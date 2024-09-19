@@ -1,5 +1,11 @@
+import LandingPage from './components/landing';
+import NavLogo from './components/navbarLogo';
+
 export default function Home() {
   return (
-   <h1>Dashboard</h1>
+    <>
+   <NavLogo/>
+   <LandingPage/>
+   </>
   )
 }
