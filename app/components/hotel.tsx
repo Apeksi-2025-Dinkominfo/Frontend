@@ -4,6 +4,8 @@ import "swiper/css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useRouter } from "next/navigation";
 import { accommodationsData } from "../utils/accommodations"; 
+import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
+import BathtubOutlinedIcon from "@mui/icons-material/BathtubOutlined";
 
 interface Accommodation {
   id: number;
@@ -21,7 +23,6 @@ const AccommodationSlider: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Using static data from accommodations.ts
     setAccommodations(accommodationsData);
   }, []);
 
@@ -38,10 +39,9 @@ const AccommodationSlider: React.FC = () => {
       </div>
 
       <div className="block md:hidden">
-        {/* For mobile view */}
         {accommodations.slice(0, 5).map((item) => (
           <div key={item.id} className="relative bg-white shadow-lg rounded-lg overflow-hidden mb-4">
-            <div className="absolute top-[200px] left-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded-lg flex items-center">
+            <div className="absolute top-[200px] left-4 bg-light text-white px-3 py-1 rounded-lg flex items-center">
               <LocationOnIcon className="mr-1" fontSize="small" />
               <span className="text-sm">{item.distance}</span>
             </div>
@@ -51,15 +51,20 @@ const AccommodationSlider: React.FC = () => {
               <h6 className="text-xl font-bold">{item.price}</h6>
               <h4 className="text-lg font-semibold">{item.title}</h4>
               <p className="text-gray-600">{item.address}</p>
-              <div className="flex justify-between mt-2">
-                <span className="text-sm">{item.beds} Beds</span>
-                <span className="text-sm">{item.baths} Baths</span>
+              <div className="flex items-center mt-2">
+                {/* Menambahkan icon Bed dan Bath dengan jarak lebih kecil */}
+                <span className="text-sm flex items-center mr-4">
+                  <BedOutlinedIcon className="mr-1" fontSize="small" />
+                  {item.beds} Beds
+                </span>
+                <span className="text-sm flex items-center ">
+                  <BathtubOutlinedIcon className="mr-1" fontSize="small" />
+                  {item.baths} Baths
+                </span>
               </div>
             </div>
           </div>
         ))}
-
-        {/* Mobile "View more properties" button */}
         <div className="flex justify-center mt-6">
           <button
             onClick={() => router.push("/hotels")}
@@ -71,7 +76,6 @@ const AccommodationSlider: React.FC = () => {
       </div>
 
       <div className="hidden md:block">
-        {/* For desktop/tablet view */}
         <Swiper
           spaceBetween={20}
           slidesPerView={4}
@@ -85,7 +89,7 @@ const AccommodationSlider: React.FC = () => {
           {accommodations.slice(0, 6).map((item) => (
             <SwiperSlide key={item.id}>
               <div className="relative bg-white shadow-lg rounded-lg overflow-hidden">
-                <div className="absolute top-[200px] left-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded-lg flex items-center">
+                <div className="absolute top-[220px] left-4 bg-light text-white px-3 py-1 rounded-lg flex items-center">
                   <LocationOnIcon className="mr-1" fontSize="small" />
                   <span className="text-sm">{item.distance}</span>
                 </div>
@@ -95,10 +99,18 @@ const AccommodationSlider: React.FC = () => {
                   <h6 className="text-xl font-bold">{item.price}</h6>
                   <h4 className="text-lg font-semibold">{item.title}</h4>
                   <p className="text-gray-600">{item.address}</p>
-                  <div className="flex justify-between mt-2">
-                    <span className="text-sm">{item.beds} Beds</span>
-                    <span className="text-sm">{item.baths} Baths</span>
-                  </div>
+                  <div className="flex items-center mt-2">
+                {/* Menambahkan icon Bed dan Bath dengan jarak lebih kecil */}
+                <span className="text-sm flex items-center mr-4">
+                  <BedOutlinedIcon className="mr-1" fontSize="small" />
+                  {item.beds} Beds
+                </span>
+                <span className="text-sm flex items-center ">
+                  <BathtubOutlinedIcon className="mr-1" fontSize="small" />
+                  {item.baths} Baths
+                </span>
+              </div>
+
                 </div>
               </div>
             </SwiperSlide>
