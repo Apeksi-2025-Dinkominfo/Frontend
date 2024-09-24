@@ -1,6 +1,7 @@
 import LandingPage from './components/landing';
-import NavLogo from './components/navbarLogo';
 import Sejarah from './components/CardSejarah';
+import NavLogo from './components/navbarLogo';
+import Surabaya from './components/sapaSurabaya';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
    <NavLogo/>
    <LandingPage/>
    <Sejarah/>
+   <Surabaya/>
    </>
   )
 }
