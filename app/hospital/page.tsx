@@ -1,155 +1,198 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Typography, Grid, Button, Container, Box, CircularProgress } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Button, Container, Box, CircularProgress, Tabs, Tab, Pagination, useMediaQuery } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import BusinessIcon from '@mui/icons-material/Business';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import CategoryIcon from '@mui/icons-material/Category';
+import { useTheme } from '@mui/material/styles';
 
-// Define the type for hospital data
 interface Facility {
   nama: string;
   alamat: string;
-  jenis_sarana_kesehatan?: string;
-  jenis_lyn?: string;
+  penyelenggara?: string; 
+  klasifikasi_rumah_sakit?: string;  
+  tipe_rumah_sakit?: string;  
+  jenis_sarana_kesehatan?: string; 
+  jenis_lyn?: string; 
   koordinat: string;
 }
 
-// Function to open location in Google Maps based on coordinates
 const openLocationInMaps = (coordinates: string) => {
   const url = `https://www.google.com/maps?q=${coordinates}`;
   window.open(url, '_blank');
 };
 
-// Card component for apotek, klinik, and puskesmas
-const GeneralCard: React.FC<Facility & { selectedType: string }> = ({
-  nama,
-  alamat,
-  jenis_sarana_kesehatan,
-  jenis_lyn,
-  koordinat,
-  selectedType,
-}) => {
+
+
+
+const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab: string }> = ({ facility, loading, selectedTab }) => {
+
+  const getIcon = () => {
+    switch (selectedTab) {
+      case 'hospitals':
+        return <LocalHospitalIcon sx={{ color: '#0288d1', mr: 1 }} />;
+      case 'puskesmas':
+        return <CategoryIcon sx={{ color: '#0288d1', mr: 1 }} />;
+      case 'klinik':
+        return <BusinessIcon sx={{ color: '#0288d1', mr: 1 }} />;
+      case 'apotek':
+        return <BusinessIcon sx={{ color: '#0288d1', mr: 1 }} />;
+      default:
+        return <LocationOnIcon sx={{ color: '#0288d1', mr: 1 }} />;
+    }
+  };
+
+  
   return (
     <Card
       sx={{
         borderRadius: '16px',
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
         padding: '20px',
+        position: 'relative',
         backgroundColor: '#f0f4f8',
+        height: '100%', 
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        minHeight: '300px',
+        '&:hover': {
+          boxShadow: '0px 6px 14px rgba(0, 0, 0, 0.15)', 
+        }
       }}
     >
-      <CardContent>
-        <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: '#0d47a1', mb: 1 }}>
-          {nama}
-        </Typography>
-
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <LocationOnIcon sx={{ color: '#0288d1', mr: 1 }} />
-          <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
-            {alamat}
-          </Typography>
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <CircularProgress />
         </Box>
+      ) : (
+        <CardContent sx={{ paddingBottom: '0px' }}>
+          <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: '#0d47a1', mb: 1 }}>
+            {facility.nama}
+          </Typography>
 
-        {/* Conditionally render fields based on selected type */}
-        {selectedType === 'apotek' || selectedType === 'klinik' ? (
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+            <LocationOnIcon sx={{ color: '#0288d1', mr: 1 }} />
             <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
-              Type: {jenis_sarana_kesehatan}
+              {facility.alamat}
             </Typography>
           </Box>
-        ) : selectedType === 'puskesmas' ? (
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-            <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
-              Service: {jenis_lyn}
-            </Typography>
-          </Box>
-        ) : null}
 
-        <Button
-          variant="contained"
-          onClick={() => openLocationInMaps(koordinat)}
-          sx={{
-            backgroundColor: '#0288d1',
-            textTransform: 'none',
-            padding: '6px 16px',
-            '&:hover': {
-              backgroundColor: '#0277bd',
-            },
-          }}
-        >
-          Location
-        </Button>
-      </CardContent>
+          {/* Display penyelenggara for hospitals */}
+          {selectedTab === 'hospitals' && (
+            <>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                {getIcon()}
+                <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                  Penyelenggara: {facility.penyelenggara}
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <LocalHospitalIcon sx={{ color: '#0288d1', mr: 1 }} />
+                <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                  Fasilitas: {facility.klasifikasi_rumah_sakit}
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <CategoryIcon sx={{ color: '#0288d1', mr: 1 }} />
+                <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                  Tipe Rumah Sakit: {facility.tipe_rumah_sakit}
+                </Typography>
+              </Box>
+            </>
+          )}
+
+          {selectedTab === 'puskesmas' && (
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              {getIcon()}
+              <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                Tipe Fasilitas: {facility.jenis_lyn}
+              </Typography>
+            </Box>
+          )}
+
+          {selectedTab === 'klinik' && (
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              {getIcon()} 
+              <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                Tipe Fasilitas: {facility.jenis_sarana_kesehatan}
+              </Typography>
+            </Box>
+          )}
+
+          {selectedTab === 'apotek' && (
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              {getIcon()}
+              <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                Tipe Fasilitas: {facility.jenis_sarana_kesehatan}
+              </Typography>
+            </Box>
+          )}
+
+          <Box sx={{ mt: 'auto', pt: 2 }}>
+            <Button
+              variant="contained"
+              startIcon={<LocationOnIcon />}
+              onClick={() => openLocationInMaps(facility.koordinat)}
+              sx={{
+                backgroundColor: '#0288d1',
+                borderRadius: '24px',
+                textTransform: 'none',
+                padding: '6px 16px',
+                '&:hover': {
+                  backgroundColor: '#0277bd',
+                },
+              }}
+            >
+              Location
+            </Button>
+          </Box>
+        </CardContent>
+      )}
     </Card>
   );
 };
 
-// Card component for hospitals (unchanged)
-const HospitalCard: React.FC<Facility> = ({ nama, alamat, koordinat }) => {
-  return (
-    <Card
-      sx={{
-        borderRadius: '16px',
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-        padding: '20px',
-        backgroundColor: '#f0f4f8',
-      }}
-    >
-      <CardContent>
-        <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: '#0d47a1', mb: 1 }}>
-          {nama}
-        </Typography>
+  
+  
 
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <LocationOnIcon sx={{ color: '#0288d1', mr: 1 }} />
-          <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
-            {alamat}
-          </Typography>
-        </Box>
-
-        <Button
-          variant="contained"
-          onClick={() => openLocationInMaps(koordinat)}
-          sx={{
-            backgroundColor: '#0288d1',
-            textTransform: 'none',
-            padding: '6px 16px',
-            '&:hover': {
-              backgroundColor: '#0277bd',
-            },
-          }}
-        >
-          Location
-        </Button>
-      </CardContent>
-    </Card>
-  );
-};
-
-// Main component combining LandingPage and HospitalList
 const FacilityList: React.FC = () => {
   const [facilities, setFacilities] = useState<Facility[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedType, setSelectedType] = useState('rumah_sakit'); // Default type: rumah sakit
+  const [selectedTab, setSelectedTab] = useState('hospitals');
+  const [currentPage, setCurrentPage] = useState(1); 
+  const itemsPerPage = 12;
 
-  const API_URLS: { [key: string]: string } = {
-    rumah_sakit: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/rumah_sakit',
-    apotek: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/apotek',
-    klinik: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/klinik',
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Define API endpoints for different types of facilities
+  const apiUrls: { [key: string]: string } = {
+    hospitals: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/rumah_sakit',
     puskesmas: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/puskesmas',
+    klinik: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/klinik',
+    apotek: 'https://satupeta.surabaya.go.id/eksternal/open-spatial/apotek',
   };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(API_URLS[selectedType]);
+        const response = await fetch(apiUrls[selectedTab]);
         const data = await response.json();
         setFacilities(
           data.map((item: any) => ({
             nama: item.nama,
             alamat: item.alamat,
-            jenis_sarana_kesehatan: item.jenis_sarana_kesehatan || '',
-            jenis_lyn: item.jenis_lyn || '',
-            koordinat: item.koordinat || '',
+            penyelenggara: item.penyelenggara,
+            klasifikasi_rumah_sakit: item.klasifikasi_rumah_sakit,
+            tipe_rumah_sakit: item.tipe_rumah_sakit,
+            jenis_sarana_kesehatan: item.jenis_sarana_kesehatan,
+            jenis_lyn: item.jenis_lyn,
+            koordinat: item.koordinat,
           }))
         );
         setLoading(false);
@@ -160,64 +203,108 @@ const FacilityList: React.FC = () => {
     };
 
     fetchData();
-  }, [selectedType]);
+  }, [selectedTab]);
 
-  if (loading) {
-    return (
-      <Container>
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <CircularProgress />
-        </Box>
-      </Container>
-    );
-  }
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setSelectedTab(newValue);
+    setCurrentPage(1); // Reset to first page when switching tabs
+  };
+
+  // Calculate pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = facilities.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(facilities.length / itemsPerPage);
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <Container>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
-        <Button
-          variant={selectedType === 'rumah_sakit' ? 'contained' : 'outlined'}
-          onClick={() => setSelectedType('rumah_sakit')}
-          sx={{ margin: '0 10px' }}
-        >
-          Rumah Sakit
-        </Button>
-        <Button
-          variant={selectedType === 'apotek' ? 'contained' : 'outlined'}
-          onClick={() => setSelectedType('apotek')}
-          sx={{ margin: '0 10px' }}
-        >
-          Apotek
-        </Button>
-        <Button
-          variant={selectedType === 'klinik' ? 'contained' : 'outlined'}
-          onClick={() => setSelectedType('klinik')}
-          sx={{ margin: '0 10px' }}
-        >
-          Klinik
-        </Button>
-        <Button
-          variant={selectedType === 'puskesmas' ? 'contained' : 'outlined'}
-          onClick={() => setSelectedType('puskesmas')}
-          sx={{ margin: '0 10px' }}
-        >
-          Puskesmas
-        </Button>
-      </Box>
+      <LandingPage selectedTab={selectedTab} />
+      <Tabs value={selectedTab} onChange={handleTabChange} centered sx={{ marginBottom: '20px' }}>
+        <Tab label="Hospitals" value="hospitals" />
+        <Tab label="Puskesmas" value="puskesmas" />
+        <Tab label="Klinik" value="klinik" />
+        <Tab label="Apotek" value="apotek" />
+      </Tabs>
 
-      <Grid container spacing={2}>
-        {facilities.map((facility, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            {selectedType === 'rumah_sakit' ? (
-              <HospitalCard {...facility} />
-            ) : (
-              <GeneralCard {...facility} selectedType={selectedType} />
-            )}
+      <Grid container spacing={4}>
+        {currentItems.map((facility, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+            <FacilityCard facility={facility} loading={loading} selectedTab={selectedTab} />
           </Grid>
         ))}
       </Grid>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          shape="rounded"
+          siblingCount={isMobile ? 0 : 1}
+        />
+      </Box>
     </Container>
   );
+};
+
+const LandingPage: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+    // Update heading based on selected tab
+    const getPageHeading = () => {
+      switch (selectedTab) {
+        case 'hospitals':
+          return 'Hospitals';
+        case 'puskesmas':
+          return 'Puskesmas';
+        case 'klinik':
+          return 'Klinik';
+        case 'apotek':
+          return 'Apotek';
+        default:
+          return 'Healthcare Facilities';
+      }
+    };
+
+    return (
+      <Box
+        sx={{
+          width: '100%',
+          height: isMobile ? 'auto' : '300px',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          justifyContent: 'space-between', // Distribute space between text and image
+          alignItems: 'center',
+          padding: '20px',
+          mb: 4,
+        }}
+      >
+        {/* Text Section */}
+        <Box sx={{ flex: 1 }}>
+          <Typography variant={isMobile ? 'h4' : 'h2'} component="div" sx={{ fontWeight: 'bold', color: '#0d47a1' }}>
+            {getPageHeading()}
+          </Typography>
+          <Typography variant={isMobile ? 'body1' : 'h6'} component="div" sx={{ mt: 2, color: '#0d47a1' }}>
+          Jelajahi berbagai sarana kesehatan di Surabaya yang siap memberikan pelayanan kesehatan terbaik untuk Anda dan keluarga. {getPageHeading().toLowerCase()} in your area.
+          </Typography>
+        </Box>
+
+        {/* Image Section */}
+        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', mt: isMobile ? 3 : 0 }}>
+          <img
+            src="/hospital.png"
+            alt="Healthcare Facility"
+            style={{ maxWidth: '65%', height: 'auto', borderRadius: '8px' }}
+          />
+        </Box>
+      </Box>
+    );
 };
 
 export default FacilityList;
