@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@magiclabs/ui": "^0.27.4",
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
+    "framer-motion": "^11.5.6",
     "next": "14.2.12",
     "react": "^18",
     "react-countdown": "^2.3.6",
