@@ -20,7 +20,8 @@
     "react": "^18",
     "react-countdown": "^2.3.6",
     "react-dom": "^18",
-    "react-material-ui-carousel": "^3.4.2",
+    "react-swiper": "^0.1.5",
+    "react-transition-group": "^4.4.5",
     "swiper": "^11.1.14"
   },
   "devDependencies": {
