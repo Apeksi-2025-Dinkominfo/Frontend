@@ -1,12 +1,11 @@
 import Image from 'next/image';
-import batikImage from '../../public/batik.png.png'; // Import image
-import apeksiLogo from '../../public/apeksi.png'; // Import logo
+import batikImage from '../../public/batik.png.png';
+import apeksiLogo from '../../public/apeksi.png';
 
 export default function CardSejarah() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between bg-white p-6 px-19 py-3 rounded-lg shadow-md md:mx-10 mt-10"> {/* Added margin at the top */}
-      {/* Batik Image */}
-      <div className="hidden md:block md:w-1/3"> {/* Adjusted width to allow space */}
+      <div className="hidden md:block md:w-1/3"> 
         <Image
           src={batikImage}
           alt="Batik"
@@ -15,8 +14,6 @@ export default function CardSejarah() {
           className="object-contain"
         />
       </div>
-
-      {/* Text Section */}
       <div className="md:w-6/3 text-left font-poppins md:text-left mb-3 md:mb-15">
         <h1 className="text-518x132 text-5xl font-Poppins font-bold text-[#16325B] mb-10 mt-10">
           Sejarah <br /> Asosiasi Pemerintah <br /> Kota Seluruh Indonesia
@@ -29,9 +26,7 @@ export default function CardSejarah() {
           We Are Surabaya Smart City!
         </button>
       </div>
-
-      {/* Logo Image */}
-      <div className="md:w-7/3 mt-15"> {/* Adjusted width for spacing */}
+      <div className="md:w-7/3 mt-15"> 
         <Image
           src={apeksiLogo}
           alt="Apeksi Logo"
