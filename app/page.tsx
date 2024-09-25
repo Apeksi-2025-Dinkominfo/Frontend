@@ -7,6 +7,8 @@ import Hotel from './components/hotel';
 import WalikotaVideo from './components/walkitvid';
 import Jadwal from './components/jadwal';
 import Berita from './components/Berita';
+import Galeri from './components/Gallery main';
+import Footerr from './components/footer';
 import { Box } from '@mui/material';
 
 export default function Home() {
@@ -47,6 +49,15 @@ export default function Home() {
       <Box sx={{ mt: { xs: 250, md: 50 } }}>
         <Berita />
       </Box>
+
+      <Box sx={{ mt: { xs: 4, md: 20 } }}>
+        <Galeri />
+      </Box>
+
+      <Box sx={{ mt: { xs: 4, md: 20 } }}>
+        <Footerr />
+      </Box>
+
 
     </>
   );

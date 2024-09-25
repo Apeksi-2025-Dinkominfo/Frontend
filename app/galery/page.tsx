@@ -1,3 +1,34 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+const base_url = "https://satupeta.surabaya.go.id/eksternal/open-spatial/apotek"
+interface Iposts{
+  id : number;
+  nama: string;
+  alamat : string;
+}
+
+
+const Galery = async() => {
+  const response = await fetch(base_url)
+  const apotek:Iposts[] = await response.json()
+  return (
+    <>
+      {apotek.map((apotik) => (
+        <div key={apotik.id}>
+          <p>id apotek      : {apotik.id}</p>
+          <p>nama apotek    : {apotik.nama}</p>
+          <p>alamat apotek  :{apotik.alamat}</p>
+          <br />
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default Galery
+=======
+=======
+>>>>>>> 1ec1b018f17168c3e4001eb05750137c74bcb10c
 const base_url = "https://satupeta.surabaya.go.id/eksternal/open-spatial/apotek";
 
 interface Iposts {
@@ -54,3 +85,7 @@ const Galery = async () => {
   
 
 export default Galery;
+<<<<<<< HEAD
+>>>>>>> 97c78c8350803edf568f493dd8f3da74c0a5bbdf
+=======
+>>>>>>> 1ec1b018f17168c3e4001eb05750137c74bcb10c
