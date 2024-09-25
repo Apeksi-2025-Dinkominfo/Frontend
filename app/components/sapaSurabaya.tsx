@@ -8,7 +8,7 @@ const cardData = [
   { title: 'Transportasi', img: '/transportasi.jpeg', link: '/Surabaya/transportasi' },
   { title: 'Heritage', img: '/heritage.jpeg', link: '/Surabaya/heritage' },
   { title: 'Budaya', img: '/budaya.jpg', link: '/Surabaya/budaya' },
-  { title: 'Rumah Sakit', img: '/belanja.jpeg', link: '/Surabaya/belanja' },
+  { title: 'Rumah Sakit', img: '/belanja.jpeg', link: '/hospital' },
 ];
 
 export default function CityTourComponent() {
