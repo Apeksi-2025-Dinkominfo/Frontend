@@ -22,7 +22,7 @@ const GalleryComponent = () => {
         <Typography variant="h4" fontWeight="bold" color="#227B94">
           Galeri
         </Typography>
-        <Link href="/Gallery/galeri-page" color="#78B7D0" underline="none" sx={{ fontSize: '16px' }}>
+        <Link href="/Gallery" color="#78B7D0" underline="none" sx={{ fontSize: '16px' }}>
           Lihat semua
         </Link>
       </Box>
