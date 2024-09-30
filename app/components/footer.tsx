@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Grid, Typography, IconButton, Container } from '@mui/material';
 import { Phone, Email, LocationOn } from '@mui/icons-material';
-import { Facebook, Twitter, Instagram, YouTube, } from '@mui/icons-material';
+import { Facebook, Twitter, Instagram, YouTube } from '@mui/icons-material';
 
 const FooterComponent = () => {
   return (
-    <Box component="footer" sx={{ backgroundColor: '#FFFFFF', py: 2, borderTop: '1px solid #e0e0e0' }}>
+    <Box component="footer" sx={{ backgroundColor: '#FFFFFF', py: 9, borderTop: '2px solid #e0e0e0',marginBottom:'8px' }}>
       <Container maxWidth="xl">
         <Grid container spacing={2}>
           {/* Kolom Logo dan Deskripsi */}
@@ -13,9 +13,9 @@ const FooterComponent = () => {
             <Box display="flex" flexDirection="column">
               <img src="/logo-dark.png" alt="Surabaya Logo" width={150} style={{ marginBottom: '16px' }} />
               <Typography variant="body1" color="textSecondary">
-                Surabaya dengan bangga menjadi tuan rumah Rakernas Apeksi,<br/> menyambut peserta dari seluruh Indonesia
-                untuk berdiskusi<br/> dan berkolaborasi.Kota Pahlawan siap berbagi inovasi dan solusi<br/> dalam pengembangan perkotaan,
-                mendorong<br/> kemajuan dan kerjasama antar daerah.
+                Surabaya dengan bangga menjadi tuan rumah Rakernas Apeksi,<br /> menyambut peserta dari seluruh Indonesia
+                untuk berdiskusi<br /> dan berkolaborasi.Kota Pahlawan siap berbagi inovasi dan solusi<br /> dalam pengembangan perkotaan,
+                mendorong<br /> kemajuan dan kerjasama antar daerah.
               </Typography>
             </Box>
           </Grid>
