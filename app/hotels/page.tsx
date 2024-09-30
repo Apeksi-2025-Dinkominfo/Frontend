@@ -42,8 +42,13 @@ const Hotels: React.FC = () => {
                 }
                 setAccommodations(allAccommodations);
                 setLoading(false);
-            } catch (err: any) {
-                setError(err.message);
+            } catch (err) {
+                // Improved error handling by specifying 'unknown' and narrowing the type
+                if (err instanceof Error) {
+                    setError(err.message);
+                } else {
+                    setError('An unexpected error occurred');
+                }
                 setLoading(false);
             }
         };
