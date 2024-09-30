@@ -12,3 +12,23 @@ body {
     text-wrap: balance;
   }
 }
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
+
+.slick-slide {
+  margin: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.slick-dots li button:before {
+  color: #000;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #000;
+}
