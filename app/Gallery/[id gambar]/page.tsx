@@ -279,5 +279,3 @@ const Footer = () => {
 };
 
 export default Galeri;
-
-  
