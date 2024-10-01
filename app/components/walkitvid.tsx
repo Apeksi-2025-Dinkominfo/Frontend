@@ -1,4 +1,4 @@
-// components/WalikotaVideos.tsx
+"use client"
 import React, { useState } from 'react';
 import { Box, Typography, Button, Grid } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';

@@ -127,7 +127,7 @@ const StoryManagementPage: React.FC = () => {
                     }
                     .sidebar ul li a {
                         color: white;
-                        text-decoration: none;
+                        textDecoration: none;
                     }
                     .content {
                         flex-grow: 1;
