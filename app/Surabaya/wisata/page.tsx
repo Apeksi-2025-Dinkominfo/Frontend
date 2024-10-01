@@ -16,7 +16,7 @@ interface Destination {
   touristDestinationFiles: TouristDestinationFile[];
 }
 
-export default function HeritagePage() {
+export default function WisataPage() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -36,18 +36,6 @@ export default function HeritagePage() {
   }, []);
 
   const excludedIds = [
-    '9bf9c9fe-51a6-4b0b-97aa-9c8ce15074a5',
-    '9b2e8c13-499b-47bd-9b47-827d0afd00e9',
-    '9bfbf031-1016-4e9e-949e-aa387960d040',
-    '9bfbfbeb-db56-4ac7-81d2-ea635c013c47',
-    '9bfbfcee-56b4-4fcb-84d0-87c6509d06ff',
-    '9bfbff40-58ee-4f11-bb8c-0bbd890a4d0d',
-    '9bfc06ef-5862-42aa-ac91-d2679e7f4073',
-    '9bfc084c-a856-4a26-9af3-f8cc3b461117',
-    '9bfc08b2-5828-44de-b06d-558c57a35bbb',
-    '9bfc0914-44c0-4e21-bcfc-ab3d57178efc',
-    '9bfc0aa9-82c8-430a-9777-59ee0a3112f0',
-    "9bfc07a1-9d7b-4f92-89bc-7cdfb7eb2825",
     '9c4228f7-64ad-43dc-96e8-f71d62f445a6',
     '9c422b84-3beb-40f3-bbc2-a3bb014848f1',
     '52be927c-1312-4170-a332-f6ea07713d02',
@@ -62,12 +50,13 @@ export default function HeritagePage() {
     'e5291779-2864-4a01-9590-1b507ea7ed4f',
     'b02cfe95-a65a-4888-9c60-9875c1dd3d08',
     '8ff3eb3d-da1d-49f6-a259-379623f7bf7c',
+
   ];
 
   const filteredDestinations = destinations.filter(
     (destination) =>
       destination.touristDestinationFiles.length > 0 &&
-      !excludedIds.includes(destination.id)
+      excludedIds.includes(destination.id)
   );
 
   const truncateDescription = (description: string) => {

@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -54,21 +55,26 @@ const AccommodationSlider: React.FC = () => {
           'https://tourism.surabaya.go.id/api/kominfo/hotel?page=1'
         );
         const data = await response.json();
-
+  
         if (data.status.code !== 200) {
           throw new Error('Failed to fetch data');
         }
-
+  
         setAccommodations(data.data.data);
         setLoading(false);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {  
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred');
+        }
         setLoading(false);
       }
     };
-
+  
     fetchAccommodations();
   }, []);
+  
 
   if (loading) {
     return <div>Loading...</div>;
