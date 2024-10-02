@@ -20,9 +20,37 @@ export default function HeritagePage() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Hardcoded dummy data
+  const dummyData: Destination[] = [
+    {
+      id: 'dummy1',
+      nameIndonesia: 'Candi Dummy',
+      address: 'Dummy Address 1',
+      descriptionIndonesia:
+        'Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama. ',
+      latitude: -7.250445,
+      longitude: 112.768845,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Candi+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+  ];
+
   useEffect(() => {
     const fetchData = async () => {
-      const allDestinations: Destination[] = [];
+      const allDestinations: Destination[] = [...dummyData]; // Start with dummy data
       for (let page = 1; page <= 7; page++) {
         const res = await fetch(
           `https://tourism.surabaya.go.id/api/kominfo/destination?page=${page}`
@@ -47,7 +75,7 @@ export default function HeritagePage() {
     '9bfc08b2-5828-44de-b06d-558c57a35bbb',
     '9bfc0914-44c0-4e21-bcfc-ab3d57178efc',
     '9bfc0aa9-82c8-430a-9777-59ee0a3112f0',
-    "9bfc07a1-9d7b-4f92-89bc-7cdfb7eb2825",
+    '9bfc07a1-9d7b-4f92-89bc-7cdfb7eb2825',
     '9c4228f7-64ad-43dc-96e8-f71d62f445a6',
     '9c422b84-3beb-40f3-bbc2-a3bb014848f1',
     '52be927c-1312-4170-a332-f6ea07713d02',
@@ -179,26 +207,33 @@ export default function HeritagePage() {
               )}
               <div
                 className="p-4"
-                style={{ minHeight: '300px', position: 'relative' }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
               >
-                <h3 className="text-lg font-bold text-black mb-2">
-                  {destination.nameIndonesia}
-                </h3>
-                <p className="text-sm text-gray-500 mb-4">
-                  {truncateDescription(destination.descriptionIndonesia)}
-                </p>
-                <button
+                <div>
+                  <h2 className="text-lg font-semibold">
+                    {destination.nameIndonesia}
+                  </h2>
+                  <p className="text-sm">{destination.address}</p>
+                  <p className="text-sm">
+                    {truncateDescription(destination.descriptionIndonesia)}
+                  </p>
+                </div>
+                <Button
                   onClick={() =>
                     openLocationInMaps(
                       destination.latitude,
                       destination.longitude
                     )
                   }
-                  className="bg-[#2b8ea6] text-white py-2 px-4 rounded-full hover:bg-[#257a8a] transition duration-300"
-                  style={{ position: 'absolute', bottom: '16px', left: '16px' }}
+                  variant="contained"
+                  style={{ marginTop: '10px', backgroundColor: '#008080' }}
                 >
-                  Menuju Lokasi
-                </button>
+                  Buka di Google Maps
+                </Button>
               </div>
             </div>
           </Grid>

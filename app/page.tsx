@@ -9,12 +9,19 @@ import Berita from './components/Berita';
 import Galeri from './components/gallery';
 import { Box } from '@mui/material';
 
+export const metadata = {
+  title: 'Apeksi Rakernas Surabaya 2025',
+  description: 'Your site description.',
+};
+
 export default function Home() {
   return (
     <>
       <Box sx={{ mt: { xs: 2, md: 4 } }}>
         <LandingPage />
       </Box>
+
+    {/* Bagian Untuk foto Walikota */}
 
       <Box sx={{ mt: { xs: 2, md: 4 } }}>
         <Sejarah />
