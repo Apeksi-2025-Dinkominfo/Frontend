@@ -1,13 +1,10 @@
-// app/layout.tsx
-import './globals.css'; // Include your global styles if needed
+'use client'; // This tells Next.js that this component should be rendered client-side
+
+import './globals.css';
 import NavLogo from './components/navbarLogo';
 import Footerr from './components/footer';
 import { Box } from '@mui/material';
-
-export const metadata = {
-  title: 'Apeksi Rakernas Surabaya 2025',
-  description: 'Your site description.',
-};
+import AnimatedImage from './components/layout'; // Import the animated image component
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,9 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <NavLogo />
         </Box>
 
-        <Box sx={{ mt: { xs: 4, md: 6 }, minHeight: '80vh', maxWidth: '100%' }}>
+        {/* Animated Image */}
+        <AnimatedImage>
           {children}
-        </Box>
+          </AnimatedImage>
+
 
         {/* Footer */}
         <Box sx={{ mt: { xs: 4, md: 6 }, maxWidth: '100%' }}>

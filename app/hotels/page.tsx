@@ -8,7 +8,7 @@ interface Accommodation {
   name: string;
   address: string;
   latitude: number;
-  longitude: number;
+  longitude: string;
   websiteLink: string;
   hotelThumbnail: { link: string };
   hotelCategory: {
@@ -21,6 +21,8 @@ const Hotels: React.FC = () => {
   const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<string>('default');
+  const [starOptions, setStarOptions] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 12;
 
@@ -40,6 +42,12 @@ const Hotels: React.FC = () => {
 
           allAccommodations.push(...data.data.data);
         }
+
+        const uniqueStarOptions = Array.from(
+          new Set(allAccommodations.map((hotel) => hotel.hotelCategory.starNumberName))
+        ).sort((a, b) => a.localeCompare(b)); // Sort alphabetically by starNumberName
+
+        setStarOptions(uniqueStarOptions);
         setAccommodations(allAccommodations);
         setLoading(false);
       } catch (err) {
@@ -62,6 +70,16 @@ const Hotels: React.FC = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  // Sort accommodations based on selected star category
+  const sortedAccommodations = () => {
+    if (sortOrder === 'default') {
+      return accommodations;
+    }
+    return accommodations.filter(
+      (hotel) => hotel.hotelCategory.starNumberName === sortOrder
+    );
+  };
 
   const truncateAddress = (address: string, wordLimit: number) => {
     const words = address.split(' ');
@@ -99,9 +117,7 @@ const Hotels: React.FC = () => {
   const referenceLat = -7.261528192788436;
   const referenceLon = 112.75042301106396;
 
-  const totalPages = Math.ceil(accommodations.length / itemsPerPage);
-
-  const paginatedAccommodations = accommodations.slice(
+  const paginatedAccommodations = sortedAccommodations().slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -111,6 +127,11 @@ const Hotels: React.FC = () => {
   };
 
   const renderPagination = () => {
+    if (sortedAccommodations().length <= itemsPerPage) {
+      return null; // Don't render pagination if items are less than or equal to itemsPerPage
+    }
+
+    const totalPages = Math.ceil(sortedAccommodations().length / itemsPerPage);
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
@@ -146,9 +167,7 @@ const Hotels: React.FC = () => {
           <p className="text-lg text-second mb-5">
             Cari Hotel yang sempurna untuk menginap di Surabaya. Menawarkan
             kenyamanan terbaik, layanan personal, dan fasilitas lengkap untuk
-            memastikan setiap tamu merasa istimewa. Baik untuk liburan romantis,
-            perjalanan bisnis, atau liburan keluarga, kami menghadirkan
-            kemewahan dan kenyamanan di setiap sudut.
+            memastikan setiap tamu merasa istimewa.
           </p>
         </div>
         <div className="image-content md:w-1/2 w-full flex justify-center">
@@ -160,8 +179,25 @@ const Hotels: React.FC = () => {
         </div>
       </div>
 
+      {/* Sorting Dropdown */}
+      <div className="flex justify-end">
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className="p-2 border border-gray-300 rounded-md"
+        >
+          <option value="default">Default</option>
+          {starOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* Hotel Listings */}
       <h1 className="text-5xl font-bold mb-5 text-body">Hotel Suroboyo Rek</h1>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {paginatedAccommodations.map((item) => (
           <div
@@ -188,7 +224,7 @@ const Hotels: React.FC = () => {
                     referenceLat,
                     referenceLon,
                     item.latitude,
-                    item.longitude
+                    parseFloat(item.longitude)
                   )}
                 </span>
               </div>
@@ -213,6 +249,7 @@ const Hotels: React.FC = () => {
           </div>
         ))}
       </div>
+
       {renderPagination()}
     </div>
   );

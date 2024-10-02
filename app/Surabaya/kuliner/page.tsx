@@ -53,6 +53,42 @@ export default function CulinaryPage() {
     fetchData();
   }, []);
 
+  const initialDisplayIds = [
+    '7fba3dba-d9bd-4df2-8790-f2af713b1adf',
+    '28be4fed-be52-4969-ac60-f89cf346dfd0',
+    'ccecd068-f611-492f-98e6-38beb39a771f',
+    '3312a584-de71-405f-be4d-75e2a09bf6af',
+  ];
+
+  // Filter culinary data for prioritized items and the rest
+  const filteredCulinary = culinaryData.filter(
+    (item) =>
+      item.culinaryFiles &&
+      Array.isArray(item.culinaryFiles) &&
+      item.culinaryFiles.length > 0
+  );
+
+  const prioritizedCulinary = filteredCulinary.filter(item =>
+    initialDisplayIds.includes(item.id)
+  );
+
+  const otherCulinary = filteredCulinary.filter(
+    item => !initialDisplayIds.includes(item.id)
+  );
+
+  const combinedCulinary = [...prioritizedCulinary, ...otherCulinary];
+
+  // Set interval to change images every 3 seconds
+  useEffect(() => {
+    if (combinedCulinary.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % combinedCulinary.length);
+      }, 3000); // Change every 3 seconds
+
+      return () => clearInterval(interval); // Clear interval when component unmounts
+    }
+  }, [combinedCulinary]);
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -60,13 +96,6 @@ export default function CulinaryPage() {
   if (error) {
     return <p>{error}</p>;
   }
-
-  const filteredCulinary = culinaryData.filter(
-    (item) =>
-      item.culinaryFiles &&
-      Array.isArray(item.culinaryFiles) &&
-      item.culinaryFiles.length > 0
-  );
 
   const openLocationInMaps = (latitude: number, longitude: number) => {
     const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
@@ -81,8 +110,8 @@ export default function CulinaryPage() {
         display="flex"
         sx={{
           textAlign: { sm: 'left' },
-          paddingLeft: isMobile ? '0' : '20px', // Set padding sesuai kondisi mobile
-          paddingRight: isMobile ? '0' : '20px', // Set padding sesuai kondisi mobile
+          paddingLeft: isMobile ? '0' : '20px',
+          paddingRight: isMobile ? '0' : '20px',
           width: '100%',
         }}
       >
@@ -94,7 +123,7 @@ export default function CulinaryPage() {
             fontSize: { xs: '3rem', sm: '4rem' },
             lineHeight: { xs: '1.2', sm: '1.4' },
             textAlign: { xs: 'left', sm: 'left' },
-            fontFamily:"Poppins"
+            fontFamily: "Poppins",
           }}
         >
           KULINER <br /> SUROBOYO
@@ -102,7 +131,7 @@ export default function CulinaryPage() {
       </Box>
 
       {/* Carousel Section */}
-      {filteredCulinary.length > 0 && (
+      {combinedCulinary.length > 0 && (
         <Box
           display="flex"
           alignItems="center"
@@ -114,8 +143,8 @@ export default function CulinaryPage() {
           mb={4} // Add margin to separate from card grid
         >
           <img
-            src={filteredCulinary[currentIndex].culinaryFiles[0].link}
-            alt={filteredCulinary[currentIndex].name}
+            src={combinedCulinary[currentIndex].culinaryFiles[0].link}
+            alt={combinedCulinary[currentIndex].name}
             style={{
               width: '100%',
               height: '400px',
@@ -133,7 +162,7 @@ export default function CulinaryPage() {
             <Button
               onClick={() =>
                 setCurrentIndex((prevIndex) =>
-                  prevIndex === 0 ? filteredCulinary.length - 1 : prevIndex - 1
+                  prevIndex === 0 ? combinedCulinary.length - 1 : prevIndex - 1
                 )
               }
               variant="outlined"
@@ -152,7 +181,7 @@ export default function CulinaryPage() {
             <Button
               onClick={() =>
                 setCurrentIndex((prevIndex) =>
-                  prevIndex === filteredCulinary.length - 1 ? 0 : prevIndex + 1
+                  prevIndex === combinedCulinary.length - 1 ? 0 : prevIndex + 1
                 )
               }
               variant="outlined"
@@ -172,6 +201,7 @@ export default function CulinaryPage() {
         </Box>
       )}
 
+      {/* Display All Culinary Items */}
       <Grid
         container
         spacing={2}
@@ -179,21 +209,18 @@ export default function CulinaryPage() {
         style={{ maxWidth: '1200px', margin: '0 auto' }}
         sx={{
           '@media (max-width: 600px)': {
-            // Two cards per row on mobile
             '& > .MuiGrid-item': {
               width: '50%',
               padding: '8px',
             },
-            // Move the button to the bottom and make it rounded on mobile
             '& .MuiButton-root': {
               position: 'relative',
-              width: '100%', // Full width for mobile
-              borderRadius: '50px', // Oval shape
-              marginTop: '20px', // Space between content and button
+              width: '100%',
+              borderRadius: '50px',
+              marginTop: '20px',
             },
           },
           '@media (min-width: 600px)': {
-            // Three cards per row on larger screens
             '& > .MuiGrid-item': {
               width: '33.33%',
               padding: '12px',
@@ -201,7 +228,7 @@ export default function CulinaryPage() {
           },
         }}
       >
-        {filteredCulinary.map((item) => (
+        {combinedCulinary.map((item) => (
           <Grid item key={item.id} xs={6} sm={4}>
             <Card
               style={{
@@ -239,7 +266,6 @@ export default function CulinaryPage() {
               <Box
                 sx={{
                   '@media (max-width: 600px)': {
-                    // Make sure button is placed below content on mobile
                     position: 'relative',
                     bottom: 'unset',
                     left: 'unset',
@@ -260,8 +286,8 @@ export default function CulinaryPage() {
                   color="primary"
                   style={{
                     width: '100%',
-                    borderRadius: '50px', // Oval button
-                    padding: '10px 0', // Make it oval by adjusting padding
+                    borderRadius: '50px',
+                    padding: '10px 0',
                   }}
                 >
                   Menuju Lokasi
