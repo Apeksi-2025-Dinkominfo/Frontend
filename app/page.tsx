@@ -1,24 +1,27 @@
-'use client';
+// app/page.tsx
 import LandingPage from './components/landing';
-import NavLogo from './components/navbarLogo';
 import Sejarah from './components/CardSejarah';
 import Surabaya from './components/sapaSurabaya';
 import Hotel from './components/hotel';
 import WalikotaVideo from './components/walkitvid';
 import Jadwal from './components/jadwal';
 import Berita from './components/Berita';
-import Galeri from './components/Gallery main';
-import Footerr from './components/footer';
+import Galeri from './components/gallery';
 import { Box } from '@mui/material';
+
+export const metadata = {
+  title: 'Apeksi Rakernas Surabaya 2025',
+  description: 'Your site description.',
+};
 
 export default function Home() {
   return (
     <>
-      <NavLogo />
-
       <Box sx={{ mt: { xs: 2, md: 4 } }}>
         <LandingPage />
       </Box>
+
+    {/* Bagian Untuk foto Walikota */}
 
       <Box sx={{ mt: { xs: 2, md: 4 } }}>
         <Sejarah />
@@ -53,12 +56,6 @@ export default function Home() {
       <Box sx={{ mt: { xs: 4, md: 20 } }}>
         <Galeri />
       </Box>
-
-      <Box sx={{ mt: { xs: 4, md: 20 } }}>
-        <Footerr />
-      </Box>
-
-
     </>
   );
 }

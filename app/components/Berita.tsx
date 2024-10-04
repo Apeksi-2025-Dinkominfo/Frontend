@@ -1,3 +1,4 @@
+"use client"
 import { Box, Grid, Typography, Button, IconButton, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/system';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

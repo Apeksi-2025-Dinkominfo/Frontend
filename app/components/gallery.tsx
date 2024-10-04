@@ -24,13 +24,13 @@ const GalleryComponent = () => {
         </Typography>
         <Link
           href="/Gallery"
-          color="#78B7D0"
-          text-decoration="underline"
           sx={{
             fontSize: '16px',
+            color: '#78B7D0',
+            textDecoration: 'underline',
             transition: 'color 1s ease', // Animasi perubahan warna
             '&:hover': {
-             backgroundcolor: '#1A1A1A4', // Ubah warna saat hover
+              backgroundColor: '#1A1A1A4', // Ubah warna saat hover
             },
           }}
         >
