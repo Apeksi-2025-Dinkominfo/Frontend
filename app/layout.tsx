@@ -6,19 +6,37 @@ import Footerr from './components/footer';
 import { Box } from '@mui/material';
 import AnimatedImage from './components/layout'; // Import the animated image component
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}>
-        <Box sx={{ position: 'sticky', top: 0, zIndex: 1000, backgroundColor: 'white' }}>
+      <body
+        style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}
+      >
+        <Box
+          sx={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 1000,
+            backgroundColor: 'white',
+          }}
+        >
           <NavLogo />
         </Box>
 
         {/* Animated Image */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-          <AnimatedImage>
-            {children}
-          </AnimatedImage>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+          }}
+        >
+          <AnimatedImage>{children}</AnimatedImage>
         </Box>
 
         {/* Footer */}
