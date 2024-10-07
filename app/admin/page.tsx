@@ -1,17 +1,34 @@
 "use client"; // This will make the entire file a Client Component
 
-import React from 'react';
+import Link from 'next/link';
+import React, { useState } from 'react';
 
 // Komponen Sidebar
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ activeButton: number; onButtonClick: (index: number) => void }> = ({ activeButton, onButtonClick }) => {
     return (
         <div className="sidebar">
             <h2>MANAGEMENT MUNAS</h2>
             <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Data Registrasi</a></li>
-                <li><a href="#">Add News</a></li>
-                <li><a href="#">Add Gallery</a></li>
+                <li>
+                    <Link href="/admin" className={`sidebar-link ${activeButton === 1 ? 'active' : ''}`} onClick={() => onButtonClick(1)}>
+                        Dashboard
+                    </Link>
+                </li>
+                <li>
+                    <Link href="#" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
+                        Data Registrasi
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/admin/addnews" className={`sidebar-link ${activeButton === 3 ? 'active' : ''}`} onClick={() => onButtonClick(3)}>
+                        Add News
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/admin/addgaleri" className={`sidebar-link ${activeButton === 4 ? 'active' : ''}`} onClick={() => onButtonClick(4)}>
+                        Add Gallery
+                    </Link>
+                </li>
             </ul>
         </div>
     );
@@ -24,15 +41,14 @@ interface Story {
     writers: string;
     category: string;
     keyword: string[];
-    status: string;
 }
 
 const storiesData: Story[] = [
-    { no: 1, title: 'The Moon that Can’t be Seen', writers: 'Rara', category: 'Teen Fiction', keyword: ['school', 'fiction'], status: 'Draft' },
-    { no: 2, title: 'Given', writers: 'Sansa S.', category: 'Romance', keyword: ['music'], status: 'Draft' },
-    { no: 3, title: 'Fish Swimming In The Sky', writers: 'Kaenarita Faly', category: 'Fantasy', keyword: ['fantasy', 'romance'], status: 'Publish' },
-    { no: 4, title: 'The Science of Fertility PCOS', writers: 'Jessie Inchauspé', category: 'Non Fiction', keyword: ['science', 'PCOS'], status: 'Publish' },
-    { no: 5, title: 'The Glucose Goddess Method', writers: 'Jessie Inchauspé', category: 'Non Fiction', keyword: ['glucose', 'science'], status: 'Publish' }
+    { no: 1, title: 'The Moon that Can’t be Seen', writers: 'Rara', category: 'Teen Fiction', keyword: ['school', 'fiction']},
+    { no: 2, title: 'Given', writers: 'Sansa S.', category: 'Romance', keyword: ['music']},
+    { no: 3, title: 'Fish Swimming In The Sky', writers: 'Kaenarita Faly', category: 'Fantasy', keyword: ['fantasy', 'romance'] },
+    { no: 4, title: 'The Science of Fertility PCOS', writers: 'Jessie Inchauspé', category: 'Non Fiction', keyword: ['science', 'PCOS']},
+    { no: 5, title: 'The Glucose Goddess Method', writers: 'Jessie Inchauspé', category: 'Non Fiction', keyword: ['glucose', 'science']}
 ];
 
 const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; onUpdate: (story: Story) => void }> = ({ stories, onDelete, onUpdate }) => {
@@ -45,7 +61,6 @@ const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; o
                     <th>Writers</th>
                     <th>Category</th>
                     <th>Keyword</th>
-                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -57,7 +72,6 @@ const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; o
                         <td>{story.writers}</td>
                         <td>{story.category}</td>
                         <td>{story.keyword.join(', ')}</td>
-                        <td>{story.status}</td>
                         <td>
                             <button onClick={() => onUpdate(story)}>Update</button>
                             <button onClick={() => onDelete(story.no)}>Delete</button>
@@ -80,6 +94,8 @@ const AddStoryButton: React.FC = () => {
 
 // Komponen Utama (Page)
 const StoryManagementPage: React.FC = () => {
+    const [activeButton, setActiveButton] = useState<number>(0); // Set default active button
+
     // Function to handle deletion of a story
     const handleDelete = (no: number) => {
         console.log(`Deleted story with No: ${no}`);
@@ -110,10 +126,11 @@ const StoryManagementPage: React.FC = () => {
                     }
                     .sidebar {
                         width: 250px;
-                        background-color: #2bb6c1;
+                        background-color: #2c3e50;
                         color: white;
                         padding: 20px;
                         height: 100%;
+                        margin-bottom: 20px;
                     }
                     .sidebar h2 {
                         margin-bottom: 20px;
@@ -121,13 +138,23 @@ const StoryManagementPage: React.FC = () => {
                     .sidebar ul {
                         list-style-type: none;
                         padding: 0;
+                        margin-bottom: 20px;
                     }
                     .sidebar ul li {
-                        margin-bottom: 10px;
+                        margin-bottom: 20px;
                     }
                     .sidebar ul li a {
+                        display: block;
                         color: white;
                         text-decoration: none;
+                        padding: 10px;
+                        border-radius: 4px;
+                        text-align: center; /* Menjadikan teks center */
+                        transition: background-color 0.3s ease;
+                    }
+                    .sidebar ul li a:hover,
+                    .sidebar ul li a.active { /* Tambahkan kondisi untuk aktif dan hover */
+                        background-color: #2980b9; /* Ubah warna sesuai preferensi */
                     }
                     .content {
                         flex-grow: 1;
@@ -173,7 +200,7 @@ const StoryManagementPage: React.FC = () => {
                     }
                 `}
             </style>
-            <Sidebar />
+            <Sidebar activeButton={activeButton} onButtonClick={setActiveButton} />
             <div className="content">
                 <h1>Stories</h1>
                 <div className="header-controls">
@@ -186,4 +213,4 @@ const StoryManagementPage: React.FC = () => {
     );
 };
 
-export default StoryManagementPage;
+export default StoryManagementPage; 
