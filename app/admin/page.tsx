@@ -146,15 +146,7 @@ const StoryManagementPage: React.FC = () => {
                     .sidebar ul li a {
                         display: block;
                         color: white;
-                        text-decoration: none;
-                        padding: 10px;
-                        border-radius: 4px;
-                        text-align: center; /* Menjadikan teks center */
-                        transition: background-color 0.3s ease;
-                    }
-                    .sidebar ul li a:hover,
-                    .sidebar ul li a.active { /* Tambahkan kondisi untuk aktif dan hover */
-                        background-color: #2980b9; /* Ubah warna sesuai preferensi */
+                        textDecoration: none;
                     }
                     .content {
                         flex-grow: 1;

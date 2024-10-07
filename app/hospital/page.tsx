@@ -182,19 +182,17 @@ const FacilityList: React.FC = () => {
       setLoading(true);
       try {
         const response = await fetch(apiUrls[selectedTab]);
-        const data = await response.json();
-        setFacilities(
-          data.map((item: any) => ({
-            nama: item.nama,
-            alamat: item.alamat,
-            penyelenggara: item.penyelenggara,
-            klasifikasi_rumah_sakit: item.klasifikasi_rumah_sakit,
-            tipe_rumah_sakit: item.tipe_rumah_sakit,
-            jenis_sarana_kesehatan: item.jenis_sarana_kesehatan,
-            jenis_lyn: item.jenis_lyn,
-            koordinat: item.koordinat,
-          }))
-        );
+        const data: Facility[] = await response.json();
+        setFacilities(data.map(item => ({
+          nama: item.nama,
+          alamat: item.alamat,
+          penyelenggara: item.penyelenggara,
+          klasifikasi_rumah_sakit: item.klasifikasi_rumah_sakit,
+          tipe_rumah_sakit: item.tipe_rumah_sakit,
+          jenis_sarana_kesehatan: item.jenis_sarana_kesehatan,
+          jenis_lyn: item.jenis_lyn,
+          koordinat: item.koordinat,
+        })));
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
