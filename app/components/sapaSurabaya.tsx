@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { Card, CardContent, Typography, Grid } from '@mui/material';
 
 const cardData = [
-  { title: 'Tempat Wisata', img: '/wisata.jpeg', link: '/Surabaya/wisata' },
-  { title: 'Kuliner', img: '/kuliner.jpg', link: '/Surabaya/kuliner' },
-  { title: 'Transportasi', img: '/transportasi.jpeg', link: '/Surabaya/transportasi' },
-  { title: 'Heritage', img: '/heritage.jpeg', link: '/Surabaya/heritage' },
-  { title: 'Budaya', img: '/budaya.jpg', link: '/Surabaya/budaya' },
+  { title: 'Tempat Wisata', img: '/wisata.jpeg', link: '/surabaya/wisata' },
+  { title: 'Kuliner', img: '/kuliner.jpg', link: '/surabaya/kuliner' },
+  { title: 'Transportasi', img: '/transportasi.jpeg', link: '/surabaya/transportasi' },
+  { title: 'Heritage', img: '/heritage.jpeg', link: '/surabaya/heritage' },
+  { title: 'Budaya', img: '/budaya.jpg', link: '/surabaya/budaya' },
   { title: 'Rumah Sakit', img: '/belanja.jpeg', link: '/hospital' },
 ];
 
