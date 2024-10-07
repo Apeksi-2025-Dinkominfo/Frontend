@@ -23,7 +23,7 @@ export default function CardSejarah() {
           <br /><br />elementum. Nam vitae mi consectetur ex  felis. Nunc iaculis placerat tristique. Pellentesque ullamcorper ut metus in elementum. Nam vitae mi consectetur ex. felis.
         </p>
         <button className="mb-20 px-12 py-3 bg-[#78B7D0] text-white font-semibold rounded-full">
-          We Are Surabaya Smart City!
+          Dari Surabaya Untuk Indonesia!
         </button>
       </div>
       <div className="md:w-7/3 mt-15"> 

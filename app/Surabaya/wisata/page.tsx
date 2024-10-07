@@ -16,41 +16,13 @@ interface Destination {
   touristDestinationFiles: TouristDestinationFile[];
 }
 
-export default function HeritagePage() {
+export default function WisataPage() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Hardcoded dummy data
-  const dummyData: Destination[] = [
-    {
-      id: 'dummy1',
-      nameIndonesia: 'Candi Dummy',
-      address: 'Dummy Address 1',
-      descriptionIndonesia:
-        'Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama. ',
-      latitude: -7.250445,
-      longitude: 112.768845,
-      touristDestinationFiles: [
-        { link: 'https://dummyimage.com/600x400/000/fff&text=Candi+Dummy' },
-      ],
-    },
-    {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
-      address: 'Dummy Address 2',
-      descriptionIndonesia:
-        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
-      latitude: -7.257472,
-      longitude: 112.752088,
-      touristDestinationFiles: [
-        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
-      ],
-    },
-  ];
-
   useEffect(() => {
     const fetchData = async () => {
-      const allDestinations: Destination[] = [...dummyData]; // Start with dummy data
+      const allDestinations: Destination[] = [];
       for (let page = 1; page <= 7; page++) {
         const res = await fetch(
           `https://tourism.surabaya.go.id/api/kominfo/destination?page=${page}`
@@ -64,18 +36,6 @@ export default function HeritagePage() {
   }, []);
 
   const excludedIds = [
-    '9bf9c9fe-51a6-4b0b-97aa-9c8ce15074a5',
-    '9b2e8c13-499b-47bd-9b47-827d0afd00e9',
-    '9bfbf031-1016-4e9e-949e-aa387960d040',
-    '9bfbfbeb-db56-4ac7-81d2-ea635c013c47',
-    '9bfbfcee-56b4-4fcb-84d0-87c6509d06ff',
-    '9bfbff40-58ee-4f11-bb8c-0bbd890a4d0d',
-    '9bfc06ef-5862-42aa-ac91-d2679e7f4073',
-    '9bfc084c-a856-4a26-9af3-f8cc3b461117',
-    '9bfc08b2-5828-44de-b06d-558c57a35bbb',
-    '9bfc0914-44c0-4e21-bcfc-ab3d57178efc',
-    '9bfc0aa9-82c8-430a-9777-59ee0a3112f0',
-    '9bfc07a1-9d7b-4f92-89bc-7cdfb7eb2825',
     '9c4228f7-64ad-43dc-96e8-f71d62f445a6',
     '9c422b84-3beb-40f3-bbc2-a3bb014848f1',
     '52be927c-1312-4170-a332-f6ea07713d02',
@@ -90,12 +50,13 @@ export default function HeritagePage() {
     'e5291779-2864-4a01-9590-1b507ea7ed4f',
     'b02cfe95-a65a-4888-9c60-9875c1dd3d08',
     '8ff3eb3d-da1d-49f6-a259-379623f7bf7c',
+
   ];
 
   const filteredDestinations = destinations.filter(
     (destination) =>
       destination.touristDestinationFiles.length > 0 &&
-      !excludedIds.includes(destination.id)
+      excludedIds.includes(destination.id)
   );
 
   const truncateDescription = (description: string) => {
@@ -207,33 +168,26 @@ export default function HeritagePage() {
               )}
               <div
                 className="p-4"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}
+                style={{ minHeight: '300px', position: 'relative' }}
               >
-                <div>
-                  <h2 className="text-lg font-semibold">
-                    {destination.nameIndonesia}
-                  </h2>
-                  <p className="text-sm">{destination.address}</p>
-                  <p className="text-sm">
-                    {truncateDescription(destination.descriptionIndonesia)}
-                  </p>
-                </div>
-                <Button
+                <h3 className="text-lg font-bold text-black mb-2">
+                  {destination.nameIndonesia}
+                </h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  {truncateDescription(destination.descriptionIndonesia)}
+                </p>
+                <button
                   onClick={() =>
                     openLocationInMaps(
                       destination.latitude,
                       destination.longitude
                     )
                   }
-                  variant="contained"
-                  style={{ marginTop: '10px', backgroundColor: '#008080' }}
+                  className="bg-[#2b8ea6] text-white py-2 px-4 rounded-full hover:bg-[#257a8a] transition duration-300"
+                  style={{ position: 'absolute', bottom: '16px', left: '16px' }}
                 >
-                  Buka di Google Maps
-                </Button>
+                  Menuju Lokasi
+                </button>
               </div>
             </div>
           </Grid>

@@ -74,7 +74,7 @@ import {
           className="text-body font-semibold"
           sx={{ mb: 4, textAlign: 'right', fontSize: '39px' }}
         >
-          Jadwal Rakernas.
+          Jadwal Munas.
         </Typography>
         <Grid container spacing={9} justifyContent="center">
           {events.map((event, index) => (

@@ -6,7 +6,7 @@ export default function LandingPage() {
   const router = useRouter();
 
   const handleButtonClick = () => {
-    router.push('/galery');
+    router.push('/register');
   };
 
   return (
@@ -18,8 +18,8 @@ export default function LandingPage() {
       <div className="relative z-20 max-w-5xl px-6 lg:px-12 ml-6">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-body">
           SELAMAT DATANG <br />
-          PARA PESERTA MUNAS KE – VII <br />
-          ASOSIASI PEMERINTAH KOTA <br />
+          MUNAS KE – VII ASOSIASI <br />
+          PEMERINTAH KOTA <br />
           SELURUH INDONESIA <br />
           DI SURABAYA
         </h1>
