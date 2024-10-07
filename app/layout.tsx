@@ -15,10 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Box>
 
         {/* Animated Image */}
-        <AnimatedImage>
-          {children}
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+          <AnimatedImage>
+            {children}
           </AnimatedImage>
-
+        </Box>
 
         {/* Footer */}
         <Box sx={{ mt: { xs: 4, md: 6 }, maxWidth: '100%' }}>
