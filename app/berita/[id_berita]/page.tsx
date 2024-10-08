@@ -1,11 +1,13 @@
 import { Box, Typography, Button, Paper } from '@mui/material';
-import { beritaItems } from '../../utils/beritaData';
 import Link from 'next/link';
+import { fetchNewsItems, NewsItem } from '../../utils/beritaData';
+import { format } from 'date-fns';
 
-const BeritaDetail = ({ params }: { params: { id_berita: string } }) => {
-  const { id_berita } = params; // Get id_berita from params
+const BeritaDetail = async ({ params }: { params: { id_berita: string } }) => {
+  const { id_berita } = params; 
 
-  const berita = beritaItems.find((item) => item.id_berita.toString() === id_berita);
+  const newsItems: NewsItem[] = await fetchNewsItems();
+  const berita = newsItems.find((item) => item.id.toString() === id_berita);
 
   if (!berita) {
     return (
@@ -26,7 +28,7 @@ const BeritaDetail = ({ params }: { params: { id_berita: string } }) => {
 
   return (
     <Box sx={{ mt: 4, px: 4, py: 4 }}>
-      <Paper elevation={3} sx={{ padding: 4 }}>
+      <Paper elevation={3} sx={{ padding: 4, overflow: 'hidden' }}>
         <Box sx={{ mb: 2 }}>
           <Link href="/berita" passHref>
             <Button variant="outlined" sx={{ mb: 2 }}>
@@ -34,20 +36,24 @@ const BeritaDetail = ({ params }: { params: { id_berita: string } }) => {
             </Button>
           </Link>
         </Box>
-        <Typography variant="h4" sx={{ color: '#1A4C63', mb: 2 }}>
-          {berita.title}
+        <Typography className='text-4xl font-semibold text-body'>
+          {berita.tittle}
         </Typography>
-        <Typography variant="caption" sx={{ color: '#777' }}>
-          {berita.location} - {berita.date}
+        <Typography className='text-l font-light text-gray'>
+          {berita.location} - {format(new Date(berita.date), 'dd MMM yyyy')}
         </Typography>
         <Box
           component="img"
-          src={berita.image}
-          alt={berita.title}
+          src={berita.images}
           sx={{ width: '100%', borderRadius: 1, mt: 2 }}
         />
-        <Typography variant="body1" sx={{ mt: 2, color: '#333' }}>
-          {berita.body}
+        <Typography variant="body1" sx={{ mt: 2, color: '#333', overflowWrap: 'break-word' }}>
+          {berita.body.split('\n').map((paragraph, index) => (
+            <span key={index}>
+              {paragraph}
+              <br /> 
+            </span>
+          ))}
         </Typography>
       </Paper>
     </Box>

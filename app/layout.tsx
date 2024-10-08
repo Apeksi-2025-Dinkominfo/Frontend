@@ -34,9 +34,14 @@ export default function RootLayout({
             justifyContent: 'center',
             alignItems: 'center',
             minHeight: '100vh',
+            width: '100%', // Ensure this box takes full width
+            overflow: 'hidden', // Prevent overflow
+            padding: 2, // Optional: Add some padding to prevent edge cases
           }}
         >
-          <AnimatedImage>{children}</AnimatedImage>
+          <AnimatedImage>
+            {children}
+          </AnimatedImage>
         </Box>
 
         {/* Footer */}
