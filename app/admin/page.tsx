@@ -15,7 +15,7 @@ const Sidebar: React.FC<{ activeButton: number; onButtonClick: (index: number) =
                     </Link>
                 </li>
                 <li>
-                    <Link href="#" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
+                    <Link href="/admin/dataregistrasi" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
                         Data Registrasi
                     </Link>
                 </li>
@@ -94,7 +94,7 @@ const AddStoryButton: React.FC = () => {
 
 // Komponen Utama (Page)
 const StoryManagementPage: React.FC = () => {
-    const [activeButton, setActiveButton] = useState<number>(0); // Set default active button
+    const [activeButton, setActiveButton] = useState<number>(1); // Set default active button ke Dashboard (1)
 
     // Function to handle deletion of a story
     const handleDelete = (no: number) => {
@@ -130,7 +130,6 @@ const StoryManagementPage: React.FC = () => {
                         color: white;
                         padding: 20px;
                         height: 100%;
-                        margin-bottom: 20px;
                     }
                     .sidebar h2 {
                         margin-bottom: 20px;
@@ -147,6 +146,14 @@ const StoryManagementPage: React.FC = () => {
                         display: block;
                         color: white;
                         textDecoration: none;
+                        padding: 10px;
+                        text-align: center;
+                        transition: background-color 0.3s;
+                    }
+                    .sidebar ul li a:hover,
+                    .sidebar ul li a.active {
+                        background-color: #2980b9;
+                        border-radius: 4px;
                     }
                     .content {
                         flex-grow: 1;
@@ -194,7 +201,7 @@ const StoryManagementPage: React.FC = () => {
             </style>
             <Sidebar activeButton={activeButton} onButtonClick={setActiveButton} />
             <div className="content">
-                <h1>Stories</h1>
+                <h1>Search</h1>
                 <div className="header-controls">
                     <input type="text" placeholder="Search by Writers/Title" className="search-bar" />
                     <AddStoryButton />
@@ -205,4 +212,4 @@ const StoryManagementPage: React.FC = () => {
     );
 };
 
-export default StoryManagementPage; 
+export default StoryManagementPage;
