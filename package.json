@@ -16,6 +16,7 @@
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
     "axios": "^1.7.7",
+    "date-fns": "^4.1.0",
     "framer-motion": "^11.9.0",
     "next": "14.2.12",
     "react": "^18",
@@ -26,6 +27,7 @@
     "react-swiper": "^0.1.5",
     "react-transition-group": "^4.4.5",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.6.13",
     "swiper": "^11.1.14"
   },
   "devDependencies": {
