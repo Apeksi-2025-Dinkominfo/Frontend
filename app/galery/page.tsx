@@ -1,26 +1,48 @@
-const base_url = "https://satupeta.surabaya.go.id/eksternal/open-spatial/apotek"
-interface Iposts{
-  id : number;
-  nama: string;
-  alamat : string;
-}
+// app/pendaftars/page.jsx
+"use client"; // Ini harus di bagian atas agar komponen berjalan di client
 
+import { useEffect, useState } from "react";
 
-const Galery = async() => {
-  const response = await fetch(base_url)
-  const apotek:Iposts[] = await response.json()
+export default function PendaftarsPage() {
+  const [pendaftars, setPendaftars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from the API on the client side
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:1337/api/pendaftars');
+        const data = await res.json();
+        setPendaftars(data.data); // Update state with the fetched data
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch data');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures fetching happens once on component mount
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
-    <>
-      {apotek.map((apotik) => (
-        <div key={apotik.id}>
-          <p>id apotek      : {apotik.id}</p>
-          <p>nama apotek    : {apotik.nama}</p>
-          <p>alamat apotek  :{apotik.alamat}</p>
-          <br />
-        </div>
-      ))}
-    </>
+    <div>
+      <h1>Daftar Pendaftar</h1>
+      <ul>
+        {pendaftars.map((pendaftar) => (
+          <li key={pendaftar.id}>
+            {pendaftar.asal_kota}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
-};
-
-export default Galery
+}

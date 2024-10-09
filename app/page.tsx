@@ -1,4 +1,3 @@
-// app/page.tsx
 import LandingPage from './components/landing';
 import Sejarah from './components/CardSejarah';
 import Surabaya from './components/sapaSurabaya';
@@ -9,6 +8,7 @@ import Agenda from './components/agenda';
 import Berita from './components/Berita';
 import Galeri from './components/gallery';
 import { Box } from '@mui/material';
+import React from 'react';
 
 export const metadata = {
   title: 'Apeksi Rakernas Surabaya 2025',
@@ -18,6 +18,7 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+    
       <Box sx={{ mt: { xs: 2, md: 4 } }}>
         <LandingPage />
       </Box>
