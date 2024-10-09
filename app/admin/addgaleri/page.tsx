@@ -23,7 +23,7 @@ const Sidebar: React.FC<{ activeButton: number; onButtonClick: (index: number) =
                     </Link>
                 </li>
                 <li>
-                    <Link href="#" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
+                    <Link href="/admin/dataregistrasi" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
                         Data Registrasi
                     </Link>
                 </li>

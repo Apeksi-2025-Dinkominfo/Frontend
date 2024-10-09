@@ -179,20 +179,23 @@ const Hotels: React.FC = () => {
         </div>
       </div>
 
-      {/* Sorting Dropdown */}
-      <div className="flex justify-end">
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md"
-        >
-          <option value="default">Default</option>
-          {starOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+      {/* Sorting Dropdown sebagai Card */}
+      <div className="flex justify-end mt-5">
+        <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md flex items-center">
+          <span className="mr-4 font-bold">Filter :</span>
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="p-2 border-none rounded-md bg-white text-black"
+          >
+            <option value="default">Default</option>
+            {starOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Hotel Listings */}
