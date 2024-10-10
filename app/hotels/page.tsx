@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 
 interface Accommodation {
   id: number;
@@ -45,7 +46,7 @@ const Hotels: React.FC = () => {
 
         const uniqueStarOptions = Array.from(
           new Set(allAccommodations.map((hotel) => hotel.hotelCategory.starNumberName))
-        ).sort((a, b) => a.localeCompare(b)); // Sort alphabetically by starNumberName
+        ).sort((a, b) => a.localeCompare(b));
 
         setStarOptions(uniqueStarOptions);
         setAccommodations(allAccommodations);
@@ -71,7 +72,6 @@ const Hotels: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-  // Sort accommodations based on selected star category
   const sortedAccommodations = () => {
     if (sortOrder === 'default') {
       return accommodations;
@@ -128,7 +128,7 @@ const Hotels: React.FC = () => {
 
   const renderPagination = () => {
     if (sortedAccommodations().length <= itemsPerPage) {
-      return null; // Don't render pagination if items are less than or equal to itemsPerPage
+      return null;
     }
 
     const totalPages = Math.ceil(sortedAccommodations().length / itemsPerPage);
@@ -179,22 +179,33 @@ const Hotels: React.FC = () => {
         </div>
       </div>
 
-      {/* Sorting Dropdown sebagai Card */}
+      {/* Dropdown dengan background color #78B7D0 dan tulisan Filter */}
       <div className="flex justify-end mt-5">
-        <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md flex items-center">
+        <div className="flex items-center bg-[#78B7D0] text-black p-2 rounded-lg shadow-md">
           <span className="mr-4 font-bold">Filter :</span>
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="p-2 border-none rounded-md bg-white text-black"
-          >
-            <option value="default">Default</option>
-            {starOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <Dropdown>
+            <DropdownTrigger>
+              <Button variant="bordered" className="bg-[#78B7D0] text-black">
+                All
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+            aria-label="Filter Hotel"
+            items={[{ key: "default", label: "All" }, ...starOptions.map(option => ({ key: option, label: option }))]}
+            >
+            {(item) => (
+            <DropdownItem
+            key={item.key}
+            onClick={() => setSortOrder(item.key)}
+            className={`text-black ${item.key === sortOrder ? "bg-blue-200 text-blue-500" : "bg-[#78B7D0] hover:bg-[#78B7D0]"}`}
+    >
+      {item.label}
+    </DropdownItem>
+  )}
+</DropdownMenu>
+
+
+          </Dropdown>
         </div>
       </div>
 
