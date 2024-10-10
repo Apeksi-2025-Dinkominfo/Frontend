@@ -4,6 +4,7 @@ import Surabaya from './components/sapaSurabaya';
 import Hotel from './components/hotel';
 import WalikotaVideo from './components/walkitvid';
 import Jadwal from './components/jadwal';
+import Agenda from './components/agenda';
 import Berita from './components/Berita';
 import Galeri from './components/gallery';
 import { Box } from '@mui/material';
@@ -48,6 +49,10 @@ export default function Home() {
         }}
       >
         <Jadwal />
+      </Box>
+
+      <Box sx={{ mt: { xs: 250, md: 50 } }}>
+        <Agenda />
       </Box>
 
       <Box sx={{ mt: { xs: 250, md: 50 } }}>

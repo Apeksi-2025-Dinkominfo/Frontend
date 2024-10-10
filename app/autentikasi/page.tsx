@@ -1,95 +1,83 @@
 "use client";
 
-import React, { useReducer, useEffect, useState } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter untuk navigasi
-import { makeStyles } from '@mui/styles';
-import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import CardHeader from '@mui/material/CardHeader';
-import Button from '@mui/material/Button';
+import React, { useReducer, useEffect } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter dari Next.js
+import { makeStyles } from "@mui/styles";
+import TextField from "@mui/material/TextField";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import CardHeader from "@mui/material/CardHeader";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 const useStyles = makeStyles({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      width: 400,
-      margin: '0 auto'
-    },
-    loginBtn: {
-      marginTop: 16, 
-      flexGrow: 1
-    },
-    header: {
-      textAlign: 'center',
-      background: '#212121',
-      color: '#fff'
-    },
-    card: {
-      marginTop: 40 
-    }
+  root: {
+    display: "flex",
+    justifyContent: "center", // Menyesuaikan agar berada di tengah horizontal
+    alignItems: "center", // Vertikal tengah
+    height: "100vh", // Membuat tampilan full height
+    backgroundColor: "#FFFFFF", // Warna background untuk kontras
+  },
+  formContainer: {
+    maxWidth: 400, // Batas lebar card
+    width: "100%", // Memastikan card mengambil seluruh lebar
+  },
+  loginBtn: {
+    marginTop: 16, // Spasi atas tombol
+  },
+  header: {
+    textAlign: "center",
+    color: "#212121",
+  },
+  card: {
+    padding: 20, // Padding di dalam card
+  },
+  logo: {
+    display: "block",
+    maxWidth: "200px",
+    margin: "0 auto 20px", // Logo center dengan margin bawah
+  },
 });
 
-//state type
+// State Type dan Initial State
 type State = {
   username: string;
   password: string;
   isButtonDisabled: boolean;
   helperText: string;
   isError: boolean;
+  isLoggedIn: boolean; // Status login
 };
 
 const initialState: State = {
-  username: '',
-  password: '',
+  username: "",
+  password: "",
   isButtonDisabled: true,
-  helperText: '',
-  isError: false
+  helperText: "",
+  isError: false,
+  isLoggedIn: false, // Inisialisasi status login ke false
 };
 
 type Action =
-  | { type: 'setUsername'; payload: string }
-  | { type: 'setPassword'; payload: string }
-  | { type: 'setIsButtonDisabled'; payload: boolean }
-  | { type: 'loginSuccess'; payload: string }
-  | { type: 'loginFailed'; payload: string }
-  | { type: 'setIsError'; payload: boolean };
+  | { type: "setUsername"; payload: string }
+  | { type: "setPassword"; payload: string }
+  | { type: "setIsButtonDisabled"; payload: boolean }
+  | { type: "loginSuccess"; payload: string }
+  | { type: "loginFailed"; payload: string };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'setUsername':
-      return {
-        ...state,
-        username: action.payload
-      };
-    case 'setPassword':
-      return {
-        ...state,
-        password: action.payload
-      };
-    case 'setIsButtonDisabled':
-      return {
-        ...state,
-        isButtonDisabled: action.payload
-      };
-    case 'loginSuccess':
-      return {
-        ...state,
-        helperText: action.payload,
-        isError: false
-      };
-    case 'loginFailed':
-      return {
-        ...state,
-        helperText: action.payload,
-        isError: true
-      };
-    case 'setIsError':
-      return {
-        ...state,
-        isError: action.payload
-      };
+    case "setUsername":
+      return { ...state, username: action.payload };
+    case "setPassword":
+      return { ...state, password: action.payload };
+    case "setIsButtonDisabled":
+      return { ...state, isButtonDisabled: action.payload };
+    case "loginSuccess":
+      return { ...state, helperText: action.payload, isError: false, isLoggedIn: true }; // Status login success
+    case "loginFailed":
+      return { ...state, helperText: action.payload, isError: true, isLoggedIn: false }; // Status gagal
     default:
       return state;
   }
@@ -98,80 +86,43 @@ const reducer = (state: State, action: Action): State => {
 const Login = () => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
+  const router = useRouter(); // Router dari Next.js
 
   useEffect(() => {
-    setIsClient(true); // Set isClient to true once the component is mounted on the client side
-  }, []);
-
-  useEffect(() => {
-    if (state.username.trim() && state.password.trim()) {
-      dispatch({
-        type: 'setIsButtonDisabled',
-        payload: false
-      });
-    } else {
-      dispatch({
-        type: 'setIsButtonDisabled',
-        payload: true
-      });
-    }
+    // Aktifkan tombol ketika username dan password terisi
+    dispatch({
+      type: "setIsButtonDisabled",
+      payload: !(state.username.trim() && state.password.trim()),
+    });
   }, [state.username, state.password]);
 
   const handleLogin = () => {
-    if (state.username === 'abc@email.com' && state.password === 'password') {
-      dispatch({
-        type: 'loginSuccess',
-        payload: 'Login Successfully'
-      });
-      if (isClient) {
-        router.push('/admin'); // Only redirect after the component is mounted on the client
-      }
+    if (state.username === "nandanalog@gmail.com" && state.password === "a7d1x3kw") {
+      dispatch({ type: "loginSuccess", payload: "Login Berhasil" });
+      router.push("/admin"); // Redirect ke halaman admin
     } else {
-      dispatch({
-        type: 'loginFailed',
-        payload: 'Incorrect username or password'
-      });
+      dispatch({ type: "loginFailed", payload: "Username atau password salah" });
     }
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.keyCode === 13 || event.which === 13) {
-      state.isButtonDisabled || handleLogin();
-    }
-  };
-
-  const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    dispatch({
-      type: 'setUsername',
-      payload: event.target.value
-    });
-  };
-
-  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    dispatch({
-      type: 'setPassword',
-      payload: event.target.value
-    });
   };
 
   return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <Card className={classes.card}>
-        <CardHeader className={classes.header} title="Login App" />
-        <CardContent>
-          <div>
+    <div className={classes.root}>
+      <Box className={classes.formContainer}>
+        {/* Logo di atas form */}
+        <img src="apeksi.png" alt="Logo APEKSI" className={classes.logo} />
+
+        {/* Card Login */}
+        <Card className={classes.card}>
+          <CardHeader className={classes.header} title="Login Admin" />
+          <CardContent>
             <TextField
               error={state.isError}
               fullWidth
               id="username"
               type="email"
               label="Username"
-              placeholder="Username"
               margin="normal"
-              onChange={handleUsernameChange}
-              onKeyPress={handleKeyPress}
+              onChange={(e) => dispatch({ type: "setUsername", payload: e.target.value })}
             />
             <TextField
               error={state.isError}
@@ -179,28 +130,27 @@ const Login = () => {
               id="password"
               type="password"
               label="Password"
-              placeholder="Password"
               margin="normal"
               helperText={state.helperText}
-              onChange={handlePasswordChange}
-              onKeyPress={handleKeyPress}
+              onChange={(e) => dispatch({ type: "setPassword", payload: e.target.value })}
             />
-          </div>
-        </CardContent>
-        <CardActions>
-          <Button
-            variant="contained"
-            size="large"
-            color="secondary"
-            className={classes.loginBtn}
-            onClick={handleLogin}
-            disabled={state.isButtonDisabled}
-          >
-            Login
-          </Button>
-        </CardActions>
-      </Card>
-    </form>
+          </CardContent>
+          <CardActions>
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              className={classes.loginBtn}
+              onClick={handleLogin}
+              disabled={state.isButtonDisabled}
+              fullWidth
+            >
+              Login
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
+    </div>
   );
 };
 
