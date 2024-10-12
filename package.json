@@ -15,6 +15,7 @@
     "@magiclabs/ui": "^0.27.4",
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
+    "@mui/styles": "^6.1.3",
     "@nextui-org/react": "^2.4.8",
     "axios": "^1.7.7",
     "date-fns": "^4.1.0",

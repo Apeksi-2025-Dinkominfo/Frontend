@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useReducer, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter dari Next.js
-import { makeStyles } from "@mui/styles";
+import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -10,53 +9,25 @@ import CardActions from "@mui/material/CardActions";
 import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { loginUser } from "../utils/login";
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    justifyContent: "center", // Menyesuaikan agar berada di tengah horizontal
-    alignItems: "center", // Vertikal tengah
-    height: "100vh", // Membuat tampilan full height
-    backgroundColor: "#FFFFFF", // Warna background untuk kontras
-  },
-  formContainer: {
-    maxWidth: 400, // Batas lebar card
-    width: "100%", // Memastikan card mengambil seluruh lebar
-  },
-  loginBtn: {
-    marginTop: 16, // Spasi atas tombol
-  },
-  header: {
-    textAlign: "center",
-    color: "#212121",
-  },
-  card: {
-    padding: 20, // Padding di dalam card
-  },
-  logo: {
-    display: "block",
-    maxWidth: "200px",
-    margin: "0 auto 20px", // Logo center dengan margin bawah
-  },
-});
-
-// State Type dan Initial State
+// State Type and Initial State
 type State = {
-  username: string;
+  name: string;
   password: string;
   isButtonDisabled: boolean;
   helperText: string;
   isError: boolean;
-  isLoggedIn: boolean; // Status login
+  isLoggedIn: boolean; // Login status
 };
 
 const initialState: State = {
-  username: "",
+  name: "",
   password: "",
   isButtonDisabled: true,
   helperText: "",
   isError: false,
-  isLoggedIn: false, // Inisialisasi status login ke false
+  isLoggedIn: false,
 };
 
 type Action =
@@ -69,57 +40,56 @@ type Action =
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "setUsername":
-      return { ...state, username: action.payload };
+      return { ...state, name: action.payload };
     case "setPassword":
       return { ...state, password: action.payload };
     case "setIsButtonDisabled":
       return { ...state, isButtonDisabled: action.payload };
     case "loginSuccess":
-      return { ...state, helperText: action.payload, isError: false, isLoggedIn: true }; // Status login success
+      return { ...state, helperText: action.payload, isError: false, isLoggedIn: true };
     case "loginFailed":
-      return { ...state, helperText: action.payload, isError: true, isLoggedIn: false }; // Status gagal
+      return { ...state, helperText: action.payload, isError: true, isLoggedIn: false };
     default:
       return state;
   }
 };
 
 const Login = () => {
-  const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const router = useRouter(); // Router dari Next.js
+  const router = useRouter();
 
   useEffect(() => {
-    // Aktifkan tombol ketika username dan password terisi
     dispatch({
       type: "setIsButtonDisabled",
-      payload: !(state.username.trim() && state.password.trim()),
+      payload: !(state.name.trim() && state.password.trim()),
     });
-  }, [state.username, state.password]);
+  }, [state.name, state.password]);
 
-  const handleLogin = () => {
-    if (state.username === "nandanalog@gmail.com" && state.password === "a7d1x3kw") {
+  const handleLogin = async () => {
+    try {
+      const response = await loginUser(state.name, state.password);
+      
+      localStorage.setItem("token", response.token); // Store the token
       dispatch({ type: "loginSuccess", payload: "Login Berhasil" });
-      router.push("/admin"); // Redirect ke halaman admin
-    } else {
-      dispatch({ type: "loginFailed", payload: "Username atau password salah" });
+      router.push("/admin"); // Redirect to admin page
+    } catch (error) {
+      dispatch({ type: "loginFailed", payload: error.message });
     }
   };
 
   return (
-    <div className={classes.root}>
-      <Box className={classes.formContainer}>
-        {/* Logo di atas form */}
-        <img src="apeksi.png" alt="Logo APEKSI" className={classes.logo} />
+    <div className="flex justify-center items-center h-screen bg-white">
+      <Box className="max-w-md w-full">
+        <img src="apeksi.png" alt="Logo APEKSI" className="block mx-auto mb-5 max-w-[200px]" />
 
-        {/* Card Login */}
-        <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Login Admin" />
+        <Card className="p-5">
+          <CardHeader className="text-center text-gray-800" title="Login Admin" />
           <CardContent>
             <TextField
               error={state.isError}
               fullWidth
-              id="username"
-              type="email"
+              id="name"
+              type="name"
               label="Username"
               margin="normal"
               onChange={(e) => dispatch({ type: "setUsername", payload: e.target.value })}
@@ -140,10 +110,9 @@ const Login = () => {
               variant="contained"
               size="large"
               color="primary"
-              className={classes.loginBtn}
+              className="mt-4 w-full"
               onClick={handleLogin}
               disabled={state.isButtonDisabled}
-              fullWidth
             >
               Login
             </Button>
