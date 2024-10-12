@@ -18,17 +18,14 @@ export default function LandingPage() {
       <div className="relative z-20 max-w-5xl px-6 lg:px-12 ml-6">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-body">
           SELAMAT DATANG <br />
-          MUNAS KE – VII ASOSIASI <br />
+          MUNAS VII ASOSIASI <br />
           PEMERINTAH KOTA <br />
           SELURUH INDONESIA <br />
           DI SURABAYA
         </h1>
         <p className="text-lg text-light font-semibold">25 – 27 Mei 2025</p>
         <p className="mt-9 text-second">
-          Penjelasan tema, menghubungkan pemerintah kota di Indonesia untuk
-          <br />
-          berbagi solusi dan ide dalam pengelolaan kota, memperkuat <br />
-          kolaborasi, dan mendukung pembangunan berkelanjutan.
+        Dari Surabaya Untuk Indonesia!
         </p>
         <div className="mt-8">
         <button
