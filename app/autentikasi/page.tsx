@@ -11,14 +11,13 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { loginUser } from "../utils/login";
 
-// State Type and Initial State
 type State = {
   name: string;
   password: string;
   isButtonDisabled: boolean;
   helperText: string;
   isError: boolean;
-  isLoggedIn: boolean; // Login status
+  isLoggedIn: boolean;
 };
 
 const initialState: State = {
@@ -69,9 +68,9 @@ const Login = () => {
     try {
       const response = await loginUser(state.name, state.password);
       
-      localStorage.setItem("token", response.token); // Store the token
+      localStorage.setItem("token", response.token);
       dispatch({ type: "loginSuccess", payload: "Login Berhasil" });
-      router.push("/admin"); // Redirect to admin page
+      router.push("/admin"); 
     } catch (error) {
       dispatch({ type: "loginFailed", payload: error.message });
     }
