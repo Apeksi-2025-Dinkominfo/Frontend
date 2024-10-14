@@ -10,6 +10,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { loginUser } from "../utils/login";
+import { setCookie } from 'nookies';
 
 type State = {
   name: string;
@@ -68,13 +69,25 @@ const Login = () => {
     try {
       const response = await loginUser(state.name, state.password);
       
-      localStorage.setItem("token", response.token);
+      // Set the token in cookies
+      setCookie(null, 'token', response.token, {
+        maxAge: 5 * 60,
+        path: '/',
+      });
+      
       dispatch({ type: "loginSuccess", payload: "Login Berhasil" });
       router.push("/admin"); 
-    } catch (error) {
-      dispatch({ type: "loginFailed", payload: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // Handle the error correctly by accessing the message
+        dispatch({ type: "loginFailed", payload: error.message });
+      } else {
+        // Handle unexpected error types
+        dispatch({ type: "loginFailed", payload: "An unknown error occurred." });
+      }
     }
   };
+  
 
   return (
     <div className="flex justify-center items-center h-screen bg-white">
