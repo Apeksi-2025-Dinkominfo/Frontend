@@ -1,6 +1,5 @@
 "use client"; // This will make the entire file a Client Component
 
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { SpeedDial, SpeedDialAction } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -10,39 +9,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import Sidebar from '../../components/sidebar';
 
-// Komponen Sidebar
-const Sidebar: React.FC<{ activeButton: number; onButtonClick: (index: number) => void }> = ({ activeButton, onButtonClick }) => {
-    return (
-        <div className="sidebar">
-            <h2>MANAGEMENT MUNAS</h2>
-            <ul>
-                <li>
-                    <Link href="/admin" className={`sidebar-link ${activeButton === 1 ? 'active' : ''}`} onClick={() => onButtonClick(1)}>
-                        Dashboard
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/admin/dataregistrasi" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
-                        Data Registrasi
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/admin/addnews" className={`sidebar-link ${activeButton === 3 ? 'active' : ''}`} onClick={() => onButtonClick(3)}>
-                        Add News
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/admin/addgaleri" className={`sidebar-link ${activeButton === 4 ? 'active' : ''}`} onClick={() => onButtonClick(4)}>
-                        Add Gallery
-                    </Link>
-                </li>
-            </ul>
-        </div>
-    );
-};
-
-// Komponen StoryTable
 interface Story {
     no: number;
     title: string;
@@ -53,28 +21,40 @@ interface Story {
 
 const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; onEdit: (story: Story) => void }> = ({ stories, onDelete, onEdit }) => {
     return (
-        <table className="story-table">
+        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Title</th>
-                    <th>Writers</th>
-                    <th>Date</th>
-                    <th>Image</th>
-                    <th>Actions</th>
+                <tr className="bg-gray-200 text-left">
+                    <th className="py-3 px-4 font-semibold text-sm">No</th>
+                    <th className="py-3 px-4 font-semibold text-sm">Title</th>
+                    <th className="py-3 px-4 font-semibold text-sm">Writers</th>
+                    <th className="py-3 px-4 font-semibold text-sm">Date</th>
+                    <th className="py-3 px-4 font-semibold text-sm">Image</th>
+                    <th className="py-3 px-4 font-semibold text-sm">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {stories.map((story) => (
-                    <tr key={story.no}>
-                        <td>{story.no}</td>
-                        <td>{story.title}</td>
-                        <td>{story.writers}</td>
-                        <td>{story.date}</td>
-                        <td><img src={story.image} alt={story.title} style={{ width: '50px', height: 'auto' }} /></td>
-                        <td>
-                            <button onClick={() => onEdit(story)}>Edit</button>
-                            <button onClick={() => onDelete(story.no)}>Delete</button>
+                    <tr key={story.no} className="border-b border-gray-200">
+                        <td className="py-3 px-4">{story.no}</td>
+                        <td className="py-3 px-4">{story.title}</td>
+                        <td className="py-3 px-4">{story.writers}</td>
+                        <td className="py-3 px-4">{story.date}</td>
+                        <td className="py-3 px-4">
+                            <img src={story.image} alt={story.title} className="w-12 h-auto" />
+                        </td>
+                        <td className="py-3 px-4">
+                            <button
+                                className="bg-blue-500 text-white px-4 py-1 rounded mr-2 hover:bg-blue-600"
+                                onClick={() => onEdit(story)}
+                            >
+                                Edit
+                            </button>
+                            <button
+                                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+                                onClick={() => onDelete(story.no)}
+                            >
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 ))}
@@ -83,7 +63,7 @@ const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; o
     );
 };
 
-// Komponen Utama (Page)
+// Main Component (Page)
 const StoryManagementPage: React.FC = () => {
     const [openSpeedDial, setOpenSpeedDial] = useState(false);
     const [stories, setStories] = useState<Story[]>([]);
@@ -93,20 +73,17 @@ const StoryManagementPage: React.FC = () => {
     const [editStoryNo, setEditStoryNo] = useState<number | null>(null);
     const [activeButton, setActiveButton] = useState<number>(0); // Ubah default ke 0
 
-    // Function to handle deletion of a story
     const handleDelete = (no: number) => {
         setStories(stories.filter(story => story.no !== no));
         console.log(`Deleted story with No: ${no}`);
     };
 
-    // Function to handle adding a new story
     const handleAddStory = () => {
         setOpenDialog(true);
         setEditStoryNo(null);
         setNewStory({ title: '', writers: '', date: '', image: '' });
     };
 
-    // Function to save the new or updated story
     const handleSaveStory = () => {
         if (editStoryNo !== null) {
             setStories(stories.map(story => (story.no === editStoryNo ? { ...story, ...newStory } : story)));
@@ -118,7 +95,6 @@ const StoryManagementPage: React.FC = () => {
         setOpenDialog(false);
     };
 
-    // Function to handle image upload
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -130,7 +106,6 @@ const StoryManagementPage: React.FC = () => {
         }
     };
 
-    // Function to handle editing a story
     const handleEdit = (story: Story) => {
         setNewStory({ title: story.title, writers: story.writers, date: story.date, image: story.image });
         setEditStoryNo(story.no);
@@ -138,100 +113,16 @@ const StoryManagementPage: React.FC = () => {
     };
 
     return (
-        <div className="container">
-            <style>
-                {`
-                    * {
-                        box-sizing: border-box;
-                    }
-                    body {
-                        margin: 0;
-                        font-family: Arial, sans-serif;
-                        height: 100vh;
-                    }
-                    .container {
-                        display: flex;
-                        height: 100%;
-                    }
-                    .sidebar {
-                        width: 250px;
-                        background-color: #2c3e50;
-                        color: white;
-                        padding: 20px;
-                        height: 100%;
-                        margin-bottom: 20px;
-                    }
-                    .sidebar h2 {
-                        margin-bottom: 20px;
-                    }
-                    .sidebar ul {
-                        list-style-type: none;
-                        padding: 0;
-                        margin-bottom: 20px;
-                    }
-                    .sidebar ul li {
-                        margin-bottom: 20px;
-                    }
-                    .sidebar ul li a {
-                        display: block;
-                        color: white;
-                        text-decoration: none;
-                        padding: 10px;
-                        border-radius: 4px;
-                        text-align: center;
-                        transition: background-color 0.3s ease;
-                    }
-                    .sidebar ul li a:hover,
-                    .sidebar ul li a.active { /* Tambahkan kondisi untuk aktif dan hover */
-                        background-color: #2980b9; /* Ubah warna sesuai preferensi */
-                    }
-                    .content {
-                        flex-grow: 1;
-                        padding: 20px;
-                        overflow-y: auto;
-                    }
-                    .header-controls {
-                        display: flex;
-                        justify-content: space-between;
-                        margin-bottom: 20px;
-                    }
-                    .search-bar {
-                        padding: 10px;
-                        width: 300px;
-                    }
-                    .story-table {
-                        width: 100%;
-                        border-collapse: collapse;
-                    }
-                    .story-table th, .story-table td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                    }
-                    .story-table th {
-                        background-color: #f4f4f4;
-                        text-align: left;
-                    }
-                    button {
-                        margin-right: 5px;
-                        padding: 5px 10px;
-                        cursor: pointer;
-                        background-color: #007bff;
-                        color: white;
-                        border: none;
-                        border-radius: 4px;
-                    }
-                    .preview-image {
-                        width: 100px; /* Set the width for the preview */
-                        height: auto; /* Maintain aspect ratio */
-                        margin-bottom: 10px;
-                    }
-                `}
-            </style>
+        <div className="flex">
             <Sidebar activeButton={activeButton} onButtonClick={setActiveButton} />
-            <div className="content">
-                <h1>News</h1>
-                <div className="header-controls">
-                    <input type="text" placeholder="Search by Writers/Title" className="search-bar" />
+            <div className="flex-1 p-6">
+                <h1 className="text-2xl font-bold mb-6">News</h1>
+                <div className="mb-6">
+                    <input
+                        type="text"
+                        placeholder="Search by Writers/Title"
+                        className="w-full border p-2 rounded-lg"
+                    />
                 </div>
                 <StoryTable stories={stories} onDelete={handleDelete} onEdit={handleEdit} />
 
@@ -282,12 +173,13 @@ const StoryManagementPage: React.FC = () => {
                             value={newStory.date}
                             onChange={(e) => setNewStory({ ...newStory, date: e.target.value })}
                         />
-                        {newStory.image && ( // Tampilkan gambar yang ada jika ada
-                            <img src={newStory.image} alt="Preview" className="preview-image" />
+                        {newStory.image && (
+                            <img src={newStory.image} alt="Preview" className="w-full mt-4" />
                         )}
                         <input
                             type="file"
                             accept="image/*"
+                            className="mt-4"
                             onChange={handleImageUpload}
                         />
                     </DialogContent>
