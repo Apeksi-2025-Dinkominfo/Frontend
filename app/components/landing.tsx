@@ -25,10 +25,7 @@ export default function LandingPage() {
         </h1>
         <p className="text-lg text-light font-semibold">25 – 27 Mei 2025</p>
         <p className="mt-9 text-second">
-          Penjelasan tema, menghubungkan pemerintah kota di Indonesia untuk
-          <br />
-          berbagi solusi dan ide dalam pengelolaan kota, memperkuat <br />
-          kolaborasi, dan mendukung pembangunan berkelanjutan.
+          Dari Surabaya Untuk Indonesia
         </p>
         <div className="mt-8">
         <button
