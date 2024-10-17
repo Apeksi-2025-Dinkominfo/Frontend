@@ -1,8 +1,8 @@
 "use client"; // This will make the entire file a Client Component
 
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+import Sidebar from '../components/sidebar'; // Impor Sidebar yang baru
 
 // Tipe untuk cerita
 interface Story {
@@ -24,37 +24,6 @@ const storiesData: Story[] = [
 
 // Tipe untuk kriteria sorting
 type SortCriteria = 'title' | 'writers' | 'category' | 'keyword';
-
-// Komponen Sidebar
-const Sidebar: React.FC<{ activeButton: number; onButtonClick: (index: number) => void }> = ({ activeButton, onButtonClick }) => {
-    return (
-        <div className="sidebar">
-            <h2>MANAGEMENT MUNAS</h2>
-            <ul>
-                <li>
-                    <Link href="/admin" className={`sidebar-link ${activeButton === 1 ? 'active' : ''}`} onClick={() => onButtonClick(1)}>
-                        Dashboard
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/admin/dataregistrasi" className={`sidebar-link ${activeButton === 2 ? 'active' : ''}`} onClick={() => onButtonClick(2)}>
-                        Data Registrasi
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/admin/addnews" className={`sidebar-link ${activeButton === 3 ? 'active' : ''}`} onClick={() => onButtonClick(3)}>
-                        Add News
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/admin/addgaleri" className={`sidebar-link ${activeButton === 4 ? 'active' : ''}`} onClick={() => onButtonClick(4)}>
-                        Add Gallery
-                    </Link>
-                </li>
-            </ul>
-        </div>
-    );
-};
 
 // Komponen StoryTable
 const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; onUpdate: (story: Story) => void }> = ({ stories, onDelete, onUpdate }) => {
@@ -144,37 +113,6 @@ const StoryManagementPage: React.FC = () => {
                     .container {
                         display: flex;
                         height: 100%;
-                    }
-                    .sidebar {
-                        width: 250px;
-                        background-color: #2c3e50;
-                        color: white;
-                        padding: 20px;
-                        height: 100%;
-                    }
-                    .sidebar h2 {
-                        margin-bottom: 20px;
-                    }
-                    .sidebar ul {
-                        list-style-type: none;
-                        padding: 0;
-                        margin-bottom: 20px;
-                    }
-                    .sidebar ul li {
-                        margin-bottom: 20px;
-                    }
-                    .sidebar ul li a {
-                        display: block;
-                        color: white;
-                        text-decoration: none;
-                        padding: 10px;
-                        text-align: center;
-                        transition: background-color 0.3s;
-                    }
-                    .sidebar ul li a:hover,
-                    .sidebar ul li a.active {
-                        background-color: #2980b9;
-                        border-radius: 4px;
                     }
                     .content {
                         flex-grow: 1;
