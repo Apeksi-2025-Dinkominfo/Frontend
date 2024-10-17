@@ -21,38 +21,43 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="flex">
       {/* Button to toggle sidebar on mobile */}
       <IconButton
         onClick={toggleSidebar}
-        className="md:hidden text-white" // Ensures icon is white
+        className="md:hidden text-white fixed top-4 left-4 z-50"
         aria-label="Toggle Sidebar"
       >
-        <MenuIcon /> {/* MUI Hamburger Icon */}
+        <MenuIcon />
       </IconButton>
 
       {/* Sidebar */}
       <div
-        className={`sidebar bg-gray-800 text-white h-screen p-4 absolute md:relative transition-transform transform ${
+        className={`bg-gray-800 text-white p-22 fixed top-0 left-0 h-screen md:h-auto md:relative w-64 md:block transition-transform transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0`}
+        style={{ maxHeight: 'calc(100vh - 80px)' }} // Adjust to prevent overflow beyond header/footer
       >
         {/* Close Button for Sidebar */}
         <IconButton
           onClick={toggleSidebar}
-          className="md:hidden text-white mb-4" // Ensures close button is white
+          className="md:hidden text-white mb-4"
           aria-label="Close Sidebar"
         >
-          <CloseIcon /> {/* MUI Close Icon */}
+          <CloseIcon />
         </IconButton>
-        
+
         <h2 className="text-lg font-bold mt-20">MANAGEMENT MUNAS</h2>
         <ul className="space-y-4">
           <li>
             <Link href="/admin">
               <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${activeButton === 1 ? 'bg-blue-500 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                onClick={() => handleItemClick(1)} // Call handleItemClick here
+                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
+                  activeButton === 1
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+                onClick={() => handleItemClick(1)}
               >
                 Dashboard
               </div>
@@ -61,8 +66,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
           <li>
             <Link href="/admin/dataregistrasi">
               <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${activeButton === 2 ? 'bg-blue-500 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                onClick={() => handleItemClick(2)} // Call handleItemClick here
+                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
+                  activeButton === 2
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+                onClick={() => handleItemClick(2)}
               >
                 Data Registrasi
               </div>
@@ -71,8 +80,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
           <li>
             <Link href="/admin/addnews">
               <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${activeButton === 3 ? 'bg-blue-500 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                onClick={() => handleItemClick(3)} // Call handleItemClick here
+                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
+                  activeButton === 3
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+                onClick={() => handleItemClick(3)}
               >
                 Add News
               </div>
@@ -81,14 +94,23 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
           <li>
             <Link href="/admin/addgaleri">
               <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${activeButton === 4 ? 'bg-blue-500 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                onClick={() => handleItemClick(4)} // Call handleItemClick here
+                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
+                  activeButton === 4
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+                onClick={() => handleItemClick(4)}
               >
                 Add Gallery
               </div>
             </Link>
           </li>
         </ul>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 p-4 md:ml-64">
+        {/* Your main content goes here */}
       </div>
     </div>
   );

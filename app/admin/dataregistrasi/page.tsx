@@ -95,7 +95,7 @@ export default function DataRegistrasi() {
           </div>
           <div>
             <button
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 mr-4"
+              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 mr-2"
               onClick={downloadExcel}
             >
               Download Excel
