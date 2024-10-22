@@ -15,21 +15,22 @@ export default function CardSejarah() {
           className="object-contain"
         />
       </div>
-      <div className="md:w-6/3 text-left font-poppins md:text-left mb-3 md:mb-15">
-        <h1 className="text-518x132 text-5xl font-Poppins font-bold text-[#16325B] mb-10 mt-10">
+      <div className="md:w-6/3 text-left font-poppins md:text-left mb-10 md:mb-15">
+        <h1 className="text-518x132 text-5xl ml-12 font-Poppins font-bold text-[#16325B] mb-10 mt-10">
           Sejarah <br /> Asosiasi Pemerintah <br /> Kota Seluruh Indonesia
         </h1>
-        <p className="md:w-4/6 mb-15 font-Poppins font-bold text-410x375 text-l text-[#78B7D0]">
-        25 Mei 2000
-Asosiasi Pemerintah Kota Seluruh Indonesia berdiri sesuai Undang- Undang No.22 Tahun 1999 tentang Pemerintahan Daerah dan Keputusan Presiden No. 49 Tahun 2000 tentang Pembentukan Dewan Pertimbangan Otonomi Daerah (DPOD)
-<br/> Panitia Kerja Walikota dibentuk guna mempertimbangkan dan membuat rekomendasi tentang pembentukan Asosiasi Kota-Kota dan diberi nama Asosiasi Pemerintah Kota Seluruh Indonesia (Apeksi) atau Association of Indonesia Municipalities (AIM)
-
+        <p className="md:w-4/6 mb-15 font-Poppins font-bold text-410x375 text-l ml-12 text-[#78B7D0]">
+          25 Mei 2000
+          Asosiasi Pemerintah Kota Seluruh Indonesia berdiri sesuai Undang- Undang No.22 Tahun 1999 tentang Pemerintahan Daerah dan Keputusan Presiden No. 49 Tahun 2000 tentang Pembentukan Dewan Pertimbangan Otonomi Daerah (DPOD)
+          <br/> Panitia Kerja Walikota dibentuk guna mempertimbangkan dan membuat rekomendasi tentang pembentukan Asosiasi Kota-Kota dan diberi nama Asosiasi Pemerintah Kota Seluruh Indonesia (Apeksi) atau Association of Indonesia Municipalities (AIM)
         </p>
-        <Link href="/cardsejarah" passHref>
-          <button className="mb-20 px-12 py-3 bg-[#78B7D0] text-white font-semibold rounded-full transform transition duration-300 hover:scale-105 hover:bg-[#5A9FBA]">
-            Lihat Selengkapnya
-          </button>
-        </Link>
+        <div className="ml-12">
+          <Link href="/cardsejarah" legacyBehavior>
+            <a className="mb-20 text-[#78B7D0] font-semibold hover:underline">
+              Lihat Selengkapnya....
+            </a>
+          </Link>
+        </div>
       </div>
       <div className="md:w-7/3 mt-15"> 
         <Image
