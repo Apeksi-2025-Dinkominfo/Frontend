@@ -1,20 +1,21 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Typography, Card, CardMedia, Link, Container } from '@mui/material';
-
-const images = [
-  { src: 'example1.jpg', title: 'Gambar 1' },
-  { src: 'example 2.jpg', title: 'Gambar 2' },
-  { src: 'example 3.jpg', title: 'Gambar 3' },
-  { src: 'example 5.png', title: 'Gambar 4' },
-  { src: 'balai kota.png', title: 'Gambar 5' },
-  { src: 'example 2.jpg', title: 'Gambar 6' },
-  { src: 'example 3.jpg', title: 'Gambar 7' },
-  { src: 'example 5.png', title: 'Gambar 8' },
-  { src: 'example 5.png', title: 'Gambar 9' },
-  { src: 'example 2.jpg', title: 'Gambar 10' },
-];
+import { fetchGambarData, Gambar } from '../utils/gambardata';
 
 const GalleryComponent = () => {
+  const [images, setImages] = useState<Gambar[]>([]);
+
+  useEffect(() => {
+    const getGambarData = async () => {
+      const data = await fetchGambarData();
+      setImages(data);
+      console.log(data)
+    };
+    
+    getGambarData();
+  }, []);
+
   return (
     <Container maxWidth="lg">
       {/* Bagian header Galeri */}
@@ -45,9 +46,9 @@ const GalleryComponent = () => {
             <Card sx={{ borderRadius: '30px', overflow: 'hidden' }}>
               <CardMedia
                 component="img"
-                alt={image.title}
+                alt={image.photoType}
                 height="150"
-                image={image.src}
+                image={image.url}
                 sx={{ objectFit: 'cover' }}
               />
             </Card>
