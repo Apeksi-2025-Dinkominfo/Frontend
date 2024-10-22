@@ -51,11 +51,11 @@ export default function Home() {
         <Jadwal />
       </Box>
 
-      <Box sx={{ mt: { xs: 250, md: 50 } }}>
+      <Box sx={{ mt: { xs: 250, md: 25 } }}>
         <Agenda />
       </Box>
 
-      <Box sx={{ mt: { xs: 250, md: 50 } }}>
+      <Box sx={{ mt: { xs: 250, md: 20 } }}>
         <Berita />
       </Box>
 

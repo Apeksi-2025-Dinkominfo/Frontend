@@ -16,20 +16,20 @@ export default function LandingPage() {
         aria-hidden="true"
       ></div>
       <div className="relative z-20 max-w-5xl px-6 lg:px-12 ml-6">
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-body">
-          SELAMAT DATANG DI KOTA SURABAYA REK <br />
-          MUNAS VII ASOSIASI <br />
+        <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-body">
+          SELAMAT DATANG DI KOTA SURABAYA REK! MUSYAWARAH NASIONAL<br />
+          (MUNAS) VIII APEKSI 2025 <br />
           PEMERINTAH KOTA <br />
           SELURUH INDONESIA <br />
           DI SURABAYA
         </h1>
         <p className="text-lg text-light font-semibold">25 – 27 Mei 2025</p>
-        <p className="mt-9 text-second">
+        {/* <p className="mt-9 text-second">
           Penjelasan tema, menghubungkan pemerintah kota di Indonesia untuk
           <br />
           berbagi solusi dan ide dalam pengelolaan kota, memperkuat <br />
           kolaborasi, dan mendukung pembangunan berkelanjutan.
-        </p>
+        </p> */}
         <div className="mt-8">
         <button
             onClick={handleButtonClick}

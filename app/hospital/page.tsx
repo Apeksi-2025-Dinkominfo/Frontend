@@ -289,7 +289,7 @@ const LandingPage: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
             {getPageHeading()}
           </Typography>
           <Typography variant={isMobile ? 'body1' : 'h6'} component="div" sx={{ mt: 2, color: '#0d47a1' }}>
-          Jelajahi berbagai sarana kesehatan di Surabaya yang siap memberikan pelayanan kesehatan terbaik untuk Anda dan keluarga. {getPageHeading().toLowerCase()} in your area.
+          Temukan rumah sakit dan fasilitas layanan kesehatan terdekat yang siap menolong jika mengalami masalah kesehatan.
           </Typography>
         </Box>
 

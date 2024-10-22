@@ -67,14 +67,14 @@ import {
           className="text-white font-medium"
           sx={{ textAlign: 'right', fontFamily: 'Poppins', letterSpacing: '5px' }}
         >
-          Rangkaian
+          Cek jadwal Munas nang kene, rek!
         </Typography>
         <Typography
           variant="h6"
           className="text-body font-semibold"
-          sx={{ mb: 4, textAlign: 'right', fontSize: '39px' }}
+          sx={{ mb: 4, textAlign: 'right', fontSize: '19px' }}
         >
-          Jadwal Munas.
+          Catat jadwal kegiatan selama Munas VIII 2024 di Kota Surabaya
         </Typography>
         <Grid container spacing={9} justifyContent="center">
           {events.map((event, index) => (
