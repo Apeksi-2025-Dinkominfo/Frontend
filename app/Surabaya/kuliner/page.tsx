@@ -11,6 +11,7 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function CulinaryPage() {
   const [culinaryData, setCulinaryData] = useState<any[]>([]);
@@ -90,7 +91,22 @@ export default function CulinaryPage() {
   }, [combinedCulinary]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh', // Full viewport height to center vertically
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (loading) {
+    return <CircularProgress />;
   }
 
   if (error) {

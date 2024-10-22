@@ -65,6 +65,9 @@ export default function HeritagePage() {
 
   const excludedIds = [
     '9bf9c9fe-51a6-4b0b-97aa-9c8ce15074a5',
+    "9d27647f-7c93-4f5c-a03b-2c3466016141",
+    "9d27a64c-644e-419d-9b33-c83c7c180cd1",
+    "9d27ab50-f518-4107-87e0-fc13a577188e",
     '9b2e8c13-499b-47bd-9b47-827d0afd00e9',
     '9bfbf031-1016-4e9e-949e-aa387960d040',
     '9bfbfbeb-db56-4ac7-81d2-ea635c013c47',
