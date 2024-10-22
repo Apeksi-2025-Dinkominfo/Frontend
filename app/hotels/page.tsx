@@ -178,11 +178,12 @@ const Hotels: React.FC = () => {
           />
         </div>
       </div>
-
-      {/* Dropdown dengan background color #78B7D0 dan tulisan Filter */}
-      <div className="flex justify-end mt-5">
-        <div className="flex items-center bg-[#78B7D0] text-black p-2 rounded-lg shadow-md">
-          <span className="mr-4 font-bold">Filter :</span>
+  
+      {/* Menyatukan Filter dan Judul dengan Flexbox */}
+      <div className="flex justify-between items-center mt-5">
+        <h1 className="text-5xl font-bold mb-10 text-body">Hotel Suroboyo Rek</h1>
+        <div className="flex items-center bg-[#78B7D0] text-black p-2 mb-7 rounded-lg shadow-md">
+          <span className="mr-2 font-bold">Filter :</span>
           <Dropdown>
             <DropdownTrigger>
               <Button variant="bordered" className="bg-[#78B7D0] text-black">
@@ -190,28 +191,24 @@ const Hotels: React.FC = () => {
               </Button>
             </DropdownTrigger>
             <DropdownMenu
-            aria-label="Filter Hotel"
-            items={[{ key: "default", label: "All" }, ...starOptions.map(option => ({ key: option, label: option }))]}
+              aria-label="Filter Hotel"
+              items={[{ key: "default", label: "All" }, ...starOptions.map(option => ({ key: option, label: option }))]}
             >
-            {(item) => (
-            <DropdownItem
-            key={item.key}
-            onClick={() => setSortOrder(item.key)}
-            className={`text-black ${item.key === sortOrder ? "bg-blue-200 text-blue-500" : "bg-[#78B7D0] hover:bg-[#78B7D0]"}`}
-    >
-      {item.label}
-    </DropdownItem>
-  )}
-</DropdownMenu>
-
-
+              {(item) => (
+                <DropdownItem
+                  key={item.key}
+                  onClick={() => setSortOrder(item.key)}
+                  className={`text-black ${item.key === sortOrder ? "bg-blue-200 text-blue-500" : "bg-[#78B7D0] hover:bg-[#78B7D0]"}`}
+                >
+                  {item.label}
+                </DropdownItem>
+              )}
+            </DropdownMenu>
           </Dropdown>
         </div>
       </div>
-
+  
       {/* Hotel Listings */}
-      <h1 className="text-5xl font-bold mb-5 text-body">Hotel Suroboyo Rek</h1>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {paginatedAccommodations.map((item) => (
           <div
@@ -228,7 +225,7 @@ const Hotels: React.FC = () => {
                 alt={item.name}
                 className="w-full h-64 object-cover transition duration-300 hover:opacity-90"
               />
-
+  
               <div className="absolute top-[220px] left-2 bg-light text-white text-sm px-2 py-1 rounded-lg flex items-center">
                 <LocationOnIcon
                   style={{ fontSize: '16px', marginRight: '4px' }}
@@ -242,7 +239,7 @@ const Hotels: React.FC = () => {
                   )}
                 </span>
               </div>
-
+  
               <div className="p-4">
                 <h4 className="text-lg font-semibold transition-colors duration-300 hover:text-second">
                   {item.name}
@@ -263,10 +260,10 @@ const Hotels: React.FC = () => {
           </div>
         ))}
       </div>
-
+  
       {renderPagination()}
     </div>
-  );
+  );  
 };
 
 export default Hotels;

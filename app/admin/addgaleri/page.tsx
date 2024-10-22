@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { SpeedDial, SpeedDialAction } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Dialog from '@mui/material/Dialog';
@@ -8,12 +8,26 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Sidebar from '../../components/sidebar'; // Adjust the import path as needed
+import { fetchGambarData, Gambar } from '../utils/gambardata';
 
 interface GalleryItem {
   no: number;
   image: string;
   category: string;
 }
+
+const GalleryManagementPage = () => {
+  const [images, setImages] = useState<Gambar[]>([]);
+
+  useEffect(() => {
+    const getGambarData = async () => {
+      const data = await fetchGambarData();
+      setImages(data);
+      console.log(data)
+    };
+    
+    getGambarData();
+  }, []);
 
 const GalleryManagementPage: React.FC = () => {
   const [openSpeedDial, setOpenSpeedDial] = useState(false);

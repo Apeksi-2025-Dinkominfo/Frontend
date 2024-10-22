@@ -1,38 +1,39 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Box, Grid, CardMedia, Typography } from '@mui/material';
-import { dayImages, eventImages, venueImages } from '../utils/gambardata';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
-
-// Gambar untuk Carousel
-const carouselImages = [
-  { src: 'belanja.jpeg', title: 'Gambar 1' },
-  { src: 'budaya.jpg', title: 'Gambar 2' },
-  { src: 'kuliner.jpg', title: 'Gambar 3' },
-];
+import { fetchGambarData, Gambar } from '../utils/gambardata';
 
 const Galeri = () => {
+  const [images, setImages] = useState<Gambar[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<'day' | 'event' | 'venue'>('day');
   const [selectedDay, setSelectedDay] = useState<string>('Day 1');
   const [selectedEvent, setSelectedEvent] = useState<string>('Event 1');
   const [selectedVenue, setSelectedVenue] = useState<string>('Venue 1');
 
+  useEffect(() => {
+    const getGambarData = async () => {
+      const data = await fetchGambarData();
+      setImages(data);
+      console.log(data);
+    };
+
+    getGambarData();
+  }, []);
+
   const getGalleryImages = () => {
-    switch (selectedCategory) {
-      case 'day':
-        return dayImages;
-      case 'event':
-        return eventImages;
-      case 'venue':
-        return venueImages;
-      default:
-        return [];
-    }
+    // Mengembalikan gambar berdasarkan kategori yang dipilih
+    return images.filter((image) => {
+      if (selectedCategory === 'day') return image.photoType === 'day';
+      if (selectedCategory === 'event') return image.photoType === 'event';
+      if (selectedCategory === 'venue') return image.photoType === 'venue';
+      return false;
+    });
   };
 
   return (
@@ -68,13 +69,13 @@ const Galeri = () => {
             },
           }}
         >
-          {carouselImages.map((image, index) => (
+          {getGalleryImages().map((image, index) => (
             <CardMedia
               key={index}
               component="img"
               height="444"
               width="1199"
-              image={image.src}
+              image={image.url}
               alt={`Slide ${index}`}
               sx={{
                 objectFit: 'contain',
@@ -170,8 +171,8 @@ const Galeri = () => {
                   component="img"
                   height="190"
                   width="188"
-                  image={image.src}
-                  alt={image.title}
+                  image={image.url}
+                  alt={image.photoType}
                   sx={{
                     width: '188%',
                     height: '190px',
