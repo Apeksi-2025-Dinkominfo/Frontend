@@ -247,7 +247,7 @@ const WalikotaVideos: React.FC = () => {
         }}
         className='text-light font-medium'
       >
-        Introduce Yourself to
+        Iki lho rek ucapan dari walikota-walikota HEBAT
       </Typography>
       <Typography
         variant="h4"
@@ -257,10 +257,9 @@ const WalikotaVideos: React.FC = () => {
         }}
         className='text-body font-semibold'
       >
-        Ucapan Para Walikota
+        Ucapan Dari Dara Walikota Hebat
       </Typography>
       <VideoPlayer />
-      {/* Countdown remains untouched */}
       <Countdown date={Date.now() + 1000 * 60 * 60 * 48} renderer={renderer} />
     </Box>
   );
