@@ -50,10 +50,11 @@ const AgendaAcara = () => {
   return (
     <Container>
       <Typography variant="h4" component="h2" gutterBottom sx={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'normal', fontSize: '1.2rem', color: '#227B94' }}>
-        RANGKAIAN
+      Ini lho rek rangkaian acara Munas VIII 2024 Surabaya
       </Typography>
       <Typography variant="h4" component="h2" gutterBottom sx={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'bold', fontSize: '2.5rem', color: '#16325B' }}>
-        Acara
+      Jangan sampai ketinggalan rangkaian acara Munas VIII 2024 di Kota Surabaya ya rek!
+
       </Typography>
       <Grid container spacing={5}>
         {acara.map((item, index) => (
