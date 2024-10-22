@@ -160,14 +160,11 @@ const Hotels: React.FC = () => {
     <div className="p-5 font-poppins">
       <div className="hero-section bg-white py-10 flex flex-col md:flex-row items-center justify-between">
         <div className="text-content md:w-1/2 w-full text-center md:text-left">
-          <h1 className="text-6xl font-semibold text-body mb-4">
-            Hotel Suroboyo <br />
-            Rek
+          <h1 className="text-5xl font-semibold text-body mb-4">
+          Mau menginap dimana, rek?
           </h1>
-          <p className="text-lg text-second mb-5">
-            Cari Hotel yang sempurna untuk menginap di Surabaya. Menawarkan
-            kenyamanan terbaik, layanan personal, dan fasilitas lengkap untuk
-            memastikan setiap tamu merasa istimewa.
+          <p className="text-xl text-second mb-5">
+          Temukan informasi dan alternatif hotel dan penginapan selama gelaran Munas VIII Apeksi 2025 di Kota Surabaya.
           </p>
         </div>
         <div className="image-content md:w-1/2 w-full flex justify-center">
