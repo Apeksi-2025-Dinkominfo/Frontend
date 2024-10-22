@@ -50,6 +50,8 @@ export default function WisataPage() {
     'e5291779-2864-4a01-9590-1b507ea7ed4f',
     'b02cfe95-a65a-4888-9c60-9875c1dd3d08',
     '8ff3eb3d-da1d-49f6-a259-379623f7bf7c',
+    "9d27a64c-644e-419d-9b33-c83c7c180cd1",
+    "9d27ab50-f518-4107-87e0-fc13a577188e",
 
   ];
 
@@ -69,6 +71,7 @@ export default function WisataPage() {
     const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
     window.open(url, '_blank');
   };
+  
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

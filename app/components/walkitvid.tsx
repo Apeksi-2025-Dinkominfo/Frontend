@@ -257,7 +257,7 @@ const WalikotaVideos: React.FC = () => {
         }}
         className='text-body font-semibold'
       >
-        Ucapan Dari Dara Walikota Hebat
+        Ucapan Dari Para Walikota Hebat
       </Typography>
       <VideoPlayer />
       <Countdown date={Date.now() + 1000 * 60 * 60 * 48} renderer={renderer} />
