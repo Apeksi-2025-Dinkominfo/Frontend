@@ -17,7 +17,7 @@ export default function LandingPage() {
       ></div>
       <div className="relative z-20 max-w-5xl px-6 lg:px-12 ml-6">
         <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-body">
-          SELAMAT DATANG DI KOTA SURABAYA REK! MUSYAWARAH NASIONAL<br />
+          SELAMAT DATANG <br />DI KOTA SURABAYA REK!<br /> <br />MUSYAWARAH NASIONAL<br />
           (MUNAS) VIII APEKSI 2025 <br />
           PEMERINTAH KOTA <br />
           SELURUH INDONESIA <br />
