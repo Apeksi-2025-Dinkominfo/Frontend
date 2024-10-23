@@ -202,7 +202,7 @@ export default function Register() {
             control={
               <Checkbox checked={isOPTD} onChange={() => setIsOPTD(!isOPTD)} />
             }
-            label="Register as OPTD"
+            label="Registrasi Untuk Pejabat Daerah Selain Walikota"
             sx={{ mb: 2, display: 'block', textAlign: 'left' }}
           />
 

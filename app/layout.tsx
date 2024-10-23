@@ -5,6 +5,7 @@ import NavLogo from './components/navbarLogo';
 import Footerr from './components/footer';
 import { Box } from '@mui/material';
 import AnimatedImage from './components/layout'; // Import the animated image component
+import MobileNavbar from './components/mobileNav';
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
       <body
         style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}
       >
+        {/* Navbar */}
         <Box
           sx={{
             position: 'sticky',
@@ -48,6 +50,9 @@ export default function RootLayout({
         <Box sx={{ mt: { xs: 4, md: 6 }, maxWidth: '100%' }}>
           <Footerr />
         </Box>
+
+        {/* Mobile Navbar */}
+        <MobileNavbar /> {/* Insert MobileNavbar component here */}
       </body>
     </html>
   );
