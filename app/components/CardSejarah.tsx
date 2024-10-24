@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link'; // Import the Link component from Next.js
 import batikImage from '../../public/batik.png.png';
-import apeksiLogo from '../../public/apeksi.png';
+import apeksiLogo from '../../public/logoNew.png';
 
 export default function CardSejarah() {
   return (

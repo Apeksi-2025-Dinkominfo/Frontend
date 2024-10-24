@@ -63,8 +63,8 @@ export default function Home() {
 
       <Box
         sx={{
-          mt: { xs: '-120px', md: '-100px' },
-          zIndex: -1,
+          mt: { xs: '-120px', md: 25 },
+          zIndex: 1,
           position: 'relative',
         }}
         id="jadwal"
@@ -72,11 +72,11 @@ export default function Home() {
         <Jadwal />
       </Box>
 
-      <Box sx={{ mt: { xs: 250, md: 25 } }} id="Agenda">
+      {/* <Box sx={{ mt: { xs: 250, md: 25 } }} id="Agenda">
         <Agenda />
-      </Box>
+      </Box> */}
 
-      <Box sx={{ mt: { xs: 250, md: 20 } }}>
+      <Box sx={{ mt: { xs: 10, md: 20 } }}>
         <Berita />
       </Box>
 

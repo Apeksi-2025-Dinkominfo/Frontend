@@ -21,7 +21,7 @@ export default function CityTourComponent() {
     <div className="relative h-screen flex flex-col items-center justify-between px-8 md:px-16">
       <div className="flex flex-col md:flex-row items-center md:items-start w-full md:justify-between mt-8">
         <div className="text-body font-bold text-2xl md:text-4xl text-center md:text-left mb-4 md:mb-0">
-          Ada apa rek di
+          Ada apa di
           <br />
           Surabaya
         </div>
