@@ -1,14 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Button,
-  Box,
-  Typography,
-  Grid,
-  Checkbox,
-  FormControlLabel,
-} from '@mui/material';
+import { Button, Box, Typography, Grid } from '@mui/material';
 import { City } from '../utils/listKota';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
@@ -31,24 +24,23 @@ interface FormData {
 }
 
 export default function Register() {
- const [formData, setFormData] = useState<FormData>({
-  asal_kota: '',
-  nama_ajudan: '',
-  nomor_handphone: '',
-  tanggal_kedatangan: '',
-  jam_kedatangan: '',
-  pesawat: '',
-  tanggal_kepulangan: '',
-  lokasi_menginap: '',
-  jumlah_rombongan: '',
-  instansi: '', 
-  jabatan: '',   
-  nama_unit_kerja: '', 
-  nama: '',    
-});
+  const [formData, setFormData] = useState<FormData>({
+    asal_kota: '',
+    nama_ajudan: '',
+    nomor_handphone: '',
+    tanggal_kedatangan: '',
+    jam_kedatangan: '',
+    pesawat: '',
+    tanggal_kepulangan: '',
+    lokasi_menginap: '',
+    jumlah_rombongan: '',
+    instansi: '',
+    jabatan: '',
+    nama_unit_kerja: '',
+    nama: '',
+  });
 
-
-  const [isOPTD, setIsOPTD] = useState(false);
+  const [userType, setUserType] = useState<'walikota' | 'optd'>('walikota');
   const router = useRouter();
 
   const handleChange = (
@@ -63,23 +55,22 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-  
+
     const tanggalKedatangan = new Date(
       `${formData.tanggal_kedatangan}T${formData.jam_kedatangan}:00`
     ).toISOString();
     const tanggalKepulangan = new Date(
       `${formData.tanggal_kepulangan}T00:00:00`
     ).toISOString();
-  
-    // Remove jam_kedatangan from the payload, as it's not necessary
+
     let payload = {
       ...formData,
       tanggal_kedatangan: tanggalKedatangan,
       tanggal_kepulangan: tanggalKepulangan,
       jumlah_rombongan: Number(formData.jumlah_rombongan),
     };
-  
-    if (isOPTD) {
+
+    if (userType === 'optd') {
       payload = {
         ...payload,
         nama: formData.nama,
@@ -88,20 +79,16 @@ export default function Register() {
         nama_unit_kerja: formData.nama_unit_kerja,
       };
     } else {
-      // Remove OPTD-specific fields if not registering as OPTD
       delete payload.nama;
       delete payload.instansi;
       delete payload.jabatan;
       delete payload.nama_unit_kerja;
     }
-  
-    const endpoint = isOPTD
-      ? 'http://localhost:5000/optd'
-      : 'http://localhost:5000/peserta';
-  
+
+    const endpoint =
+      userType === 'optd' ? 'http://localhost:5000/optd' : 'http://localhost:5000/peserta';
+
     try {
-      console.log('Payload:', payload); // Log the payload before sending
-  
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -109,32 +96,12 @@ export default function Register() {
         },
         body: JSON.stringify(payload),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
-        console.log('Error response:', errorData);
         throw new Error('Failed to submit data');
       }
-  
-      const result = await response.json();
-      console.log('Form Submitted Successfully:', result);
-  
-      setFormData({
-        asal_kota: '',
-        nama_ajudan: '',
-        nomor_handphone: '',
-        tanggal_kedatangan: '',
-        jam_kedatangan: '',
-        pesawat: '',
-        tanggal_kepulangan: '',
-        lokasi_menginap: '',
-        jumlah_rombongan: '',
-        instansi: '',
-        jabatan: '',
-        nama_unit_kerja: '',
-        nama: '',
-      });
-  
+
       Swal.fire({
         title: 'Success!',
         text: 'Form submitted successfully!',
@@ -143,7 +110,6 @@ export default function Register() {
         router.push('/');
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -151,8 +117,6 @@ export default function Register() {
       });
     }
   };
-  
-  
 
   return (
     <Grid container sx={{ minHeight: '100vh' }}>
@@ -164,7 +128,7 @@ export default function Register() {
       >
         <Box
           component="img"
-          src="/apeksi.png"
+          src="/logoNew.png"
           alt="Medium Image"
           sx={{ width: '90%', maxHeight: '90%', objectFit: 'contain' }}
         />
@@ -187,27 +151,39 @@ export default function Register() {
             borderRadius: 2,
             boxShadow: 3,
             textAlign: 'center',
+            position: 'relative', // to position "Tipe Pendaftaran" inside the form
           }}
         >
-          <Typography
-            variant="h5"
-            align="left"
-            gutterBottom
-            className="font-bold text-body mb-11"
+          {/* Tipe Pendaftaran di kanan atas */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 16,
+              right: 16,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+            }}
           >
-            {isOPTD ? 'Register for OPTD' : 'Register'}
+            <Typography align="left">Tipe Pendaftaran</Typography>
+            <select
+              name="userType"
+              value={userType}
+              onChange={(e) => setUserType(e.target.value as 'walikota' | 'optd')}
+              required
+              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+            >
+              <option value="walikota">Walikota</option>
+              <option value="optd">Pejabat Daerah</option>
+            </select>
+          </Box>
+
+          <Typography variant="h5" align="left" gutterBottom className="font-bold text-body mb-11">
+            {userType === 'optd' ? 'Register for OPTD' : 'Register'}
           </Typography>
 
-          <FormControlLabel
-            control={
-              <Checkbox checked={isOPTD} onChange={() => setIsOPTD(!isOPTD)} />
-            }
-            label="Registrasi Untuk Pejabat Daerah Selain Walikota"
-            sx={{ mb: 2, display: 'block', textAlign: 'left' }}
-          />
-
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2} className="text-body">
+            <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <Typography align="left">Asal Kota</Typography>
                 <select
@@ -215,7 +191,7 @@ export default function Register() {
                   value={formData.asal_kota}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all mt-3"
                 >
                   <option value="" disabled>
                     Select Kota
@@ -230,28 +206,28 @@ export default function Register() {
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">
-                  {isOPTD ? 'Nama' : 'Nama Walikota'}
+                  {userType === 'optd'
+                    ? 'Nama (Lengkap dengan Gelar)'
+                    : 'Nama Walikota (Lengkap dengan Gelar)'}
                 </Typography>
                 <input
                   type="text"
-                  name={isOPTD ? 'nama' : 'nama_walikota'}
-                  value={isOPTD ? formData.nama : formData.nama_walikota || ''}
+                  name={userType === 'optd' ? 'nama' : 'nama_walikota'}
+                  value={userType === 'optd' ? formData.nama : formData.nama_walikota || ''}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                 />
               </Grid>
 
-              {isOPTD && (
+              {/* Other form fields */}
+              {userType === 'optd' && (
                 <>
+                  {/* Additional Fields for OPTD */}
                   {[
                     { label: 'Instansi', name: 'instansi', type: 'text' },
                     { label: 'Jabatan', name: 'jabatan', type: 'text' },
-                    {
-                      label: 'Nama Unit Kerja',
-                      name: 'nama_unit_kerja',
-                      type: 'text',
-                    },
+                    { label: 'Nama Unit Kerja', name: 'nama_unit_kerja', type: 'text' },
                   ].map((input) => (
                     <Grid item xs={12} md={6} key={input.name}>
                       <Typography align="left">{input.label}</Typography>
@@ -269,12 +245,14 @@ export default function Register() {
               )}
 
               {[
-                {
-                  label: 'Nomor Handphone',
-                  name: 'nomor_handphone',
-                  type: 'tel',
-                },
-                { label: 'Pesawat', name: 'pesawat', type: 'text' },
+                { label: 'Nomor Handphone Ajudan', name: 'nomor_handphone', type: 'tel' },
+                { label: 'Kendaraan', name: 'pesawat', type: 'text' },
+                { label: 'Nama Ajudan', name: 'nama_ajudan', type: 'text' },
+                { label: 'Tanggal Kedatangan', name: 'tanggal_kedatangan', type: 'date' },
+                { label: 'Jam Kedatangan', name: 'jam_kedatangan', type: 'time' },
+                { label: 'Tanggal Kepulangan', name: 'tanggal_kepulangan', type: 'date' },
+                { label: 'Lokasi Menginap', name: 'lokasi_menginap', type: 'text' },
+                { label: 'Jumlah Rombongan', name: 'jumlah_rombongan', type: 'number' },
               ].map((input) => (
                 <Grid item xs={12} md={6} key={input.name}>
                   <Typography align="left">{input.label}</Typography>
@@ -289,85 +267,13 @@ export default function Register() {
                 </Grid>
               ))}
 
-              <Grid item xs={12} md={6}>
-                <Typography align="left">Nama Ajudan</Typography>
-                <input
-                  type="text"
-                  name="nama_ajudan"
-                  value={formData.nama_ajudan}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
-
-              {/* Date fields */}
-              <Grid item xs={12} md={6}>
-                <Typography align="left">Tanggal Kedatangan</Typography>
-                <input
-                  type="date"
-                  name="tanggal_kedatangan"
-                  value={formData.tanggal_kedatangan}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Typography align="left">Jam Kedatangan</Typography>
-                <input
-                  type="time"
-                  name="jam_kedatangan"
-                  value={formData.jam_kedatangan}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Typography align="left">Tanggal Kepulangan</Typography>
-                <input
-                  type="date"
-                  name="tanggal_kepulangan"
-                  value={formData.tanggal_kepulangan}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Typography align="left">Lokasi Menginap</Typography>
-                <input
-                  type="text"
-                  name="lokasi_menginap"
-                  value={formData.lokasi_menginap}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Typography align="left">Jumlah Rombongan</Typography>
-                <input
-                  type="number"
-                  name="jumlah_rombongan"
-                  value={formData.jumlah_rombongan}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
-
               <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="contained"
+                  color="primary"
                   fullWidth
-                  className="bg-blue-500 text-white hover:bg-blue-600"
+                  sx={{ mt: 3, bgcolor: '#1B82D1', '&:hover': { bgcolor: '#1565c0' } }}
                 >
                   Submit
                 </Button>
