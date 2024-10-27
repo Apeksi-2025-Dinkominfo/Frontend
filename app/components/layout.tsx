@@ -26,7 +26,7 @@ const AnimatedImage = (props: Props) => {
     <>
       {visible && (
         <motion.img
-          src="/apeksi.png" // Path to the image in the public folder
+          src="/logoNew.png" // Path to the image in the public folder
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}

@@ -29,7 +29,7 @@ export default function LandingPage() {
             onClick={handleButtonClick}
             className="relative z-20 bg-[#78B7D0] text-white px-10 py-6 rounded-full shadow-md hover:bg-[#67A6BE] transition duration-300 text-lg font-bold"
           >
-            Daftar Di Sini !!!
+            Daftar disini!
           </button>
         </div>
       </div>

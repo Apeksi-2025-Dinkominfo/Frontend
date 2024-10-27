@@ -20,12 +20,12 @@ export default function HeritagePage() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Hardcoded dummy data
+  // Hardcoded dummy data sesuai dengan permintaan bu novi
   const dummyData: Destination[] = [
     {
-      id: 'dummy1',
-      nameIndonesia: 'Candi Dummy',
-      address: 'Dummy Address 1',
+      id: 'hc1',
+      nameIndonesia: 'Sumur Jobong',
+      address: 'Jl. Pandean Gang I',
       descriptionIndonesia:
         'Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama. ',
       latitude: -7.250445,
@@ -46,6 +46,127 @@ export default function HeritagePage() {
         { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
       ],
     },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy2',
+      nameIndonesia: 'Museum Dummy',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+
   ];
 
   useEffect(() => {
@@ -63,11 +184,25 @@ export default function HeritagePage() {
     fetchData();
   }, []);
 
+  //data yang tidak termasuk heritage
   const excludedIds = [
+    '9a4d27f5-7e71-4933-a573-a800183dcb03',
+    '1f496bb6-fa54-47ee-a60f-4653922a4a62',
+    '9a4d1a7a-37a7-4a91-a99c-d30719c35b0c',
+    '9a6a6405-dbcc-4ab6-83ee-b935f8cbb7c3',
+    '2f668034-b1b0-4080-babd-5e4ca645e08b',
+    '414091ab-91d1-4caf-8dba-a24ed80da50c',
+    '9a4d9d24-a158-4833-9101-db16fe96fd34',
+    "9a4d22bd-b0ca-4abc-b842-776221f14a63",
+    "9a4d2b70-54e9-4491-8234-d2cc5f679c23",
+    '9a4d956a-5259-43e0-b9d9-b4a98e606e2e',
+    '7472bf3e-dcc4-40d1-b682-6ca76d3b7bc0',
+    '6c3365ff-3fbb-40a5-b27f-1bfb5f8dc369',
+    "999e0bc2-82db-42a7-a23a-068eac19b074",
     '9bf9c9fe-51a6-4b0b-97aa-9c8ce15074a5',
-    "9d27647f-7c93-4f5c-a03b-2c3466016141",
-    "9d27a64c-644e-419d-9b33-c83c7c180cd1",
-    "9d27ab50-f518-4107-87e0-fc13a577188e",
+    '9d27647f-7c93-4f5c-a03b-2c3466016141',
+    '9d27a64c-644e-419d-9b33-c83c7c180cd1',
+    '9d27ab50-f518-4107-87e0-fc13a577188e',
     '9b2e8c13-499b-47bd-9b47-827d0afd00e9',
     '9bfbf031-1016-4e9e-949e-aa387960d040',
     '9bfbfbeb-db56-4ac7-81d2-ea635c013c47',
@@ -90,7 +225,6 @@ export default function HeritagePage() {
     '5f29a051-4673-4fd7-bf7e-9f4508e958e5',
     '83a3b4ae-387a-4d29-90ff-9525df6c2c49',
     '9996d65c-53d6-4d6b-9c77-3498c3fc528f',
-    'e5291779-2864-4a01-9590-1b507ea7ed4f',
     'b02cfe95-a65a-4888-9c60-9875c1dd3d08',
     '8ff3eb3d-da1d-49f6-a259-379623f7bf7c',
   ];
@@ -112,136 +246,150 @@ export default function HeritagePage() {
     window.open(url, '_blank');
   };
 
-  return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Box
-        mb={4}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        position="relative"
-      >
-        {filteredDestinations.length > 0 && (
-          <>
-            <img
-              src={
-                filteredDestinations[currentIndex].touristDestinationFiles[0]
-                  .link
-              }
-              alt={filteredDestinations[currentIndex].nameIndonesia}
-              style={{
-                width: '100%',
-                height: '500px',
-                objectFit: 'cover',
-                borderRadius: '8px',
-              }}
-            />
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              position="absolute"
-              left="20px"
-              bottom="20px"
-              width="auto"
-            >
-              <Button
-                onClick={() =>
-                  setCurrentIndex((prevIndex) =>
-                    prevIndex === 0
-                      ? filteredDestinations.length - 1
-                      : prevIndex - 1
-                  )
-                }
-                variant="outlined"
-                style={{
-                  borderRadius: '50%',
-                  minWidth: '40px',
-                  minHeight: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '0',
-                  borderColor: 'white',
-                  color: 'white',
-                }}
-              >
-                <span style={{ fontSize: '20px', lineHeight: '0' }}>&lt;</span>
-              </Button>
-              <Button
-                onClick={() =>
-                  setCurrentIndex((prevIndex) =>
-                    prevIndex === filteredDestinations.length - 1
-                      ? 0
-                      : prevIndex + 1
-                  )
-                }
-                variant="outlined"
-                style={{
-                  borderRadius: '50%',
-                  minWidth: '40px',
-                  minHeight: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '0',
-                  borderColor: 'white',
-                  color: 'white',
-                  marginLeft: '10px',
-                }}
-              >
-                <span style={{ fontSize: '20px', lineHeight: '0' }}>&gt;</span>
-              </Button>
-            </Box>
-          </>
-        )}
-      </Box>
+ //TODO: Custom links untuk tiap id yang di sambungkan dengan tourism, link tourism nya harus yang detail
+const customLinks: { [key: string]: string } = {
+  'hc1': 'https://example.com/sumur-jobong',
+  'dummy2': 'https://example.com/museum-dummy',
+  '2e98ebf4-b47c-422e-8c46-ad0d3914f181':'https://tourism.surabaya.go.id/destination/2e98ebf4-b47c-422e-8c46-ad0d3914f181'
+};
 
-      <Grid container spacing={4}>
-        {filteredDestinations.map((destination) => (
-          <Grid item xs={12} sm={6} md={4} key={destination.id}>
-            <div className="bg-[#add8e6] rounded-lg shadow-md p-4 flex flex-col justify-between h-full">
-              {destination.touristDestinationFiles.length > 0 && (
-                <img
-                  src={destination.touristDestinationFiles[0].link}
-                  alt={destination.nameIndonesia}
-                  className="w-full h-56 object-cover rounded-t-lg"
-                  style={{ maxHeight: '200px', objectFit: 'cover' }}
-                />
-              )}
-              <div
-                className="p-4"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
-                  <h2 className="text-lg font-semibold">
-                    {destination.nameIndonesia}
-                  </h2>
-                  <p className="text-sm">{destination.address}</p>
-                  <p className="text-sm">
-                    {truncateDescription(destination.descriptionIndonesia)}
-                  </p>
-                </div>
-                <Button
-                  onClick={() =>
-                    openLocationInMaps(
-                      destination.latitude,
-                      destination.longitude
-                    )
-                  }
-                  variant="contained"
-                  style={{ marginTop: '10px', backgroundColor: '#008080' }}
-                >
-                  Buka di Google Maps
-                </Button>
+return (
+  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Box
+      mb={4}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      position="relative"
+    >
+      {filteredDestinations.length > 0 && (
+        <>
+          <img
+            src={
+              filteredDestinations[currentIndex].touristDestinationFiles[0].link
+            }
+            alt={filteredDestinations[currentIndex].nameIndonesia}
+            style={{
+              width: '100%',
+              height: '500px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+            }}
+          />
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            position="absolute"
+            left="20px"
+            bottom="20px"
+            width="auto"
+          >
+            <Button
+              onClick={() =>
+                setCurrentIndex((prevIndex) =>
+                  prevIndex === 0
+                    ? filteredDestinations.length - 1
+                    : prevIndex - 1
+                )
+              }
+              variant="outlined"
+              style={{
+                borderRadius: '50%',
+                minWidth: '40px',
+                minHeight: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0',
+                borderColor: 'white',
+                color: 'white',
+              }}
+            >
+              <span style={{ fontSize: '20px', lineHeight: '0' }}>&lt;</span>
+            </Button>
+            <Button
+              onClick={() =>
+                setCurrentIndex((prevIndex) =>
+                  prevIndex === filteredDestinations.length - 1
+                    ? 0
+                    : prevIndex + 1
+                )
+              }
+              variant="outlined"
+              style={{
+                borderRadius: '50%',
+                minWidth: '40px',
+                minHeight: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0',
+                borderColor: 'white',
+                color: 'white',
+                marginLeft: '10px',
+              }}
+            >
+              <span style={{ fontSize: '20px', lineHeight: '0' }}>&gt;</span>
+            </Button>
+          </Box>
+        </>
+      )}
+    </Box>
+
+    <Grid container spacing={4}>
+      {filteredDestinations.map((destination) => (
+        <Grid item xs={12} sm={6} md={4} key={destination.id}>
+          <div
+            className="bg-[#add8e6] rounded-lg shadow-md p-4 flex flex-col justify-between h-full cursor-pointer"
+            onClick={() =>
+              customLinks[destination.id]
+                ? window.open(customLinks[destination.id], '_blank')
+                : openLocationInMaps(destination.latitude, destination.longitude)
+            }
+          >
+            {destination.touristDestinationFiles.length > 0 && (
+              <img
+                src={destination.touristDestinationFiles[0].link}
+                alt={destination.nameIndonesia}
+                className="w-full h-56 object-cover rounded-t-lg"
+                style={{ maxHeight: '200px', objectFit: 'cover' }}
+              />
+            )}
+            <div
+              className="p-4"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <h2 className="text-lg font-semibold">
+                  {destination.nameIndonesia}
+                </h2>
+                <p className="text-sm">{destination.address}</p>
+                <p className="text-sm">
+                  {truncateDescription(destination.descriptionIndonesia)}
+                </p>
               </div>
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation(); // Supaya tidak trigger onClick parent
+                  openLocationInMaps(
+                    destination.latitude,
+                    destination.longitude
+                  );
+                }}
+                variant="contained"
+                style={{ marginTop: '10px', backgroundColor: '#008080' }}
+              >
+                Buka di Google Maps
+              </Button>
             </div>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-  );
+          </div>
+        </Grid>
+      ))}
+    </Grid>
+  </Container>
+);
 }
