@@ -92,7 +92,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-white">
       <Box className="max-w-md w-full">
-        <img src="apeksi.png" alt="Logo APEKSI" className="block mx-auto mb-5 max-w-[200px]" />
+        <img src="logoNew.png" alt="Logo APEKSI" className="block mx-auto mb-5 max-w-[200px]" />
 
         <Card className="p-5">
           <CardHeader className="text-center text-gray-800" title="Login Admin" />

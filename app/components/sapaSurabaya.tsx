@@ -3,17 +3,17 @@ import Link from 'next/link';
 import { Card, CardContent, Typography, Grid } from '@mui/material';
 
 const cardData = [
-  { title: 'Belanja', img: '/belanja2.JPG', link: '/Surabaya/belanja' }, // New card for Belanja
-  { title: 'Tempat Wisata', img: '/Wisata2.JPG', link: '/Surabaya/wisata' },
-  { title: 'Kuliner', img: '/KulinerNew.jpg', link: '/Surabaya/kuliner' },
+  { title: 'Belanja', img: '/belanja2.JPG', link: '/surabaya/belanja' }, // New card for Belanja
+  { title: 'Tempat Wisata', img: '/Wisata2.JPG', link: '/surabaya/wisata' },
+  { title: 'Kuliner', img: '/KulinerNew.jpg', link: '/surabaya/kuliner' },
   {
     title: 'Transportasi',
     img: '/Transport.jpg',
-    link: '/Surabaya/transportasi',
+    link: '/surabaya/transportasi',
   },
-  { title: 'Heritage', img: '/Heritage.jpg', link: '/Surabaya/heritage' },
-  { title: 'Budaya', img: '/budaya.jpg', link: '/Surabaya/budaya' },
-  { title: 'Rumah Sakit', img: '/rumahsakit.jpeg', link: '/hospital' },
+  { title: 'Heritage', img: '/Heritage.jpg', link: '/surabaya/heritage' },
+  { title: 'Budaya', img: '/budaya.jpg', link: '/surabaya/budaya' },
+  { title: 'Fasilitas Kesehatan', img: '/rumahsakit.jpeg', link: '/hospital' },
 ];
 
 export default function CityTourComponent() {

@@ -25,21 +25,20 @@ export default function Home() {
       </Box>
 
     {/* Bagian Untuk foto Walikota */}
-
     <Box
         sx={{
-          mt: { xs: 2, md: 20 }, // Margin top untuk mobile (xs) dan desktop (md)
+          mt: { xs: 2, md: 20 },
           display: 'flex',
-          justifyContent: 'center', // Posisikan gambar di tengah
+          justifyContent: 'center',
         }}
       >
-        <Box sx={{ maxWidth: '80%', width: '100%' }}> {/* Maksimal 80% lebar layar */}
+        <Box sx={{ maxWidth: '80%', width: '100%' }}>
           <Image
-            src="/PesertaMunas.png" // Ganti dengan path gambar kamu
+            src="/PesertaMunas.png" 
             alt="Foto Walikota"
-            width={600} // Set ukuran gambar
-            height={400} // Set tinggi gambar
-            layout="responsive" // Agar responsif
+            width={600}
+            height={400}
+            layout="responsive"
           />
         </Box>
       </Box>
