@@ -1,184 +1,125 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const cardData = [
-  { title: 'Belanja', img: '/belanja2.JPG', link: '/surabaya/belanja' }, // New card for Belanja
+  { title: 'Belanja', img: '/belanja2.JPG', link: '/surabaya/belanja' },
   { title: 'Tempat Wisata', img: '/Wisata2.JPG', link: '/surabaya/wisata' },
   { title: 'Kuliner', img: '/KulinerNew.jpg', link: '/surabaya/kuliner' },
-  {
-    title: 'Transportasi',
-    img: '/Transport.jpg',
-    link: '/surabaya/transportasi',
-  },
+  { title: 'Transportasi', img: '/Transport.jpg', link: '/surabaya/transportasi' },
   { title: 'Heritage', img: '/Heritage.jpg', link: '/surabaya/heritage' },
   { title: 'Budaya', img: '/budaya.jpg', link: '/surabaya/budaya' },
   { title: 'Fasilitas Kesehatan', img: '/rumahsakit.jpeg', link: '/hospital' },
 ];
 
 export default function CityTourComponent() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % cardData.length);
+  const handlePrev = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + cardData.length) % cardData.length);
+
   return (
-    <div className="relative h-screen flex flex-col items-center justify-between px-8 md:px-16">
-      <div className="flex flex-col md:flex-row items-center md:items-start w-full md:justify-between mt-8">
-        <div className="text-body font-bold text-2xl md:text-4xl text-center md:text-left mb-4 md:mb-0">
-          Ada apa di
-          <br />
-          Surabaya
-        </div>
-        <button className="px-4 py-2 bg-blue-300 text-white font-semibold rounded-full shadow-md transition-transform transform hover:scale-105 w-full md:w-auto text-center md:ml-8">
-          Registrasi City Tour
-        </button>
+    <>
+      <div className="text-center mt-4 mb-2">
+        <Typography
+          variant="h2"
+          style={{
+            fontWeight: 'bold',
+            color: '#E63946',
+            textShadow: '2px 2px #1D3557',
+            letterSpacing: '2px',
+          }}
+        >
+          Muter Muter<br />
+          Suroboyo
+        </Typography>
+        <Typography variant="subtitle1" color="textSecondary">
+          Discover the beauty of Surabaya in style!
+        </Typography>
       </div>
+      <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
+        <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
+          <button
+            onClick={handlePrev}
+            className="absolute left-4 md:left-10 z-10 bg-gray-800 text-white rounded-full p-3"
+          >
+            &larr;
+          </button>
+          <div
+            style={{ marginRight: 450, marginBottom: 300 }}
+            className="carousel-3d flex items-center justify-center relative"
+          >
+            {cardData.map((card, index) => {
+              let offset = (index - currentIndex + cardData.length) % cardData.length;
+              if (offset > 1 && offset < cardData.length - 1) return null;
 
-      <div className="mt-12 w-full">
-        <Grid container spacing={3}>
+              if (offset === cardData.length - 1) offset = -1;
 
-          {/* New "Belanja" Card */}
-          <Grid item xs={12} sm={6} md={12}>
-            <Link href={cardData[0].link} passHref>
-              <Card
-                className="rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
-                style={{ width: '100%', height: '300px', cursor: 'pointer' }}
-              >
-                <div
-                  style={{
-                    backgroundImage: `url(${cardData[0].img})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    height: '100%',
-                  }}
-                >
-                  <CardContent className="flex items-center justify-center h-full bg-black bg-opacity-50">
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      className="text-white font-bold text-center"
-                    >
-                      {cardData[0].title}
-                    </Typography>
-                  </CardContent>
-                </div>
-              </Card>
-            </Link>
-          </Grid>
+              const rotationAngle = offset * 15;
+              const scale = offset === 0 ? 1.1 : 0.95;
+              const opacity = offset === 0 ? 1 : 0.7;
 
-          {/* First 3 Cards (Tempat Wisata, Kuliner, Transportasi) */}
-          {cardData.slice(1, 4).map((card, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Link href={card.link} passHref>
-                <Card
-                  className="h-48 rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
-                  style={{ width: '100%', height: '300px', cursor: 'pointer' }}
-                >
+              return (
+                <Link href={card.link} passHref key={index}>
                   <div
+                    className="carousel-card absolute rounded-xl shadow-lg overflow-hidden transition-transform transform"
                     style={{
-                      backgroundImage: `url(${card.img})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      height: '100%',
+                      transform: `rotateY(${rotationAngle}deg) translateX(${offset * 250}px) scale(${scale})`,
+                      opacity: opacity,
+                      width: '500px',
+                      height: '300px',
+                      cursor: 'pointer',
+                      zIndex: offset === 0 ? 2 : 1,
                     }}
                   >
-                    <CardContent className="flex items-center justify-center h-full bg-black bg-opacity-50">
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        className="text-white font-bold text-center"
-                      >
-                        {card.title}
-                      </Typography>
-                    </CardContent>
+                    <div
+                      className="carousel-image rounded-xl"
+                      style={{
+                        backgroundImage: `url(${card.img})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    />
+                    <div className="absolute bottom-4 w-full text-center text-white font-bold text-lg">
+                      {card.title}
+                    </div>
                   </div>
-                </Card>
-              </Link>
-            </Grid>
-          ))}
-
-          {/* Next Cards */}
-          <Grid item xs={12} sm={6} md={6}>
-            <Link href={cardData[4].link} passHref>
-              <Card
-                className="rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
-                style={{ width: '100%', height: '300px', cursor: 'pointer' }}
-              >
-                <div
-                  style={{
-                    backgroundImage: `url(${cardData[4].img})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    height: '100%',
-                  }}
-                >
-                  <CardContent className="flex items-center justify-center h-full bg-black bg-opacity-50">
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      className="text-white font-bold text-center"
-                    >
-                      {cardData[4].title}
-                    </Typography>
-                  </CardContent>
-                </div>
-              </Card>
-            </Link>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={6}>
-            <Link href={cardData[5].link} passHref>
-              <Card
-                className="rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
-                style={{ width: '100%', height: '300px', cursor: 'pointer' }}
-              >
-                <div
-                  style={{
-                    backgroundImage: `url(${cardData[5].img})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    height: '100%',
-                  }}
-                >
-                  <CardContent className="flex items-center justify-center h-full bg-black bg-opacity-50">
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      className="text-white font-bold text-center"
-                    >
-                      {cardData[5].title}
-                    </Typography>
-                  </CardContent>
-                </div>
-              </Card>
-            </Link>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Link href={cardData[6].link} passHref>
-              <Card
-                className="rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
-                style={{ width: '100%', height: '300px', cursor: 'pointer' }}
-              >
-                <div
-                  style={{
-                    backgroundImage: `url(${cardData[6].img})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    height: '100%',
-                  }}
-                >
-                  <CardContent className="flex items-center justify-center h-full bg-black bg-opacity-50">
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      className="text-white font-bold text-center"
-                    >
-                      {cardData[6].title}
-                    </Typography>
-                  </CardContent>
-                </div>
-              </Card>
-            </Link>
-          </Grid>
-        </Grid>
+                </Link>
+              );
+            })}
+          </div>
+          <button
+            onClick={handleNext}
+            className="absolute right-4 md:right-10 z-10 bg-gray-800 text-white rounded-full p-3"
+          >
+            &rarr;
+          </button>
+        </div>
+        <style jsx>{`
+          .carousel-container {
+            perspective: 1200px;
+          }
+          .carousel-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+          }
+          .carousel-card {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+          }
+          @media (max-width: 768px) {
+            .carousel-card {
+              width: 250px;
+              height: 150px;
+            }
+            .carousel-3d {
+              transform: translateX(-50%);
+            }
+          }
+        `}</style>
       </div>
-    </div>
+    </>
   );
 }

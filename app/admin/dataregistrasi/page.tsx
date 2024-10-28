@@ -14,7 +14,7 @@ interface PesertaData {
   tanggal_kepulangan: string;
   lokasi_menginap: string;
   jumlah_rombongan: number;
-  pesawat: string;
+  transportasi: string;
 }
 
 export default function DataRegistrasi() {
@@ -71,7 +71,7 @@ export default function DataRegistrasi() {
         'Tanggal Kepulangan': formatDate(item.tanggal_kepulangan),
         'Lokasi Menginap': item.lokasi_menginap,
         'Jumlah Rombongan': item.jumlah_rombongan,
-        Pesawat: item.pesawat,
+        Transportasi: item.transportasi,
       }))
     );
 
@@ -127,7 +127,7 @@ export default function DataRegistrasi() {
                 <th className="border px-4 py-2 w-36">Tanggal Kepulangan</th>
                 <th className="border px-4 py-2 w-40">Lokasi Menginap</th>
                 <th className="border px-4 py-2 w-40">Jumlah Rombongan</th>
-                <th className="border px-4 py-2 w-36">Pesawat</th>
+                <th className="border px-4 py-2 w-36">transportasi</th>
                 <th className="border px-4 py-2 w-36">Actions</th>
               </tr>
             </thead>
@@ -162,7 +162,7 @@ export default function DataRegistrasi() {
                     <td className="border px-4 py-2 text-center">
                       {item.jumlah_rombongan}
                     </td>
-                    <td className="border px-4 py-2">{item.pesawat}</td>
+                    <td className="border px-4 py-2">{item.transportasi}</td>
                     <td className="border px-4 py-2">
                       <button className="bg-blue-500 text-white px-4 py-1 mr-2 rounded hover:bg-blue-600">
                         Update

@@ -48,11 +48,11 @@ export default function Home() {
         <Sejarah />
       </Box>
 
-      <Box sx={{ mt: { xs: 4, md: 6 } }}>
+      <Box sx={{ mt: { xs: 2, md: 6 } }}>
         <Surabaya />
       </Box>
 
-      <Box sx={{ mt: { xs: 250, md: 95 } }}>
+      <Box sx={{ mt: { xs: 50, md: 10 } }}>
         <Hotel />
       </Box>
 
@@ -62,7 +62,7 @@ export default function Home() {
 
       <Box
         sx={{
-          mt: { xs: '-120px', md: 25 },
+          mt: { xs: 20, md: 25 },
           zIndex: 1,
           position: 'relative',
         }}

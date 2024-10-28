@@ -1,7 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Box, Typography, Grid } from '@mui/material';
+import {
+  Button,
+  Box,
+  Typography,
+  Grid,
+  Tabs,
+  Tab,
+  TextField,
+} from '@mui/material';
 import { City } from '../utils/listKota';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
@@ -13,7 +21,7 @@ interface FormData {
   nomor_handphone: string;
   tanggal_kedatangan: string;
   jam_kedatangan: string;
-  pesawat: string;
+  transportasi: string;
   tanggal_kepulangan: string;
   lokasi_menginap: string;
   jumlah_rombongan: string;
@@ -21,6 +29,8 @@ interface FormData {
   jabatan?: string;
   nama_unit_kerja?: string;
   nama?: string;
+  ukuran_baju_ibuk?: string;
+  ukuran_baju_bapak?: string;
 }
 
 export default function Register() {
@@ -30,7 +40,7 @@ export default function Register() {
     nomor_handphone: '',
     tanggal_kedatangan: '',
     jam_kedatangan: '',
-    pesawat: '',
+    transportasi: '',
     tanggal_kepulangan: '',
     lokasi_menginap: '',
     jumlah_rombongan: '',
@@ -38,13 +48,15 @@ export default function Register() {
     jabatan: '',
     nama_unit_kerja: '',
     nama: '',
+    ukuran_baju_ibuk: '',
+    ukuran_baju_bapak: '',
   });
 
-  const [userType, setUserType] = useState<'walikota' | 'optd'>('walikota');
+  const [selectedTab, setSelectedTab] = useState('Walikota');
   const router = useRouter();
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
     const { name, value } = e.target;
     setFormData({
@@ -53,7 +65,16 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleTabChange = (
+    event: React.SyntheticEvent,
+    newValue: string
+  ) => {
+    setSelectedTab(newValue);
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     const tanggalKedatangan = new Date(
@@ -70,7 +91,7 @@ export default function Register() {
       jumlah_rombongan: Number(formData.jumlah_rombongan),
     };
 
-    if (userType === 'optd') {
+    if (selectedTab === 'OPTD') {
       payload = {
         ...payload,
         nama: formData.nama,
@@ -86,9 +107,13 @@ export default function Register() {
     }
 
     const endpoint =
-      userType === 'optd' ? 'http://localhost:5000/optd' : 'http://localhost:5000/peserta';
+      selectedTab === 'OPTD'
+        ? 'http://localhost:5000/optd'
+        : 'http://localhost:5000/peserta';
 
     try {
+      console.log('Payload:', payload);
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -99,8 +124,30 @@ export default function Register() {
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.log('Error response:', errorData);
         throw new Error('Failed to submit data');
       }
+
+      const result = await response.json();
+      console.log('Form Submitted Successfully:', result);
+
+      setFormData({
+        asal_kota: '',
+        nama_ajudan: '',
+        nomor_handphone: '',
+        tanggal_kedatangan: '',
+        jam_kedatangan: '',
+        transportasi: '',
+        tanggal_kepulangan: '',
+        lokasi_menginap: '',
+        jumlah_rombongan: '',
+        instansi: '',
+        jabatan: '',
+        nama_unit_kerja: '',
+        nama: '',
+        ukuran_baju_ibuk: '',
+        ukuran_baju_bapak: '',
+      });
 
       Swal.fire({
         title: 'Success!',
@@ -110,6 +157,7 @@ export default function Register() {
         router.push('/');
       });
     } catch (error) {
+      console.error('Error submitting form:', error);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -128,7 +176,7 @@ export default function Register() {
       >
         <Box
           component="img"
-          src="/logoNew.png"
+          src="/apeksi.png"
           alt="Medium Image"
           sx={{ width: '90%', maxHeight: '90%', objectFit: 'contain' }}
         />
@@ -150,40 +198,19 @@ export default function Register() {
             bgcolor: 'white',
             borderRadius: 2,
             boxShadow: 3,
-            textAlign: 'center',
-            position: 'relative', // to position "Tipe Pendaftaran" inside the form
           }}
         >
-          {/* Tipe Pendaftaran di kanan atas */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 16,
-              right: 16,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-            }}
+          <Tabs
+            value={selectedTab}
+            onChange={handleTabChange}
+            centered
           >
-            <Typography align="left">Tipe Pendaftaran</Typography>
-            <select
-              name="userType"
-              value={userType}
-              onChange={(e) => setUserType(e.target.value as 'walikota' | 'optd')}
-              required
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-            >
-              <option value="walikota">Walikota</option>
-              <option value="optd">Pejabat Daerah</option>
-            </select>
-          </Box>
-
-          <Typography variant="h5" align="left" gutterBottom className="font-bold text-body mb-11">
-            {userType === 'optd' ? 'Register for OPTD' : 'Register'}
-          </Typography>
+            <Tab value="Walikota" label="Walikota / Wakil Walikota" />
+            <Tab value="OPTD" label="Pejabat Yang Mewakili" />
+          </Tabs>
 
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className="text-body">
               <Grid item xs={12} md={6}>
                 <Typography align="left">Asal Kota</Typography>
                 <select
@@ -191,7 +218,7 @@ export default function Register() {
                   value={formData.asal_kota}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all mt-3"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                 >
                   <option value="" disabled>
                     Select Kota
@@ -206,74 +233,165 @@ export default function Register() {
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">
-                  {userType === 'optd'
-                    ? 'Nama (Lengkap dengan Gelar)'
-                    : 'Nama Walikota (Lengkap dengan Gelar)'}
+                  {selectedTab === 'OPTD' ? 'Nama (Beserta Gelar)' : 'Nama Walikota (Beserta Gelar)'}
                 </Typography>
                 <input
                   type="text"
-                  name={userType === 'optd' ? 'nama' : 'nama_walikota'}
-                  value={userType === 'optd' ? formData.nama : formData.nama_walikota || ''}
+                  name={selectedTab === 'OPTD' ? 'nama' : 'nama_walikota'}
+                  value={selectedTab === 'OPTD' ? formData.nama : formData.nama_walikota || ''}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                 />
               </Grid>
 
-              {/* Other form fields */}
-              {userType === 'optd' && (
+              {selectedTab === 'OPTD' && (
                 <>
-                  {/* Additional Fields for OPTD */}
                   {[
-                    { label: 'Instansi', name: 'instansi', type: 'text' },
-                    { label: 'Jabatan', name: 'jabatan', type: 'text' },
-                    { label: 'Nama Unit Kerja', name: 'nama_unit_kerja', type: 'text' },
+                    { label: 'Instansi', name: 'instansi' },
+                    { label: 'Jabatan', name: 'jabatan' },
+                    { label: 'Nama Unit Kerja', name: 'nama_unit_kerja' },
                   ].map((input) => (
                     <Grid item xs={12} md={6} key={input.name}>
                       <Typography align="left">{input.label}</Typography>
-                      <input
-                        type={input.type}
+                      <TextField
                         name={input.name}
                         value={formData[input.name as keyof FormData]}
                         onChange={handleChange}
+                        fullWidth
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                       />
                     </Grid>
                   ))}
                 </>
               )}
 
-              {[
-                { label: 'Nomor Handphone Ajudan', name: 'nomor_handphone', type: 'tel' },
-                { label: 'Kendaraan', name: 'pesawat', type: 'text' },
-                { label: 'Nama Ajudan', name: 'nama_ajudan', type: 'text' },
-                { label: 'Tanggal Kedatangan', name: 'tanggal_kedatangan', type: 'date' },
-                { label: 'Jam Kedatangan', name: 'jam_kedatangan', type: 'time' },
-                { label: 'Tanggal Kepulangan', name: 'tanggal_kepulangan', type: 'date' },
-                { label: 'Lokasi Menginap', name: 'lokasi_menginap', type: 'text' },
-                { label: 'Jumlah Rombongan', name: 'jumlah_rombongan', type: 'number' },
-              ].map((input) => (
-                <Grid item xs={12} md={6} key={input.name}>
-                  <Typography align="left">{input.label}</Typography>
-                  <input
-                    type={input.type}
-                    name={input.name}
-                    value={formData[input.name as keyof FormData]}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                  />
-                </Grid>
-              ))}
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Nomor Ajudan</Typography>
+                <input
+                  type="text"
+                  name="nomor_handphone"
+                  value={formData.nomor_handphone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Nama Ajudan</Typography>
+                <input
+                  type="text"
+                  name="nama_ajudan"
+                  value={formData.nama_ajudan}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Transportasi</Typography>
+                <input
+                  type="text"
+                  name="transportasi"
+                  value={formData.transportasi}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Tanggal Kedatangan</Typography>
+                <input
+                  type="date"
+                  name="tanggal_kedatangan"
+                  value={formData.tanggal_kedatangan}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Jam Kedatangan</Typography>
+                <input
+                  type="time"
+                  name="jam_kedatangan"
+                  value={formData.jam_kedatangan}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Tanggal Kepulangan</Typography>
+                <input
+                  type="date"
+                  name="tanggal_kepulangan"
+                  value={formData.tanggal_kepulangan}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Tempat Menginap</Typography>
+                <input
+                  type="text"
+                  name="lokasi_menginap"
+                  value={formData.lokasi_menginap}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Ukuran Baju Bapak</Typography>
+                <input
+                  name="ukuran_baju_bapak"
+                  value={formData.ukuran_baju_bapak}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Ukuran Baju Ibuk</Typography>
+                <input
+                  name="ukuran_baju_ibuk"
+                  value={formData.ukuran_baju_ibuk}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">
+                  Jumlah Rombongan yang dibawa.
+                </Typography>
+                <input
+                  type="number"
+                  name="jumlah_rombongan"
+                  value={formData.jumlah_rombongan}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
 
               <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="contained"
-                  color="primary"
                   fullWidth
-                  sx={{ mt: 3, bgcolor: '#1B82D1', '&:hover': { bgcolor: '#1565c0' } }}
+                  className="bg-blue-500 text-white hover:bg-blue-600"
                 >
                   Submit
                 </Button>
