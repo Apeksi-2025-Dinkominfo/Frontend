@@ -27,35 +27,35 @@ export default function HeritagePage() {
       nameIndonesia: 'Sumur Jobong',
       address: 'Jl. Pandean Gang I',
       descriptionIndonesia:
-        'Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama.Ini adalah deskripsi dummy untuk destinasi wisata pertama. ',
-      latitude: -7.250445,
+        'Kawasan Peneleh adalah kawasan delta yang menjadi tujuan pemukim atau munculnya sebuah peradaban. Dalam buku Asia Maior “Soerabaia 1900-1950”, diiilustrasikan kondisi alami di kawasan Bunguran (utara Peneleh), masih berupa tanah berair dan berawa-rawa. Bisa jadi, semakin ke utara seperti di kawasan Ampel, kondisi alamnya masih semak belukar dengan lahan yang berlumpur. Tanahnya belum sepadat dan sekeras jika dibandingkan dengan di kawasan selatan (kini kawasan kelurahan Peneleh).',
+         latitude: -7.250445,
       longitude: 112.768845,
       touristDestinationFiles: [
-        { link: 'https://dummyimage.com/600x400/000/fff&text=Candi+Dummy' },
+        { link: '/jobong.jpeg' },
       ],
     },
     {
       id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
-      address: 'Dummy Address 2',
+      nameIndonesia: 'Surabaya Kota Lama',
+      address: 'Jl. Kebonrojo 10',
       descriptionIndonesia:
-        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+        'Gedung Kantor Pos Kebonrojo ini dibangun pada tahun 1926, dengan diarsiteki oleh G.P.J.M.Bolsius dari Departemen Burgerlijke Openbare Werken (BOV) Batavia. Sebelum menjadi kantor pos, gedung ini digunakan sebagai Kantor Kabupaten Surabaya sekitar tahun 1800 – 1881. Karena ini jugalah Jalan Kebonrojo dulu dikenal dengan nama Regenstraat. Dan Pada saat digunakan sebagai kantor bupati itu, gedung ini memiliki atap yang rata, tidak menjulang seperti sekarang. Setelah itu, gedung ini beralih fungsi lagi menjadi gedung HBS (Hogere Burgerschool) hingga tahun 1923, dan salah satu lulusannya yang terkenal adalah Soekarno (1915-1920). Selain Soekarno, beberapa tokoh lain yang juga bersekolah di sini adalah Hubertus Jan van Mook (1906-1913) dan Christian Eichholtz (1916-1923). HBS ini merupakan sekolah untuk anak-anak bangsa Eropa, putra bangsawan pribumi atau putra para tokoh pribumi terkemuka, dengan pengantar dalam Bahasa Belanda. Gedung ini juga sempat dipakai selama tiga tahun sebagai gedung Kepala Komisaris Surabaya (Hoofdcommissariaat van Politie) sebelum akhirnya digunakan sebagai kantor pos hingga sekarang.',
       latitude: -7.257472,
       longitude: 112.752088,
       touristDestinationFiles: [
-        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+        { link: '/kotalama.jpg' },
       ],
     },
     {
       id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      nameIndonesia: 'Tunjungan Romansa',
       address: 'Dummy Address 2',
       descriptionIndonesia:
-        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+        'Gedung Kantor Pos Kebonrojo ini dibangun pada tahun 1926, dengan diarsiteki oleh G.P.J.M.Bolsius dari Departemen Burgerlijke Openbare Werken (BOV) Batavia. Sebelum menjadi kantor pos, gedung ini digunakan sebagai Kantor Kabupaten Surabaya sekitar tahun 1800 – 1881. Karena ini jugalah Jalan Kebonrojo dulu dikenal dengan nama Regenstraat. Dan Pada saat digunakan sebagai kantor bupati itu, gedung ini memiliki atap yang rata, tidak menjulang seperti sekarang. Setelah itu, gedung ini beralih fungsi lagi menjadi gedung HBS (Hogere Burgerschool) hingga tahun 1923, dan salah satu lulusannya yang terkenal adalah Soekarno (1915-1920). Selain Soekarno, beberapa tokoh lain yang juga bersekolah di sini adalah Hubertus Jan van Mook (1906-1913) dan Christian Eichholtz (1916-1923). HBS ini merupakan sekolah untuk anak-anak bangsa Eropa, putra bangsawan pribumi atau putra para tokoh pribumi terkemuka, dengan pengantar dalam Bahasa Belanda. Gedung ini juga sempat dipakai selama tiga tahun sebagai gedung Kepala Komisaris Surabaya (Hoofdcommissariaat van Politie) sebelum akhirnya digunakan sebagai kantor pos hingga sekarang. Gedung ini pernah dikuasai Jepang pada pasa pendudukan Jepang, tapi berhasil direbut kembali oleh para pegawai pos pribumi sekitar Oktober 1945.',
       latitude: -7.257472,
       longitude: 112.752088,
       touristDestinationFiles: [
-        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+        { link: '/tunjungan.jpg' },
       ],
     },
     {
@@ -214,6 +214,8 @@ export default function HeritagePage() {
     '9bfc0914-44c0-4e21-bcfc-ab3d57178efc',
     '9bfc0aa9-82c8-430a-9777-59ee0a3112f0',
     '9bfc07a1-9d7b-4f92-89bc-7cdfb7eb2825',
+    '60b51d0b-e5ae-4102-a3e4-fa781810a442',
+    'e5291779-2864-4a01-9590-1b507ea7ed4f',
     '9c4228f7-64ad-43dc-96e8-f71d62f445a6',
     '9c422b84-3beb-40f3-bbc2-a3bb014848f1',
     '52be927c-1312-4170-a332-f6ea07713d02',
@@ -249,8 +251,8 @@ export default function HeritagePage() {
  //TODO: Custom links untuk tiap id yang di sambungkan dengan tourism, link tourism nya harus yang detail
 const customLinks: { [key: string]: string } = {
   'hc1': 'https://example.com/sumur-jobong',
-  'dummy2': 'https://example.com/museum-dummy',
-  '2e98ebf4-b47c-422e-8c46-ad0d3914f181':'https://tourism.surabaya.go.id/destination/2e98ebf4-b47c-422e-8c46-ad0d3914f181'
+  '2e98ebf4-b47c-422e-8c46-ad0d3914f181':'https://tourism.surabaya.go.id/destination/2e98ebf4-b47c-422e-8c46-ad0d3914f181',
+  'dummy2':'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
 };
 
 return (
@@ -374,7 +376,7 @@ return (
               </div>
               <Button
                 onClick={(e) => {
-                  e.stopPropagation(); // Supaya tidak trigger onClick parent
+                  e.stopPropagation();
                   openLocationInMaps(
                     destination.latitude,
                     destination.longitude
