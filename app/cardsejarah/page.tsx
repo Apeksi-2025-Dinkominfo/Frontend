@@ -1,15 +1,16 @@
+import React from 'react';
 import Image from 'next/image';
-import apeksiLogo from '../../public/logoNew.png'; // Sesuaikan path jika diperlukan
+import apeksiLogo from '../../public/apeksi.png'; // Pastikan path ke gambar benar
 
 export default function CardSejarah() {
   return (
-    <div className="flex flex-col md:flex-row items-stretch gap-6 mt-10 px-4 md:px-10 lg:px-20">
-      {/* Left Section sebagai Card Terpisah */}
-      <div className="bg-[#78B7D0] text-white p-6 rounded-3xl shadow-lg md:w-1/2 flex flex-col">
-        <h2 className="text-3xl font-bold mb-4">
+    <div className="flex justify-center mt-10 px-4 md:px-10 lg:px-20">
+      {/* Card Sejarah sebagai Persegi Panjang */}
+      <div className="bg-[#78B7D0] text-white p-8 rounded-3xl shadow-lg w-full lg:w-3/4 xl:w-2/3 min-h-[400px] flex flex-col items-center">
+        <h2 className="text-3xl font-bold mb-4 text-center">
           Sejarah Asosiasi Pemerintah <br />Kota Seluruh Indonesia
         </h2>
-        <ul className="space-y-4 text-sm flex-grow">
+        <ul className="space-y-4 text-sm flex-grow text-left w-full">
           <li>
             <strong>13 - 24 Juni 2000</strong>: Rapat Panitia Kerja Walikota menyusun proposal yang diserahkan pada pertemuan para Walikota yang diselenggarakan pada akhir Juni.
           </li>
@@ -22,6 +23,18 @@ export default function CardSejarah() {
           <li>
             <strong>22 - 24 Juli 2008</strong>: Munas III digelar di Surakarta dan memutuskan Wali Kota Palembang, Eddy Santana Putra, menjadi Ketua Dewan Pengurus periode 2008 - 2012.
           </li>
+          
+          {/* Logo Apeksi di tengah */}
+          <div className="flex justify-center my-4">
+            <Image
+              src={apeksiLogo}
+              alt="Apeksi Logo"
+              width={400} // Sesuaikan ukuran logo sesuai kebutuhan
+              height={500} // Sesuaikan ukuran logo sesuai kebutuhan
+              className="object-contain" // Menjaga proporsi gambar
+            />
+          </div>
+
           <li>
             <strong>30 Mei - 2 Juni 2012</strong>: Munas IV digelar di Manado dan memutuskan Wali Kota Manado, GS Vicky Lumentut, menjadi Ketua Dewan Pengurus untuk periode 2012 - 2016.
           </li>
@@ -45,32 +58,6 @@ export default function CardSejarah() {
           >
             Sumber: apeksi.id/profil/
           </a>
-        </div>
-      </div>
-
-      {/* Right Section */}
-      <div className="flex flex-col md:w-1/2 items-center space-y-6 justify-between">
-        {/* Gambar yang lebih besar */}
-        <div className="bg-[#E4E4E4] p-4 rounded-xl shadow-md w-full flex justify-center">
-          <Image
-            src={apeksiLogo}
-            alt="Apeksi Logo"
-            width={400}
-            height={200}
-            className="object-contain"
-          />
-        </div>
-
-        {/* Grid untuk Statistik */}
-        <div className="bg-white p-7 rounded-xl shadow-md w-full grid grid-cols-2 gap-2 md:gap-4 flex-grow">
-          <div className="bg-[#F3F4F6] rounded-lg p-2 md:p-4 text-center flex flex-col items-center justify-center">
-            <p className="text-2xl md:text-3xl font-bold">34</p>
-            <p className="text-sm md:text-lg">Total Provinsi</p>
-          </div>
-          <div className="bg-[#F3F4F6] rounded-lg p-2 md:p-4 text-center flex flex-col items-center justify-center">
-            <p className="text-2xl md:text-3xl font-bold">98</p>
-            <p className="text-sm md:text-lg">Total Kota</p>
-          </div>
         </div>
       </div>
     </div>
