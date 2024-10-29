@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import apeksiLogo from '../../public/apeksi.png'; // Sesuaikan path jika diperlukan
+import apeksiLogo from '../../public/logoNew.png'; // Sesuaikan path jika diperlukan
 
 export default function CardSejarah() {
   return (
@@ -70,14 +70,6 @@ export default function CardSejarah() {
           <div className="bg-[#F3F4F6] rounded-lg p-2 md:p-4 text-center flex flex-col items-center justify-center">
             <p className="text-2xl md:text-3xl font-bold">98</p>
             <p className="text-sm md:text-lg">Total Kota</p>
-          </div>
-          <div className="bg-[#F3F4F6] rounded-lg p-2 md:p-4 text-center flex flex-col items-center justify-center">
-            <p className="text-2xl md:text-3xl font-bold">416</p>
-            <p className="text-sm md:text-lg">Total Kabupaten</p>
-          </div>
-          <div className="bg-[#F3F4F6] rounded-lg p-2 md:p-4 text-center flex flex-col items-center justify-center">
-            <p className="text-2xl md:text-3xl font-bold">7.094</p>
-            <p className="text-sm md:text-lg">Total Kecamatan</p>
           </div>
         </div>
       </div>

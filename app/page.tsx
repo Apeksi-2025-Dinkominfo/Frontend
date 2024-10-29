@@ -25,21 +25,20 @@ export default function Home() {
       </Box>
 
     {/* Bagian Untuk foto Walikota */}
-
     <Box
         sx={{
-          mt: { xs: 2, md: 20 }, // Margin top untuk mobile (xs) dan desktop (md)
+          mt: { xs: 2, md: 20 },
           display: 'flex',
-          justifyContent: 'center', // Posisikan gambar di tengah
+          justifyContent: 'center',
         }}
       >
-        <Box sx={{ maxWidth: '80%', width: '100%' }}> {/* Maksimal 80% lebar layar */}
+        <Box sx={{ maxWidth: '80%', width: '100%' }}>
           <Image
-            src="/PesertaMunas.png" // Ganti dengan path gambar kamu
+            src="/PesertaMunas.png" 
             alt="Foto Walikota"
-            width={600} // Set ukuran gambar
-            height={400} // Set tinggi gambar
-            layout="responsive" // Agar responsif
+            width={600}
+            height={400}
+            layout="responsive"
           />
         </Box>
       </Box>
@@ -49,11 +48,11 @@ export default function Home() {
         <Sejarah />
       </Box>
 
-      <Box sx={{ mt: { xs: 4, md: 6 } }}>
+      <Box sx={{ mt: { xs: 2, md: 6 } }}>
         <Surabaya />
       </Box>
 
-      <Box sx={{ mt: { xs: 250, md: 95 } }}>
+      <Box sx={{ mt: { xs: 50, md: 10 } }}>
         <Hotel />
       </Box>
 
@@ -63,8 +62,8 @@ export default function Home() {
 
       <Box
         sx={{
-          mt: { xs: '-120px', md: '-100px' },
-          zIndex: -1,
+          mt: { xs: 20, md: 25 },
+          zIndex: 1,
           position: 'relative',
         }}
         id="jadwal"
@@ -72,11 +71,11 @@ export default function Home() {
         <Jadwal />
       </Box>
 
-      <Box sx={{ mt: { xs: 250, md: 25 } }} id="Agenda">
+      {/* <Box sx={{ mt: { xs: 250, md: 25 } }} id="Agenda">
         <Agenda />
-      </Box>
+      </Box> */}
 
-      <Box sx={{ mt: { xs: 250, md: 20 } }}>
+      <Box sx={{ mt: { xs: 10, md: 20 } }}>
         <Berita />
       </Box>
 

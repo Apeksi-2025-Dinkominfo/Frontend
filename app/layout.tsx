@@ -30,19 +30,18 @@ export default function RootLayout({
         </Box>
 
         {/* Animated Image */}
-        <Box
-          sx={{
-            // display: 'flex',
-            // justifyContent: 'center',
-            // alignItems: 'center',
-            // minHeight: '100vh',
-            // width: '100%', // Ensure this box takes full width
-            // overflow: 'hidden', // Prevent overflow
-            // padding: 2, // Optional: Add some padding to prevent edge cases
-          }}
-        >
+        <Box>
           <AnimatedImage>
-            {children}
+            {/* Children with background color */}
+            <Box
+              sx={{
+                minHeight: '100vh', // Ensure it covers the full height of the viewport
+                width: '100%',
+              marginTop: -6,
+              }}
+            >
+              {children}
+            </Box>
           </AnimatedImage>
         </Box>
 

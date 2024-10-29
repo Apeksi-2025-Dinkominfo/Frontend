@@ -6,8 +6,9 @@ import {
   Box,
   Typography,
   Grid,
-  Checkbox,
-  FormControlLabel,
+  Tabs,
+  Tab,
+  TextField,
 } from '@mui/material';
 import { City } from '../utils/listKota';
 import Swal from 'sweetalert2';
@@ -20,7 +21,7 @@ interface FormData {
   nomor_handphone: string;
   tanggal_kedatangan: string;
   jam_kedatangan: string;
-  pesawat: string;
+  transportasi: string;
   tanggal_kepulangan: string;
   lokasi_menginap: string;
   jumlah_rombongan: string;
@@ -28,31 +29,34 @@ interface FormData {
   jabatan?: string;
   nama_unit_kerja?: string;
   nama?: string;
+  ukuran_baju_ibuk?: string;
+  ukuran_baju_bapak?: string;
 }
 
 export default function Register() {
- const [formData, setFormData] = useState<FormData>({
-  asal_kota: '',
-  nama_ajudan: '',
-  nomor_handphone: '',
-  tanggal_kedatangan: '',
-  jam_kedatangan: '',
-  pesawat: '',
-  tanggal_kepulangan: '',
-  lokasi_menginap: '',
-  jumlah_rombongan: '',
-  instansi: '', 
-  jabatan: '',   
-  nama_unit_kerja: '', 
-  nama: '',    
-});
+  const [formData, setFormData] = useState<FormData>({
+    asal_kota: '',
+    nama_ajudan: '',
+    nomor_handphone: '',
+    tanggal_kedatangan: '',
+    jam_kedatangan: '',
+    transportasi: '',
+    tanggal_kepulangan: '',
+    lokasi_menginap: '',
+    jumlah_rombongan: '',
+    instansi: '',
+    jabatan: '',
+    nama_unit_kerja: '',
+    nama: '',
+    ukuran_baju_ibuk: '',
+    ukuran_baju_bapak: '',
+  });
 
-
-  const [isOPTD, setIsOPTD] = useState(false);
+  const [selectedTab, setSelectedTab] = useState('Walikota');
   const router = useRouter();
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
     const { name, value } = e.target;
     setFormData({
@@ -61,25 +65,33 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleTabChange = (
+    event: React.SyntheticEvent,
+    newValue: string
+  ) => {
+    setSelectedTab(newValue);
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-  
+
     const tanggalKedatangan = new Date(
       `${formData.tanggal_kedatangan}T${formData.jam_kedatangan}:00`
     ).toISOString();
     const tanggalKepulangan = new Date(
       `${formData.tanggal_kepulangan}T00:00:00`
     ).toISOString();
-  
-    // Remove jam_kedatangan from the payload, as it's not necessary
+
     let payload = {
       ...formData,
       tanggal_kedatangan: tanggalKedatangan,
       tanggal_kepulangan: tanggalKepulangan,
       jumlah_rombongan: Number(formData.jumlah_rombongan),
     };
-  
-    if (isOPTD) {
+
+    if (selectedTab === 'OPTD') {
       payload = {
         ...payload,
         nama: formData.nama,
@@ -88,20 +100,20 @@ export default function Register() {
         nama_unit_kerja: formData.nama_unit_kerja,
       };
     } else {
-      // Remove OPTD-specific fields if not registering as OPTD
       delete payload.nama;
       delete payload.instansi;
       delete payload.jabatan;
       delete payload.nama_unit_kerja;
     }
-  
-    const endpoint = isOPTD
-      ? 'http://localhost:5000/optd'
-      : 'http://localhost:5000/peserta';
-  
+
+    const endpoint =
+      selectedTab === 'OPTD'
+        ? 'http://localhost:5000/optd'
+        : 'http://localhost:5000/peserta';
+
     try {
-      console.log('Payload:', payload); // Log the payload before sending
-  
+      console.log('Payload:', payload);
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -109,23 +121,23 @@ export default function Register() {
         },
         body: JSON.stringify(payload),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         console.log('Error response:', errorData);
         throw new Error('Failed to submit data');
       }
-  
+
       const result = await response.json();
       console.log('Form Submitted Successfully:', result);
-  
+
       setFormData({
         asal_kota: '',
         nama_ajudan: '',
         nomor_handphone: '',
         tanggal_kedatangan: '',
         jam_kedatangan: '',
-        pesawat: '',
+        transportasi: '',
         tanggal_kepulangan: '',
         lokasi_menginap: '',
         jumlah_rombongan: '',
@@ -133,8 +145,10 @@ export default function Register() {
         jabatan: '',
         nama_unit_kerja: '',
         nama: '',
+        ukuran_baju_ibuk: '',
+        ukuran_baju_bapak: '',
       });
-  
+
       Swal.fire({
         title: 'Success!',
         text: 'Form submitted successfully!',
@@ -151,8 +165,6 @@ export default function Register() {
       });
     }
   };
-  
-  
 
   return (
     <Grid container sx={{ minHeight: '100vh' }}>
@@ -186,25 +198,16 @@ export default function Register() {
             bgcolor: 'white',
             borderRadius: 2,
             boxShadow: 3,
-            textAlign: 'center',
           }}
         >
-          <Typography
-            variant="h5"
-            align="left"
-            gutterBottom
-            className="font-bold text-body mb-11"
+          <Tabs
+            value={selectedTab}
+            onChange={handleTabChange}
+            centered
           >
-            {isOPTD ? 'Register for OPTD' : 'Register'}
-          </Typography>
-
-          <FormControlLabel
-            control={
-              <Checkbox checked={isOPTD} onChange={() => setIsOPTD(!isOPTD)} />
-            }
-            label="Registrasi Untuk Pejabat Daerah Selain Walikota"
-            sx={{ mb: 2, display: 'block', textAlign: 'left' }}
-          />
+            <Tab value="Walikota" label="Walikota / Wakil Walikota" />
+            <Tab value="OPTD" label="Pejabat Yang Mewakili" />
+          </Tabs>
 
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2} className="text-body">
@@ -230,64 +233,50 @@ export default function Register() {
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">
-                  {isOPTD ? 'Nama' : 'Nama Walikota'}
+                  {selectedTab === 'OPTD' ? 'Nama (Beserta Gelar)' : 'Nama Walikota (Beserta Gelar)'}
                 </Typography>
                 <input
                   type="text"
-                  name={isOPTD ? 'nama' : 'nama_walikota'}
-                  value={isOPTD ? formData.nama : formData.nama_walikota || ''}
+                  name={selectedTab === 'OPTD' ? 'nama' : 'nama_walikota'}
+                  value={selectedTab === 'OPTD' ? formData.nama : formData.nama_walikota || ''}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                 />
               </Grid>
 
-              {isOPTD && (
+              {selectedTab === 'OPTD' && (
                 <>
                   {[
-                    { label: 'Instansi', name: 'instansi', type: 'text' },
-                    { label: 'Jabatan', name: 'jabatan', type: 'text' },
-                    {
-                      label: 'Nama Unit Kerja',
-                      name: 'nama_unit_kerja',
-                      type: 'text',
-                    },
+                    { label: 'Instansi', name: 'instansi' },
+                    { label: 'Jabatan', name: 'jabatan' },
+                    { label: 'Nama Unit Kerja', name: 'nama_unit_kerja' },
                   ].map((input) => (
                     <Grid item xs={12} md={6} key={input.name}>
                       <Typography align="left">{input.label}</Typography>
-                      <input
-                        type={input.type}
+                      <TextField
                         name={input.name}
                         value={formData[input.name as keyof FormData]}
                         onChange={handleChange}
+                        fullWidth
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                       />
                     </Grid>
                   ))}
                 </>
               )}
 
-              {[
-                {
-                  label: 'Nomor Handphone',
-                  name: 'nomor_handphone',
-                  type: 'tel',
-                },
-                { label: 'Pesawat', name: 'pesawat', type: 'text' },
-              ].map((input) => (
-                <Grid item xs={12} md={6} key={input.name}>
-                  <Typography align="left">{input.label}</Typography>
-                  <input
-                    type={input.type}
-                    name={input.name}
-                    value={formData[input.name as keyof FormData]}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                  />
-                </Grid>
-              ))}
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Nomor Ajudan</Typography>
+                <input
+                  type="text"
+                  name="nomor_handphone"
+                  value={formData.nomor_handphone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">Nama Ajudan</Typography>
@@ -301,7 +290,18 @@ export default function Register() {
                 />
               </Grid>
 
-              {/* Date fields */}
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Transportasi</Typography>
+                <input
+                  type="text"
+                  name="transportasi"
+                  value={formData.transportasi}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
               <Grid item xs={12} md={6}>
                 <Typography align="left">Tanggal Kedatangan</Typography>
                 <input
@@ -339,7 +339,7 @@ export default function Register() {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography align="left">Lokasi Menginap</Typography>
+                <Typography align="left">Tempat Menginap</Typography>
                 <input
                   type="text"
                   name="lokasi_menginap"
@@ -351,7 +351,31 @@ export default function Register() {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography align="left">Jumlah Rombongan</Typography>
+                <Typography align="left">Ukuran Baju Bapak</Typography>
+                <input
+                  name="ukuran_baju_bapak"
+                  value={formData.ukuran_baju_bapak}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">Ukuran Baju Ibuk</Typography>
+                <input
+                  name="ukuran_baju_ibuk"
+                  value={formData.ukuran_baju_ibuk}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography align="left">
+                  Jumlah Rombongan yang dibawa.
+                </Typography>
                 <input
                   type="number"
                   name="jumlah_rombongan"
