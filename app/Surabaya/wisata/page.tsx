@@ -50,16 +50,36 @@ export default function WisataPage() {
     'e5291779-2864-4a01-9590-1b507ea7ed4f',
     'b02cfe95-a65a-4888-9c60-9875c1dd3d08',
     '8ff3eb3d-da1d-49f6-a259-379623f7bf7c',
-    "9d27a64c-644e-419d-9b33-c83c7c180cd1",
-    "9d27ab50-f518-4107-87e0-fc13a577188e",
-
+    '9d27a64c-644e-419d-9b33-c83c7c180cd1',
+    '9d27ab50-f518-4107-87e0-fc13a577188e',
   ];
 
-  const filteredDestinations = destinations.filter(
-    (destination) =>
-      destination.touristDestinationFiles.length > 0 &&
-      excludedIds.includes(destination.id)
-  );
+  const filteredDestinations = destinations
+    .filter(
+      (destination) =>
+        destination.touristDestinationFiles.length > 0 &&
+        excludedIds.includes(destination.id)
+    )
+    .sort((a, b) => {
+      // IDs to show at the beginning
+      const firstIds = [
+        '91e8027f-1948-47e7-98f3-c55c1b143e8f', 
+        '9192cdb5-1a97-420a-9b24-0957ba842fb3',
+        '9995f578-5f5d-4379-a104-f1ff1d988715',
+      ];
+
+      // IDs to move to the end
+      const lastIds = [
+        '9d27a64c-644e-419d-9b33-c83c7c180cd1',
+        '9d27ab50-f518-4107-87e0-fc13a577188e',
+      ];
+
+      if (firstIds.includes(a.id)) return -1;
+      if (firstIds.includes(b.id)) return 1;
+      if (lastIds.includes(a.id)) return 1;
+      if (lastIds.includes(b.id)) return -1;
+      return 0;
+    });
 
   const truncateDescription = (description: string) => {
     return description.length > 222
@@ -71,7 +91,6 @@ export default function WisataPage() {
     const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
     window.open(url, '_blank');
   };
-  
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

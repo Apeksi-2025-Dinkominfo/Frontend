@@ -161,7 +161,7 @@ const Hotels: React.FC = () => {
       <div className="hero-section bg-white py-10 flex flex-col md:flex-row items-center justify-between">
         <div className="text-content md:w-1/2 w-full text-center md:text-left">
           <h1 className="text-5xl font-semibold text-body mb-4">
-          Mau menginap dimana, rek?
+          Mau menginap dimana?
           </h1>
           <p className="text-xl text-second mb-5">
           Temukan informasi dan alternatif hotel dan penginapan selama gelaran Munas VIII Apeksi 2025 di Kota Surabaya.
@@ -178,7 +178,7 @@ const Hotels: React.FC = () => {
   
       {/* Menyatukan Filter dan Judul dengan Flexbox */}
       <div className="flex justify-between items-center mt-5">
-        <h1 className="text-5xl font-bold mb-10 text-body">Hotel Suroboyo Rek</h1>
+        <h1 className="text-5xl font-bold mb-10 text-body">Hotel Hotel Suroboyo</h1>
         <div className="flex items-center bg-[#78B7D0] text-black p-2 mb-7 rounded-lg shadow-md">
           <span className="mr-2 font-bold">Filter :</span>
           <Dropdown>

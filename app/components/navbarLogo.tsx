@@ -29,7 +29,7 @@ export default function Navbar() {
               className="h-13 w-12"
             />
             <img
-              src="/apeksi.png"
+              src="/logoNew.png"
               alt="Gambar 2"
               className="h-12 w-15"
             />
