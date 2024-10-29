@@ -113,9 +113,9 @@ const StoryManagementPage: React.FC = () => {
     };
 
     return (
-        <div className="flex">
+        <div className="flex h-screen">
             <Sidebar activeButton={activeButton} onButtonClick={setActiveButton} />
-            <div className="flex-1 p-6">
+            <div className="flex-1 p-2 ml-1">
                 <h1 className="text-2xl font-bold mb-6">News</h1>
                 <div className="mb-6">
                     <input

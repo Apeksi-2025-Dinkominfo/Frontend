@@ -79,10 +79,12 @@ export default function DataRegistrasi() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
+      {/* Sidebar with fixed position */}
       <Sidebar activeButton={activeButton} onButtonClick={handleSidebarClick} />
-      <div className="flex-1 p-6">
-        <div className="flex justify-between items-center mb-6">
+      {/* Main content area */}
+      <div className="flex-1 p-4 ml-64 overflow-auto"> {/* Added ml-64 to ensure content does not overlap with sidebar */}
+        <div className="flex justify-between items-center mb-1">
           <div>
             <h2 className="text-lg font-semibold">Search</h2>
             <input
