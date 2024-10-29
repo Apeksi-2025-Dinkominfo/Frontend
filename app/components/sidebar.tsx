@@ -33,10 +33,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-gray-800 text-white p-22 fixed top-0 left-0 h-screen md:h-auto md:relative w-64 md:block transition-transform transform ${
+        className={`bg-gray-800 text-white fixed top-0 left-0 h-screen w-64 md:block transition-transform transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0`}
-        style={{ maxHeight: 'calc(100vh - 80px)' }} // Adjust to prevent overflow beyond header/footer
+        style={{ maxHeight: 'calc(100vh - 100px)' }} // Adjust to prevent overflow beyond header/footer
       >
         {/* Close Button for Sidebar */}
         <IconButton
@@ -47,8 +47,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
           <CloseIcon />
         </IconButton>
 
-        <h2 className="text-lg font-bold mt-20">MANAGEMENT MUNAS</h2>
-        <ul className="space-y-4">
+        <h2 className="text-lg font-bold mt-20 px-4">MANAGEMENT MUNAS</h2>
+        <ul className="space-y-4 px-4">
           <li>
             <Link href="/admin">
               <div
@@ -109,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 p-4 md:ml-64">
+      <div className="flex-1 md:ml-64">
         {/* Your main content goes here */}
       </div>
     </div>
