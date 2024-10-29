@@ -247,7 +247,7 @@ const WalikotaVideos: React.FC = () => {
         }}
         className='text-light font-medium'
       >
-        Iki lho rek ucapan dari walikota-walikota HEBAT
+      ucapan dari walikota-walikota HEBAT
       </Typography>
       <Typography
         variant="h4"

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Sidebar from '../../components/sidebar';
 import { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx'; // Import XLSX for Excel generation
@@ -14,13 +14,13 @@ interface PesertaData {
   tanggal_kepulangan: string;
   lokasi_menginap: string;
   jumlah_rombongan: number;
-  pesawat: string;
+  transportasi: string;
 }
 
 export default function DataRegistrasi() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [activeButton, setActiveButton] = useState(2); // Use number (2 represents Data Registrasi)
-  
+
   // Explicitly type the useState with PesertaData[] (array of PesertaData)
   const [data, setData] = useState<PesertaData[]>([]);
 
@@ -28,11 +28,11 @@ export default function DataRegistrasi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/peserta");
+        const response = await fetch('http://localhost:5000/peserta');
         const result: PesertaData[] = await response.json(); // Type the API response correctly
         setData(result);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -42,7 +42,11 @@ export default function DataRegistrasi() {
   // Format date to display month name (e.g., "October 10, 2024")
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
     return date.toLocaleDateString('en-US', options); // This will give you 'October 10, 2024'
   };
 
@@ -58,33 +62,38 @@ export default function DataRegistrasi() {
   const downloadExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
       data.map((item) => ({
-        "Asal Kota": item.asal_kota,
-        "Nama Walikota": item.nama_walikota,
-        "Nama Ajudan": item.nama_ajudan,
-        "Nomor Handphone": item.nomor_handphone,
-        "Tanggal Kedatangan": formatDate(item.tanggal_kedatangan),
-        "Jam Kedatangan": item.jam_kedatangan,
-        "Tanggal Kepulangan": formatDate(item.tanggal_kepulangan),
-        "Lokasi Menginap": item.lokasi_menginap,
-        "Jumlah Rombongan": item.jumlah_rombongan,
-        "Pesawat": item.pesawat,
+        'Asal Kota': item.asal_kota,
+        'Nama Walikota': item.nama_walikota,
+        'Nama Ajudan': item.nama_ajudan,
+        'Nomor Handphone': item.nomor_handphone,
+        'Tanggal Kedatangan': formatDate(item.tanggal_kedatangan),
+        'Jam Kedatangan': item.jam_kedatangan,
+        'Tanggal Kepulangan': formatDate(item.tanggal_kepulangan),
+        'Lokasi Menginap': item.lokasi_menginap,
+        'Jumlah Rombongan': item.jumlah_rombongan,
+        Transportasi: item.transportasi,
       }))
     );
-    
+
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Peserta");
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Peserta');
 
     // Trigger download
-    XLSX.writeFile(workbook, "data_peserta.xlsx");
+    XLSX.writeFile(workbook, 'data_peserta.xlsx');
   };
 
   return (
     <div className="flex h-screen">
       {/* Sidebar with fixed position */}
       <Sidebar activeButton={activeButton} onButtonClick={handleSidebarClick} />
+<<<<<<< HEAD
       {/* Main content area */}
       <div className="flex-1 p-4 ml-64 overflow-auto"> {/* Added ml-64 to ensure content does not overlap with sidebar */}
         <div className="flex justify-between items-center mb-1">
+=======
+      <div className="flex-1 p-6 ">
+        <div className="flex justify-between items-center mb-6">
+>>>>>>> f1fc6b28cfc9fcac307d84b5d176dfd37ba516e3
           <div>
             <h2 className="text-lg font-semibold">Search</h2>
             <input
@@ -108,11 +117,14 @@ export default function DataRegistrasi() {
           </div>
         </div>
 
-        <div className="overflow-auto"> {/* Add scrollable area for overflow */}
+        <div className="overflow-auto">
+          {' '}
+          {/* Add scrollable area for overflow */}
           <table className="table-auto w-full border-collapse">
             <thead>
               <tr>
-                <th className="border px-2 py-2 w-8">No</th> {/* Smaller width */}
+                <th className="border px-2 py-2 w-8">No</th>{' '}
+                {/* Smaller width */}
                 <th className="border px-4 py-2 w-40">Asal Kota</th>
                 <th className="border px-4 py-2 w-40">Nama Walikota</th>
                 <th className="border px-4 py-2 w-40">Nama Ajudan</th>
@@ -122,32 +134,49 @@ export default function DataRegistrasi() {
                 <th className="border px-4 py-2 w-36">Tanggal Kepulangan</th>
                 <th className="border px-4 py-2 w-40">Lokasi Menginap</th>
                 <th className="border px-4 py-2 w-40">Jumlah Rombongan</th>
-                <th className="border px-4 py-2 w-36">Pesawat</th>
+                <th className="border px-4 py-2 w-36">transportasi</th>
                 <th className="border px-4 py-2 w-36">Actions</th>
               </tr>
             </thead>
             <tbody>
               {data
-                .filter((item) =>
-                  item.asal_kota.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  item.nama_walikota.toLowerCase().includes(searchTerm.toLowerCase())
+                .filter(
+                  (item) =>
+                    item.asal_kota
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase()) ||
+                    item.nama_walikota
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
                 )
                 .map((item, index) => (
                   <tr key={index}>
-                    <td className="border px-2 py-2 text-center">{index + 1}</td>
+                    <td className="border px-2 py-2 text-center">
+                      {index + 1}
+                    </td>
                     <td className="border px-4 py-2">{item.asal_kota}</td>
                     <td className="border px-4 py-2">{item.nama_walikota}</td>
                     <td className="border px-4 py-2">{item.nama_ajudan}</td>
                     <td className="border px-4 py-2">{item.nomor_handphone}</td>
-                    <td className="border px-4 py-2">{formatDate(item.tanggal_kedatangan)}</td>
-                    <td className="border px-4 py-2">{item.jam_kedatangan}</td>
-                    <td className="border px-4 py-2">{formatDate(item.tanggal_kepulangan)}</td>
-                    <td className="border px-4 py-2">{item.lokasi_menginap}</td>
-                    <td className="border px-4 py-2 text-center">{item.jumlah_rombongan}</td>
-                    <td className="border px-4 py-2">{item.pesawat}</td>
                     <td className="border px-4 py-2">
-                      <button className="bg-blue-500 text-white px-4 py-1 mr-2 rounded hover:bg-blue-600">Update</button>
-                      <button className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Delete</button>
+                      {formatDate(item.tanggal_kedatangan)}
+                    </td>
+                    <td className="border px-4 py-2">{item.jam_kedatangan}</td>
+                    <td className="border px-4 py-2">
+                      {formatDate(item.tanggal_kepulangan)}
+                    </td>
+                    <td className="border px-4 py-2">{item.lokasi_menginap}</td>
+                    <td className="border px-4 py-2 text-center">
+                      {item.jumlah_rombongan}
+                    </td>
+                    <td className="border px-4 py-2">{item.transportasi}</td>
+                    <td className="border px-4 py-2">
+                      <button className="bg-blue-500 text-white px-4 py-1 mr-2 rounded hover:bg-blue-600">
+                        Update
+                      </button>
+                      <button className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
