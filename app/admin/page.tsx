@@ -99,7 +99,7 @@ const StoryManagementPage: React.FC = () => {
     });
 
     return (
-        <div className="container">
+        <div className="page-wrapper">
             <style>
                 {`
                     * {
@@ -110,14 +110,15 @@ const StoryManagementPage: React.FC = () => {
                         font-family: Arial, sans-serif;
                         height: 100vh;
                     }
-                    .container {
+                    .page-wrapper {
                         display: flex;
                         height: 100%;
                     }
                     .content {
                         flex-grow: 1;
                         padding: 20px;
-                        overflow-y: auto; 
+                        overflow-y: auto;
+                        margin-left: 0; /* Menghapus jarak antara sidebar dan konten */
                     }
                     .header-controls {
                         display: flex;

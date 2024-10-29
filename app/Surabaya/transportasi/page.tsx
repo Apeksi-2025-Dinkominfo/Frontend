@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Link
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Link, Container
 } from '@mui/material';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 function RentalTable() {
   const rows = [
@@ -10,55 +10,73 @@ function RentalTable() {
     { no: 2, name: 'Kalla Transport & Logistic Surabaya', phone: '08114141116', address: 'Jl. Raya Taman No.113-137, Taman, Kec. Taman, Kabupaten Sidoarjo, Jawa Timur 61257' },
     { no: 3, name: 'TRAC Rental Mobil', phone: '08111873210', address: 'Jl. Raya Jemursari No.224 - 228, Tenggilis Mejoyo, Kec. Tenggilis Mejoyo, Surabaya, Jawa Timur 60292' },
     { no: 4, name: 'CV. Tunas Jaya', phone: '08131518750', address: 'Jl. Musi No. 29, Surabaya' },
-    { no: 5, name: 'PT Diantama Usaha Berkah', phone: '081235556999', phoneAlt: '08165406702', address: 'Taman Suko Asri Blok AA 18, Sukodono, Sidoarjo' },
+    { no: 5, name: 'PT Diantama Usaha Berkah', phone: 'Nomor 1', phoneAlt: 'Nomor 2', address: 'Taman Suko Asri Blok AA 18, Sukodono, Sidoarjo' },
     { no: 6, name: 'Fafa Wisata Trans', phone: '081216859936', address: 'Kec. Prambon, Sidoarjo' },
     { no: 7, name: 'CV. PUSAKA LIMA TIGA SURABAYA (Nurhayati)', phone: '08113350606', address: 'Jl. Rungkut Mejoyo selatan V / 21-23' },
   ];
 
-  // Fungsi untuk mengubah nomor telepon menjadi tautan WhatsApp
-  const formatWhatsAppLink = (phone) => {
+  // Fungsi untuk mengubah nomor telepon menjadi tautan
+  const formatPhoneLink = (phone) => {
     const formattedPhone = phone.replace(/\s+/g, '').replace(/^0/, '62'); // Ganti 0 di awal dengan 62 untuk format Indonesia
-    return `https://wa.me/${formattedPhone}`;
+    return `tel:+${formattedPhone}`;
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Typography variant="h5" align="center" gutterBottom>
+    <Container sx={{ backgroundColor: '#78B7D0', padding: 3, borderRadius: 2 }}>
+      <Typography variant="h5" align="center" gutterBottom sx={{ color: 'white', marginBottom: 3 }}>
         RENTAL MOBIL DI SURABAYA
       </Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>No.</TableCell>
-            <TableCell>Nama Penyedia</TableCell>
-            <TableCell>Nomor Telepon</TableCell>
-            <TableCell>Alamat</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.no}>
-              <TableCell>{row.no}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>
-                <Link href={formatWhatsAppLink(row.phone)} target="_blank" rel="noopener noreferrer">
-                  <WhatsAppIcon sx={{ verticalAlign: 'middle', marginRight: 1 }} />
-                </Link>
-                {row.phoneAlt && (
-                  <>
-                    <br />
-                    <Link href={formatWhatsAppLink(row.phoneAlt)} target="_blank" rel="noopener noreferrer">
-                      <WhatsAppIcon sx={{ verticalAlign: 'middle', marginRight: 1 }} />
-                    </Link>
-                  </>
-                )}
-              </TableCell>
-              <TableCell>{row.address}</TableCell>
+      <TableContainer component={Paper} sx={{ backgroundColor: '#227B94', borderRadius: 2 }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ color: 'white' }}>No.</TableCell>
+              <TableCell sx={{ color: 'white' }}>Nama Penyedia</TableCell>
+              <TableCell sx={{ color: 'white' }}>Nomor Telepon</TableCell>
+              <TableCell sx={{ color: 'white' }}>Alamat</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.no}>
+                <TableCell sx={{ color: 'white' }}>{row.no}</TableCell>
+                <TableCell sx={{ color: 'white' }}>{row.name}</TableCell>
+                <TableCell>
+                  <Link
+                    href={formatPhoneLink(row.phone)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{
+                      color: 'white',
+                      '&:hover': { transform: 'scale(1.2)', transition: 'transform 0.3s' },
+                    }}
+                  >
+                    <PhoneIcon sx={{ verticalAlign: 'middle', color: '#25D366' }} />
+                  </Link>
+                  {row.phoneAlt && (
+                    <>
+                      <br />
+                      <Link
+                        href={formatPhoneLink(row.phoneAlt)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          color: 'white',
+                          '&:hover': { transform: 'scale(1.2)', transition: 'transform 0.3s' },
+                        }}
+                      >
+                        <PhoneIcon sx={{ verticalAlign: 'middle', color: '#25D366' }} />
+                      </Link>
+                    </>
+                  )}
+                </TableCell>
+                <TableCell sx={{ textAlign: 'justify', color: 'white' }}>{row.address}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
   );
 }
 
