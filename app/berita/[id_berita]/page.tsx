@@ -1,14 +1,21 @@
 import { Box, Typography, Button, Paper } from '@mui/material';
 import Link from 'next/link';
-import { fetchNewsItems, NewsItem } from '../../utils/beritaData';
+import { fetchNewsItems, apeksiNews, NewsItem } from '../../utils/beritaData'; // Import apeksiNews
 import { format } from 'date-fns';
 
 const BeritaDetail = async ({ params }: { params: { id_berita: string } }) => {
-  const { id_berita } = params; 
+  const { id_berita } = params;
 
+  // Fetch news items from the backend
   const newsItems: NewsItem[] = await fetchNewsItems();
-  const berita = newsItems.find((item) => item.id.toString() === id_berita);
+  let berita = newsItems.find((item) => item.id.toString() === id_berita);
 
+  // If not found in fetched news items, check apeksiNews
+  if (!berita) {
+    berita = apeksiNews.find((item) => item.id.toString() === id_berita);
+  }
+
+  // If no news item is found, show a not found message
   if (!berita) {
     return (
       <Box sx={{ mt: 4, px: 4, py: 4 }}>
@@ -26,6 +33,7 @@ const BeritaDetail = async ({ params }: { params: { id_berita: string } }) => {
     );
   }
 
+  // Display the news item details
   return (
     <Box sx={{ mt: 4, px: 4, py: 4 }}>
       <Paper elevation={3} sx={{ padding: 4, overflow: 'hidden' }}>
@@ -51,7 +59,7 @@ const BeritaDetail = async ({ params }: { params: { id_berita: string } }) => {
           {berita.body.split('\n').map((paragraph, index) => (
             <span key={index}>
               {paragraph}
-              <br /> 
+              <br />
             </span>
           ))}
         </Typography>

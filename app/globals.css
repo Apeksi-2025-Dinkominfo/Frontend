@@ -1,11 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '~keen-slider/keen-slider.min.css';
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
+  margin: 0;
+  padding: 0;
 }
-
 
 @layer utilities {
   .text-balance {
@@ -32,6 +34,17 @@ body {
 .slick-dots li.slick-active button:before {
   color: #000;
 }
+
+.carousel-container {
+  perspective: 1000px;
+}
+
+.carousel-card {
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
 
 html, body {
   margin: 0;
