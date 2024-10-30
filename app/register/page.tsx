@@ -209,7 +209,7 @@ export default function Register() {
             <Tab value="OPTD" label="Pejabat Yang Mewakili" />
           </Tabs>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='mt-8'>
             <Grid container spacing={2} className="text-body">
               <Grid item xs={12} md={6}>
                 <Typography align="left">Asal Kota</Typography>
@@ -257,7 +257,7 @@ export default function Register() {
                       <TextField
                         name={input.name}
                         value={formData[input.name as keyof FormData]}
-                        onChange={handleChange}
+                        onChange={handleChange as React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>}
                         fullWidth
                         required
                       />
@@ -351,7 +351,7 @@ export default function Register() {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography align="left">Ukuran Baju Bapak</Typography>
+                <Typography align="left">Ukuran Baju Walikota/Wakil</Typography>
                 <input
                   name="ukuran_baju_bapak"
                   value={formData.ukuran_baju_bapak}
@@ -362,7 +362,7 @@ export default function Register() {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography align="left">Ukuran Baju Ibuk</Typography>
+                <Typography align="left">Ukuran Baju Istri</Typography>
                 <input
                   name="ukuran_baju_ibuk"
                   value={formData.ukuran_baju_ibuk}
@@ -374,7 +374,7 @@ export default function Register() {
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">
-                  Jumlah Rombongan yang dibawa.
+                  Jumlah Rombongan yang dibawa
                 </Typography>
                 <input
                   type="number"

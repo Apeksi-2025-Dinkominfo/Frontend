@@ -4,7 +4,7 @@
 @import '~keen-slider/keen-slider.min.css';
 
 body {
-  font-family: 'Poppins';
+  font-family: 'Plus Jakarta Sans';
   margin: 0;
   padding: 0;
 }
@@ -164,4 +164,17 @@ html, body {
 .main-content {
   margin-left: 250px;
   padding: 20px;
+}
+
+@keyframes rainbowAnimation {
+  0% { WebkitTextStrokeColor: #FF0000; } /* Red */
+  20% { WebkitTextStrokeColor: #FFA500; } /* Orange */
+  40% { WebkitTextStrokeColor: #FFFF00; } /* Yellow */
+  60% { WebkitTextStrokeColor: #008000; } /* Green */
+  80% { WebkitTextStrokeColor: #0000FF; } /* Blue */
+  100% { WebkitTextStrokeColor: #4B0082; } /* Indigo */
+}
+
+.rainbow-text:hover {
+  animation: rainbowAnimation 2s linear infinite;
 }

@@ -58,7 +58,7 @@ const Berita = () => {
         className="text-4xl font-semibold text-body"
         sx={{ mb: 2, color: '#FFFFFF' }}
       >
-        Info Suroboyo
+        Berita APEKSI
       </Typography>
 
       <Grid container spacing={4}>
