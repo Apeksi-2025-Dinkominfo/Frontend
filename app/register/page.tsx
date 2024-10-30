@@ -176,7 +176,7 @@ export default function Register() {
       >
         <Box
           component="img"
-          src="/apeksi.png"
+          src="/logoNew.png"
           alt="Medium Image"
           sx={{ width: '90%', maxHeight: '90%', objectFit: 'contain' }}
         />
