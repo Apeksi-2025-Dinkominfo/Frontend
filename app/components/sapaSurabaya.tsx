@@ -20,7 +20,10 @@ export default function CityTourComponent() {
   const handlePrev = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + cardData.length) % cardData.length);
 
   return (
-    <>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen"
+      style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
+    >
       <div className="text-center mt-4 mb-2">
         <Typography
           variant="h2"
@@ -33,9 +36,6 @@ export default function CityTourComponent() {
         >
           Muter Muter<br />
           Suroboyo
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
-          Discover the beauty of Surabaya in style!
         </Typography>
       </div>
       <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
@@ -120,6 +120,6 @@ export default function CityTourComponent() {
           }
         `}</style>
       </div>
-    </>
+    </div>
   );
 }
