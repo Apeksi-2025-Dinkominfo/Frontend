@@ -90,7 +90,6 @@ export default function CityTourComponent() {
               const rotationAngle = offset * 15;
               const scale = offset === 0 ? 1.1 : 0.95;
               const opacity = offset === 0 ? 1 : 0.7;
-
               return (
                 <Link href={card.link} passHref key={index}>
                   <div

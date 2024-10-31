@@ -22,7 +22,6 @@ export default function Home() {
       <Box id="home">
         <LandingPage />
       </Box>
-
       {/* Centered Large Box with Image */}
       <Box
         sx={{

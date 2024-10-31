@@ -68,7 +68,6 @@ const EventComponent = () => {
       >
         Catat jadwal kegiatan selama Munas VIII 2024 di Kota Surabaya
       </Typography>
-
       <Swiper
         spaceBetween={30}
         slidesPerView={3}

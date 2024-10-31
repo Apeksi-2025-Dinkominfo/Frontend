@@ -227,3 +227,4 @@ const AccommodationSlider: React.FC = () => {
 };
 
 export default AccommodationSlider;
+
