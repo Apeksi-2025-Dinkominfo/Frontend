@@ -21,7 +21,7 @@ const GalleryComponent = () => {
       {/* Bagian header Galeri */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
         <Typography variant="h4" fontWeight="bold" color="#227B94">
-          Galeri
+          Galeri APEKSI
         </Typography>
         <Link
           href="/Gallery"

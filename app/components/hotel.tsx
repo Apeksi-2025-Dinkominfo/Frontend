@@ -48,6 +48,22 @@ const AccommodationSlider: React.FC = () => {
     return `${distanceInKm.toFixed(2)} km`;
   };
 
+  const calculateDistanceInMeters = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
+  
+    const R = 6371 * 1000; // Radius of Earth in meters
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+  
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in meters
+  };
+  
   useEffect(() => {
     const fetchAccommodations = async () => {
       try {
@@ -60,9 +76,20 @@ const AccommodationSlider: React.FC = () => {
           throw new Error('Failed to fetch data');
         }
   
-        setAccommodations(data.data.data);
+        const referenceLat = -7.261528192788436;
+        const referenceLon = 112.75042301106396;
+  
+        // Sort accommodations by distance in meters
+        const sortedAccommodations = data.data.data.sort((a: Accommodation, b: Accommodation) => {
+          const distanceA = calculateDistanceInMeters(referenceLat, referenceLon, a.latitude, a.longitude);
+          const distanceB = calculateDistanceInMeters(referenceLat, referenceLon, b.latitude, b.longitude);
+  
+          return distanceA - distanceB;
+        });
+  
+        setAccommodations(sortedAccommodations);
         setLoading(false);
-      } catch (err: unknown) {  
+      } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
         } else {
@@ -75,6 +102,7 @@ const AccommodationSlider: React.FC = () => {
     fetchAccommodations();
   }, []);
   
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -86,6 +114,14 @@ const AccommodationSlider: React.FC = () => {
 
   const referenceLat = -7.261528192788436;
   const referenceLon = 112.75042301106396;
+
+  const formatDistance = (distanceInMeters: number) => {
+    if (distanceInMeters < 1000) {
+      return `${distanceInMeters.toFixed(0)} meters`;
+    }
+    return `${(distanceInMeters / 1000).toFixed(2)} km`;
+  };
+  
 
   return (
     <div className="w-full p-5">
@@ -109,8 +145,9 @@ const AccommodationSlider: React.FC = () => {
             <div className="absolute top-[200px] left-4 bg-light text-white px-3 py-1 rounded-lg flex items-center">
               <LocationOnIcon className="mr-1" fontSize="small" />
               <span className="text-sm">
-                {calculateDistance(referenceLat, referenceLon, item.latitude, item.longitude)}
-              </span>
+  {formatDistance(calculateDistanceInMeters(referenceLat, referenceLon, item.latitude, item.longitude))}
+</span>
+
             </div>
 
             <img
@@ -190,3 +227,4 @@ const AccommodationSlider: React.FC = () => {
 };
 
 export default AccommodationSlider;
+
