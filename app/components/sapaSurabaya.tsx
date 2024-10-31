@@ -35,7 +35,10 @@ export default function CityTourComponent() {
     );
 
   return (
-    <>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen"
+      style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
+    >
       <div className="text-center mt-4 mb-2">
       <Typography
           style={{
@@ -51,6 +54,10 @@ export default function CityTourComponent() {
           onMouseLeave={handleMouseLeave}
           className="relative text-9xl"
         >
+<<<<<<< HEAD
+          Muter Muter<br />
+          Suroboyo
+=======
           Ayo Jelajahi Kota <br /> Surabaya
           {isHovered && (
             <div
@@ -66,6 +73,7 @@ export default function CityTourComponent() {
               }}
             />
           )}
+>>>>>>> e8aeeea119efaeda585e8b1dfaaca9e9aa0afd30
         </Typography>
       </div>
       <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
@@ -167,6 +175,6 @@ export default function CityTourComponent() {
           }
         `}</style>
       </div>
-    </>
+    </div>
   );
 }
