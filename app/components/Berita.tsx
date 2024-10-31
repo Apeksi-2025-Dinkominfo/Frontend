@@ -58,9 +58,7 @@ const Berita = () => {
         className="text-4xl font-semibold text-body"
         sx={{ mb: 2, color: '#FFFFFF' }}
       >
-        Info Suroboyo
-      </Typography>
-
+        Berita APEKSI
       <Grid container spacing={4}>
         {/* Apeksi News Section (Left Side) */}
         <Grid item xs={12} md={7}>

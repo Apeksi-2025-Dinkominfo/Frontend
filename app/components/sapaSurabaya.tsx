@@ -4,20 +4,35 @@ import Link from 'next/link';
 import { Typography } from '@mui/material';
 
 const cardData = [
-  { title: 'Belanja', img: '/belanja2.JPG', link: '/surabaya/belanja' },
-  { title: 'Tempat Wisata', img: '/Wisata2.JPG', link: '/surabaya/wisata' },
-  { title: 'Kuliner', img: '/KulinerNew.jpg', link: '/surabaya/kuliner' },
-  { title: 'Transportasi', img: '/Transport.jpg', link: '/surabaya/transportasi' },
-  { title: 'Heritage', img: '/Heritage.jpg', link: '/surabaya/heritage' },
-  { title: 'Budaya', img: '/budaya.jpg', link: '/surabaya/budaya' },
-  { title: 'Fasilitas Kesehatan', img: '/rumahsakit.jpeg', link: '/hospital' },
+  { img: '/belanjaIcon.png', link: '/surabaya/belanja' },
+  { img: '/WisataIcon.png', link: '/surabaya/wisata' },
+  { img: '/Kuliner.png', link: '/surabaya/kuliner' },
+  { img: '/transportIcon.png', link: '/surabaya/transportasi' },
+  { img: '/heritageIcon.png', link: '/surabaya/heritage' },
+  { img: '/budayaIcon.png', link: '/surabaya/budaya' },
+  { img: '/fasilitasKesehatan.png', link: '/hospital' },
 ];
 
 export default function CityTourComponent() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [circlePosition, setCirclePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleNext = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % cardData.length);
-  const handlePrev = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + cardData.length) % cardData.length);
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { offsetX, offsetY } = e.nativeEvent;
+    setCirclePosition({ x: offsetX - 250, y: offsetY - 500 });
+  };
+  
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const handleNext = () =>
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cardData.length);
+  const handlePrev = () =>
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + cardData.length) % cardData.length
+    );
 
   return (
     <div
@@ -25,17 +40,40 @@ export default function CityTourComponent() {
       style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
     >
       <div className="text-center mt-4 mb-2">
-        <Typography
-          variant="h2"
+      <Typography
           style={{
             fontWeight: 'bold',
-            color: '#E63946',
-            textShadow: '2px 2px #1D3557',
+            color: 'transparent',
+            fontFamily: 'Gotham, sans-serif',
             letterSpacing: '2px',
+            WebkitTextStroke: '5px #E63946', // Set initial stroke color
+            animation: isHovered ? 'strokeAnimation 1s infinite' : 'none', // Speed up animation
           }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="relative text-9xl"
         >
+<<<<<<< HEAD
           Muter Muter<br />
           Suroboyo
+=======
+          Ayo Jelajahi Kota <br /> Surabaya
+          {isHovered && (
+            <div
+              className="moving-circle"
+              style={{
+                position: 'absolute',
+                width: '500px',
+                height: '500px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(230, 57, 70, 0.5)',
+                pointerEvents: 'none',
+                transform: `translate(${circlePosition.x - 1}px, ${circlePosition.y - 1}px)`,
+              }}
+            />
+          )}
+>>>>>>> e8aeeea119efaeda585e8b1dfaaca9e9aa0afd30
         </Typography>
       </div>
       <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
@@ -51,7 +89,8 @@ export default function CityTourComponent() {
             className="carousel-3d flex items-center justify-center relative"
           >
             {cardData.map((card, index) => {
-              let offset = (index - currentIndex + cardData.length) % cardData.length;
+              let offset =
+                (index - currentIndex + cardData.length) % cardData.length;
               if (offset > 1 && offset < cardData.length - 1) return null;
 
               if (offset === cardData.length - 1) offset = -1;
@@ -59,33 +98,32 @@ export default function CityTourComponent() {
               const rotationAngle = offset * 15;
               const scale = offset === 0 ? 1.1 : 0.95;
               const opacity = offset === 0 ? 1 : 0.7;
-
               return (
                 <Link href={card.link} passHref key={index}>
                   <div
                     className="carousel-card absolute rounded-xl shadow-lg overflow-hidden transition-transform transform"
                     style={{
-                      transform: `rotateY(${rotationAngle}deg) translateX(${offset * 250}px) scale(${scale})`,
+                      transform: `rotateY(${rotationAngle}deg) translateX(${
+                        offset * 250
+                      }px) scale(${scale})`,
                       opacity: opacity,
                       width: '500px',
                       height: '300px',
                       cursor: 'pointer',
                       zIndex: offset === 0 ? 2 : 1,
+                      backgroundColor: 'transparent', // Set background to transparent
+                      boxShadow: 'none',
                     }}
                   >
-                    <div
-                      className="carousel-image rounded-xl"
+                    <img
+                      className="carousel-image w-full h-full object-cover"
+                      src={card.img}
+                      alt="Carousel Card"
                       style={{
-                        backgroundImage: `url(${card.img})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        width: '100%',
-                        height: '100%',
+                        width: '500px', // Ensures image width matches the card
+                        height: '300px', // Ensures image height matches the card
                       }}
                     />
-                    <div className="absolute bottom-4 w-full text-center text-white font-bold text-lg">
-                      {card.title}
-                    </div>
                   </div>
                 </Link>
               );
@@ -116,6 +154,23 @@ export default function CityTourComponent() {
             }
             .carousel-3d {
               transform: translateX(-50%);
+            }
+          }
+          @keyframes strokeAnimation {
+            0% {
+              -webkit-text-stroke-color: #E63946;
+            }
+            25% {
+              -webkit-text-stroke-color: #F4A261;
+            }
+            50% {
+              -webkit-text-stroke-color: #E9C46A;
+            }
+            75% {
+              -webkit-text-stroke-color: #2A9D8F;
+            }
+            100% {
+              -webkit-text-stroke-color: #264653;
             }
           }
         `}</style>

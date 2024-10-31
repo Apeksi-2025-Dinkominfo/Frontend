@@ -1,6 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+<<<<<<< HEAD
 import logoNew from '../../public/logoNew.png';
+=======
+import apeksiLogo from '../../public/logoNew.png'; // Pastikan path ke gambar benar
+>>>>>>> e8aeeea119efaeda585e8b1dfaaca9e9aa0afd30
 
 export default function CardSejarah() {
   return (
