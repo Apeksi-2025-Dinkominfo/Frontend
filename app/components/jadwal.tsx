@@ -31,7 +31,7 @@ const EventComponent = () => {
     setSelectedAcara(acara);
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
     setSelectedAcara(null);
@@ -54,21 +54,20 @@ const EventComponent = () => {
         zIndex: 1,
       }}
     >
-        <Typography
-          variant="h6"
-          className="text-white font-medium"
-          sx={{ textAlign: 'right', fontFamily: 'Poppins', letterSpacing: '5px' }}
-        >
-          Cek jadwal Munas di Sini!
-        </Typography>
-        <Typography
-          variant="h6"
-          className="text-body font-semibold"
-          sx={{ mb: 4, textAlign: 'right', fontSize: '19px' }}
-        >
-          Catat jadwal kegiatan selama Munas VIII 2024 di Kota Surabaya
-        </Typography>
-
+      <Typography
+        variant="h6"
+        className="text-white font-medium"
+        sx={{ textAlign: 'right', fontFamily: 'Poppins', letterSpacing: '5px' }}
+      >
+        Cek jadwal Munas di Sini!
+      </Typography>
+      <Typography
+        variant="h6"
+        className="text-body font-semibold"
+        sx={{ mb: 4, textAlign: 'right', fontSize: '19px' }}
+      >
+        Catat jadwal kegiatan selama Munas VIII 2024 di Kota Surabaya
+      </Typography>
       <Swiper
         spaceBetween={30}
         slidesPerView={3}
@@ -181,38 +180,40 @@ const EventComponent = () => {
                   <Typography variant="body2" sx={{ mt: 2 }}>
                     {event.description}
                   </Typography>
-                  <Box sx={{ mt: 2, borderTop: '1px solid #16325B', pt: 2 }}>
-                    <Typography variant="subtitle2" style={{ fontFamily: 'Poppins' }}>
-                      Acara:
-                    </Typography>
-                    <Box
-                      sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}
-                    >
-                      {event.acara.map((acaraItem, idx) => (
-                        <Button
-                          key={idx}
-                          variant="outlined"
-                          size="small"
-                          sx={{
-                            borderRadius: '20px',
-                            padding: '2px 10px',
-                            textTransform: 'none',
-                            fontSize: '12px',
-                            color: '#3C3C43',
-                            borderColor: '#3C3C43',
-                            transition: '0.3s',
-                            '&:hover': {
-                              backgroundColor: '#16325B',
-                              color: '#fff',
-                              borderColor: '#16325B',
-                            },
-                          }}
-                          onClick={() => handleClickOpen(acaraItem)}
-                        >
-                          {acaraItem.title}
-                        </Button>
-                      ))}
-                    </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: 1,
+                      mt: 1,
+                      maxHeight: '100px', // Set a maximum height for the container
+                      overflowY: 'auto', // Enable vertical scroll if content overflows
+                    }}
+                  >
+                    {event.acara.map((acaraItem, idx) => (
+                      <Button
+                        key={idx}
+                        variant="outlined"
+                        size="small"
+                        sx={{
+                          borderRadius: '20px',
+                          padding: '2px 10px',
+                          textTransform: 'none',
+                          fontSize: '12px',
+                          color: '#3C3C43',
+                          borderColor: '#3C3C43',
+                          transition: '0.3s',
+                          '&:hover': {
+                            backgroundColor: '#16325B',
+                            color: '#fff',
+                            borderColor: '#16325B',
+                          },
+                        }}
+                        onClick={() => handleClickOpen(acaraItem)}
+                      >
+                        {acaraItem.title}
+                      </Button>
+                    ))}
                   </Box>
                 </CardContent>
               </Card>
@@ -222,84 +223,83 @@ const EventComponent = () => {
       </Swiper>
 
       <Dialog
-  open={open}
-  onClose={handleClose}
-  sx={{
-    '& .MuiDialog-paper': {
-      width: '450px',
-      height: '350px',
-      borderRadius: '16px',
-    },
-  }}
->
-  <DialogTitle
-    sx={{
-      m: 0,
-      p: 2,
-      fontFamily: 'Arial, sans-serif',
-      fontWeight: 'bold',
-      fontSize: '24px',
-      borderBottom: '1px solid #ddd',
-      textAlign: 'center',
-    }}
-  >
-    Detail Acara
-    <IconButton
-      aria-label="close"
-      onClick={handleClose}
-      sx={{
-        position: 'absolute',
-        right: 8,
-        top: 8,
-        color: (theme) => theme.palette.grey[500],
-      }}
-    >
-      <CloseIcon />
-    </IconButton>
-  </DialogTitle>
-  {selectedAcara && (
-    <DialogContent
-      dividers
-      sx={{
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '14px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        position: 'relative', // Set position relative for absolute positioning inside
-      }}
-    >
-      <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
-        {selectedAcara.title}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Location: </strong>
-        {selectedAcara.location}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Time: </strong>
-        {selectedAcara.time}
-      </Typography>
-      <Typography variant="body1" sx={{ mt: 1 }}>
-        <strong>Description: </strong>
-        {selectedAcara.description}
-      </Typography>
-      <Box
+        open={open}
+        onClose={handleClose}
         sx={{
-          position: 'absolute', // Position absolute to align it at the bottom right
-          bottom: 16,
-          right: 16,
+          '& .MuiDialog-paper': {
+            width: '450px',
+            height: '350px',
+            borderRadius: '16px',
+          },
         }}
       >
-        <Typography variant="body1">
-          <strong>Dresscode: </strong>
-          {selectedAcara.dresscode}
-        </Typography>
-      </Box>
-    </DialogContent>
-  )}
-</Dialog>
-
+        <DialogTitle
+          sx={{
+            m: 0,
+            p: 2,
+            fontFamily: 'Arial, sans-serif',
+            fontWeight: 'bold',
+            fontSize: '24px',
+            borderBottom: '1px solid #ddd',
+            textAlign: 'center',
+          }}
+        >
+          Detail Acara
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        {selectedAcara && (
+          <DialogContent
+            dividers
+            sx={{
+              fontFamily: 'Arial, sans-serif',
+              fontSize: '14px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              position: 'relative', // Set position relative for absolute positioning inside
+            }}
+          >
+            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+              {selectedAcara.title}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Location: </strong>
+              {selectedAcara.location}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Time: </strong>
+              {selectedAcara.time}
+            </Typography>
+            <Typography variant="body1" sx={{ mt: 1 }}>
+              <strong>Description: </strong>
+              {selectedAcara.description}
+            </Typography>
+            <Box
+              sx={{
+                position: 'absolute', // Position absolute to align it at the bottom right
+                bottom: 16,
+                right: 16,
+              }}
+            >
+              <Typography variant="body1">
+                <strong>Dresscode: </strong>
+                {selectedAcara.dresscode}
+              </Typography>
+            </Box>
+          </DialogContent>
+        )}
+      </Dialog>
     </Box>
   );
 };
