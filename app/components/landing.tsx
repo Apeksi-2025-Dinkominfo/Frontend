@@ -34,6 +34,7 @@ export default function LandingPage() {
         >
           Daftar disini!
         </button>
+
       </div>
     </div>
   );
