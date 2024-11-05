@@ -1,18 +1,46 @@
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 import Image from 'next/image';
-<<<<<<< HEAD
 import logoNew from '../../public/logoNew.png';
-=======
-import apeksiLogo from '../../public/logoNew.png'; // Pastikan path ke gambar benar
->>>>>>> e8aeeea119efaeda585e8b1dfaaca9e9aa0afd30
+
+const dataSejarah = [
+  { 
+    tahun: "13 - 24 Juni 2000",
+    deskripsi: "Rapat Panitia Kerja Walikota menyusun proposal yang diserahkan pada pertemuan para Walikota yang diselenggarakan pada akhir Juni.",
+  },
+  {
+    tahun: "22 - 23 Juni 2000",
+    deskripsi: "Munas I di Surabaya, menetapkan AD/ART Apeksi. Wali Kota Surabaya, Sunarto Sumoprawiro, terpilih sebagai Ketua Dewan Pengurus pertama.",
+  },
+  // Tambahkan data lainnya...
+];
 
 export default function CardSejarah() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : dataSejarah.length - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex < dataSejarah.length - 1 ? prevIndex + 1 : 0));
+  };
+
   return (
-    <div className="flex justify-center mt-10 px-4 md:px-10 lg:px-20">
-      {/* Card Sejarah dengan Bentuk Huruf "L" */}
+    <div className="flex justify-center mt-10 px-4 md:px-10 lg:px-20 relative">
+      {/* Button Kiri */}
+      <button
+        onClick={handlePrevious}
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white p-3 rounded-full shadow-md hover:bg-blue-600"
+      >
+        &lt;
+      </button>
+
+      {/* Card Sejarah */}
       <div className="relative bg-gradient-to-br from-[#78B7D0] to-[#4A90E2] text-white p-10 rounded-3xl shadow-2xl w-full lg:w-3/4 xl:w-2/3 min-h-[450px] flex flex-col items-start">
         
-        {/* Logo di Kanan Atas yang Menyatu dengan Card */}
+        {/* Logo */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden">
           <Image
             src={logoNew}
@@ -23,52 +51,15 @@ export default function CardSejarah() {
           />
         </div>
 
-        {/* Judul dan Garis Pembatas */}
+        {/* Konten Sejarah */}
         <h2 className="text-3xl font-bold mb-4 text-left leading-tight z-10">
-          Sejarah Asosiasi Pemerintah <br /> Kota Seluruh Indonesia
+          {dataSejarah[currentIndex].tahun}
         </h2>
-        <div className="w-16 h-1 bg-white my-2 rounded-full z-10"></div>
+        <p className="text-sm md:text-base text-left z-10">
+          {dataSejarah[currentIndex].deskripsi}
+        </p>
 
-        {/* Konten dalam Bentuk "L" */}
-        <div className="flex flex-col md:flex-row z-10">
-          
-          {/* Kolom Kiri (Bagian Vertikal dari "L") */}
-          <ul className="space-y-4 text-sm md:text-base text-left w-full md:w-1/2 list-disc list-inside pr-4 md:pr-8">
-            <li>
-              <strong>13 - 24 Juni 2000</strong>: Rapat Panitia Kerja Walikota menyusun proposal yang diserahkan pada pertemuan para Walikota yang diselenggarakan pada akhir Juni.
-            </li>
-            <li>
-              <strong>22 - 23 Juni 2000</strong>: Munas I di Surabaya, menetapkan AD/ART Apeksi. Wali Kota Surabaya, Sunarto Sumoprawiro, terpilih sebagai Ketua Dewan Pengurus pertama.
-            </li>
-            <li>
-              <strong>31 Juli - 1 Agustus 2000</strong>: Munas II di Surabaya memilih Wali Kota Tarakan, Jusuf Serang Kasim, sebagai Ketua Dewan Pengurus periode 2004 - 2008.
-            </li>
-            <li>
-              <strong>22 - 24 Juli 2008</strong>: Munas III di Surakarta memilih Wali Kota Palembang, Eddy Santana Putra, sebagai Ketua Dewan Pengurus periode 2008 - 2012.
-            </li>
-          </ul>
-
-          {/* Kolom Kanan (Bagian Horizontal dari "L") */}
-          <ul className="space-y-4 text-sm md:text-base text-left w-full md:w-1/2 list-disc list-inside mt-4 md:mt-0 md:pl-8">
-            <li>
-              <strong>30 Mei - 2 Juni 2012</strong>: Munas IV di Manado memilih Wali Kota Manado, GS Vicky Lumentut, untuk periode 2012 - 2016.
-            </li>
-            <li>
-              <strong>26 - 28 Juli 2016</strong>: Munas V di Jambi menunjuk Wali Kota Tangerang Selatan, Airin Rachmi Diany, sebagai Ketua Dewan Pengurus 2016 - 2020.
-            </li>
-            <li>
-              <strong>11 Februari 2021</strong>: Munas VI di Jakarta memilih Wali Kota Bogor, Bima Arya Sugiarto, sebagai Ketua Dewan Pengurus 2021 - 2024.
-            </li>
-            <li>
-              <strong>14 - 15 Desember 2023</strong>: Munaslub VII di Bogor memilih Wali Kota Surabaya, Eri Cahyadi, sebagai Ketua Dewan Pengurus untuk 2023 - 2025.
-            </li>
-            <li>
-              <strong>2025</strong>: Munas VIII akan diadakan di Kota Surabaya.
-            </li>
-          </ul>
-        </div>
-
-        {/* Sumber dengan Animasi Hover */}
+        {/* Sumber */}
         <div className="mt-8 w-full text-center md:text-left z-10">
           <a
             href="https://apeksi.id/profil/"
@@ -78,6 +69,14 @@ export default function CardSejarah() {
           </a>
         </div>
       </div>
+
+      {/* Button Kanan */}
+      <button
+        onClick={handleNext}
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white p-3 rounded-full shadow-md hover:bg-blue-600"
+      >
+        &gt;
+      </button>
     </div>
   );
 }
