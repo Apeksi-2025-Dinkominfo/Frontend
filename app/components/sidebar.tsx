@@ -1,119 +1,142 @@
+import React from 'react';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Divider,
+  Toolbar,
+  Box,
+  Typography,
+} from '@mui/material';
+import { Menu } from '@mui/icons-material';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
+import Image from 'next/image';
 
-interface SidebarProps {
-  activeButton: number;
-  onButtonClick: (id: number) => void;
-}
+const drawerWidth = 240;
 
-const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
-  const [isOpen, setIsOpen] = useState(false);
+function Sidebar() {
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [activePath, setActivePath] = React.useState('/admin'); // default path
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  const handleDrawerToggle = () => {
+    setOpen(!open);
   };
 
-  const handleItemClick = (id: number) => {
-    onButtonClick(id);
-    setIsOpen(false); // Close the sidebar when an item is clicked
-  };
+  const menuItems = [
+    { text: 'Add Gallery', path: '/admin/addgaleri' },
+    { text: 'Add News', path: '/admin/addnews' },
+    { text: 'Data Registration', path: '/admin/dataregistrasi' },
+    { text: 'Admin', path: '/admin' },
+  ];
 
-  return (
-    <div className="flex">
-      {/* Button to toggle sidebar on mobile */}
-      <IconButton
-        onClick={toggleSidebar}
-        className="md:hidden text-white fixed top-4 left-4 z-50"
-        aria-label="Toggle Sidebar"
+  const drawerContent = (
+    <div>
+      <Toolbar
+        sx={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          backgroundColor: '#252525',
+          color: 'white',
+        }}
       >
-        <MenuIcon />
-      </IconButton>
+        <Box sx={{ mb: 2 }}>
+          <Image src="/logoNew.png" alt="Logo" width={60} height={60} />
+        </Box>
+        <Typography variant="h6" component="div" sx={{ textAlign: 'center' }}>
+          Admin Page Munas 2025
+        </Typography>
+      </Toolbar>
 
-      {/* Sidebar */}
-      <div
-        className={`bg-gray-800 text-white fixed top-0 left-0 h-screen w-64 md:block transition-transform transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0`}
-        style={{ maxHeight: 'calc(100vh - 100px)' }} // Adjust to prevent overflow beyond header/footer
-      >
-        {/* Close Button for Sidebar */}
-        <IconButton
-          onClick={toggleSidebar}
-          className="md:hidden text-white mb-4"
-          aria-label="Close Sidebar"
-        >
-          <CloseIcon />
-        </IconButton>
-
-        <h2 className="text-lg font-bold mt-20 px-4">MANAGEMENT MUNAS</h2>
-        <ul className="space-y-4 px-4">
-          <li>
-            <Link href="/admin">
-              <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
-                  activeButton === 1
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-                onClick={() => handleItemClick(1)}
-              >
-                Dashboard
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/dataregistrasi">
-              <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
-                  activeButton === 2
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-                onClick={() => handleItemClick(2)}
-              >
-                Data Registrasi
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/addnews">
-              <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
-                  activeButton === 3
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-                onClick={() => handleItemClick(3)}
-              >
-                Add News
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/addgaleri">
-              <div
-                className={`sidebar-link px-4 py-2 rounded cursor-pointer ${
-                  activeButton === 4
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-                onClick={() => handleItemClick(4)}
-              >
-                Add Gallery
-              </div>
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      {/* Main Content Area */}
-      <div className="flex-1 md:ml-64">
-        {/* Your main content goes here */}
-      </div>
+      <Divider sx={{ backgroundColor: 'white' }} />
+      <List>
+        {menuItems.map((item, index) => (
+          <ListItem
+            component={Link}
+            href={item.path}
+            key={index}
+            onClick={() => setActivePath(item.path)}
+            sx={{
+              backgroundColor: activePath === item.path ? 'blue' : '#252525',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: activePath === item.path ? 'blue' : 'rgba(255, 255, 255, 0.2)',
+              },
+            }}
+          >
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
-};
+
+  React.useEffect(() => {
+    setOpen(isMobile ? false : true);
+  }, [isMobile]);
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      {isMobile && (
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{
+            position: 'fixed',
+            top: 16,
+            left: 16,
+            zIndex: theme.zIndex.drawer + 1,
+          }}
+        >
+          <Menu />
+        </IconButton>
+      )}
+
+      <Drawer
+        variant={isMobile ? 'temporary' : 'persistent'}
+        open={isMobile ? open : true}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+            backgroundColor: '#252525',
+            color: 'white',
+          },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: '100%',
+          transition: 'margin 0.3s',
+          marginLeft: isMobile && open ? `${drawerWidth}px` : '0',
+        }}
+        aria-hidden={isMobile && !open} // Use aria-hidden to hide when drawer is closed
+      >
+        <Toolbar />
+        <Box>{/* Main content goes here */}</Box>
+      </Box>
+    </Box>
+  );
+}
 
 export default Sidebar;

@@ -23,28 +23,14 @@ export default function HeritagePage() {
   // Hardcoded dummy data sesuai dengan permintaan bu novi
   const dummyData: Destination[] = [
     {
-      id: 'hc1',
-      nameIndonesia: 'Sumur Jobong',
-      address: 'Jl. Pandean Gang I',
-      descriptionIndonesia:
-        'Kawasan Peneleh adalah kawasan delta yang menjadi tujuan pemukim atau munculnya sebuah peradaban. Dalam buku Asia Maior “Soerabaia 1900-1950”, diiilustrasikan kondisi alami di kawasan Bunguran (utara Peneleh), masih berupa tanah berair dan berawa-rawa. Bisa jadi, semakin ke utara seperti di kawasan Ampel, kondisi alamnya masih semak belukar dengan lahan yang berlumpur. Tanahnya belum sepadat dan sekeras jika dibandingkan dengan di kawasan selatan (kini kawasan kelurahan Peneleh).',
-         latitude: -7.250445,
-      longitude: 112.768845,
-      touristDestinationFiles: [
-        { link: '/jobong.jpeg' },
-      ],
-    },
-    {
-      id: 'dummy2',
+      id: 'dummy1',
       nameIndonesia: 'Surabaya Kota Lama',
       address: 'Jl. Kebonrojo 10',
       descriptionIndonesia:
         'Gedung Kantor Pos Kebonrojo ini dibangun pada tahun 1926, dengan diarsiteki oleh G.P.J.M.Bolsius dari Departemen Burgerlijke Openbare Werken (BOV) Batavia. Sebelum menjadi kantor pos, gedung ini digunakan sebagai Kantor Kabupaten Surabaya sekitar tahun 1800 – 1881. Karena ini jugalah Jalan Kebonrojo dulu dikenal dengan nama Regenstraat. Dan Pada saat digunakan sebagai kantor bupati itu, gedung ini memiliki atap yang rata, tidak menjulang seperti sekarang. Setelah itu, gedung ini beralih fungsi lagi menjadi gedung HBS (Hogere Burgerschool) hingga tahun 1923, dan salah satu lulusannya yang terkenal adalah Soekarno (1915-1920). Selain Soekarno, beberapa tokoh lain yang juga bersekolah di sini adalah Hubertus Jan van Mook (1906-1913) dan Christian Eichholtz (1916-1923). HBS ini merupakan sekolah untuk anak-anak bangsa Eropa, putra bangsawan pribumi atau putra para tokoh pribumi terkemuka, dengan pengantar dalam Bahasa Belanda. Gedung ini juga sempat dipakai selama tiga tahun sebagai gedung Kepala Komisaris Surabaya (Hoofdcommissariaat van Politie) sebelum akhirnya digunakan sebagai kantor pos hingga sekarang.',
       latitude: -7.257472,
       longitude: 112.752088,
-      touristDestinationFiles: [
-        { link: '/kotalama.jpg' },
-      ],
+      touristDestinationFiles: [{ link: '/kotalama.jpg' }],
     },
     {
       id: 'dummy2',
@@ -54,13 +40,21 @@ export default function HeritagePage() {
         'Gedung Kantor Pos Kebonrojo ini dibangun pada tahun 1926, dengan diarsiteki oleh G.P.J.M.Bolsius dari Departemen Burgerlijke Openbare Werken (BOV) Batavia. Sebelum menjadi kantor pos, gedung ini digunakan sebagai Kantor Kabupaten Surabaya sekitar tahun 1800 – 1881. Karena ini jugalah Jalan Kebonrojo dulu dikenal dengan nama Regenstraat. Dan Pada saat digunakan sebagai kantor bupati itu, gedung ini memiliki atap yang rata, tidak menjulang seperti sekarang. Setelah itu, gedung ini beralih fungsi lagi menjadi gedung HBS (Hogere Burgerschool) hingga tahun 1923, dan salah satu lulusannya yang terkenal adalah Soekarno (1915-1920). Selain Soekarno, beberapa tokoh lain yang juga bersekolah di sini adalah Hubertus Jan van Mook (1906-1913) dan Christian Eichholtz (1916-1923). HBS ini merupakan sekolah untuk anak-anak bangsa Eropa, putra bangsawan pribumi atau putra para tokoh pribumi terkemuka, dengan pengantar dalam Bahasa Belanda. Gedung ini juga sempat dipakai selama tiga tahun sebagai gedung Kepala Komisaris Surabaya (Hoofdcommissariaat van Politie) sebelum akhirnya digunakan sebagai kantor pos hingga sekarang. Gedung ini pernah dikuasai Jepang pada pasa pendudukan Jepang, tapi berhasil direbut kembali oleh para pegawai pos pribumi sekitar Oktober 1945.',
       latitude: -7.257472,
       longitude: 112.752088,
-      touristDestinationFiles: [
-        { link: '/tunjungan.jpg' },
-      ],
+      touristDestinationFiles: [{ link: '/tunjungan.jpg' }],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy3',
+      nameIndonesia: 'Sumur Jobong',
+      address: 'Jl. Pandean Gang I',
+      descriptionIndonesia:
+        'Kawasan Peneleh adalah kawasan delta yang menjadi tujuan pemukim atau munculnya sebuah peradaban. Dalam buku Asia Maior “Soerabaia 1900-1950”, diiilustrasikan kondisi alami di kawasan Bunguran (utara Peneleh), masih berupa tanah berair dan berawa-rawa. Bisa jadi, semakin ke utara seperti di kawasan Ampel, kondisi alamnya masih semak belukar dengan lahan yang berlumpur. Tanahnya belum sepadat dan sekeras jika dibandingkan dengan di kawasan selatan (kini kawasan kelurahan Peneleh).',
+      latitude: -7.250445,
+      longitude: 112.768845,
+      touristDestinationFiles: [{ link: '/jobong.jpeg' }],
+    },
+    {
+      id: 'dummy4',
+      nameIndonesia: 'Kampung lawang seketeng',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -71,8 +65,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy5',
+      nameIndonesia: 'Museum resolusi jihad',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -83,8 +77,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy6',
+      nameIndonesia: 'Pos Bloc Surabaya',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -95,8 +89,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy7',
+      nameIndonesia: 'Perkumpulan Hwie Tiauw Ka',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -107,8 +101,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy8',
+      nameIndonesia: 'Rumah Abu Keluarga Tjoa',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -119,8 +113,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy9',
+      nameIndonesia: 'Rumah Abu Keluarga The',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -131,8 +125,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy10',
+      nameIndonesia: 'Siropen',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -143,8 +137,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy11',
+      nameIndonesia: 'Panti Asuhan Don Bosco',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -155,8 +149,8 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy2',
-      nameIndonesia: 'Museum Dummy',
+      id: 'dummy12',
+      nameIndonesia: 'Rumah Sakit Darmo',
       address: 'Dummy Address 2',
       descriptionIndonesia:
         'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
@@ -166,7 +160,30 @@ export default function HeritagePage() {
         { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
       ],
     },
-
+    {
+      id: 'dummy12',
+      nameIndonesia: 'Perpustakaan Bank Indonesia',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
+    {
+      id: 'dummy12',
+      nameIndonesia: 'Makam Sunan Bungkul',
+      address: 'Dummy Address 2',
+      descriptionIndonesia:
+        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
+      latitude: -7.257472,
+      longitude: 112.752088,
+      touristDestinationFiles: [
+        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -193,12 +210,12 @@ export default function HeritagePage() {
     '2f668034-b1b0-4080-babd-5e4ca645e08b',
     '414091ab-91d1-4caf-8dba-a24ed80da50c',
     '9a4d9d24-a158-4833-9101-db16fe96fd34',
-    "9a4d22bd-b0ca-4abc-b842-776221f14a63",
-    "9a4d2b70-54e9-4491-8234-d2cc5f679c23",
+    '9a4d22bd-b0ca-4abc-b842-776221f14a63',
+    '9a4d2b70-54e9-4491-8234-d2cc5f679c23',
     '9a4d956a-5259-43e0-b9d9-b4a98e606e2e',
     '7472bf3e-dcc4-40d1-b682-6ca76d3b7bc0',
     '6c3365ff-3fbb-40a5-b27f-1bfb5f8dc369',
-    "999e0bc2-82db-42a7-a23a-068eac19b074",
+    '999e0bc2-82db-42a7-a23a-068eac19b074',
     '9bf9c9fe-51a6-4b0b-97aa-9c8ce15074a5',
     '9d27647f-7c93-4f5c-a03b-2c3466016141',
     '9d27a64c-644e-419d-9b33-c83c7c180cd1',
@@ -247,151 +264,175 @@ export default function HeritagePage() {
     const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
     window.open(url, '_blank');
   };
+  const customLinks: { [key: string]: string } = {
+    dummy1: 'https://example.com/sumur-jobong',
+    '2e98ebf4-b47c-422e-8c46-ad0d3914f181':
+      'https://tourism.surabaya.go.id/destination/2e98ebf4-b47c-422e-8c46-ad0d3914f181',
+    dummy2:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy3:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy4:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy5:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy6:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy7:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy8:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy9:
+      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+    dummy10:
+      'https://tourism.surabaya.go.id/destination/76a5a601-ba12-4567-bda1-83d102e7875c',
+    dummy11:
+      'https://tourism.surabaya.go.id/destination/803c25fe-e528-4f87-9482-50ec9d02ec2f',
+    dummy12:
+      'https://tourism.surabaya.go.id/destination/fd8f975b-1c7e-4687-a281-1895c8587a17',
+  };
 
- //TODO: Custom links untuk tiap id yang di sambungkan dengan tourism, link tourism nya harus yang detail
-const customLinks: { [key: string]: string } = {
-  'hc1': 'https://example.com/sumur-jobong',
-  '2e98ebf4-b47c-422e-8c46-ad0d3914f181':'https://tourism.surabaya.go.id/destination/2e98ebf4-b47c-422e-8c46-ad0d3914f181',
-  'dummy2':'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
-};
-
-return (
-  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-    <Box
-      mb={4}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      position="relative"
-    >
-      {filteredDestinations.length > 0 && (
-        <>
-          <img
-            src={
-              filteredDestinations[currentIndex].touristDestinationFiles[0].link
-            }
-            alt={filteredDestinations[currentIndex].nameIndonesia}
-            style={{
-              width: '100%',
-              height: '500px',
-              objectFit: 'cover',
-              borderRadius: '8px',
-            }}
-          />
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            position="absolute"
-            left="20px"
-            bottom="20px"
-            width="auto"
-          >
-            <Button
-              onClick={() =>
-                setCurrentIndex((prevIndex) =>
-                  prevIndex === 0
-                    ? filteredDestinations.length - 1
-                    : prevIndex - 1
-                )
+  return (
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Box
+        mb={4}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        position="relative"
+      >
+        {filteredDestinations.length > 0 && (
+          <>
+            <img
+              src={
+                filteredDestinations[currentIndex].touristDestinationFiles[0]
+                  .link
               }
-              variant="outlined"
+              alt={filteredDestinations[currentIndex].nameIndonesia}
               style={{
-                borderRadius: '50%',
-                minWidth: '40px',
-                minHeight: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0',
-                borderColor: 'white',
-                color: 'white',
+                width: '100%',
+                height: '500px',
+                objectFit: 'cover',
+                borderRadius: '8px',
               }}
+            />
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              position="absolute"
+              left="20px"
+              bottom="20px"
+              width="auto"
             >
-              <span style={{ fontSize: '20px', lineHeight: '0' }}>&lt;</span>
-            </Button>
-            <Button
-              onClick={() =>
-                setCurrentIndex((prevIndex) =>
-                  prevIndex === filteredDestinations.length - 1
-                    ? 0
-                    : prevIndex + 1
-                )
-              }
-              variant="outlined"
-              style={{
-                borderRadius: '50%',
-                minWidth: '40px',
-                minHeight: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0',
-                borderColor: 'white',
-                color: 'white',
-                marginLeft: '10px',
-              }}
-            >
-              <span style={{ fontSize: '20px', lineHeight: '0' }}>&gt;</span>
-            </Button>
-          </Box>
-        </>
-      )}
-    </Box>
-
-    <Grid container spacing={4}>
-      {filteredDestinations.map((destination) => (
-        <Grid item xs={12} sm={6} md={4} key={destination.id}>
-          <div
-            className="bg-[#add8e6] rounded-lg shadow-md p-4 flex flex-col justify-between h-full cursor-pointer"
-            onClick={() =>
-              customLinks[destination.id]
-                ? window.open(customLinks[destination.id], '_blank')
-                : openLocationInMaps(destination.latitude, destination.longitude)
-            }
-          >
-            {destination.touristDestinationFiles.length > 0 && (
-              <img
-                src={destination.touristDestinationFiles[0].link}
-                alt={destination.nameIndonesia}
-                className="w-full h-56 object-cover rounded-t-lg"
-                style={{ maxHeight: '200px', objectFit: 'cover' }}
-              />
-            )}
-            <div
-              className="p-4"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <h2 className="text-lg font-semibold">
-                  {destination.nameIndonesia}
-                </h2>
-                <p className="text-sm">{destination.address}</p>
-                <p className="text-sm">
-                  {truncateDescription(destination.descriptionIndonesia)}
-                </p>
-              </div>
               <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openLocationInMaps(
-                    destination.latitude,
-                    destination.longitude
-                  );
+                onClick={() =>
+                  setCurrentIndex((prevIndex) =>
+                    prevIndex === 0
+                      ? filteredDestinations.length - 1
+                      : prevIndex - 1
+                  )
+                }
+                variant="outlined"
+                style={{
+                  borderRadius: '50%',
+                  minWidth: '40px',
+                  minHeight: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0',
+                  borderColor: 'white',
+                  color: 'white',
                 }}
-                variant="contained"
-                style={{ marginTop: '10px', backgroundColor: '#008080' }}
               >
-                Buka di Google Maps
+                <span style={{ fontSize: '20px', lineHeight: '0' }}>&lt;</span>
               </Button>
+              <Button
+                onClick={() =>
+                  setCurrentIndex((prevIndex) =>
+                    prevIndex === filteredDestinations.length - 1
+                      ? 0
+                      : prevIndex + 1
+                  )
+                }
+                variant="outlined"
+                style={{
+                  borderRadius: '50%',
+                  minWidth: '40px',
+                  minHeight: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0',
+                  borderColor: 'white',
+                  color: 'white',
+                  marginLeft: '10px',
+                }}
+              >
+                <span style={{ fontSize: '20px', lineHeight: '0' }}>&gt;</span>
+              </Button>
+            </Box>
+          </>
+        )}
+      </Box>
+
+      <Grid container spacing={4}>
+        {filteredDestinations.map((destination) => (
+          <Grid item xs={12} sm={6} md={4} key={destination.id}>
+            <div
+              className="bg-[#add8e6] rounded-lg shadow-md p-4 flex flex-col justify-between h-full cursor-pointer"
+              onClick={() =>
+                customLinks[destination.id]
+                  ? window.open(customLinks[destination.id], '_blank')
+                  : openLocationInMaps(
+                      destination.latitude,
+                      destination.longitude
+                    )
+              }
+            >
+              {destination.touristDestinationFiles.length > 0 && (
+                <img
+                  src={destination.touristDestinationFiles[0].link}
+                  alt={destination.nameIndonesia}
+                  className="w-full h-56 object-cover rounded-t-lg"
+                  style={{ maxHeight: '200px', objectFit: 'cover' }}
+                />
+              )}
+              <div
+                className="p-4"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div>
+                  <h2 className="text-lg font-semibold">
+                    {destination.nameIndonesia}
+                  </h2>
+                  <p className="text-sm">{destination.address}</p>
+                  <p className="text-sm">
+                    {truncateDescription(destination.descriptionIndonesia)}
+                  </p>
+                </div>
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openLocationInMaps(
+                      destination.latitude,
+                      destination.longitude
+                    );
+                  }}
+                  variant="contained"
+                  style={{ marginTop: '10px', backgroundColor: '#008080' }}
+                >
+                  Buka di Google Maps
+                </Button>
+              </div>
             </div>
-          </div>
-        </Grid>
-      ))}
-    </Grid>
-  </Container>
-);
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+  );
 }

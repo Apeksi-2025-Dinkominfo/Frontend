@@ -1,6 +1,7 @@
-"use client"; // This will make the entire file a Client Component
+"use client";
 
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { SpeedDial, SpeedDialAction } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
@@ -9,143 +10,190 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import Sidebar from '../../components/sidebar';
 
 interface Story {
-    no: number;
-    title: string;
-    writers: string;
+    id: number;
+    tittle: string;
+    location: string;
     date: string;
-    image: string;
+    body: string;
+    images: string;
 }
 
-const StoryTable: React.FC<{ stories: Story[], onDelete: (no: number) => void; onEdit: (story: Story) => void }> = ({ stories, onDelete, onEdit }) => {
+const truncateText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+};
+
+const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+const StoryTable: React.FC<{ stories: Story[], onDelete: (id: number) => void; onEdit: (story: Story) => void }> = ({ stories, onDelete, onEdit }) => {
     return (
-        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead>
-                <tr className="bg-gray-200 text-left">
-                    <th className="py-3 px-4 font-semibold text-sm">No</th>
-                    <th className="py-3 px-4 font-semibold text-sm">Title</th>
-                    <th className="py-3 px-4 font-semibold text-sm">Writers</th>
-                    <th className="py-3 px-4 font-semibold text-sm">Date</th>
-                    <th className="py-3 px-4 font-semibold text-sm">Image</th>
-                    <th className="py-3 px-4 font-semibold text-sm">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {stories.map((story) => (
-                    <tr key={story.no} className="border-b border-gray-200">
-                        <td className="py-3 px-4">{story.no}</td>
-                        <td className="py-3 px-4">{story.title}</td>
-                        <td className="py-3 px-4">{story.writers}</td>
-                        <td className="py-3 px-4">{story.date}</td>
-                        <td className="py-3 px-4">
-                            <img src={story.image} alt={story.title} className="w-12 h-auto" />
-                        </td>
-                        <td className="py-3 px-4">
-                            <button
-                                className="bg-blue-500 text-white px-4 py-1 rounded mr-2 hover:bg-blue-600"
-                                onClick={() => onEdit(story)}
-                            >
-                                Edit
-                            </button>
-                            <button
-                                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-                                onClick={() => onDelete(story.no)}
-                            >
-                                Delete
-                            </button>
-                        </td>
+        <div className="overflow-x-auto">
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr className="bg-gray-200 text-left">
+                        <th className="py-3 px-4 font-semibold text-sm">No</th>
+                        <th className="py-3 px-4 font-semibold text-sm">Title</th>
+                        <th className="py-3 px-4 font-semibold text-sm">Location</th>
+                        <th className="py-3 px-4 font-semibold text-sm">Date</th>
+                        <th className="py-3 px-4 font-semibold text-sm">Body</th>
+                        <th className="py-3 px-4 font-semibold text-sm">Image</th>
+                        <th className="py-3 px-4 font-semibold text-sm">Actions</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {stories.map((story, index) => (
+                        <tr key={story.id} className="border-b border-gray-200">
+                            <td className="py-3 px-4">{index + 1}</td>
+                            <td className="py-3 px-4">{story.tittle}</td>
+                            <td className="py-3 px-4">{story.location}</td>
+                            <td className="py-3 px-4">{formatDate(story.date)}</td> {/* Format the date here */}
+                            <td className="py-3 px-4">{truncateText(story.body, 100)}</td>
+                            <td className="py-3 px-4">
+                                <img src={story.images} alt={story.tittle} className="w-12 h-auto" />
+                            </td>
+                            <td className="py-3 px-4">
+                                <button
+                                    className="bg-blue-500 text-white px-4 py-1 rounded mr-2 hover:bg-blue-600"
+                                    onClick={() => onEdit(story)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+                                    onClick={() => onDelete(story.id)}
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
-// Main Component (Page)
 const StoryManagementPage: React.FC = () => {
-    const [openSpeedDial, setOpenSpeedDial] = useState(false);
     const [stories, setStories] = useState<Story[]>([]);
     const [openDialog, setOpenDialog] = useState(false);
-    const [newStory, setNewStory] = useState<Omit<Story, 'no'>>({ title: '', writers: '', date: '', image: '' });
-    const [nextNo, setNextNo] = useState(1);
-    const [editStoryNo, setEditStoryNo] = useState<number | null>(null);
-    const [activeButton, setActiveButton] = useState<number>(0); // Ubah default ke 0
+    const [newStory, setNewStory] = useState<Omit<Story, 'id'>>({ tittle: '', location: '', date: '', body: '', images: '' });
+    const [editStoryId, setEditStoryId] = useState<number | null>(null);
 
-    const handleDelete = (no: number) => {
-        setStories(stories.filter(story => story.no !== no));
-        console.log(`Deleted story with No: ${no}`);
+    useEffect(() => {
+        fetchStories();
+    }, []);
+
+    const fetchStories = async () => {
+        const response = await fetch('http://localhost:5000/news');
+        const data = await response.json();
+        setStories(data);
     };
 
     const handleAddStory = () => {
         setOpenDialog(true);
-        setEditStoryNo(null);
-        setNewStory({ title: '', writers: '', date: '', image: '' });
+        setEditStoryId(null);
+        setNewStory({ tittle: '', location: '', date: '', body: '', images: '' });
     };
 
-    const handleSaveStory = () => {
-        if (editStoryNo !== null) {
-            setStories(stories.map(story => (story.no === editStoryNo ? { ...story, ...newStory } : story)));
-        } else {
-            const storyToAdd = { no: nextNo, ...newStory };
-            setStories([...stories, storyToAdd]);
-            setNextNo(nextNo + 1);
+    const handleEdit = (story: Story) => {
+        setNewStory({ tittle: story.tittle, location: story.location, date: story.date, body: story.body, images: story.images });
+        setEditStoryId(story.id);
+        setOpenDialog(true);
+    };
+
+
+    
+    
+    const handleSaveStory = async () => {
+        const formData = new FormData();
+        formData.append('tittle', newStory.tittle);
+        formData.append('location', newStory.location);
+        
+        // Ensure the date is formatted to ISO-8601
+        const formattedDate = new Date(newStory.date).toISOString(); // Format date
+        formData.append('date', formattedDate);
+        
+        formData.append('body', newStory.body);
+    
+        // Only append the image file if it exists
+        if (newStory.images) {
+            formData.append('images', newStory.images);
         }
-        setOpenDialog(false);
+    
+        try {
+            let response;
+            if (editStoryId !== null) {
+                response = await fetch(`http://localhost:5000/news/${editStoryId}`, {
+                    method: 'PATCH',
+                    body: formData,
+                });
+            } else {
+                response = await fetch('http://localhost:5000/news', {
+                    method: 'POST',
+                    body: formData,
+                });
+            }
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error:", errorData);
+                alert("Failed to save story. Check the console for more details.");
+                return;
+            }
+    
+            fetchStories(); // Refresh the story list
+            setOpenDialog(false); // Close dialog after successful creation
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please check your server connection.");
+        }
+    };
+    
+    
+    
+
+    const handleDelete = async (id: number) => {
+        await fetch(`http://localhost:5000/news/${id}`, { method: 'DELETE' });
+        fetchStories();
     };
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setNewStory({ ...newStory, image: reader.result as string });
-            };
-            reader.readAsDataURL(file);
+            // Create a URL for the file
+            const fileUrl = URL.createObjectURL(file);
+            setNewStory({ ...newStory, images: fileUrl }); // Save the URL string
         }
     };
-
-    const handleEdit = (story: Story) => {
-        setNewStory({ title: story.title, writers: story.writers, date: story.date, image: story.image });
-        setEditStoryNo(story.no);
-        setOpenDialog(true);
-    };
+    
 
     return (
-        <div className="flex h-screen">
-            <Sidebar activeButton={activeButton} onButtonClick={setActiveButton} />
-            <div className="flex-1 p-2 ml-1">
+        <div className="flex h-screen flex-col md:flex-row">
+            <div className="flex-1 p-2 ml-1 overflow-y-auto">
                 <h1 className="text-2xl font-bold mb-6">News</h1>
-                <div className="mb-6">
-                    <input
-                        type="text"
-                        placeholder="Search by Writers/Title"
-                        className="w-full border p-2 rounded-lg"
-                    />
-                </div>
                 <StoryTable stories={stories} onDelete={handleDelete} onEdit={handleEdit} />
 
                 {/* Speed Dial for adding new story */}
-                <SpeedDial
-                    ariaLabel="Add Actions"
-                    sx={{ position: 'fixed', bottom: 16, right: 16 }}
-                    icon={<AddIcon />}
-                    onClose={() => setOpenSpeedDial(false)}
-                    onOpen={() => setOpenSpeedDial(true)}
-                    open={openSpeedDial}
-                >
-                    <SpeedDialAction
-                        key="addNews"
+                <div className="fixed bottom-16 right-16">
+                    <SpeedDial
+                        ariaLabel="Add Actions"
                         icon={<AddIcon />}
-                        tooltipTitle="Add News"
                         onClick={handleAddStory}
-                    />
-                </SpeedDial>
+                    >
+                        <SpeedDialAction
+                            icon={<AddIcon />}
+                            tooltipTitle="Add News"
+                        />
+                    </SpeedDial>
+                </div>
 
                 {/* Dialog for adding/editing story */}
                 <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-                    <DialogTitle>{editStoryNo !== null ? 'Edit Story' : 'Add New Story'}</DialogTitle>
+                    <DialogTitle>{editStoryId !== null ? 'Edit Story' : 'Add New Story'}</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
@@ -153,16 +201,16 @@ const StoryManagementPage: React.FC = () => {
                             label="Title"
                             fullWidth
                             variant="outlined"
-                            value={newStory.title}
-                            onChange={(e) => setNewStory({ ...newStory, title: e.target.value })}
+                            value={newStory.tittle}
+                            onChange={(e) => setNewStory({ ...newStory, tittle: e.target.value })}
                         />
                         <TextField
                             margin="dense"
-                            label="Writers"
+                            label="Location"
                             fullWidth
                             variant="outlined"
-                            value={newStory.writers}
-                            onChange={(e) => setNewStory({ ...newStory, writers: e.target.value })}
+                            value={newStory.location}
+                            onChange={(e) => setNewStory({ ...newStory, location: e.target.value })}
                         />
                         <TextField
                             margin="dense"
@@ -173,8 +221,18 @@ const StoryManagementPage: React.FC = () => {
                             value={newStory.date}
                             onChange={(e) => setNewStory({ ...newStory, date: e.target.value })}
                         />
-                        {newStory.image && (
-                            <img src={newStory.image} alt="Preview" className="w-full mt-4" />
+                        <TextField
+                            margin="dense"
+                            label="Body"
+                            fullWidth
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                            value={newStory.body}
+                            onChange={(e) => setNewStory({ ...newStory, body: e.target.value })}
+                        />
+                        {newStory.images && (
+                            <img src={newStory.images} alt="Preview" className="w-full mt-4" />
                         )}
                         <input
                             type="file"
@@ -185,7 +243,7 @@ const StoryManagementPage: React.FC = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-                        <Button onClick={handleSaveStory}>{editStoryNo !== null ? 'Update' : 'Save'}</Button>
+                        <Button onClick={handleSaveStory}>{editStoryId !== null ? 'Update' : 'Save'}</Button>
                     </DialogActions>
                 </Dialog>
             </div>
