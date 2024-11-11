@@ -222,7 +222,7 @@ const FacilityList: React.FC = () => {
     <Container>
       <LandingPage selectedTab={selectedTab} />
       <Tabs value={selectedTab} onChange={handleTabChange} centered sx={{ marginBottom: '20px' }}>
-        <Tab label="Hospitals" value="hospitals" />
+        <Tab label="Rumah Sakit" value="hospitals" />
         <Tab label="Puskesmas" value="puskesmas" />
         <Tab label="Klinik" value="klinik" />
         <Tab label="Apotek" value="apotek" />
@@ -258,7 +258,7 @@ const LandingPage: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
     const getPageHeading = () => {
       switch (selectedTab) {
         case 'hospitals':
-          return 'Hospitals';
+          return 'Rumah Sakit';
         case 'puskesmas':
           return 'Puskesmas';
         case 'klinik':

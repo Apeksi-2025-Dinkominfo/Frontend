@@ -6,6 +6,8 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 import { Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Optd from '../../components/optdTable';
+import Pagination from '@mui/material/Pagination';
 
 interface PesertaData {
   id: number;
@@ -95,10 +97,9 @@ export default function DataRegistrasi() {
         'Tanggal Kepulangan': formatDate(item.tanggal_kepulangan),
         'Lokasi Menginap': item.lokasi_menginap,
         'Jumlah Rombongan': item.jumlah_rombongan,
-        'Transportasi': item.transportasi,
-        'Baju Wali Kota / Wakil' : item.ukuran_baju_bapak,
+        Transportasi: item.transportasi,
+        'Baju Wali Kota / Wakil': item.ukuran_baju_bapak,
         'Baju Suami / Istri Walikota': item.ukuran_baju_ibuk,
-
       }))
     );
 
@@ -262,8 +263,9 @@ export default function DataRegistrasi() {
       <Sidebar activeButton={activeButton} onButtonClick={handleSidebarClick} />
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center mb-6">
+        <h3 className='text-2xl font-semibold '>Data Walikota</h3>
           <div>
-            <h2 className="text-lg font-semibold">Search</h2>
+            <h2 className="text-lg font-semibold text-center">Search</h2>
             <input
               type="text"
               placeholder="Search by Kota/Walikota"
@@ -279,12 +281,9 @@ export default function DataRegistrasi() {
             >
               Download Excel
             </button>
-            <button className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
-              + Add Participant
-            </button>
           </div>
         </div>
-
+  
         <div className="overflow-auto">
           <table className="table-auto w-full border-collapse">
             <thead>
@@ -306,82 +305,86 @@ export default function DataRegistrasi() {
               </tr>
             </thead>
             <tbody>
-  {currentItems.map((item, index) => (
-    <tr key={item.id}>
-      <td className="border px-2 py-2 text-center">
-        {index + 1 + indexOfFirstItem}
-      </td>
-      <td className="border px-4 py-2">{item.asal_kota.replace(/_/g, ' ')}</td>
-      <td className="border px-4 py-2">{item.nama_walikota}</td>
-      <td className="border px-4 py-2">{item.nama_ajudan}</td>
-      <td className="border px-4 py-2">{item.nomor_handphone}</td>
-      <td className="border px-4 py-2">{formatDate(item.tanggal_kedatangan)}</td>
-      <td className="border px-4 py-2">{item.jam_kedatangan}</td>
-      <td className="border px-4 py-2">{formatDate(item.tanggal_kepulangan)}</td>
-      <td className="border px-4 py-2">{item.lokasi_menginap}</td>
-      <td className="border px-4 py-2 text-center">{item.jumlah_rombongan}</td>
-      <td className="border px-4 py-2">{item.transportasi}</td>
-      <td className="border px-4 py-2">{item.ukuran_baju_bapak}</td>
-      <td className="border px-4 py-2">{item.ukuran_baju_ibuk}</td>
-      <td className="border px-4 py-2">
-        <div className="flex justify-center">
-          <button
-            className={`px-2 py-1 mr-2 rounded hover:bg-blue-600 ${
-              item.updated
-                ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-blue-500 text-white'
-            }`}
-            onClick={() => !item.updated && handleUpdate(item)}
-            disabled={item.updated}
-          >
-            <Typography
-              variant="body2"
-              component="span"
-              fontWeight={item.updated ? 'normal' : 'bold'}
-            >
-              <EditIcon />
-            </Typography>
-          </button>
-          <button
-            className="px-2 py-1 rounded hover:bg-red-600 bg-red-500 text-white"
-            onClick={() => handleDelete(item.id)}
-          >
-            <Typography variant="body2" component="span" fontWeight="bold">
-              <DeleteIcon /> {/* Your delete icon component */}
-            </Typography>
-          </button>
-        </div>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+              {currentItems.map((item, index) => (
+                <tr key={item.id}>
+                  <td className="border px-2 py-2 text-center">
+                    {index + 1 + indexOfFirstItem}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {item.asal_kota.replace(/_/g, ' ')}
+                  </td>
+                  <td className="border px-4 py-2">{item.nama_walikota}</td>
+                  <td className="border px-4 py-2">{item.nama_ajudan}</td>
+                  <td className="border px-4 py-2">{item.nomor_handphone}</td>
+                  <td className="border px-4 py-2">
+                    {formatDate(item.tanggal_kedatangan)}
+                  </td>
+                  <td className="border px-4 py-2">{item.jam_kedatangan}</td>
+                  <td className="border px-4 py-2">
+                    {formatDate(item.tanggal_kepulangan)}
+                  </td>
+                  <td className="border px-4 py-2">{item.lokasi_menginap}</td>
+                  <td className="border px-4 py-2 text-center">
+                    {item.jumlah_rombongan}
+                  </td>
+                  <td className="border px-4 py-2">{item.transportasi}</td>
+                  <td className="border px-4 py-2">{item.ukuran_baju_bapak}</td>
+                  <td className="border px-4 py-2">{item.ukuran_baju_ibuk}</td>
+                  <td className="border px-4 py-2">
+                    <div className="flex justify-center">
+                      <button
+                        className={`px-2 py-1 mr-2 rounded hover:bg-blue-600 ${
+                          item.updated
+                            ? 'bg-gray-300 cursor-not-allowed'
+                            : 'bg-blue-500 text-white'
+                        }`}
+                        onClick={() => !item.updated && handleUpdate(item)}
+                        disabled={item.updated}
+                      >
+                        <Typography
+                          variant="body2"
+                          component="span"
+                          fontWeight={item.updated ? 'normal' : 'bold'}
+                        >
+                          <EditIcon />
+                        </Typography>
+                      </button>
+                      <button
+                        className="px-2 py-1 rounded hover:bg-red-600 bg-red-500 text-white"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        <Typography
+                          variant="body2"
+                          component="span"
+                          fontWeight="bold"
+                        >
+                          <DeleteIcon /> {/* Your delete icon component */}
+                        </Typography>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
 
-        {/* Pagination controls */}
-        <div className="flex justify-between items-center mt-4">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="bg-gray-300 text-gray-700 px-4 py-2 rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {pageCount}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, pageCount))
-            }
-            disabled={currentPage === pageCount}
-            className="bg-gray-300 text-gray-700 px-4 py-2 rounded disabled:opacity-50"
-          >
-            Next
-          </button>
+        <div className="flex justify-center items-center mt-4">
+          <Pagination
+            count={pageCount} // Total number of pages
+            page={currentPage} // Current page
+            onChange={(event, value) => setCurrentPage(value)} // Handle page change
+            color="primary" // Optional: change color
+            size="medium" // Optional: adjust size
+            variant="outlined" // Optional: change style
+            shape="rounded" // Optional: round pagination buttons
+          />
         </div>
       </div>
+      
+      {/* Pemanggilan komponen Optd */}
+      <Optd />
     </div>
   );
+  
 }
