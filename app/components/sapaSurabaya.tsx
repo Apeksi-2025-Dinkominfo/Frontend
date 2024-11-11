@@ -54,10 +54,6 @@ export default function CityTourComponent() {
           onMouseLeave={handleMouseLeave}
           className="relative text-9xl"
         >
-<<<<<<< HEAD
-          Muter Muter<br />
-          Suroboyo
-=======
           Ayo Jelajahi Kota <br /> Surabaya
           {isHovered && (
             <div
@@ -73,7 +69,6 @@ export default function CityTourComponent() {
               }}
             />
           )}
->>>>>>> e8aeeea119efaeda585e8b1dfaaca9e9aa0afd30
         </Typography>
       </div>
       <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
