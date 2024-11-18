@@ -1,28 +1,41 @@
 import React from 'react';
 import {
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemText,
-  IconButton,
   Divider,
   Toolbar,
   Box,
   Typography,
 } from '@mui/material';
-import { Menu } from '@mui/icons-material';
 import Link from 'next/link';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 240;
 
-function Sidebar() {
-  const [open, setOpen] = React.useState(false);
+interface SidebarProps {
+  activeButton: number;
+  onButtonClick: (buttonId: number) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ activeButton, onButtonClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [open, setOpen] = React.useState(!isMobile); // Sidebar default terbuka di layar besar
   const [activePath, setActivePath] = React.useState('/admin'); // default path
+
+  // Load active path from localStorage on mount
+  React.useEffect(() => {
+    const savedPath = localStorage.getItem('activePath');
+    if (savedPath) {
+      setActivePath(savedPath); // Load the saved path on component mount
+    }
+  }, []);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -34,6 +47,16 @@ function Sidebar() {
     { text: 'Data Registration', path: '/admin/dataregistrasi' },
     { text: 'Admin', path: '/admin' },
   ];
+
+  const handleMenuItemClick = (path: string, index: number) => {
+    setActivePath(path);
+    onButtonClick(index);
+
+    // Save the current path to localStorage
+    localStorage.setItem('activePath', path);
+
+    if (isMobile) setOpen(false); // Tutup sidebar di mobile setelah klik
+  };
 
   const drawerContent = (
     <div>
@@ -61,7 +84,7 @@ function Sidebar() {
             component={Link}
             href={item.path}
             key={index}
-            onClick={() => setActivePath(item.path)}
+            onClick={() => handleMenuItemClick(item.path, index)}
             sx={{
               backgroundColor: activePath === item.path ? 'blue' : '#252525',
               color: 'white',
@@ -77,36 +100,24 @@ function Sidebar() {
     </div>
   );
 
-  React.useEffect(() => {
-    setOpen(isMobile ? false : true);
-  }, [isMobile]);
-
   return (
     <Box sx={{ display: 'flex' }}>
+      {/* Tombol Menu di Layar Kecil */}
       {isMobile && (
         <IconButton
           color="inherit"
-          aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{
-            position: 'fixed',
-            top: 16,
-            left: 16,
-            zIndex: theme.zIndex.drawer + 1,
-          }}
+          sx={{ position: 'fixed', top: 16, left: 16, zIndex: 1300 }}
         >
-          <Menu />
+          <MenuIcon />
         </IconButton>
       )}
-
+      
       <Drawer
         variant={isMobile ? 'temporary' : 'persistent'}
-        open={isMobile ? open : true}
+        open={open}
         onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -126,17 +137,16 @@ function Sidebar() {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: '100%',
+          width: isMobile ? '100%' : `calc(100% - ${drawerWidth}px)`,
           transition: 'margin 0.3s',
-          marginLeft: isMobile && open ? `${drawerWidth}px` : '0',
+          marginLeft: open && !isMobile ? drawerWidth : 0,
         }}
-        aria-hidden={isMobile && !open} // Use aria-hidden to hide when drawer is closed
       >
         <Toolbar />
-        <Box>{/* Main content goes here */}</Box>
+        <Box>{/* Konten utama ditempatkan di sini */}</Box>
       </Box>
     </Box>
   );
-}
+};
 
 export default Sidebar;

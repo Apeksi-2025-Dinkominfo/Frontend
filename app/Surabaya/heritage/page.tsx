@@ -25,21 +25,21 @@ export default function HeritagePage() {
     {
       id: 'dummy1',
       nameIndonesia: 'Surabaya Kota Lama',
-      address: 'Jl. Kebonrojo 10',
+      address: 'jalan kalimas barat, cendrawasih, merak, krembangan timur',
       descriptionIndonesia:
-        'Gedung Kantor Pos Kebonrojo ini dibangun pada tahun 1926, dengan diarsiteki oleh G.P.J.M.Bolsius dari Departemen Burgerlijke Openbare Werken (BOV) Batavia. Sebelum menjadi kantor pos, gedung ini digunakan sebagai Kantor Kabupaten Surabaya sekitar tahun 1800 – 1881. Karena ini jugalah Jalan Kebonrojo dulu dikenal dengan nama Regenstraat. Dan Pada saat digunakan sebagai kantor bupati itu, gedung ini memiliki atap yang rata, tidak menjulang seperti sekarang. Setelah itu, gedung ini beralih fungsi lagi menjadi gedung HBS (Hogere Burgerschool) hingga tahun 1923, dan salah satu lulusannya yang terkenal adalah Soekarno (1915-1920). Selain Soekarno, beberapa tokoh lain yang juga bersekolah di sini adalah Hubertus Jan van Mook (1906-1913) dan Christian Eichholtz (1916-1923). HBS ini merupakan sekolah untuk anak-anak bangsa Eropa, putra bangsawan pribumi atau putra para tokoh pribumi terkemuka, dengan pengantar dalam Bahasa Belanda. Gedung ini juga sempat dipakai selama tiga tahun sebagai gedung Kepala Komisaris Surabaya (Hoofdcommissariaat van Politie) sebelum akhirnya digunakan sebagai kantor pos hingga sekarang.',
-      latitude: -7.257472,
-      longitude: 112.752088,
+      'Kota Lama Surabaya adalah warisan sejarah dengan daya tarik arsitektur bangunan kolonial yang megah, jalan-jalan yang sarat sejarah, dan suasana nostalgik yang kental. Berpusat di jalan Rajawali gugusan bangunan cagar budaya dalam kawasan tersebut merekam sejarah panjang perkembangan Surabaya sebagai kota sejak abad ke-17. Kawasan Kota Lama Surabaya dibagi menjadi 4 zona; Zona Eropa, Zona Pecinan, Zona Arab, dan Zona Melayu.',
+      latitude:-7.2359250783848985,
+      longitude:  112.73749143639084,
       touristDestinationFiles: [{ link: '/kotalama.jpg' }],
     },
     {
       id: 'dummy2',
       nameIndonesia: 'Tunjungan Romansa',
-      address: 'Dummy Address 2',
+      address: 'Jl.Tunjungan',
       descriptionIndonesia:
-        'Gedung Kantor Pos Kebonrojo ini dibangun pada tahun 1926, dengan diarsiteki oleh G.P.J.M.Bolsius dari Departemen Burgerlijke Openbare Werken (BOV) Batavia. Sebelum menjadi kantor pos, gedung ini digunakan sebagai Kantor Kabupaten Surabaya sekitar tahun 1800 – 1881. Karena ini jugalah Jalan Kebonrojo dulu dikenal dengan nama Regenstraat. Dan Pada saat digunakan sebagai kantor bupati itu, gedung ini memiliki atap yang rata, tidak menjulang seperti sekarang. Setelah itu, gedung ini beralih fungsi lagi menjadi gedung HBS (Hogere Burgerschool) hingga tahun 1923, dan salah satu lulusannya yang terkenal adalah Soekarno (1915-1920). Selain Soekarno, beberapa tokoh lain yang juga bersekolah di sini adalah Hubertus Jan van Mook (1906-1913) dan Christian Eichholtz (1916-1923). HBS ini merupakan sekolah untuk anak-anak bangsa Eropa, putra bangsawan pribumi atau putra para tokoh pribumi terkemuka, dengan pengantar dalam Bahasa Belanda. Gedung ini juga sempat dipakai selama tiga tahun sebagai gedung Kepala Komisaris Surabaya (Hoofdcommissariaat van Politie) sebelum akhirnya digunakan sebagai kantor pos hingga sekarang. Gedung ini pernah dikuasai Jepang pada pasa pendudukan Jepang, tapi berhasil direbut kembali oleh para pegawai pos pribumi sekitar Oktober 1945.',
-      latitude: -7.257472,
-      longitude: 112.752088,
+      'Daya tarik wisata kawasan Tunjungan sangat banyak, didominasi bangunan tua dan bangunan cagar budaya disepanjang Jalan Tunjungan. Memori bersejarah perobekan bendera Belanda menjadi bendera Merah Putih juga terjadi di salah satu hotel di jalan ini yang keberadaan hotelnya masih eksis hingga sekarang. Di tahun 1920-an Tunjungan terkenal ',
+      latitude:-7.259247055643365,
+      longitude: 112.73886940335856,
       touristDestinationFiles: [{ link: '/tunjungan.jpg' }],
     },
     {
@@ -47,21 +47,21 @@ export default function HeritagePage() {
       nameIndonesia: 'Sumur Jobong',
       address: 'Jl. Pandean Gang I',
       descriptionIndonesia:
-        'Kawasan Peneleh adalah kawasan delta yang menjadi tujuan pemukim atau munculnya sebuah peradaban. Dalam buku Asia Maior “Soerabaia 1900-1950”, diiilustrasikan kondisi alami di kawasan Bunguran (utara Peneleh), masih berupa tanah berair dan berawa-rawa. Bisa jadi, semakin ke utara seperti di kawasan Ampel, kondisi alamnya masih semak belukar dengan lahan yang berlumpur. Tanahnya belum sepadat dan sekeras jika dibandingkan dengan di kawasan selatan (kini kawasan kelurahan Peneleh).',
-      latitude: -7.250445,
-      longitude: 112.768845,
+      'Kawasan Peneleh adalah kawasan delta yang menjadi tujuan pemukim atau munculnya sebuah peradaban. Dalam buku Asia Maior “Soerabaia 1900-1950”, diiilustrasikan kondisi alami di kawasan Bunguran (utara Peneleh), masih berupa tanah berair dan berawa-rawa. Bisa jadi, semakin ke utara seperti di kawasan Ampel, kondisi alamnya masih semak belukar dengan lahan yang berlumpur. Tanahnya belum sepadat dan sekeras jika dibandingkan dengan di kawasan selatan (kini kawasan kelurahan Peneleh). Di ujung selatan kawasan delta Kalimas  inilah peradaban kuno Surabaya yang mulai bergeliat, lebih awal jika dibandingkan dengan kawasan yang kelak bernama Surabaya (1275) lalu Ngampel (1420). Penemuan arkeologi sumur Jobong di kampung Pandean menjadi pembukti adanya peradaban di delta Kalimas ini.',
+      latitude: -7.251703025960602,
+      longitude: 112.74026197355091,
       touristDestinationFiles: [{ link: '/jobong.jpeg' }],
     },
     {
       id: 'dummy4',
       nameIndonesia: 'Kampung lawang seketeng',
-      address: 'Dummy Address 2',
+      address: 'Jl. Lawang Seketeng Gg. 1, Peneleh, Kec. Genteng, Kota SBY',
       descriptionIndonesia:
-        'Deskripsi dummy untuk museum yang berlokasi di Surabaya.',
-      latitude: -7.257472,
-      longitude: 112.752088,
+        'Resmi dijadikan sebagai kampong wisata di tahun 2019 lalu, Kampung Lawang Seketeng adalah salah satu kampong tertua di Surabaya yang menyimpan berbagai sejarah. Terdapat Langgar Dukur Kayu yang dahulu tempat mengaji Presiden Soekarno saat masih kecil. Selain itu ada Terakota, Sumur Tua, Makam Mbah Pitono, Makam Mbah Dimo, Makam Syekh Zen Zaini Assegaf, Rumah Kayu, Rumah Jengki dan Rumah Puing yang menjadi pusat daya tarik wisata.',
+      latitude: -7.2504745208817285,
+      longitude:  112.74078626137934,
       touristDestinationFiles: [
-        { link: 'https://dummyimage.com/600x400/000/fff&text=Museum+Dummy' },
+        { link: '/sekoteng.jpg' },
       ],
     },
     {
@@ -161,7 +161,7 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy12',
+      id: 'dummy13',
       nameIndonesia: 'Perpustakaan Bank Indonesia',
       address: 'Dummy Address 2',
       descriptionIndonesia:
@@ -173,7 +173,7 @@ export default function HeritagePage() {
       ],
     },
     {
-      id: 'dummy12',
+      id: 'dummy14',
       nameIndonesia: 'Makam Sunan Bungkul',
       address: 'Dummy Address 2',
       descriptionIndonesia:
@@ -265,31 +265,34 @@ export default function HeritagePage() {
     window.open(url, '_blank');
   };
   const customLinks: { [key: string]: string } = {
-    dummy1: 'https://example.com/sumur-jobong',
-    '2e98ebf4-b47c-422e-8c46-ad0d3914f181':
-      'https://tourism.surabaya.go.id/destination/2e98ebf4-b47c-422e-8c46-ad0d3914f181',
+    dummy1: 
+      'https://tourism.surabaya.go.id/destination/60b51d0b-e5ae-4102-a3e4-fa781810a442',
     dummy2:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/e5291779-2864-4a01-9590-1b507ea7ed4f',
     dummy3:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/0982c216-942f-4ed6-beee-fd03c1b40ddf',
     dummy4:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/08b55ee3-e7a6-4188-995b-9ce3911160c3',
     dummy5:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/8b87356a-163d-4ada-a570-34d59eafe45b',
     dummy6:
       'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
     dummy7:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/89c0fe97-d625-4861-87da-11dfa4f4c0e3',
     dummy8:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/c9085d7a-9a9e-424e-96cc-0d7de7ee7dbd',
     dummy9:
-      'https://tourism.surabaya.go.id/destination/2d9f955b-8026-4d4d-bbf4-ff2e4e2ac44f',
+      'https://tourism.surabaya.go.id/destination/9df85020-5ab1-46e7-9bf2-7ef76c856ccd',
     dummy10:
-      'https://tourism.surabaya.go.id/destination/76a5a601-ba12-4567-bda1-83d102e7875c',
+      'https://tourism.surabaya.go.id/destination/51ea2cb1-8aeb-4a94-afd3-41434f0cfdbc',
     dummy11:
-      'https://tourism.surabaya.go.id/destination/803c25fe-e528-4f87-9482-50ec9d02ec2f',
+      'https://tourism.surabaya.go.id/destination/0edff9d2-b75e-420a-8dd4-d196e22fd236',
     dummy12:
+      'https://tourism.surabaya.go.id/destination/76a5a601-ba12-4567-bda1-83d102e7875c',
+    dummy13:
       'https://tourism.surabaya.go.id/destination/fd8f975b-1c7e-4687-a281-1895c8587a17',
+    dummy14:
+      'https://tourism.surabaya.go.id/destination/803c25fe-e528-4f87-9482-50ec9d02ec2f',
   };
 
   return (
@@ -410,7 +413,7 @@ export default function HeritagePage() {
                   <h2 className="text-lg font-semibold">
                     {destination.nameIndonesia}
                   </h2>
-                  <p className="text-sm">{destination.address}</p>
+                  <p className="text-sm italic font-medium">{destination.address}</p>
                   <p className="text-sm">
                     {truncateDescription(destination.descriptionIndonesia)}
                   </p>
