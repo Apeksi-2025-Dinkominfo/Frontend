@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import { Box, Typography, Button, Grid } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -13,6 +13,8 @@ const videos = [
   '/fix.mp4',
   '/fix.mp4',
 ];
+
+const targetDate = new Date('2025-05-05T00:00:00');
 
 const renderer: CountdownRendererFn = ({
   days,
@@ -228,39 +230,43 @@ const WalikotaVideos: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#FFDC7F',
         padding: { xs: '16px', md: '24px' },
         borderRadius: '15px',
         textAlign: 'center',
         maxWidth: '1000px',
         margin: '0 auto',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        backgroundImage: 'url("/Gembiliwonokromo3.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
       }}
-    >
-      <Typography
-        variant="h6"
+    > 
+      <Box
         sx={{
-          textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          fontSize: { xs: '14px', md: '16px' },
-          marginBottom: '20px',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent background
+          borderRadius: '10px',
+          padding: '15px',
+          display: 'inline-block',
+          mb: 4,
         }}
-        className='text-light font-medium'
       >
-      ucapan dari walikota-walikota HEBAT
-      </Typography>
-      <Typography
-        variant="h4"
-        sx={{
-          marginBottom: '24px',
-          fontSize: { xs: '20px', md: '39.8px' },
-        }}
-        className='text-body font-semibold'
-      >
-        Ucapan Dari Para Walikota Hebat
-      </Typography>
+        <Typography
+          variant="h4"
+          sx={{
+            marginBottom: '24px',
+            fontSize: { xs: '20px', md: '39.8px' },
+            color: '#1C1C1C',
+          }}
+          className='text-body font-semibold'
+        >
+          Ucapan Dari Para Walikota Hebat
+        </Typography>
+      </Box>
+
       <VideoPlayer />
-      <Countdown date={Date.now() + 1000 * 60 * 60 * 48} renderer={renderer} />
+      <Countdown date={targetDate} renderer={renderer} />
     </Box>
   );
 };

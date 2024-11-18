@@ -7,7 +7,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import Sidebar from '../../components/sidebar'; // Adjust the import path as needed
 
 interface GalleryItem {
   no: number;
@@ -77,7 +76,7 @@ const GalleryManagementPage: React.FC = () => {
 
   return (
     <div className="flex h-screen">
-      <Sidebar activeButton={activeButton} onButtonClick={setActiveButton} />
+      
       <div className="flex-1 p-4 overflow-auto ml-16">
         <h1 className="text-2xl font-bold mb-4">Gallery</h1>
         <div className="flex space-x-2 mb-4 justify-center">

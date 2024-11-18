@@ -22,7 +22,6 @@ export default function CityTourComponent() {
     const { offsetX, offsetY } = e.nativeEvent;
     setCirclePosition({ x: offsetX - 250, y: offsetY - 500 });
   };
-  
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -39,15 +38,15 @@ export default function CityTourComponent() {
       className="flex flex-col items-center justify-center min-h-screen"
       style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
     >
-      <div className="text-center mt-4 mb-2">
-      <Typography
+      <div className="text-center mt-4 mb-0.4">
+        <Typography
           style={{
             fontWeight: 'bold',
             color: 'transparent',
             fontFamily: 'Gotham, sans-serif',
             letterSpacing: '2px',
-            WebkitTextStroke: '5px #E63946', // Set initial stroke color
-            animation: isHovered ? 'strokeAnimation 1s infinite' : 'none', // Speed up animation
+            WebkitTextStroke: '5px #E63946',
+            animation: isHovered ? 'strokeAnimation 1s infinite' : 'none',
           }}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
@@ -71,6 +70,8 @@ export default function CityTourComponent() {
           )}
         </Typography>
       </div>
+
+      {/* Carousel Section */}
       <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
@@ -106,7 +107,7 @@ export default function CityTourComponent() {
                       height: '300px',
                       cursor: 'pointer',
                       zIndex: offset === 0 ? 2 : 1,
-                      backgroundColor: 'transparent', // Set background to transparent
+                      backgroundColor: 'transparent',
                       boxShadow: 'none',
                     }}
                   >
@@ -115,8 +116,8 @@ export default function CityTourComponent() {
                       src={card.img}
                       alt="Carousel Card"
                       style={{
-                        width: '500px', // Ensures image width matches the card
-                        height: '300px', // Ensures image height matches the card
+                        width: '500px',
+                        height: '300px',
                       }}
                     />
                   </div>
@@ -170,6 +171,19 @@ export default function CityTourComponent() {
           }
         `}</style>
       </div>
+
+      {/* Batik Remo Image Section */}
+      <div
+        className="batik-remo-container flex justify-center items-center mb-5"
+        style={{
+          backgroundImage: "url('/remo21.png')",
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          width: '100%',
+          height: '200px',
+        }}
+      ></div>
     </div>
   );
 }

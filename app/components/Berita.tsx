@@ -59,7 +59,7 @@ const Berita = () => {
         sx={{ mb: 2, color: '#FFFFFF' }}
       >
         Berita APEKSI
-        </Typography>
+      </Typography>
       <Grid container spacing={4}>
         {/* Apeksi News Section (Left Side) */}
         <Grid item xs={12} md={7}>

@@ -13,6 +13,34 @@ const dataSejarah = [
     tahun: "22 - 23 Juni 2000",
     deskripsi: "Munas I di Surabaya, menetapkan AD/ART Apeksi. Wali Kota Surabaya, Sunarto Sumoprawiro, terpilih sebagai Ketua Dewan Pengurus pertama.",
   },
+  {
+    tahun: "31 Juli - 1 Agustus 2000",
+    deskripsi: "Munas II di Surabaya memutuskan Wali Kota Tarakan, Jusuf Serang Kasim, menjadi Ketua Dewan Pengurus periode 2004 - 2008 menggantikan Sunarto Sumoprawiro",
+  },
+  {
+    tahun: "22 - 24 Juli 2008",
+    deskripsi: "Munas III digelar di Surakarta dan memutuskan Wali Kota Palembang, Eddy Santana Putra, menjadi Ketua Dewan Pengurus periode 2008 - 2012",
+  },
+  {
+    tahun: "30 Mei - 2 Juni 2012",
+    deskripsi: "Munas IV digelar di Manado dan memutuskan Wali Kota Manado, GS Vicky Lumentut menjadi Ketua Dewan Pengurus untuk periode 2012 - 2016",
+  },
+  {
+    tahun: "26 - 28 Juli 2016",
+    deskripsi: "Munas V digelar di Jambi. Wali Kota Tangerang Selatan, Airin Rachmi Diany menjadi Ketua Dewan Pengurus 2016 - 2020",
+  },
+  {
+    tahun: "11 Februari 2021",
+    deskripsi: "Munas VI digelar di Jakarta. Wali Kota Bogor, Bima Arya Sugiarto, terpilih menjadi Ketua Dewan Pengurus 2021 - 2024",
+  },
+  {
+    tahun: "14 - 15 Desember 2023",
+    deskripsi: "Munaslub (Musyawarah Nasional Luar Biasa) VII digelar di Bogor untuk keberlanjutan kepengurusan dengan berakhirnya masa jabatan sesuai Undang-Undang terkait Pilkada Wali Kota Surabaya, Eri Cahyadi, terpilih menjadi Ketua Dewan Pengurus untuk periode 2023 - 2025",
+  },
+  {
+    tahun: "2025",
+    deskripsi: "Munas VIII Apeksi akan digelar di Kota Surabaya pada tahun 2025Penetapan Surabaya sebagai tuan rumah diputuskan dalam Rakernas XVII Apeksi 2024 yang digelar pada 1 - 6 Juni 2024 di Kota Balikpapan",
+  },
   // Tambahkan data lainnya...
 ];
 

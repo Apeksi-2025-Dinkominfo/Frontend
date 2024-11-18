@@ -40,15 +40,15 @@ const EventComponent = () => {
   return (
     <Box
       sx={{
-        mt: '-100px',
+        mt: '-90px',
         pt: '120px',
         pb: 6,
         px: { xs: 2, md: 4 },
         backgroundColor: '#227B94',
-        backgroundImage: 'url(/lingkaranJadwal.png)',
+        backgroundImage: 'url(/abhiboyo31.png)',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'left -50px top -200px',
-        backgroundSize: '700px 700px',
+        backgroundPosition: 'left -60px top -50px',
+        backgroundSize: '400px 400px',
         color: '#fff',
         position: 'relative',
         zIndex: 1,
