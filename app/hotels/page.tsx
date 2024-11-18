@@ -157,7 +157,7 @@ const Hotels: React.FC = () => {
   };
 
   return (
-    <div className="p-5 font-poppins">
+    <div className="p-5 ">
       <div className="hero-section bg-white py-10 flex flex-col md:flex-row items-center justify-between">
         <div className="text-content md:w-1/2 w-full text-center md:text-left">
           <h1 className="text-5xl font-semibold text-body mb-4">
@@ -178,7 +178,7 @@ const Hotels: React.FC = () => {
   
       {/* Menyatukan Filter dan Judul dengan Flexbox */}
       <div className="flex justify-between items-center mt-5">
-        <h1 className="text-5xl font-bold mb-10 text-body">Hotel Hotel Suroboyo</h1>
+        <h1 className="text-5xl font-bold mb-10 text-body">Penginapan Di Surabaya</h1>
         <div className="flex items-center bg-[#78B7D0] text-black p-2 mb-7 rounded-lg shadow-md">
           <span className="mr-2 font-bold">Filter :</span>
           <Dropdown>

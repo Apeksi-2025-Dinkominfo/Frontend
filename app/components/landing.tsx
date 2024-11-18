@@ -30,7 +30,7 @@ export default function LandingPage() {
         />
         <button
           onClick={handleButtonClick}
-          className="bg-[#78B7D0] text-white px-6 py-3 rounded-full shadow-md hover:bg-[#67A6BE] transition duration-300"
+          className="bg-[#800000] text-white px-6 py-3 rounded-full shadow-md hover:bg-[#67A6BE] transition duration-300"
         >
           Daftar disini!
         </button>
