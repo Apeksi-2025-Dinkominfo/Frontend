@@ -242,7 +242,7 @@ const WalikotaVideos: React.FC = () => {
         backgroundRepeat: 'no-repeat',
         position: 'relative',
       }}
-    > 
+    >
       <Box
         sx={{
           backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent background
@@ -259,16 +259,39 @@ const WalikotaVideos: React.FC = () => {
             fontSize: { xs: '20px', md: '39.8px' },
             color: '#1C1C1C',
           }}
-          className='text-body font-semibold'
+          className="text-body font-semibold"
         >
           Ucapan Dari Para Walikota Hebat
         </Typography>
       </Box>
 
       <VideoPlayer />
+      <Box
+        sx={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent background
+          borderRadius: '10px',
+          padding: '15px',
+          display: 'inline-block',
+          mb: 6,
+        }}
+      >
+      <Typography
+        variant="h5"
+        sx={{
+          marginTop: '20px',
+          fontSize: { xs: '18px', md: '25px' },
+          fontWeight: 'bold',
+          color: '#1C1C1C',
+        }}
+      >
+        Menuju Munas APEKSI Ke VII
+      </Typography>
+
       <Countdown date={targetDate} renderer={renderer} />
+    </Box>
     </Box>
   );
 };
+
 
 export default WalikotaVideos;

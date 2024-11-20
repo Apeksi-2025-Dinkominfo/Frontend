@@ -15,7 +15,6 @@ const cardData = [
 
 export default function CityTourComponent() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [circlePosition, setCirclePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -38,7 +37,7 @@ export default function CityTourComponent() {
       className="flex flex-col items-center justify-center min-h-screen"
       style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
     >
-      <div className="text-center mt-4 mb-0.4">
+      <div className="text-center mt-4 mb-0">
         <Typography
           style={{
             fontWeight: 'bold',
@@ -54,25 +53,11 @@ export default function CityTourComponent() {
           className="relative text-9xl"
         >
           Ayo Jelajahi Kota <br /> Surabaya
-          {isHovered && (
-            <div
-              className="moving-circle"
-              style={{
-                position: 'absolute',
-                width: '500px',
-                height: '500px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(230, 57, 70, 0.5)',
-                pointerEvents: 'none',
-                transform: `translate(${circlePosition.x - 1}px, ${circlePosition.y - 1}px)`,
-              }}
-            />
-          )}
         </Typography>
       </div>
 
       {/* Carousel Section */}
-      <div className="carousel-container flex flex-col items-center justify-center h-screen mb-5">
+      <div className="carousel-container flex flex-col items-center justify-center h-screen " style={{marginBottom:-60}}>
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
             onClick={handlePrev}
@@ -81,7 +66,7 @@ export default function CityTourComponent() {
             &larr;
           </button>
           <div
-            style={{ marginRight: 450, marginBottom: 300 }}
+            style={{ marginRight: 450, marginBottom: 10 }}
             className="carousel-3d flex items-center justify-center relative"
           >
             {cardData.map((card, index) => {
@@ -112,7 +97,7 @@ export default function CityTourComponent() {
                     }}
                   >
                     <img
-                      className="carousel-image w-full h-full object-cover"
+                      className="carousel-image mb-30 w-full h-full object-cover"
                       src={card.img}
                       alt="Carousel Card"
                       style={{
@@ -127,7 +112,7 @@ export default function CityTourComponent() {
           </div>
           <button
             onClick={handleNext}
-            className="absolute right-4 md:right-10 z-10 bg-gray-800 text-white rounded-full p-3"
+            className="absolute right-4 md:right-10 mt:30 z-10 bg-gray-800 text-white rounded-full p-3"
           >
             &rarr;
           </button>
@@ -172,18 +157,23 @@ export default function CityTourComponent() {
         `}</style>
       </div>
 
-      {/* Batik Remo Image Section */}
-      <div
-        className="batik-remo-container flex justify-center items-center mb-5"
-        style={{
-          backgroundImage: "url('/remo21.png')",
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          width: '100%',
-          height: '200px',
-        }}
-      ></div>
+     {/* Batik Remo Image Section */}
+    <div
+    className="batik-remo-container flex justify-center items-center mb-20 relative"
+    style={{
+    backgroundImage: "url('/sparkling21.png')",
+    backgroundSize: 'contain', // Agar gambar tidak terpotong
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center bottom', // Fokus pada bagian bawah gambar
+    width: '100%',
+    height: '400px', // Tinggi diperbesar untuk menonjolkan batik
+    marginBottom: "8px",
+    }}
+    >
+    <div
+    className="overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0"
+    ></div>
+    </div>
     </div>
   );
 }

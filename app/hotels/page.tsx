@@ -157,7 +157,7 @@ const Hotels: React.FC = () => {
   };
 
   return (
-    <div className="p-5 font-poppins">
+    <div className="p-5 ">
       <div className="hero-section bg-white py-10 flex flex-col md:flex-row items-center justify-between">
         <div className="text-content md:w-1/2 w-full text-center md:text-left">
           <h1 className="text-5xl font-semibold text-body mb-4">
