@@ -27,11 +27,7 @@ const FooterComponent = () => {
             </Typography>
             <Typography variant="body2" color="textSecondary">
               <Phone sx={{ verticalAlign: 'middle', mr: 1 }} />
-              (031) 5475600
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              <Phone sx={{ verticalAlign: 'middle', mr: 1 }} />
-              (031) 9871239
+              (088) 801516074
             </Typography>
             <Typography variant="body2" color="textSecondary">
               <Email sx={{ verticalAlign: 'middle', mr: 1 }} />
