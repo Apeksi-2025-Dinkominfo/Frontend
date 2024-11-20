@@ -17,11 +17,6 @@ export default function CityTourComponent() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { offsetX, offsetY } = e.nativeEvent;
-    setCirclePosition({ x: offsetX - 250, y: offsetY - 500 });
-  };
-
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
@@ -47,7 +42,6 @@ export default function CityTourComponent() {
             WebkitTextStroke: '5px #E63946',
             animation: isHovered ? 'strokeAnimation 1s infinite' : 'none',
           }}
-          onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           className="relative text-9xl"
