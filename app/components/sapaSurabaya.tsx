@@ -32,7 +32,7 @@ export default function CityTourComponent() {
       className="flex flex-col items-center justify-center min-h-screen"
       style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
     >
-      <div className="text-center mt-4 mb-0">
+      <div className="text-center mb-0">
         <Typography
           style={{
             fontWeight: 'bold',
@@ -41,6 +41,7 @@ export default function CityTourComponent() {
             letterSpacing: '2px',
             WebkitTextStroke: '5px #E63946',
             animation: isHovered ? 'strokeAnimation 1s infinite' : 'none',
+            marginTop: '50px', // Menambahkan jarak lebih spesifik di sini
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -160,8 +161,8 @@ export default function CityTourComponent() {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center bottom', // Fokus pada bagian bawah gambar
     width: '100%',
-    height: '400px', // Tinggi diperbesar untuk menonjolkan batik
-    marginBottom: "8px",
+    height: '400px', 
+    marginBottom: "0px",
     }}
     >
     <div

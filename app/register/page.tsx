@@ -334,7 +334,7 @@ export default function Register() {
                   <Typography align="left">
                     Akan Mengikuti Side Event :{' '}
                   </Typography>
-                  {['Fun Run', 'Tanam Pohon', 'Pentas Seni'].map((event) => (
+                  {['Fun Run', 'Tanam Pohon', 'Pentas Seni', 'ladies program', 'karnaval','youth city change'].map((event) => (
                     <FormControlLabel
                       key={event}
                       control={
@@ -442,14 +442,22 @@ export default function Register() {
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">Transportasi</Typography>
-                <input
-                  type="text"
+                <select
                   name="transportasi"
                   value={formData.transportasi}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
+                >
+                  <option value="" disabled>
+                    Pilih transportasi
+                  </option>
+                  <option value="mobil dinas">Mobil Dinas</option>
+                  <option value="kereta api">Kereta Api</option>
+                  <option value="pesawat">Pesawat</option>
+                  <option value="bus">Bus</option>
+                  <option value="kapal">Kapal</option>
+                </select>
               </Grid>
 
               <Grid item xs={12} md={6}>
@@ -500,35 +508,62 @@ export default function Register() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6}>
-                <Typography align="left">
-                  {selectedTab === 'OPTD'
-                    ? 'Ukuran Baju Pejabat'
-                    : 'Ukuran Baju Walikota/Wakil'}
-                </Typography>
-                <input
-                  name="ukuran_baju_bapak"
-                  value={formData.ukuran_baju_bapak}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
+              {selectedTab === 'Walikota' &&
+                  <>
+                    <Grid item xs={12} md={6}>
+                      <Typography align="left">Ukuran Baju Pejabat</Typography>
+                      <input
+                        name="ukuran_baju_bapak"
+                        value={formData.ukuran_baju_bapak}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                      />
+                    </Grid>
 
-              <Grid item xs={12} md={6}>
-                <Typography align="left">
-                  {selectedTab === 'OPTD'
-                    ? 'Ukuran Baju Istri / Suami Pejabat'
-                    : 'Ukuran Baju Istri / Suami Walikota'}
-                </Typography>
-                <input
-                  name="ukuran_baju_ibuk"
-                  value={formData.ukuran_baju_ibuk}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography align="left">
+                        Ukuran Baju Istri / Suami Pejabat
+                      </Typography>
+                      <input
+                        name="ukuran_baju_ibuk"
+                        value={formData.ukuran_baju_ibuk}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                      />
+                    </Grid>
+                  </>
+                }
+
+              {selectedTab === 'OPTD' &&
+                formData.EventParticipation.includes('Tanam Pohon') && (
+                  <>
+                    <Grid item xs={12} md={6}>
+                      <Typography align="left">Ukuran Baju Pejabat</Typography>
+                      <input
+                        name="ukuran_baju_bapak"
+                        value={formData.ukuran_baju_bapak}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                      <Typography align="left">
+                        Ukuran Baju Istri / Suami Pejabat
+                      </Typography>
+                      <input
+                        name="ukuran_baju_ibuk"
+                        value={formData.ukuran_baju_ibuk}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                      />
+                    </Grid>
+                  </>
+                )}
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">

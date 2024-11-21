@@ -27,7 +27,7 @@ const GalleryComponent = () => {
     backgroundPosition: "center",
     width: "100vw", // Lebar penuh halaman
     height: "200px", // Sesuaikan tinggi sesuai kebutuhan
-    marginBottom: "50px", // Tambahkan jarak ke bawah agar tidak menempel
+    marginTop: "-170px", // Tambahkan jarak ke bawah agar tidak menempel
   }}
 ></Box>
 
@@ -59,20 +59,24 @@ const GalleryComponent = () => {
 
   {/* Grid Gambar */}
   <Grid container spacing={4}>
-    {images.map((image, index) => (
-      <Grid item xs={6} sm={4} md={2.4} key={index}>
-        <Card sx={{ borderRadius: "30px", overflow: "hidden" }}>
-          <CardMedia
-            component="img"
-            alt={image.photoType}
-            height="150"
-            image={image.url}
-            sx={{ objectFit: "cover" }}
-          />
-        </Card>
-      </Grid>
-    ))}
-  </Grid>
+  {images.map((image, index) => (
+    <Grid item xs={6} sm={4} md={2.4} key={index}>
+      <Card sx={{ borderRadius: "30px", overflow: "hidden" }}>
+        <CardMedia
+          component="img"
+          alt={image.photoType}
+          image={image.url}
+          sx={{
+            objectFit: "cover",
+            aspectRatio: "1 / 1", // Pastikan gambar berbentuk persegi
+            width: "100%",
+          }}
+        />
+      </Card>
+    </Grid>
+  ))}
+</Grid>
+
 </Container>
     </>
   );
