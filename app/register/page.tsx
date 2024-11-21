@@ -322,7 +322,7 @@ export default function Register() {
           }}
         >
           <Tabs value={selectedTab} onChange={handleTabChange} centered>
-            <Tab value="Walikota" label="Walikota / Wakil Walikota" />
+            <Tab value="Walikota" label="Walikota/Wakil Walikota/Sekda" />
             <Tab value="OPTD" label="Pejabat Yang Mewakili" />
           </Tabs>
 
@@ -583,6 +583,7 @@ export default function Register() {
                 <ReCAPTCHA
                   sitekey="6LcWZmkqAAAAABGoSosV4d1ul_xDi9BCqlKvpXju" // Replace with your actual site key
                   onChange={handleCaptchaChange}
+
                 />
               </Grid>
 
