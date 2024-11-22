@@ -416,7 +416,7 @@ export default function Register() {
                 </>
               )}
 
-              <Grid item xs={12} md={6}>
+              {/* <Grid item xs={12} md={6}>
                 <Typography align="left">Nomor Ajudan</Typography>
                 <input
                   type="text"
@@ -438,7 +438,7 @@ export default function Register() {
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                 />
-              </Grid>
+              </Grid> */}
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">Transportasi</Typography>
