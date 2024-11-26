@@ -2,8 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
-
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from '@nextui-org/react';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 interface Accommodation {
   id: number;
   name: string;
@@ -11,6 +17,7 @@ interface Accommodation {
   latitude: number;
   longitude: string;
   websiteLink: string;
+  phoneNumber: number;
   hotelThumbnail: { link: string };
   hotelCategory: {
     starNumberName: string;
@@ -45,7 +52,9 @@ const Hotels: React.FC = () => {
         }
 
         const uniqueStarOptions = Array.from(
-          new Set(allAccommodations.map((hotel) => hotel.hotelCategory.starNumberName))
+          new Set(
+            allAccommodations.map((hotel) => hotel.hotelCategory.starNumberName)
+          )
         ).sort((a, b) => a.localeCompare(b));
 
         setStarOptions(uniqueStarOptions);
@@ -161,10 +170,11 @@ const Hotels: React.FC = () => {
       <div className="hero-section bg-white py-10 flex flex-col md:flex-row items-center justify-between">
         <div className="text-content md:w-1/2 w-full text-center md:text-left">
           <h1 className="text-5xl font-semibold text-body mb-4">
-          Mau menginap dimana?
+            Mau menginap dimana?
           </h1>
           <p className="text-xl text-second mb-5">
-          Temukan informasi dan alternatif hotel dan penginapan selama gelaran Munas VIII Apeksi 2025 di Kota Surabaya.
+            Temukan informasi dan alternatif hotel dan penginapan selama gelaran
+            Munas VIII Apeksi 2025 di Kota Surabaya.
           </p>
         </div>
         <div className="image-content md:w-1/2 w-full flex justify-center">
@@ -175,27 +185,40 @@ const Hotels: React.FC = () => {
           />
         </div>
       </div>
-  
+
       {/* Menyatukan Filter dan Judul dengan Flexbox */}
       <div className="flex justify-between items-center mt-5">
-        <h1 className="text-5xl font-bold mb-10 text-body">Penginapan Di Surabaya</h1>
+        <h1 className="text-5xl font-bold mb-10 text-body">
+          Penginapan Di Surabaya
+        </h1>
         <div className="flex items-center bg-[#78B7D0] text-black p-2 mb-7 rounded-lg shadow-md">
           <span className="mr-2 font-bold">Filter :</span>
           <Dropdown>
             <DropdownTrigger>
               <Button variant="bordered" className="bg-[#78B7D0] text-black">
-                All
+                {sortOrder === 'Default' ? 'default' : sortOrder}{' '}
+
               </Button>
             </DropdownTrigger>
             <DropdownMenu
               aria-label="Filter Hotel"
-              items={[{ key: "default", label: "All" }, ...starOptions.map(option => ({ key: option, label: option }))]}
+              items={[
+                { key: 'default', label: 'All' },
+                ...starOptions.map((option) => ({
+                  key: option,
+                  label: option,
+                })),
+              ]}
             >
               {(item) => (
                 <DropdownItem
                   key={item.key}
                   onClick={() => setSortOrder(item.key)}
-                  className={`text-black ${item.key === sortOrder ? "bg-blue-200 text-blue-500" : "bg-[#78B7D0] hover:bg-[#78B7D0]"}`}
+                  className={`text-black ${
+                    item.key === sortOrder
+                      ? 'bg-blue-200 text-blue-500'
+                      : 'bg-[#78B7D0] hover:bg-[#78B7D0]'
+                  }`}
                 >
                   {item.label}
                 </DropdownItem>
@@ -204,7 +227,7 @@ const Hotels: React.FC = () => {
           </Dropdown>
         </div>
       </div>
-  
+
       {/* Hotel Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {paginatedAccommodations.map((item) => (
@@ -222,7 +245,7 @@ const Hotels: React.FC = () => {
                 alt={item.name}
                 className="w-full h-64 object-cover transition duration-300 hover:opacity-90"
               />
-  
+
               <div className="absolute top-[220px] left-2 bg-light text-white text-sm px-2 py-1 rounded-lg flex items-center">
                 <LocationOnIcon
                   style={{ fontSize: '16px', marginRight: '4px' }}
@@ -236,7 +259,7 @@ const Hotels: React.FC = () => {
                   )}
                 </span>
               </div>
-  
+
               <div className="p-4">
                 <h4 className="text-lg font-semibold transition-colors duration-300 hover:text-second">
                   {item.name}
@@ -251,16 +274,27 @@ const Hotels: React.FC = () => {
                     />
                     <span>{item.hotelCategory.starNumberName}</span>
                   </div>
+                  <div className="flex items-center space-x-1 ml-auto">
+                    {' '}
+                    {/* ml-auto for pushing it to the right */}
+                    <PhoneOutlinedIcon
+                      style={{ fontSize: '24px', color: '#4A4A4A' }}
+                    />
+                    <span className="text-sm md:text-base">
+                      {item.phoneNumber}
+                    </span>{' '}
+                    {/* text size adjustment for mobile */}
+                  </div>
                 </div>
               </div>
             </a>
           </div>
         ))}
       </div>
-  
+
       {renderPagination()}
     </div>
-  );  
+  );
 };
 
 export default Hotels;
