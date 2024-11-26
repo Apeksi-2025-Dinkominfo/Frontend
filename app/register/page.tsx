@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   FormControlLabel,
   Checkbox,
@@ -75,11 +75,105 @@ export default function Register() {
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue);
   };
+  const [captchaValue, setCaptchaValue] = useState(''); // Nilai input dari pengguna
+  const [generatedCaptcha, setGeneratedCaptcha] = useState(''); // Nilai CAPTCHA yang dihasilkan
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false); // Status verifikasi CAPTCHA
+  const canvasRef = useRef<HTMLCanvasElement>(null); // Referensi untuk elemen canvas
 
-  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  // Fungsi untuk menghasilkan CAPTCHA baru
+  const generateCaptcha = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'; // Karakter untuk CAPTCHA
+    let captcha = '';
+    for (let i = 0; i < 6; i++) {
+      captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setGeneratedCaptcha(captcha);
+    setIsCaptchaVerified(false); // Reset status verifikasi
+    setCaptchaValue(''); // Reset input pengguna
+  
+    // Gambar CAPTCHA di canvas
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        const width = canvas.width;
+        const height = canvas.height;
+  
+        // Bersihkan canvas
+        ctx.clearRect(0, 0, width, height);
+  
+        // Latar belakang dengan gradien
+        const gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, '#f0f0f0');
+        gradient.addColorStop(1, '#d4d4d4');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+  
+        // Tambahkan teks CAPTCHA dengan rotasi dan warna acak
+        ctx.font = 'bold 28px Arial';
+        for (let i = 0; i < captcha.length; i++) {
+          const char = captcha[i];
+          ctx.fillStyle = `rgba(${Math.random() * 255}, ${
+            Math.random() * 255
+          }, ${Math.random() * 255}, 0.8)`;
+          const angle = Math.random() * 0.4 - 0.2; // Rotasi acak (-0.2 hingga 0.2 radian)
+          ctx.save();
+          ctx.translate(40 + i * 30, height / 2);
+          ctx.rotate(angle);
+          ctx.fillText(char, 0, 8);
+          ctx.restore();
+        }
+  
+        // Tambahkan garis-garis acak
+        for (let i = 0; i < 8; i++) {
+          ctx.strokeStyle = `rgba(${Math.random() * 255}, ${
+            Math.random() * 255
+          }, ${Math.random() * 255}, 0.5)`;
+          ctx.beginPath();
+          ctx.moveTo(Math.random() * width, Math.random() * height);
+          ctx.lineTo(Math.random() * width, Math.random() * height);
+          ctx.stroke();
+        }
+  
+        // Tambahkan lingkaran-lingkaran kecil acak
+        for (let i = 0; i < 15; i++) {
+          ctx.fillStyle = `rgba(${Math.random() * 255}, ${
+            Math.random() * 255
+          }, ${Math.random() * 255}, 0.7)`;
+          const x = Math.random() * width;
+          const y = Math.random() * height;
+          const radius = Math.random() * 5;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+  
+        // Tambahkan distorsi dengan garis melengkung
+        for (let i = 0; i < 5; i++) {
+          ctx.strokeStyle = `rgba(${Math.random() * 255}, ${
+            Math.random() * 255
+          }, ${Math.random() * 255}, 0.5)`;
+          ctx.beginPath();
+          ctx.moveTo(Math.random() * width, Math.random() * height);
+          for (let j = 0; j < 3; j++) {
+            ctx.quadraticCurveTo(
+              Math.random() * width,
+              Math.random() * height,
+              Math.random() * width,
+              Math.random() * height
+            );
+          }
+          ctx.stroke();
+        }
+      }
+    }
+  };
+  
 
-  const handleCaptchaChange = (value: string | null) => {
-    setIsCaptchaVerified(!!value); // Set to true if reCAPTCHA value is not null
+  // Fungsi untuk menangani perubahan pada input CAPTCHA
+  const handleCaptchaChange = (value: string) => {
+    setCaptchaValue(value);
+    setIsCaptchaVerified(value === generatedCaptcha); // Verifikasi CAPTCHA
   };
 
   const handleSubmit = async (
@@ -174,6 +268,10 @@ export default function Register() {
       });
     }
   };
+
+  React.useEffect(() => {
+    generateCaptcha();
+  }, []);
 
   // Function to show ticket popup
   const showTicketPopup = () => {
@@ -322,7 +420,7 @@ export default function Register() {
           }}
         >
           <Tabs value={selectedTab} onChange={handleTabChange} centered>
-            <Tab value="Walikota" label="Walikota / Wakil Walikota" />
+            <Tab value="Walikota" label="Walikota/Wakil Walikota/Sekda" />
             <Tab value="OPTD" label="Pejabat Yang Mewakili" />
           </Tabs>
 
@@ -334,7 +432,14 @@ export default function Register() {
                   <Typography align="left">
                     Akan Mengikuti Side Event :{' '}
                   </Typography>
-                  {['Fun Run', 'Tanam Pohon', 'Pentas Seni'].map((event) => (
+                  {[
+                    'Fun Run',
+                    'Tanam Pohon',
+                    'Pentas Seni',
+                    'ladies program',
+                    'karnaval',
+                    'youth city change',
+                  ].map((event) => (
                     <FormControlLabel
                       key={event}
                       control={
@@ -416,7 +521,7 @@ export default function Register() {
                 </>
               )}
 
-              <Grid item xs={12} md={6}>
+              {/* <Grid item xs={12} md={6}>
                 <Typography align="left">Nomor Ajudan</Typography>
                 <input
                   type="text"
@@ -438,18 +543,26 @@ export default function Register() {
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
                 />
-              </Grid>
+              </Grid> */}
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">Transportasi</Typography>
-                <input
-                  type="text"
+                <select
                   name="transportasi"
                   value={formData.transportasi}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
+                >
+                  <option value="" disabled>
+                    Pilih transportasi
+                  </option>
+                  <option value="mobil dinas">Mobil Dinas</option>
+                  <option value="kereta api">Kereta Api</option>
+                  <option value="pesawat">Pesawat</option>
+                  <option value="bus">Bus</option>
+                  <option value="kapal">Kapal</option>
+                </select>
               </Grid>
 
               <Grid item xs={12} md={6}>
@@ -500,35 +613,62 @@ export default function Register() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6}>
-                <Typography align="left">
-                  {selectedTab === 'OPTD'
-                    ? 'Ukuran Baju Pejabat'
-                    : 'Ukuran Baju Walikota/Wakil'}
-                </Typography>
-                <input
-                  name="ukuran_baju_bapak"
-                  value={formData.ukuran_baju_bapak}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
+              {selectedTab === 'Walikota' && (
+                <>
+                  <Grid item xs={12} md={6}>
+                    <Typography align="left">Ukuran Baju Pejabat</Typography>
+                    <input
+                      name="ukuran_baju_bapak"
+                      value={formData.ukuran_baju_bapak}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                    />
+                  </Grid>
 
-              <Grid item xs={12} md={6}>
-                <Typography align="left">
-                  {selectedTab === 'OPTD'
-                    ? 'Ukuran Baju Istri / Suami Pejabat'
-                    : 'Ukuran Baju Istri / Suami Walikota'}
-                </Typography>
-                <input
-                  name="ukuran_baju_ibuk"
-                  value={formData.ukuran_baju_ibuk}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
-                />
-              </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography align="left">
+                      Ukuran Baju Istri / Suami Pejabat
+                    </Typography>
+                    <input
+                      name="ukuran_baju_ibuk"
+                      value={formData.ukuran_baju_ibuk}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                    />
+                  </Grid>
+                </>
+              )}
+
+              {selectedTab === 'OPTD' &&
+                formData.EventParticipation.includes('Tanam Pohon') && (
+                  <>
+                    <Grid item xs={12} md={6}>
+                      <Typography align="left">Ukuran Baju Pejabat</Typography>
+                      <input
+                        name="ukuran_baju_bapak"
+                        value={formData.ukuran_baju_bapak}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                      <Typography align="left">
+                        Ukuran Baju Istri / Suami Pejabat
+                      </Typography>
+                      <input
+                        name="ukuran_baju_ibuk"
+                        value={formData.ukuran_baju_ibuk}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition-all"
+                      />
+                    </Grid>
+                  </>
+                )}
 
               <Grid item xs={12} md={6}>
                 <Typography align="left">
@@ -544,23 +684,62 @@ export default function Register() {
                 />
               </Grid>
 
-              <Grid item xs={12}>
-                <ReCAPTCHA
-                  sitekey="6LcWZmkqAAAAABGoSosV4d1ul_xDi9BCqlKvpXju" // Replace with your actual site key
-                  onChange={handleCaptchaChange}
-                />
-              </Grid>
+              <form onSubmit={handleSubmit}>
+                <Grid className='mt-10 ' container spacing={2} >
+                  {/* CAPTCHA Gambar */}
+                  <Grid item xs={12}>
+                    <canvas
+                      ref={canvasRef}
+                      width={200}
+                      height={60}
+                      style={{
+                        display: 'block',
+                        margin: '0 auto',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                      }}
+                    ></canvas>
+                  </Grid>
 
-              <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  className="bg-blue-500 text-white hover:bg-blue-600"
-                >
-                  Submit
-                </Button>
-              </Grid>
+                  {/* Tombol Refresh CAPTCHA */}
+                  <Grid item xs={12} style={{ textAlign: 'center' }}>
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      onClick={generateCaptcha}
+                    >
+                      Refresh CAPTCHA
+                    </Button>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Masukkan CAPTCHA"
+                      variant="outlined"
+                      fullWidth
+                      value={captchaValue}
+                      onChange={(e) => handleCaptchaChange(e.target.value)}
+                      error={!isCaptchaVerified && captchaValue !== ''}
+                      helperText={
+                        !isCaptchaVerified && captchaValue !== ''
+                          ? 'Captcha salah'
+                          : ''
+                      }
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      fullWidth
+                      className="bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
 
               <Grid item xs={12}>
                 <Typography
