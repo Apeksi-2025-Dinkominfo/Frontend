@@ -9,8 +9,8 @@ const cardData = [
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
   { img: '/transportIcon.png', link: '/surabaya/transportasi' },
   { img: '/heritageIcon.png', link: '/surabaya/heritage' },
-  { img: '/budayaIcon.png', link: '/surabaya/budaya' },
   { img: '/fasilitasKesehatan.png', link: '/hospital' },
+  { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
 ];
 
 export default function CityTourComponent() {
@@ -30,7 +30,7 @@ export default function CityTourComponent() {
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen"
-      style={{ backgroundColor: '#78B7D0' }} // Mengganti warna latar belakang
+      style={{ backgroundColor: '#78B7D0' }}
     >
       <div className="text-center mt-4 mb-0">
         <Typography
@@ -51,7 +51,10 @@ export default function CityTourComponent() {
       </div>
 
       {/* Carousel Section */}
-      <div className="carousel-container flex flex-col items-center justify-center h-screen " style={{marginBottom:-60}}>
+      <div
+        className="carousel-container flex flex-col items-center justify-center h-screen"
+        style={{ marginBottom: 70, marginTop: -150 }}
+      >
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
             onClick={handlePrev}
@@ -133,16 +136,16 @@ export default function CityTourComponent() {
           }
           @keyframes strokeAnimation {
             0% {
-              -webkit-text-stroke-color: #E63946;
+              -webkit-text-stroke-color: #e63946;
             }
             25% {
-              -webkit-text-stroke-color: #F4A261;
+              -webkit-text-stroke-color: #f4a261;
             }
             50% {
-              -webkit-text-stroke-color: #E9C46A;
+              -webkit-text-stroke-color: #e9c46a;
             }
             75% {
-              -webkit-text-stroke-color: #2A9D8F;
+              -webkit-text-stroke-color: #2a9d8f;
             }
             100% {
               -webkit-text-stroke-color: #264653;
@@ -150,24 +153,6 @@ export default function CityTourComponent() {
           }
         `}</style>
       </div>
-
-     {/* Batik Remo Image Section */}
-    <div
-    className="batik-remo-container flex justify-center items-center mb-20 relative"
-    style={{
-    backgroundImage: "url('/sparkling21.png')",
-    backgroundSize: 'contain', // Agar gambar tidak terpotong
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center bottom', // Fokus pada bagian bawah gambar
-    width: '100%',
-    height: '400px', // Tinggi diperbesar untuk menonjolkan batik
-    marginBottom: "8px",
-    }}
-    >
-    <div
-    className="overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0"
-    ></div>
-    </div>
     </div>
   );
 }
