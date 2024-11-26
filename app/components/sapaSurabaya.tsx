@@ -29,10 +29,19 @@ export default function CityTourComponent() {
 
   return (
     <div
-      className="flex flex-col items-center justify-center min-h-screen"
+      className="flex flex-col items-center justify-center min-h-screen relative"
       style={{ backgroundColor: '#78B7D0' }}
     >
-      <div className="text-center mt-4 mb-0">
+
+      <Link href="https://forms.gle/rpkMZ237aK8tczW78" passHref>
+        <button
+          className="absolute top-4 right-4 md:top-6 md:right-6 bg-second text-white px-4 py-2 rounded-full shadow-lg hover:bg-body transition"
+        >
+          City Tour
+        </button>
+      </Link>
+
+      <div className="text-center mb-8">
         <Typography
           style={{
             fontWeight: 'bold',
@@ -44,21 +53,17 @@ export default function CityTourComponent() {
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="relative text-9xl"
+          className="relative text-6xl md:text-9xl"
         >
           Ayo Jelajahi Kota <br /> Surabaya
         </Typography>
       </div>
 
-      {/* Carousel Section */}
-      <div
-        className="carousel-container flex flex-col items-center justify-center h-screen"
-        style={{ marginBottom: 70, marginTop: -150 }}
-      >
+      <div className=" carousel-container flex flex-col items-center justify-center " style={{ height: '50px', marginBottom: '350px' }}>
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
             onClick={handlePrev}
-            className="absolute left-4 md:left-10 z-10 bg-gray-800 text-white rounded-full p-3"
+            className="absolute mt-72 md:left-10 z-10 bg-gray-600 text-white rounded-full p-3"
           >
             &larr;
           </button>
@@ -81,9 +86,7 @@ export default function CityTourComponent() {
                   <div
                     className="carousel-card absolute rounded-xl shadow-lg overflow-hidden transition-transform transform"
                     style={{
-                      transform: `rotateY(${rotationAngle}deg) translateX(${
-                        offset * 250
-                      }px) scale(${scale})`,
+                      transform: `rotateY(${rotationAngle}deg) translateX(${offset * 250}px) scale(${scale})`,
                       opacity: opacity,
                       width: '500px',
                       height: '300px',
@@ -109,7 +112,7 @@ export default function CityTourComponent() {
           </div>
           <button
             onClick={handleNext}
-            className="absolute right-4 md:right-10 mt:30 z-10 bg-gray-800 text-white rounded-full p-3"
+            className="absolute mt-72 md:right-10 mt:30 z-10 bg-gray-600 text-white rounded-full p-3"
           >
             &rarr;
           </button>
