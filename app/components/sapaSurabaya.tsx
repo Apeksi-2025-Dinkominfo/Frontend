@@ -9,8 +9,8 @@ const cardData = [
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
   { img: '/transportIcon.png', link: '/surabaya/transportasi' },
   { img: '/heritageIcon.png', link: '/surabaya/heritage' },
-  { img: '/budayaIcon.png', link: '/surabaya/budaya' },
   { img: '/fasilitasKesehatan.png', link: '/hospital' },
+  { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
 ];
 
 export default function CityTourComponent() {
@@ -139,16 +139,16 @@ export default function CityTourComponent() {
           }
           @keyframes strokeAnimation {
             0% {
-              -webkit-text-stroke-color: #E63946;
+              -webkit-text-stroke-color: #e63946;
             }
             25% {
-              -webkit-text-stroke-color: #F4A261;
+              -webkit-text-stroke-color: #f4a261;
             }
             50% {
-              -webkit-text-stroke-color: #E9C46A;
+              -webkit-text-stroke-color: #e9c46a;
             }
             75% {
-              -webkit-text-stroke-color: #2A9D8F;
+              -webkit-text-stroke-color: #2a9d8f;
             }
             100% {
               -webkit-text-stroke-color: #264653;
