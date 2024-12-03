@@ -8,7 +8,6 @@ const cardData = [
   { img: '/WisataIcon.png', link: '/surabaya/wisata' },
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
   { img: '/transportIcon.png', link: '/surabaya/transportasi' },
-  { img: '/heritageIcon.png', link: '/surabaya/heritage' },
   { img: '/fasilitasKesehatan.png', link: '/hospital' },
   { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
 ];

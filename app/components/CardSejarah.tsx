@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link'; // Import the Link component from Next.js
-import batikImage from '../../public/kintirkintiran21.png';
+import batikImage from '../../public/sjrh.png';
 import apeksiLogo from '../../public/logoNew.png';
 
 export default function CardSejarah() {

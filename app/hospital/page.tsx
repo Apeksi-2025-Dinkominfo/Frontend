@@ -296,7 +296,7 @@ const LandingPage: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
         {/* Image Section */}
         <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', mt: isMobile ? 3 : 0 }}>
           <img
-            src="/hospital.png"
+            src="/hsptl.png"
             alt="Healthcare Facility"
             style={{ maxWidth: '65%', height: 'auto', borderRadius: '8px' }}
           />

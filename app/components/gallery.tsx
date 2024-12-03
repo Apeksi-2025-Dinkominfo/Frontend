@@ -20,19 +20,6 @@ const GalleryComponent = () => {
 
   return (
     <>
-      {/* Gambar Batik Full Width */}
-      <Box
-        sx={{
-          backgroundImage: "url('/kintirkintiran4.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          width: "100vw",
-          height: "200px",
-          marginBottom: "50px",
-        }}
-      ></Box>
-
       {/* Kontainer Galeri */}
       <Container maxWidth="lg" sx={{ marginTop: "50px" }}>
         {/* Bagian Header Galeri */}
