@@ -23,16 +23,50 @@ interface Accommodation {
     starNumberName: string;
     starNumber: number;
   };
+  distance?: number;
 }
 
 const Hotels: React.FC = () => {
   const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [sortOrder, setSortOrder] = useState<string>('default');
+  const [sortOrder, setSortOrder] = useState<string>("default");
   const [starOptions, setStarOptions] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 12;
+  
+  const referenceLat = -7.261528192788436;
+  const referenceLon = 112.75042301106396;
+
+  // Fungsi menghitung jarak antara dua koordinat
+  const calculateDistance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): number => {
+    const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
+    const R = 6371; // Radius bumi dalam kilometer
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) *
+        Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Jarak dalam kilometer
+  };
+
+  const formatDistance = (distance: number) => {
+    if (distance < 1) {
+      return `${(distance * 1000).toFixed(0)} meters`; // Jika jarak < 1 km, tampilkan dalam meter
+    }
+    return `${distance.toFixed(2)} km`; // Jika jarak >= 1 km, tampilkan dalam km
+  };
 
   useEffect(() => {
     const fetchAccommodations = async () => {
@@ -45,12 +79,26 @@ const Hotels: React.FC = () => {
           const data = await response.json();
 
           if (data.status.code !== 200) {
-            throw new Error('Failed to fetch data');
+            throw new Error("Failed to fetch data");
           }
 
-          allAccommodations.push(...data.data.data);
+          // Hitung jarak untuk setiap hotel dan tambahkan ke data
+          const accommodationsWithDistance = data.data.data.map(
+            (hotel: any) => ({
+              ...hotel,
+              distance: calculateDistance(
+                referenceLat,
+                referenceLon,
+                hotel.latitude,
+                hotel.longitude
+              ),
+            })
+          );
+
+          allAccommodations.push(...accommodationsWithDistance);
         }
 
+        // Ambil opsi kategori bintang unik
         const uniqueStarOptions = Array.from(
           new Set(
             allAccommodations.map((hotel) => hotel.hotelCategory.starNumberName)
@@ -64,7 +112,7 @@ const Hotels: React.FC = () => {
         if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError('An unexpected error occurred');
+          setError("An unexpected error occurred");
         }
         setLoading(false);
       }
@@ -82,49 +130,21 @@ const Hotels: React.FC = () => {
   }
 
   const sortedAccommodations = () => {
-    if (sortOrder === 'default') {
-      return accommodations;
+    let filtered = accommodations;
+    if (sortOrder !== "default") {
+      filtered = accommodations.filter(
+        (hotel) => hotel.hotelCategory.starNumberName === sortOrder
+      );
     }
-    return accommodations.filter(
-      (hotel) => hotel.hotelCategory.starNumberName === sortOrder
-    );
+    // Urutkan berdasarkan jarak terdekat
+    return [...filtered].sort((a, b) => (a.distance || 0) - (b.distance || 0));
   };
 
   const truncateAddress = (address: string, wordLimit: number) => {
-    const words = address.split(' ');
+    const words = address.split(" ");
     if (words.length <= wordLimit) return address;
-    return words.slice(0, wordLimit).join(' ') + '...';
+    return words.slice(0, wordLimit).join(" ") + "...";
   };
-
-  const calculateDistance = (
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
-  ) => {
-    const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
-    const R = 6371;
-    const dLat = toRadians(lat2 - lat1);
-    const dLon = toRadians(lon2 - lon1);
-
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRadians(lat1)) *
-        Math.cos(toRadians(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distanceInKm = R * c;
-
-    if (distanceInKm < 1) {
-      return `${(distanceInKm * 1000).toFixed(0)} meters`;
-    }
-    return `${distanceInKm.toFixed(2)} km`;
-  };
-
-  const referenceLat = -7.261528192788436;
-  const referenceLon = 112.75042301106396;
 
   const paginatedAccommodations = sortedAccommodations().slice(
     (currentPage - 1) * itemsPerPage,
@@ -146,6 +166,7 @@ const Hotels: React.FC = () => {
       pageNumbers.push(i);
     }
 
+ 
     return (
       <div className="flex justify-center mt-5">
         {pageNumbers.map((pageNumber) => (
@@ -251,12 +272,13 @@ const Hotels: React.FC = () => {
                   style={{ fontSize: '16px', marginRight: '4px' }}
                 />
                 <span>
-                  {calculateDistance(
+                  {formatDistance
+                  (calculateDistance(
                     referenceLat,
                     referenceLon,
                     item.latitude,
-                    parseFloat(item.longitude)
-                  )}
+                    parseFloat(item.longitude))
+                )}
                 </span>
               </div>
 
@@ -293,6 +315,7 @@ const Hotels: React.FC = () => {
       </div>
 
       {renderPagination()}
+
     </div>
   );
 };

@@ -65,7 +65,6 @@ const AccommodationSlider: React.FC = () => {
     lon2: number
   ) => {
     const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
-
     const R = 6371 * 1000; // Radius of Earth in meters
     const dLat = toRadians(lat2 - lat1);
     const dLon = toRadians(lon2 - lon1);
