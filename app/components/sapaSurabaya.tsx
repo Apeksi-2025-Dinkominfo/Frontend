@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { Typography } from '@mui/material';
 
 const cardData = [
-  { img: '/belanjaIcon.png', link: '/Surabaya/belanja' },
-  { img: '/WisataIcon.png', link: '/Surabaya/wisata' },
-  { img: '/Kuliner.png', link: '/Surabaya/kuliner' },
-  { img: '/transportIcon.png', link: '/Surabaya/transportasi' },
-  { img: '/heritageIcon.png', link: '/Surabaya/heritage' },
+  { img: '/belanjaIcon.png', link: '/surabaya/belanja' },
+  { img: '/WisataIcon.png', link: '/surabaya/wisata' },
+  { img: '/Kuliner.png', link: '/surabaya/kuliner' },
+  { img: '/transportIcon.png', link: '/surabaya/transportasi' },
   { img: '/fasilitasKesehatan.png', link: '/hospital' },
   { img: '/event.png', link: '/Surabaya/event' }, // Tambahkan card event
 ];

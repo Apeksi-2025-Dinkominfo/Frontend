@@ -200,7 +200,7 @@ const Hotels: React.FC = () => {
         </div>
         <div className="image-content md:w-1/2 w-full flex justify-center">
           <img
-            src="/Hotel.jpeg"
+            src="/htl.png"
             alt="Hospital illustration"
             className="h-60 md:h-80 lg:h-96 w-auto"
           />
@@ -210,7 +210,7 @@ const Hotels: React.FC = () => {
       {/* Menyatukan Filter dan Judul dengan Flexbox */}
       <div className="flex justify-between items-center mt-5">
         <h1 className="text-5xl font-bold mb-10 text-body">
-          Penginapan Di Surabaya
+          Hotel Di Surabaya
         </h1>
         <div className="flex items-center bg-[#78B7D0] text-black p-2 mb-7 rounded-lg shadow-md">
           <span className="mr-2 font-bold">Filter :</span>

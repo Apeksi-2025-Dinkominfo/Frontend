@@ -435,10 +435,9 @@ export default function Register() {
                   {[
                     'Fun Run',
                     'Tanam Pohon',
-                    'Pentas Seni',
                     'ladies program',
                     'karnaval',
-                    'youth city change',
+                    'youth city changer',
                   ].map((event) => (
                     <FormControlLabel
                       key={event}
