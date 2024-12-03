@@ -9,7 +9,7 @@ const cardData = [
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
   { img: '/transportIcon.png', link: '/surabaya/transportasi' },
   { img: '/fasilitasKesehatan.png', link: '/hospital' },
-  { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
+  { img: '/event.png', link: '/Surabaya/event' }, // Tambahkan card event
 ];
 
 export default function CityTourComponent() {
