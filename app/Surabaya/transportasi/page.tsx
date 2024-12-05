@@ -54,12 +54,7 @@ function RentalCard() {
     // { no: 4, name: 'CV. Tunas Jaya', phone: '08131518750', address: 'Jl. Musi No. 29, Surabaya' },
     // { no: 5, name: 'Fafa Wisata Trans', phone: '081216859936', address: 'Kec. Prambon, Sidoarjo' },
     // { no: 6, name: 'CV. PUSAKA LIMA TIGA SURABAYA (Nurhayati)', phone: '08113350606', address: 'Jl. Rungkut Mejoyo selatan V / 21-23' },
-    // { no: 1, name: 'dada', phone: '31112', address: 'example' },
-    // { no: 2, name: 'danjdns', phone: '5151', address: 'example' },
-    // { no: 3, name: 'adaafsa', phone: '48645', address: 'example' },
-    // { no: 4, name: 'aksna', phone: '568681', address: 'example' },
-    // { no: 5, name: 'jafnsanf', phone: '132516', address: 'example' },
-    // { no: 6, name: 'najksdbkf', phone: '441185', address: 'example' },
+   
   ];
 
   const formatPhoneLink = (phone) => {
@@ -138,7 +133,7 @@ function RentalCard() {
                 },
               }}
             >
-              <CardContent>
+              <CardContent className="flex flex-col h-40">
                 <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
                   {rental.name}
                 </Typography>

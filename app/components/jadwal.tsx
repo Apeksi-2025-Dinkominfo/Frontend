@@ -25,7 +25,8 @@ const EventComponent = () => {
   // State untuk memunculkan pop-up dan data acara yang dipilih
   const [open, setOpen] = useState(false);
   const [selectedAcara, setSelectedAcara] = useState<Acara | null>(null); // Use the Acara type
-
+  const numbers = [4, 5, 6, 7, 8, 9, 10];
+  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
   // Buka pop-up dan set acara yang dipilih
   const handleClickOpen = (acara: Acara) => {
     setSelectedAcara(acara);
@@ -57,18 +58,70 @@ const EventComponent = () => {
       <Typography
         variant="h6"
         className="text-white font-medium"
-        sx={{ textAlign: 'right', fontFamily: 'Poppins', letterSpacing: '5px' }}
+        sx={{ textAlign: 'center', fontFamily: 'Poppins', letterSpacing: '5px' }}
       >
         Cek jadwal Munas di Sini!
       </Typography>
       <Typography
         variant="h6"
         className="text-body font-semibold"
-        sx={{ mb: 4, textAlign: 'right', fontSize: '19px' }}
+        sx={{ mb: 4, textAlign: 'center', fontSize: '19px' }}
       >
         Catat jadwal kegiatan selama Munas VIII 2024 di Kota Surabaya
       </Typography>
-      <Swiper
+      <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        mt: 3,
+        gap: 2, // Memberi jarak antar tombol
+        flexWrap: 'wrap', // Membuat tombol berpindah ke baris baru jika diperlukan
+      }}
+    >
+      {numbers.map((number, index) => (
+        <Button
+          key={number}
+          variant="outlined"
+          size="small"
+          sx={{
+            width: '88px',
+            height: '104px',
+            borderRadius: '19px',
+            textTransform: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+            color: '#000000',
+            backgroundColor: '#43A5CC',
+            transition: '0.3s',
+            '&:hover': {
+              backgroundColor: '#fff',
+              color: '#16325B',
+              borderColor: '#fff',
+            },
+          }}
+          onClick={() => console.log(`Clicked ${number} - ${days[index % 7]}`)}
+        >
+          {/* Angka di tengah */}
+          <Typography variant="h4" component="div" sx={{ fontSize: '40px', fontWeight: 'bold', lineHeight: 1 }}>
+            {number}
+          </Typography>
+          {/* Hari di bawah angka */}
+          <Typography variant="body2" component="div" >
+            {days[index % 7]}
+          </Typography>
+        </Button>
+      ))}
+    </Box>
+
+    <Box>
+      
+    </Box>
+
+      {/* <Swiper
         spaceBetween={30}
         slidesPerView={3}
         navigation
@@ -115,7 +168,7 @@ const EventComponent = () => {
               <Card
                 sx={{
                   width: '342px',
-                  height: '500px',
+                  height: '706px',
                   backgroundColor: '#78B7D0',
                   color: '#000',
                   borderRadius: '10px',
@@ -172,56 +225,81 @@ const EventComponent = () => {
                   </Typography>
                   <Typography
                     variant="body2"
-                    color="text.secondary"
-                    sx={{ mt: 1 }}
+
                   >
                     {event.mainTime}
                   </Typography>
-                  <Typography variant="body2" sx={{ mt: 2 }}>
+                  <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                     {event.description}
                   </Typography>
+                  <hr className='mt-1 bg-[#C4C4C4]' />
                   <Box
                     sx={{
                       display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: 1,
-                      mt: 1,
-                      maxHeight: '100px', // Set a maximum height for the container
-                      overflowY: 'auto', // Enable vertical scroll if content overflows
+                      alignItems: 'center', // Menyelaraskan item secara vertikal
+                      justifyContent: 'space-between', // Memberi ruang di antara tombol dan waktu
+                      gap: 1, // Jarak antara tombol dan waktu
+                      mb: 1, // Margin bawah antar baris
                     }}
                   >
-                    {event.acara.map((acaraItem, idx) => (
-                      <Button
-                        key={idx}
-                        variant="outlined"
-                        size="small"
+                    <Typography
+                      sx={{
+                        mt: 2,
+                        fontWeight: 500,
+                        fontSize: '14px',
+                      }}>
+                      Acara:
+                    </Typography>
+                    <Typography
+                      sx={{
+                        mt: 2,
+                        fontWeight: 500,
+                        fontSize: '14px',
+                      }}>
+                      Waktu
+                    </Typography>
+                  </Box>
+                  {event.acara.map((acaraItem, idx) => (
+                    <Box
+                      key={idx}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center', // Menyelaraskan item secara vertikal
+                        justifyContent: 'space-between', // Memberi ruang di antara tombol dan waktu
+                        gap: 1, // Jarak antara tombol dan waktu
+                        mb: 1, // Margin bawah antar baris
+                      }}
+                    >
+                      <Box
                         sx={{
                           borderRadius: '20px',
                           padding: '2px 10px',
                           textTransform: 'none',
                           fontSize: '12px',
                           color: '#3C3C43',
-                          borderColor: '#3C3C43',
-                          transition: '0.3s',
-                          '&:hover': {
-                            backgroundColor: '#16325B',
-                            color: '#fff',
-                            borderColor: '#16325B',
-                          },
+                          border: '1px solid #3C3C43',
                         }}
-                        onClick={() => handleClickOpen(acaraItem)}
                       >
                         {acaraItem.title}
-                      </Button>
-                    ))}
-                  </Box>
+                      </Box>
+                      <Typography
+                        sx={{
+                          fontSize: '12px',
+                          color: '#3C3C43',
+                        }}
+                      >
+                        {acaraItem.time}
+                      </Typography>
+                    </Box>
+                  ))}
                 </CardContent>
               </Card>
+
             </Box>
           </SwiperSlide>
         ))}
-      </Swiper>
-
+      </Swiper> */}
+      {/* popup */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -233,6 +311,7 @@ const EventComponent = () => {
           },
         }}
       >
+
         <DialogTitle
           sx={{
             m: 0,
@@ -303,5 +382,6 @@ const EventComponent = () => {
     </Box>
   );
 };
+
 
 export default EventComponent;

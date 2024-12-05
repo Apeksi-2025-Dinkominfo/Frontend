@@ -22,7 +22,7 @@ export interface Acara {
     {
         date: '26 April',
         image: '/balaikota.webp',
-        headline: 'Hari Pertam',
+        headline: 'Hari Pertama',
         mainTime: '19:00 - Selesai',
         description: 'Please add your content here. Keep it short and simple.',
         location: 'Exibition Grand City Lantai 1',
