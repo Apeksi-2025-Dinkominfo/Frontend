@@ -5,16 +5,9 @@ import apeksiLogo from '../../public/logoNew.png';
 
 export default function CardSejarah() {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between bg-white p-6 px-19 py-3 rounded-lg shadow-md md:mx-10 mt-10">
-      <div className="hidden md:block md:w-1/3"> 
-        <Image
-          src={batikImage}
-          alt="Batik"
-          width={205}
-          height={564}
-          className="object-contain"
-        />
-      </div>
+    <div className="flex flex-col justify-center md:flex-row items-center bg-white p-6 py-3 rounded-lg shadow-md w-full mt-10">
+      {/* <div className="hidden md:block md:w-1/3"> 
+      </div> */}
       <div className="md:w-6/3 text-left font-poppins md:text-left mb-10 md:mb-15">
         <h1 className="text-518x132 text-5xl ml-12 font-Poppins font-bold text-[#16325B] mb-10 mt-10">
           Sejarah <br /> Asosiasi Pemerintah <br /> Kota Seluruh Indonesia
@@ -32,7 +25,7 @@ export default function CardSejarah() {
           </Link>
         </div>
       </div>
-      <div className="md:w-7/3 mt-15"> 
+      <div className="md:w-7/3 mt-15 "> 
         <Image
           src={apeksiLogo}
           alt="Apeksi Logo"

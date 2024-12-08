@@ -7,9 +7,10 @@ const cardData = [
   { img: '/belanjaIcon.png', link: '/surabaya/belanja' },
   { img: '/WisataIcon.png', link: '/surabaya/wisata' },
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
-  { img: '/transportIcon.png', link: '/surabaya/transportasi' },
-  { img: '/fasilitasKesehatan.png', link: '/hospital' },
-  { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
+  { img: '/transtportasi1.png', link: '/surabaya/transportasi' },
+  { img: '/Kesehatan1.png', link: '/hospital' },
+  { img: '/event1.png', link: '/surabaya/event' }, // Tambahkan card event
+  { img: '/Travel1.png', link: '/surabaya/travel' }, // Tambahkan card event
 ];
 
 export default function CityTourComponent() {

@@ -1,4 +1,5 @@
 import LandingPage from './components/landing';
+import CountdownComponent from './components/coutdown';
 import Sejarah from './components/CardSejarah';
 import Surabaya from './components/sapaSurabaya';
 import Hotel from './components/hotel';
@@ -19,10 +20,29 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+    
       <Box id="home">
-        <LandingPage />
+        <LandingPage />     
       </Box>
-      {/* Centered Large Box with Image */}
+      <Box
+        sx={{
+          position: 'absolute', // Posisi absolut
+          top: '85%', // Berada di atas layar
+          left: '50%', // Tengah horizontal
+          transform: 'translateX(-50%)', // Menyeimbangkan posisi agar benar-benar di tengah
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '8px', // Opsional: Tambahkan padding agar terlihat lebih rapi
+          zIndex: 30, // Pastikan di depan elemen lain
+        }}
+      >
+        <CountdownComponent />
+      </Box>
+
+      <Box sx={{ mt: { xs: 2, md: 20 } }} id="sejarah">
+        <Sejarah />
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -87,9 +107,7 @@ export default function Home() {
         ))}
       </Box>
 
-      <Box sx={{ mt: { xs: 2, md: 20 } }} id="sejarah">
-        <Sejarah />
-      </Box>
+      
 
       <Box sx={{ mt: { xs: 2, md: 20 } }}>
         <Surabaya />
