@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Drawer, IconButton, List, ListItem, ListItemText, Divider, Toolbar, Box, Typography } from '@mui/material';
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  Toolbar,
+  Box,
+  Typography,
+} from '@mui/material';
 import { FaHome, FaUser, FaCog, FaEnvelope, FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
@@ -25,7 +35,7 @@ const Sidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  const handleMenuItemClick = (path) => {
+  const handleMenuItemClick = (path: string) => {
     setActivePath(path);
     localStorage.setItem('activePath', path);
     if (isMobile) setIsCollapsed(true);
@@ -97,25 +107,26 @@ const Sidebar = () => {
 
         <List>
           {menuItems.map((item, index) => (
-            <ListItem
-              button
-              component={Link}
-              href={item.path}
-              key={index}
-              onClick={() => handleMenuItemClick(item.path)}
-              sx={{
-                backgroundColor: activePath === item.path ? 'blue' : '#252525',
-                '&:hover': {
-                  backgroundColor: activePath === item.path ? 'blue' : 'rgba(255, 255, 255, 0.2)',
-                },
-                color: 'white',
-                justifyContent: isCollapsed ? 'center' : 'flex-start',
-                'marginBottom':isCollapsed ? '15px' : '5px',
-              }}
-            >
-              <item.icon style={{ fontSize: '1.5rem', marginRight: isCollapsed ? 0 : '16px', color: 'white' }} />
-              {!isCollapsed && <ListItemText primary={item.text} />}
-            </ListItem>
+            <Link href={item.path} key={index} passHref>
+              <ListItem
+                button
+                onClick={() => handleMenuItemClick(item.path)}
+                sx={{
+                  backgroundColor: activePath === item.path ? 'blue' : '#252525',
+                  '&:hover': {
+                    backgroundColor: activePath === item.path ? 'blue' : 'rgba(255, 255, 255, 0.2)',
+                  },
+                  color: 'white',
+                  justifyContent: isCollapsed ? 'center' : 'flex-start',
+                  marginBottom: isCollapsed ? '15px' : '5px',
+                }}
+              >
+                <item.icon
+                  style={{ fontSize: '1.5rem', marginRight: isCollapsed ? 0 : '16px', color: 'white' }}
+                />
+                {!isCollapsed && <ListItemText primary={item.text} />}
+              </ListItem>
+            </Link>
           ))}
         </List>
 
@@ -125,8 +136,7 @@ const Sidebar = () => {
               justifyContent: 'center',
               backgroundColor: 'red',
               color: 'white',
-              // padding: '8px 16px',
-              borderRadius: '5px', // Adjusted border-radius for a less oval shape
+              borderRadius: '5px',
               '&:hover': {
                 backgroundColor: 'darkred',
               },
@@ -146,16 +156,14 @@ const Sidebar = () => {
           flexGrow: 1,
           padding: '16px',
           transition: 'margin-left 0.3s',
-          // marginLeft: isCollapsed ? '64px' : `${drawerWidth}px`,
-          marginLeft: isCollapsed ? '64px' : `${drawerWidth}px`, // Menyesuaikan margin dengan lebar sidebar
-          position: 'relative', // Untuk menjaga lapisan dengan footer
+          marginLeft: isCollapsed ? '64px' : `${drawerWidth}px`,
+          position: 'relative',
           zIndex: 1,
         }}
       >
         <Toolbar />
         {/* Main content here */}
       </Box>
-      
     </Box>
   );
 };

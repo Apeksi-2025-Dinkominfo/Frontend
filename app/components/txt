@@ -1,79 +1,172 @@
 'use client';
+import React, { useState } from "react";
+import { Box, Typography, Button } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import './globals.css';
-import NavLogo from './components/navbarLogo';
-import Footerr from './components/footer';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import AdminSidebar from './components/sidebar';
-import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
+// Impor Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css"; // Gaya default Swiper
 
-export default function RootLayout({ children }) {
-  const pathname = usePathname();
-  const isAdminPage = pathname?.startsWith('/admin');
+const VideoGallery = () => {
+  // Daftar video
+  const videos = [
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+  ];
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State untuk kontrol sidebar
-  const handleToggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  // State untuk video yang sedang diputar
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const sidebarWidth = 250; // Atur lebar sidebar saat terbuka
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // Fungsi navigasi video utama
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? videos.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === videos.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
   return (
-    <html lang="en">
-      <body style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}>
-        {/* Navbar */}
-        {!isAdminPage && (
-          <Box
-            sx={{
-              position: 'sticky',
-              top: 0,
-              zIndex: 1000,
-              backgroundColor: 'white',
+    <Box>
+      {/* Container Card Abu-Abu (Video Utama) */}
+      <Box
+        sx={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "20px",
+          textAlign: "center",
+          borderRadius: "15px",
+        }}
+      >
+        {/* Judul */}
+        <Typography
+          variant="h4"
+          sx={{
+            marginBottom: "24px",
+            fontSize: { xs: "40px", md: "60px" },
+            fontWeight: "bold",
+            color: "#FF8C00",
+          }}
+        >
+          Alun Alun Kota Surabaya
+        </Typography>
+
+        {/* Video Utama */}
+        <Box sx={{ position: "relative", display: "inline-block", width: "100%" }}>
+          <video
+            key={currentIndex}
+            controls
+            style={{
+              width: "100%",
+              borderRadius: "15px",
             }}
           >
-            <NavLogo />
-          </Box>
-        )}
+            <source src={videos[currentIndex]} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
 
-        {/* Konten utama dan footer */}
-        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-          {/* Sidebar */}
-          {isAdminPage && !isMobile && (
-            <AdminSidebar
-              isSidebarOpen={isSidebarOpen}
-              onToggleSidebar={handleToggleSidebar}
-              activeButton={1}
-              onButtonClick={() => {}}
-            />
-          )}
-
-          {/* Konten */}
-          <Box
+          {/* Tombol Navigasi */}
+          <Button
+            onClick={handlePrev}
             sx={{
-              flexGrow: 1,
-              marginLeft: isAdminPage && !isMobile ? (isSidebarOpen ? `${sidebarWidth}px` : '0') : '0',
-              transition: 'margin-left 0.3s ease', // Transisi untuk animasi
-              minHeight: 'calc(100vh - 80px)',
+              position: "absolute",
+              top: "50%",
+              left: "-40px",
+              transform: "translateY(-50%)",
+              backgroundColor: "#FF8C00",
+              color: "#FFF",
+              minWidth: "40px",
+              height: "40px",
+              padding: 0,
+              borderRadius: "50%",
+              "&:hover": {
+                backgroundColor: "#FFA500",
+              },
             }}
           >
-            {children}
-          </Box>
+            <ArrowBackIcon fontSize="small" />
+          </Button>
+
+          <Button
+            onClick={handleNext}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              right: "-40px",
+              transform: "translateY(-50%)",
+              backgroundColor: "#FF8C00",
+              color: "#FFF",
+              minWidth: "40px",
+              height: "40px",
+              padding: 0,
+              borderRadius: "50%",
+              "&:hover": {
+                backgroundColor: "#FFA500",
+              },
+            }}
+          >
+            <ArrowForwardIcon fontSize="small" />
+          </Button>
         </Box>
+      </Box>
 
-        {/* Footer */}
-        {isAdminPage && (
-          <Box
-            sx={{
-              marginLeft: isAdminPage && !isMobile ? (isSidebarOpen ? `${sidebarWidth}px` : '0') : '0',
-              transition: 'margin-left 0.3s ease', // Transisi untuk animasi
-              width: '100%',
-            }}
-          >
-            <Footerr />
-          </Box>
-        )}
-      </body>
-    </html>
+      {/* Thumbnail Section (Card Biru dengan Swiper) */}
+      <Box
+        sx={{
+          backgroundColor: "#002E5F",
+          padding: "40px",
+          marginTop: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <Swiper
+          spaceBetween={60} // Jarak antar slide
+          slidesPerView={4} // Jumlah slide yang terlihat
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          }}
+        >
+          {videos.map((video, index) => (
+            <SwiperSlide key={index}>
+              <Box
+                onClick={() => setCurrentIndex(index)}
+                sx={{
+                  cursor: "pointer",
+                  borderRadius: "12px",
+                  border: index === currentIndex ? "3px solid #FFA500" : "none",
+                  overflow: "hidden", // Supaya video tidak keluar dari card
+                }}
+              >
+                <video
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "12px",
+                    objectFit: "cover",
+                  }}
+                >
+                  <source src={video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default VideoGallery;

@@ -3,46 +3,30 @@
 import './globals.css';
 import NavLogo from './components/navbarLogo';
 import Footerr from './components/footer';
-import { Box, Typography,useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import AnimatedImage from './components/layout';
 import MobileNavbar from './components/mobileNav';
 import AdminSidebar from './components/sidebar';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import brokenPhoneImage from '../public/hp.png'; // Adjust the path if necessary
+import brokenPhoneImage from '../public/hp.png'; // Sesuaikan path jika diperlukan
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAdminPage = pathname?.startsWith('/admin'); // Check if it's an admin page
-
-  // State to manage the active button in the sidebar
-  // const [activeButton, setActiveButton] = useState(1);
-
-  // // Handler to update the active button
-  // const handleButtonClick = (id: number) => {
-  //   setActiveButton(id);
-  // };
-
+  const isAdminPage = pathname?.startsWith('/admin'); // Cek jika ini halaman admin
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State untuk kontrol sidebar
-  const handleToggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const sidebarWidth = 250; // Atur lebar sidebar saat terbuka
+  const handleToggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Fungsi toggle sidebar
 
-  // Media query to check if screen is small or larger
+  // Media query untuk deteksi perangkat
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <html lang="en">
-      <body
-        style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}
-      >
-        {/* Navbar (only shown on non-admin pages) */}
+      <body style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}>
+        {/* Navbar hanya untuk halaman non-admin */}
         {!isAdminPage && (
           <Box
             sx={{
@@ -56,11 +40,11 @@ export default function RootLayout({
           </Box>
         )}
 
-        {/* Main content */}
+        {/* Konten utama */}
         <Box sx={{ marginLeft: isAdminPage && !isMobile ? '250px' : '0' }}>
           {isAdminPage ? (
             <>
-              {/* Display mobile-only warning message */}
+              {/* Tampilkan pesan untuk perangkat mobile */}
               {isMobile ? (
                 <Box
                   sx={{
@@ -73,33 +57,28 @@ export default function RootLayout({
                     p: 3,
                   }}
                 >
-                  <Image 
-                    src={brokenPhoneImage} 
-                    alt="Broken phone icon" 
-                    width={150} 
-                    height={150} 
-                    style={{ opacity: 0.7 }} 
+                  <Image
+                    src={brokenPhoneImage}
+                    alt="Broken phone icon"
+                    width={150}
+                    height={150}
+                    style={{ opacity: 0.7 }}
                   />
                   <Typography variant="h6" sx={{ mt: 2, color: 'gray' }}>
-                    Lebih Disarankan Untuk Menggunakan Device Laptop atau PC untuk
-                    bagian admin.
+                    Lebih Disarankan Untuk Menggunakan Device Laptop atau PC untuk bagian admin.
                   </Typography>
                 </Box>
               ) : (
                 <>
-                  {/* Sidebar and admin content for larger screens */}
-                  <AdminSidebar isSidebarOpen={isSidebarOpen}
-                onToggleSidebar={handleToggleSidebar}
-                activeButton={1}
-                onButtonClick={() => {}} />
+                  {/* Sidebar dan konten admin untuk layar lebih besar */}
+                  <AdminSidebar
+                    isSidebarOpen={isSidebarOpen}
+                    onToggleSidebar={handleToggleSidebar}
+                    activeButton={1}
+                    onButtonClick={() => {}}
+                  />
                   <AnimatedImage>
-                    <Box
-                      sx={{
-                        minHeight: '100vh',
-                        width: '100%',
-                        marginTop: '-6rem',
-                      }}
-                    >
+                    <Box sx={{ minHeight: '100vh', width: '100%', marginTop: -6 }}>
                       {children}
                     </Box>
                   </AnimatedImage>
@@ -107,50 +86,31 @@ export default function RootLayout({
               )}
             </>
           ) : (
-            // Regular content for non-admin pages
+            // Konten untuk halaman non-admin
             <AnimatedImage>
-              <Box
-                sx={{
-                  minHeight: '100vh',
-                  width: '100%',
-                  marginTop: -6,
-                }}
-              >
+              <Box sx={{ minHeight: '100vh', width: '100%', marginTop: -6 }}>
                 {children}
               </Box>
             </AnimatedImage>
           )}
         </Box>
 
-        {/* Footer
-        <Box sx={{ mt: { xs: 4, md: 6 }, maxWidth: '100%' }}>
-          <Footerr />
-        </Box> */}
         {/* Footer */}
-{isAdminPage && (
-  <Box
-    sx={{
-      flexGrow: 1,
-      marginLeft: isAdminPage && !isMobile ? (isSidebarOpen ? `100px` : '0') : '0',
-      transition: 'margin-left 0.3s ease', // Transition for smooth animation
-      width: '100%',
-    }}
-  >
-    <Box sx={{ mt: { xs: 4, md: 6 }, maxWidth: '100%' }}>
-      <Footerr />
-    </Box>
-  </Box>
-)}
+        <Box
+          sx={{
+            mt: { xs: 4, md: 6 },
+            maxWidth: '100%',
+            marginLeft: isAdminPage && !isMobile ? (isSidebarOpen ? '100px' : '0') : '0',
+            transition: 'margin-left 0.3s ease',
+            width: '100%',
+          }}
+        >
+          <Footerr />
+        </Box>
 
-
-        {/* Mobile Navbar */}
+        {/* Navbar untuk mobile */}
         <MobileNavbar />
       </body>
     </html>
   );
 }
-
-
-
-
-
