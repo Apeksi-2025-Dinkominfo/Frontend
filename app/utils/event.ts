@@ -10,6 +10,7 @@ export interface Acara {
   
   export interface Event {
     date: string;
+    day:string;
     image: string;
     headline: string;
     mainTime: string;
@@ -20,9 +21,10 @@ export interface Acara {
   
   export const events: Event[] = [
     {
-        date: '26 April',
+        date: '4 ',
+        day:'minggu',
         image: '/balaikota.webp',
-        headline: 'Hari Pertam',
+        headline: 'Hari Pertama',
         mainTime: '19:00 - Selesai',
         description: 'Please add your content here. Keep it short and simple.',
         location: 'Exibition Grand City Lantai 1',
@@ -38,7 +40,8 @@ export interface Acara {
       },
     
       {
-        date: '27 April',
+        date: '5 ',
+        day:'senin',
         image: '/balaikota.webp',
         headline: 'Hari Ke Dua',
         mainTime: '06:00 - 19:00',
@@ -95,7 +98,8 @@ export interface Acara {
     
     
       {
-        date: '28 April',
+        date: '6',
+        day:'selasa',
         image: '/balaikota.webp',
         headline: 'Hari Ke Tiga',
         mainTime: '08:00 - 15:00',
@@ -142,7 +146,8 @@ export interface Acara {
     
     
       {
-        date: '29 April',
+        date: '7',
+        day:'rabu',
         image: '/balaikota.webp',
         headline: 'Hari Ke Empat',
         mainTime: '08:00 - 18:00',
@@ -182,7 +187,8 @@ export interface Acara {
     
     
       {
-        date: '30 April',
+        date: '8 ',
+        day:'kamis',
         image: '/balaikota.webp',
         headline: 'Hari Ke Lima',
         mainTime: '08:00 - selesai',
@@ -209,7 +215,8 @@ export interface Acara {
     
     
       {
-        date: '2-3 Mei',
+        date: '9 ',
+        day:'jumat',
         image: '/balaikota.webp',
         headline: 'Hari ke Enam dan Tujuh',
         mainTime: '08:00 - 21:00',
@@ -227,7 +234,8 @@ export interface Acara {
       },
     
       {
-        date: '3 Mei',
+        date: '10 ',
+        day:'sabtu',
         image: '/balaikota.webp',
         headline: 'Hari Ke Tujuh',
         mainTime: '09:00 - selesai',
@@ -244,55 +252,55 @@ export interface Acara {
         ],
       },
     
-      {
-        date: '3 Mei',
-        image: '/balaikota.webp',
-        headline: 'Headline 1',
-        mainTime: '07:00 - 09:00',
-        description: 'Please add your content here. Keep it short and simple.',
-        location: 'Balai Kota',
-        acara: [
-          {
-            title: 'Gala Dinner',
-            time: '19:00 - 21:00',
-            location: 'Grand Ballroom',
-            description: 'Makan malam mewah dengan tamu kehormatan',
-            dresscode: 'Formal',
-          },
-        ],
-      },
+      // {
+      //   date: '3 Mei',
+      //   image: '/balaikota.webp',
+      //   headline: 'Headline 1',
+      //   mainTime: '07:00 - 09:00',
+      //   description: 'Please add your content here. Keep it short and simple.',
+      //   location: 'Balai Kota',
+      //   acara: [
+      //     {
+      //       title: 'Gala Dinner',
+      //       time: '19:00 - 21:00',
+      //       location: 'Grand Ballroom',
+      //       description: 'Makan malam mewah dengan tamu kehormatan',
+      //       dresscode: 'Formal',
+      //     },
+      //   ],
+      // },
     
-      {
-        date: '4 Mei',
-        image: '/balaikota.webp',
-        headline: 'Headline 1',
-        mainTime: '07:00 - 09:00',
-        description: 'Please add your content here. Keep it short and simple.',
-        location: 'Balai Kota',
-        acara: [
-          {
-            title: 'Gala Dinner',
-            time: '19:00 - 21:00',
-            location: 'Grand Ballroom',
-            description: 'Makan malam mewah dengan tamu kehormatan',
-            dresscode: 'Formal',
-          },
-          {
-            title: 'Malam Apresiasi',
-            time: '21:30 - 23:00',
-            location: 'Convention Center',
-            description: 'Acara penghargaan bagi para anggota',
-            dresscode: 'Batiks',
-          },
-          {
-            title: 'Pentas Budaya',
-            time: '18:00 - 20:00',
-            location: 'Teater Terbuka',
-            description: 'Pertunjukan seni budaya tradisional',
-            dresscode: 'Casual',
-          }
-        ],
-      },
+      // {
+      //   date: '4 Mei',
+      //   image: '/balaikota.webp',
+      //   headline: 'Headline 1',
+      //   mainTime: '07:00 - 09:00',
+      //   description: 'Please add your content here. Keep it short and simple.',
+      //   location: 'Balai Kota',
+      //   acara: [
+      //     {
+      //       title: 'Gala Dinner',
+      //       time: '19:00 - 21:00',
+      //       location: 'Grand Ballroom',
+      //       description: 'Makan malam mewah dengan tamu kehormatan',
+      //       dresscode: 'Formal',
+      //     },
+      //     {
+      //       title: 'Malam Apresiasi',
+      //       time: '21:30 - 23:00',
+      //       location: 'Convention Center',
+      //       description: 'Acara penghargaan bagi para anggota',
+      //       dresscode: 'Batiks',
+      //     },
+      //     {
+      //       title: 'Pentas Budaya',
+      //       time: '18:00 - 20:00',
+      //       location: 'Teater Terbuka',
+      //       description: 'Pertunjukan seni budaya tradisional',
+      //       dresscode: 'Casual',
+      //     }
+      //   ],
+      // },
   ];
   
   
