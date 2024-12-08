@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import {
   Box,
@@ -8,27 +8,31 @@ import {
   useMediaQuery,
   Card,
   CardContent,
+  IconButton,
   CardMedia,
 } from '@mui/material';
 import { useTheme } from '@mui/system';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  fetchNewsItems,
-  getTruncatedBody,
-  getTruncatedTitle,
-  apeksiNews,
-  NewsItem,
-} from '../utils/beritaData';
-import '@fontsource/plus-jakarta-sans'; // Import Plus Jakarta Sans font
+import { fetchNewsItems, apeksiNews } from '../utils/beritaData';
+import '@fontsource/plus-jakarta-sans';
+import { ArrowForward, ArrowBack } from '@mui/icons-material';
 
 const Berita = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // State for fetched news items
-  const [beritaItems, setBeritaItems] = useState<NewsItem[]>([]);
+  const [beritaItems, setBeritaItems] = useState<BeritaItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0); // Index for the three-card section
+
+  interface BeritaItem {
+    id: number;
+    tittle: string;
+    images: string;
+    location: string;
+    date: string;
+    body: string;
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,216 +42,283 @@ const Berita = () => {
     fetchData();
   }, []);
 
-  // Function to handle the "Next" button
   const handleNext = () => {
-    if (currentIndex + 3 < apeksiNews.length) {
-      setCurrentIndex(currentIndex + 3);
+    if (currentIndex < beritaItems.length - 1) {
+      setCurrentIndex(currentIndex + 1); // Go to the next item
+    } else {
+      setCurrentIndex(0); // Loop back to the first item
     }
   };
 
-  // Function to handle the "Previous" button
+  // Handle "Previous" button click
   const handlePrevious = () => {
-    if (currentIndex - 3 >= 0) {
-      setCurrentIndex(currentIndex - 3);
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1); // Go to the previous item
+    } else {
+      setCurrentIndex(beritaItems.length - 1); // Loop to the last item
     }
   };
 
   return (
-    <Box className="bg-second" sx={{ mt: 4, px: 4, py: 4, fontFamily: 'Plus Jakarta Sans' }}>
-      <Typography
-        className="text-4xl font-semibold text-body"
-        sx={{ mb: 2, color: '#FFFFFF' }}
+    <div className="relative">
+  {/* Gambar dekoratif di luar Box */}
+  <div
+    className="absolute -top-1/3 right-[-100px] w-[20%] h-[140vh] z-0 bg-no-repeat bg-cover scale-110"
+    style={{
+      backgroundImage: "url('/newsbg.png')",
+    }}
+  ></div>
+
+<Box
+  className="bg-second relative z-10"
+  sx={{
+    mt: 4,
+    px: 2,
+    py: 3,
+    fontFamily: 'Plus Jakarta Sans',
+    maxWidth: '900px',
+    mx: 'auto',
+    borderRadius: '20px',
+    overflow: 'hidden',
+    position: 'relative',
+    boxShadow: 2,
+  }}
+>
+  {/* Kurva Background */}
+  <Box
+    sx={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: '60px',
+      zIndex: 0,
+    }}
+  ></Box>
+
+  <Typography
+    className="text-2xl font-semibold text-body"
+    sx={{ mb: 2, color: '#FFFFFF', position: 'relative', zIndex: 1 }}
+  >
+    Berita APEKSI
+  </Typography>
+
+  <Grid container spacing={2} alignItems="stretch">
+    {/* Carousel for Berita APEKSI */}
+    <Grid item xs={12} md={7}>
+      <Card
+        sx={{
+          backgroundColor: '#78B7D0',
+          position: 'relative',
+          overflow: 'hidden',
+          height: 300,
+          borderRadius: '12px',
+        }}
       >
-        Berita APEKSI
-      </Typography>
-      <Grid container spacing={4}>
-        {/* Apeksi News Section (Left Side) */}
-        <Grid item xs={12} md={7}>
-          {/* Main News Card */}
-          {apeksiNews[0] && (
-            <Card sx={{ mb: 2, backgroundColor: '#78B7D0', color: '#FFFFFF' }}>
-              <Link href={`/berita/${apeksiNews[0].id}`} passHref>
-                <CardMedia
-                  component="img"
-                  src={apeksiNews[0].images}
-                  alt={apeksiNews[0].tittle}
-                  sx={{
-                    height: 320,
-                    objectFit: 'cover',
-                    cursor: 'pointer',
-                  }}
-                />
-              </Link>
-              <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                  {getTruncatedTitle(apeksiNews[0].tittle)}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  color="textSecondary"
-                  sx={{ color: '#CCCCCC' }}
-                >
-                  {apeksiNews[0].location} -{' '}
-                  {new Date(apeksiNews[0].date).toLocaleDateString('id-ID')}
-                </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
-                  {getTruncatedBody(apeksiNews[0].body, 150)}
-                </Typography>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Slider for Other News Items */}
-          {!isMobile && ( // Hide the slider on mobile
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <Button
-                variant="outlined"
-                onClick={handlePrevious}
-                disabled={currentIndex === 0}
-                sx={{
-                  color: '#8AB393',
-                  borderColor: '#8AB393',
-                  minWidth: '40px',
-                  height: '40px',
-                  mr: 1,
-                  borderRadius: '50%',
-                  '&:hover': {
-                    backgroundColor: '#4E4E4E',
-                  },
-                }}
-              >
-                &lt;
-              </Button>
-
-              <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                {apeksiNews.slice(currentIndex + 1, currentIndex + 4).map((news) => (
-                  <Grid item xs={12} sm={4} key={news.id}>
-                    <Card sx={{ backgroundColor: '#78B7D0', color: '#FFFFFF' }}>
-                      <Link href={`/berita/${news.id}`} passHref>
-                        <CardMedia
-                          component="img"
-                          src={news.images}
-                          alt={news.tittle}
-                          sx={{
-                            height: 160,
-                            objectFit: 'cover',
-                            cursor: 'pointer',
-                          }}
-                        />
-                      </Link>
-                      <CardContent>
-                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                          {getTruncatedTitle(news.tittle, 60)}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          color="textSecondary"
-                          sx={{ color: '#CCCCCC' }}
-                        >
-                          {news.location} -{' '}
-                          {new Date(news.date).toLocaleDateString('id-ID')}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-
-              <Button
-                variant="outlined"
-                onClick={handleNext}
-                disabled={currentIndex + 3 >= apeksiNews.length - 1}
-                sx={{
-                  color: '#8AB393',
-                  borderColor: '#ffff',
-                  minWidth: '40px',
-                  height: '40px',
-                  ml: 1,
-                  borderRadius: '50%', // Make it circular
-                  '&:hover': {
-                    backgroundColor: '#4E4E4E',
-                  },
-                }}
-              >
-                &gt;
-              </Button>
-            </Box>
-          )}
-        </Grid>
-
-        {/* Fetched News Section (Right Side) */}
-        <Grid item xs={12} md={5}>
-          <Box
+        <Link href={`/berita/${beritaItems[currentIndex]?.id}`} passHref>
+          <CardMedia
+            component="img"
+            src={beritaItems[currentIndex]?.images}
+            alt={beritaItems[currentIndex]?.tittle}
             sx={{
-              backgroundColor: '#78B7D0',
-              padding: 2,
-              borderRadius: 2,
-              border: '1px solid #8AB393',
-              maxWidth: '100%',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              cursor: 'pointer',
+            }}
+          />
+        </Link>
+
+        <CardContent
+          sx={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            color: '#FFFFFF',
+            padding: 1,
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{ fontWeight: 'bold', color: '#FFFFFF' }}
+          >
+            {beritaItems[currentIndex]?.tittle}
+          </Typography>
+        </CardContent>
+
+        {/* Arrow navigation */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '8px',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
+          }}
+        >
+          <IconButton
+            onClick={handlePrevious}
+            sx={{
+              backgroundColor: '#fff',
+              borderRadius: '50%',
+              padding: 0.5,
+              boxShadow: 2,
+              '&:hover': { backgroundColor: '#ddd' },
             }}
           >
-            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'black', mb: 2 }}>
-              Berita Info Surabaya
-            </Typography>
-            {(beritaItems.slice(0, 4) || []).map((news) => ( // Show only 4 news items
-              <Box key={news.id} sx={{ mb: 4 }}>
-                <Link href={`/berita/${news.id}`} passHref>
-                  <Box sx={{ cursor: 'pointer' }}>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontWeight: 'bold', color: 'black' }}
-                    >
-                      {getTruncatedTitle(news.tittle)}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      color="textSecondary"
-                      sx={{ color: '#252525' }}
-                    >
-                      {news.location} -{' '}
-                      {new Date(news.date).toLocaleDateString('id-ID')}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        mt: 1,
-                        color: 'black',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                      }}
-                    >
-                      {getTruncatedBody(news.body, 150)}
-                    </Typography>
-                  </Box>
-                </Link>
-              </Box>
-            ))}
-          </Box>
-        </Grid>
-      </Grid>
-
-      <Box textAlign="center" sx={{ mt: 4 }}>
-        <Button
-          variant="outlined"
+            <ArrowBack />
+          </IconButton>
+        </Box>
+        <Box
           sx={{
-            borderColor: '#8AB393',
-            color: '#8AB393',
-            borderRadius: '25px',
-            padding: '10px 20px',
-            '&:hover': {
-              borderColor: '#8AB393',
-              backgroundColor: '#F0FFF4',
-            },
+            position: 'absolute',
+            top: '50%',
+            right: '8px',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
           }}
-          href="/berita"
         >
-          Lihat semua berita
-        </Button>
+          <IconButton
+            onClick={handleNext}
+            sx={{
+              backgroundColor: '#fff',
+              borderRadius: '50%',
+              padding: 0.5,
+              boxShadow: 2,
+              '&:hover': { backgroundColor: '#ddd' },
+            }}
+          >
+            <ArrowForward />
+          </IconButton>
+        </Box>
+
+        {/* Custom Pagination Dots */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 8,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 0.5,
+          }}
+        >
+          {beritaItems.slice(0, 4).map((_, index) => (
+            <span
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: index === currentIndex ? '#fff' : '#bbb',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s',
+              }}
+            />
+          ))}
+        </Box>
+      </Card>
+    </Grid>
+
+    {/* Berita Surabaya Section */}
+    <Grid item xs={12} md={5} mb={0}>
+      <Box
+        sx={{
+          padding: 1,
+          borderRadius: 2,
+          height: '100%', // Pastikan stretch ke tinggi penuh
+        }}
+      >
+        <Typography
+          variant="subtitle1"
+          sx={{ fontWeight: 'bold', color: 'black', mt: -3, textAlign: 'right' }}
+        >
+          Surabaya
+        </Typography>
+        {(apeksiNews.slice(0, 4) || []).map((news) => (
+          <Box key={news.id} sx={{ display: 'flex', mb: 2 }}>
+            <Link href={`/berita/${news.id}`} passHref>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  cursor: 'pointer',
+                  gap: 1,
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  src={news.images}
+                  alt={news.tittle}
+                  sx={{
+                    height: 60,
+                    width: 80,
+                    objectFit: 'cover',
+                    borderRadius: 2,
+                  }}
+                />
+                <Box>
+                  <Typography
+                    variant="body2"
+                    sx={{ fontWeight: 'bold', color: 'white' }}
+                  >
+                    {news.tittle}
+                  </Typography>
+                  <Typography variant="caption" color="white">
+                    {news.location} -{' '}
+                    {new Date(news.date).toLocaleDateString('id-ID', {
+                      day: 'numeric',
+                      year: 'numeric',
+                      month: 'long',
+                    })}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      mt: 0.5,
+                      color: 'black',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                    }}
+                  ></Typography>
+                </Box>
+              </Box>
+            </Link>
+          </Box>
+        ))}
       </Box>
-    </Box>
+    </Grid>
+  </Grid>
+
+  <Box sx={{ position: 'absolute', bottom: 16, right: 20 }}>
+    <Button
+      variant="outlined"
+      sx={{
+        borderColor: '#8AB393',
+        color: '#8AB393',
+        borderRadius: '20px',
+        padding: '8px 16px',
+        fontSize: '0.8rem',
+        '&:hover': {
+          borderColor: '#8AB393',
+          backgroundColor: '#F0FFF4',
+        },
+      }}
+      href="/berita"
+    >
+      Lihat semua berita
+    </Button>
+  </Box>
+</Box>
+
+</div>
   );
 };
 
