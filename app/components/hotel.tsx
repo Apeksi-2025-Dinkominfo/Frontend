@@ -149,12 +149,20 @@ const AccommodationSlider: React.FC = () => {
   };
 
   return (
-    <div className="w-full p-5">
-      <div className="flex justify-between items-center mb-5">
+    <div className="relative">
+      {/* Background Image */}
+      <div
+        className="absolute -top-1/2 right-0 w-1/2 h-[150vh] z-0 bg-cover bg-center scale-110 hidden lg:block"
+        style={{
+          backgroundImage: `url('/htlbg.png')`,
+        }}
+      ></div>
+
+      <div className="flex justify-between items-center mb-5 ">
         <h2 className="text-4xl font-semibold text-body">Hotel di Surabaya</h2>
         <button
           onClick={() => router.push('/hotels')}
-          className="text-light hover:underline hidden md:block"
+          className="text-light hover:underline hidden md:block z-40 mr-20"
         >
           Lihat semua
         </button>
@@ -213,63 +221,95 @@ const AccommodationSlider: React.FC = () => {
         </div>
       </div>
 
-      <div className="hidden md:block">
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={4}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
+      <div className="py-8 relative hidden sm:block">
+        <div
+          className="absolute top-0 right-0 w-1/3 h-full z-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('/path/to/your/background-image.jpg')`,
           }}
-        >
-          {accommodations.slice(0, 6).map((item) => (
-  <SwiperSlide key={item.id}>
-    <Link href={item.websiteLink} passHref>
-      <div
-        className="relative bg-white shadow-lg rounded-lg overflow-hidden"
-        style={{ height: '420px', width: '100%' }}
-      >
-        <div className="absolute top-[220px] left-4 bg-light text-white px-3 py-1 rounded-lg flex items-center">
-          <LocationOnIcon className="mr-1" fontSize="small" />
-          <span className="text-sm">
-            {calculateDistance(
-              referenceLat,
-              referenceLon,
-              item.latitude,
-              item.longitude
-            )}
-          </span>
-        </div>
-        <img
-          src={item.hotelThumbnail.link}
-          className="w-full h-64 object-cover rounded-t-lg"
-        />
-        <div className="p-4">
-          <h4 className="text-lg font-semibold">{item.name}</h4>
-          <p className="text-gray-600">
-            {item.description.length > 150
-              ? item.description.substring(0, 80) + '...'
-              : item.description}
-          </p>
-        </div>
-        <div className="absolute bottom-4 left-4 flex items-center">
-          <div className="flex items-center ml-2">
-            <PhoneOutlinedIcon className="mr-1" />
-            <span className="font-light">{item.phoneNumber}</span>
-          </div>
-          <HotelOutlinedIcon className=" ml-20" />
-          <span className="font-light">
-            {item.hotelCategory.starNumberName}
-          </span>
-        </div>
-      </div>
-    </Link>
-  </SwiperSlide>
-))}
+        ></div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-3 gap-4">
+            {/* Kartu Kiri */}
+            <div className="col-span-1">
+              <a
+                href={accommodations[0].websiteLink}
+                className="relative block shadow-lg rounded-lg overflow-hidden bg-white"
+                style={{ height: '550px' }}
+              >
+                {/* Gambar Full */}
+                <img
+                  src={accommodations[0].hotelThumbnail.link}
+                  alt={accommodations[0].name}
+                  className="w-full h-full object-cover"
+                />
 
-        </Swiper>
+                {/* Nama Hotel dan StarNumberName */}
+                <div className="absolute bottom-4 left-4 flex flex-col text-xl text-white font-semibold">
+                  <span className="text-xl">{accommodations[0].name}</span>
+                  <span>{accommodations[0].hotelCategory.starNumberName}</span>
+                </div>
+
+                {/* Lokasi di Pojok Kanan */}
+                <div className="absolute bottom-4 right-4 flex items-center text-xl font-bold text-white">
+                  <LocationOnIcon fontSize="small" className="mr-1" />
+                  <span>
+                    {formatDistance(
+                      calculateDistanceInMeters(
+                        referenceLat,
+                        referenceLon,
+                        accommodations[0].latitude,
+                        accommodations[0].longitude
+                      )
+                    )}
+                  </span>
+                </div>
+              </a>
+            </div>
+
+            {/* Kartu Kanan (2x2 Grid) */}
+            <div className="col-span-2 grid grid-cols-2 gap-3">
+              {accommodations.slice(1, 5).map((item) => (
+                <a
+                  href={item.websiteLink}
+                  key={item.id}
+                  className="relative block shadow-lg rounded-lg overflow-hidden bg-white"
+                  style={{ height: '260px' }}
+                >
+                  <img
+                    src={item.hotelThumbnail.link}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* Informasi */}
+                  <div className="absolute bottom-4 left-4 flex flex-col text-xl text-white font-semibold">
+                    {/* Nama Hotel */}
+                    <span className="text-xl">{item.name}</span>
+
+                    {/* StarNumberName */}
+                    <span>{item.hotelCategory.starNumberName}</span>
+                  </div>
+
+                  {/* Lokasi di Pojok Kanan */}
+                  <div className="absolute bottom-4 right-4 flex items-center text-xl font-bold text-white">
+                    <LocationOnIcon fontSize="small" className="mr-1" />
+                    <span>
+                      {formatDistance(
+                        calculateDistanceInMeters(
+                          referenceLat,
+                          referenceLon,
+                          item.latitude,
+                          item.longitude
+                        )
+                      )}
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
