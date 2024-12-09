@@ -7,9 +7,9 @@ const cardData = [
   { img: '/belanjaIcon.png', link: '/surabaya/belanja' },
   { img: '/WisataIcon.png', link: '/surabaya/wisata' },
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
-  { img: '/transtportasi1.png', link: '/surabaya/transportasi' },
-  { img: '/Kesehatan1.png', link: '/hospital' },
-  { img: '/event1.png', link: '/surabaya/event' }, // Tambahkan card event
+  { img: '/transportasi.png', link: '/surabaya/transportasi' },
+  { img: '/Kesehatan.png', link: '/hospital' },
+  { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
   { img: '/Travel1.png', link: '/surabaya/travel' }, // Tambahkan card event
 ];
 
