@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
     
-      <Box id="home">
+      <Box id="home" className="z-50">
         <LandingPage />     
       </Box>
       <Box
@@ -52,7 +52,7 @@ export default function Home() {
         }}
       >
         <Box sx={{ maxWidth: '40%', width: '50%' }}>
-          <Image
+      <Image
             src="/kata.png" // Replace with your image path
             alt="Centered Image"
             width={400}  // Adjust width as needed
@@ -70,7 +70,9 @@ export default function Home() {
           justifyContent: 'center',
         }}
       >
-        <Box sx={{ maxWidth: '80%', width: '100%' }}>
+       
+        <Box sx={{ maxWidth: '80%', width: '100%' }}>  
+       
           <Image
             src="/PesertaMunas.png" 
             alt="Foto Walikota"

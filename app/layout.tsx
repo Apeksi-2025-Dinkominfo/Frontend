@@ -55,6 +55,10 @@ export default function RootLayout({
             padding: 0,
             width: '100%',
             overflowX: 'hidden',
+            backgroundImage: "url('/seluruh4.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: 'auto',
             backgroundColor: isDarkMode ? '#0F172A' : '#F7F7F7',
             color: isDarkMode ? '#ffffff' : '#000000',
           }}

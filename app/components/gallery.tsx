@@ -73,19 +73,6 @@ const GalleryComponent = () => {
 
   return (
     <>
-      {/* Header Background */}
-      <Box
-        sx={{
-          backgroundImage: "url('/kintirkintiran4.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          width: "100vw",
-          height: "200px",
-          marginBottom: "50px",
-        }}
-      ></Box>
-
       {/* Gallery Container */}
       <Container maxWidth={false} sx={{ padding: 0 }}>
         {/* Section Title */}
@@ -93,7 +80,7 @@ const GalleryComponent = () => {
           <Typography
             variant="h4"
             fontWeight="bold"
-            color="#227B94"
+            color="#FF8D00"
             sx={{ fontFamily: "serif", textAlign: "center" }}
           >
             Galeri APEKSI
@@ -129,7 +116,7 @@ const GalleryComponent = () => {
                   />
                 </Card>
               ))}
-              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 10, left: "74%", transform: "translateX(-30%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
+              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 10, left:'800px', transform: "translateX(-30%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
                 MUNAS
               </Typography>
             </Box>
@@ -181,7 +168,7 @@ const GalleryComponent = () => {
                   />
                 </Card>
               ))}
-              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 20, left: "74%", transform: "translateX(-50%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
+              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
                 2025
               </Typography>
             </Box>

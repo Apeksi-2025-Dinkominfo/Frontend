@@ -151,23 +151,25 @@ const AccommodationSlider: React.FC = () => {
   return (
     <div className="relative">
       {/* Background Image */}
-      <div
+      {/* <div
         className="absolute -top-1/2 right-0 w-1/2 h-[150vh] z-0 bg-cover bg-center scale-110 hidden lg:block"
         style={{
           backgroundImage: `url('/htlbg.png')`,
         }}
-      ></div>
+      ></div> */}
 
-      <div className="flex justify-between items-center mb-5 ">
-        <h2 className="text-4xl font-semibold text-body">Hotel di Surabaya</h2>
-        <button
+      <div className="flex justify-center items-end mb-5 ">
+        <h2 className="text-5xl font-bold  text-[#FF8D00]">Hotel di Surabaya</h2> 
+      </div>
+      <div className="flex justify-end pr-12 mr-1 text-xl  ">
+         <button
           onClick={() => router.push('/hotels')}
-          className="text-light hover:underline hidden md:block z-40 mr-20"
+          className="text-[#FF8D00] hover:underline hidden md:block z-40 mr-20"
         >
           Lihat semua
-        </button>
+      </button>
       </div>
-
+     
       <div className="block md:hidden">
         {accommodations.slice(0, 5).map((item) => (
           <Link href={item.websiteLink} key={item.id} passHref>

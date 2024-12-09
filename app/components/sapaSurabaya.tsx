@@ -30,7 +30,7 @@ export default function CityTourComponent() {
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen relative"
-      style={{ backgroundColor: '#78B7D0' }}
+      
     >
 
       <Link href="https://forms.gle/rpkMZ237aK8tczW78" passHref>
@@ -59,7 +59,7 @@ export default function CityTourComponent() {
         </Typography>
       </div>
 
-      <div className=" carousel-container flex flex-col items-center justify-center " style={{ height: '50px', marginBottom: '350px' }}>
+      <div className=" carousel-container flex flex-col items-center justify-center z-50 " style={{ height: '50px', marginBottom: '350px'  }}>
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
             onClick={handlePrev}

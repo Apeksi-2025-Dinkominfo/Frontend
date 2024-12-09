@@ -4,9 +4,9 @@ import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-// Impor Swiper
+// Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; 
+import "swiper/css";
 
 const VideoGallery = () => {
   // Daftar video
@@ -75,13 +75,13 @@ const VideoGallery = () => {
             Your browser does not support the video tag.
           </video>
 
-          {/* Tombol Navigasi */}
+          {/* Tombol Navigasi (Selalu di dalam video pada semua ukuran layar) */}
           <Button
             onClick={handlePrev}
             sx={{
               position: "absolute",
               top: "50%",
-              left: "-40px",
+              left: "10px", // Fixed positioning inside video
               transform: "translateY(-50%)",
               backgroundColor: "#FF8C00",
               color: "#FFF",
@@ -102,7 +102,7 @@ const VideoGallery = () => {
             sx={{
               position: "absolute",
               top: "50%",
-              right: "-40px",
+              right: "10px", // Fixed positioning inside video
               transform: "translateY(-50%)",
               backgroundColor: "#FF8C00",
               color: "#FFF",
@@ -131,12 +131,12 @@ const VideoGallery = () => {
       >
         <Swiper
           spaceBetween={60} // Jarak antar slide
-          slidesPerView={4} // Jumlah slide yang terlihat
+          slidesPerView={1} // Default view is 1 video
           breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
+            640: { slidesPerView: 1 }, // On mobile, only 1 video
+            768: { slidesPerView: 2 }, // On tablets, show 2 videos
+            1024: { slidesPerView: 3 }, // On large screens, show 3 videos
+            1280: { slidesPerView: 4 }, // On very large screens, show 4 videos
           }}
         >
           {videos.map((video, index) => (

@@ -10,6 +10,7 @@ import {
   AccordionDetails,
   createTheme,
   ThemeProvider,
+  useMediaQuery,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -30,20 +31,27 @@ const EventComponent: React.FC = () => {
     setSelectedDay(newValue);
   };
 
+  // Gunakan media query untuk deteksi ukuran layar
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // Layar kecil (xs atau sm)
+
   return (
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          backgroundColor: "#F5F5F5", // Warna latar belakang serupa dengan kode kedua
+          backgroundColor: "#F5F5F5", // Warna latar belakang
           minHeight: "100vh",
-          // padding: "20px", 
         }}
       >
         {/* Header */}
-        <Box sx={{ textAlign: "center", padding: "10px" }}>
+        <Box
+          sx={{
+            textAlign: "center",
+            padding: isSmallScreen ? "20px" : "40px",
+          }}
+        >
           <Typography
             sx={{
-              fontSize: "20px",
+              fontSize: isSmallScreen ? "16px" : "20px",
               fontWeight: "bold",
               color: "#005A8D",
               textTransform: "uppercase",
@@ -54,7 +62,7 @@ const EventComponent: React.FC = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "40px",
+              fontSize: isSmallScreen ? "28px" : "40px",
               fontWeight: "bold",
               color: "#005A8D",
               marginBottom: "5px",
@@ -64,10 +72,11 @@ const EventComponent: React.FC = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "30px",
-              marginLeft: "450px",
+              fontSize: isSmallScreen ? "20px" : "30px",
               fontWeight: "bold",
               color: "#005A8D",
+              marginBottom: isSmallScreen ? "10px" : "20px",
+              marginLeft: isSmallScreen ? "10px" : "450px",
             }}
           >
             Mei 2025
@@ -80,27 +89,27 @@ const EventComponent: React.FC = () => {
             display: "flex",
             justifyContent: "center",
             marginBottom: "20px",
+            paddingX: isSmallScreen ? "10px" : "0px",
           }}
         >
           <Tabs
             value={selectedDay}
             onChange={handleTabChange}
-            variant="scrollable"
+            variant={isSmallScreen ? "scrollable" : "standard"}
             scrollButtons="auto"
             TabIndicatorProps={{ style: { display: "none" } }}
             sx={{
               "& .MuiTab-root": {
-                padding: "40px 16px",
-                margin: "0 15px",
+                padding: isSmallScreen ? "20px 8px" : "40px 16px",
+                margin: isSmallScreen ? "0 5px" : "0 15px",
                 borderRadius: "8px",
-                fontSize: "16px",
+                fontSize: isSmallScreen ? "14px" : "16px",
                 fontWeight: "bold",
                 textTransform: "none",
               },
               "& .Mui-selected": {
                 backgroundColor: "#FF8C00",
                 color: "#005A8D",
-                // color: "#FFFFFF",
               },
               "& .MuiTab-root:not(.Mui-selected)": {
                 backgroundColor: "#005A8D",
@@ -115,13 +124,19 @@ const EventComponent: React.FC = () => {
                   <Box textAlign="center">
                     <Typography
                       sx={{
-                        fontSize: "20px",
+                        fontSize: isSmallScreen ? "16px" : "20px",
                         fontWeight: "bold",
                       }}
                     >
                       {event.date}
                     </Typography>
-                    <Typography sx={{ fontSize: "12px" }}>{event.day}</Typography>
+                    <Typography
+                      sx={{
+                        fontSize: isSmallScreen ? "10px" : "12px",
+                      }}
+                    >
+                      {event.day}
+                    </Typography>
                   </Box>
                 }
                 value={index}
@@ -135,14 +150,14 @@ const EventComponent: React.FC = () => {
           sx={{
             backgroundColor: "#0B3C5D",
             borderRadius: "15px",
-            padding: "20px",
+            padding: isSmallScreen ? "10px" : "20px",
             color: "#FFFFFF",
           }}
         >
           <Typography
             sx={{
               fontWeight: "bold",
-              fontSize: "30px",
+              fontSize: isSmallScreen ? "20px" : "30px",
               textAlign: "center",
               marginBottom: "10px",
             }}
@@ -152,9 +167,9 @@ const EventComponent: React.FC = () => {
           <Typography
             sx={{
               fontWeight: "bold",
-              fontSize: "30px",
+              fontSize: isSmallScreen ? "18px" : "30px",
               textAlign: "center",
-              margin: "0 250px 20px 0",
+              marginBottom: isSmallScreen ? "15px" : "20px",
             }}
           >
             Rangkaian Acara:
@@ -173,6 +188,7 @@ const EventComponent: React.FC = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
+                  flexDirection: isSmallScreen ? "column" : "row",
                   maxWidth: "600px",
                   width: "100%",
                 }}
@@ -181,15 +197,15 @@ const EventComponent: React.FC = () => {
                 <Box
                   sx={{
                     fontWeight: "bold",
-                    // fontFamily: "Plus Jakarta Sans",
-                    fontSize: "20px",
+                    fontSize: isSmallScreen ? "16px" : "20px",
                     color: "#FFFFFF",
                     backgroundColor: "#005A8D",
-                    padding: "10px",
+                    padding: isSmallScreen ? "8px" : "10px",
                     borderRadius: "10px",
-                    flex: "0 0 120px",
+                    flex: isSmallScreen ? "0" : "0 0 120px",
                     textAlign: "center",
-                    marginRight: "10px",
+                    marginRight: isSmallScreen ? "0" : "10px",
+                    marginBottom: isSmallScreen ? "10px" : "0",
                   }}
                 >
                   {event.time}
@@ -199,6 +215,7 @@ const EventComponent: React.FC = () => {
                 <Accordion
                   sx={{
                     flex: "1",
+                    width: "100%",
                     borderRadius: "10px",
                     "&:before": { display: "none" },
                   }}
@@ -213,8 +230,7 @@ const EventComponent: React.FC = () => {
                   >
                     <Typography
                       sx={{
-                        // fontWeight: "bold",
-                        fontSize: "20px",
+                        fontSize: isSmallScreen ? "16px" : "20px",
                         color: "#FFFFFF",
                       }}
                     >

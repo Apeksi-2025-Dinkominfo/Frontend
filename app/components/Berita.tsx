@@ -62,12 +62,12 @@ const Berita = () => {
   return (
     <div className="relative">
   {/* Gambar dekoratif di luar Box */}
-  <div
+  {/* <div
     className="absolute -top-1/3 right-[-100px] w-[20%] h-[140vh] z-0 bg-no-repeat bg-cover scale-110"
     style={{
       backgroundImage: "url('/newsbg.png')",
     }}
-  ></div>
+  ></div> */}
 
 <Box
   className="bg-second relative z-10"
