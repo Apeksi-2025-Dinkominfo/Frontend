@@ -38,6 +38,7 @@
     "react-countdown": "^2.3.6",
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
+    "react-image-lightbox": "^5.1.4",
     "react-material-ui-carousel": "^3.4.2",
     "react-simple-captcha": "^9.3.1",
     "react-slick": "^0.28.1",
