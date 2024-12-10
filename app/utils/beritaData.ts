@@ -1,3 +1,5 @@
+import { parseISO, parse, format as dateFormat } from 'date-fns';
+
 export interface NewsItem {
   id: number;
   tittle: string;
@@ -7,68 +9,29 @@ export interface NewsItem {
   body: string;
 }
 
-// Apeksi news dummy data
-export const apeksiNews: NewsItem[] = [
-  {
-    id: 101,
-    tittle: "Momentum Hari Sumpah Pemuda",
-    images: "/kotalama.jpg", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  {
-    id: 102,
-    tittle: "Momentum Hari Sumpah Pemuda 2",
-    images: "/KulinerNew.JPG", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  {
-    id: 103,
-    tittle: "Momentum Hari Sumpah Pemuda",
-    images: "/perpus.jpg", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  {
-    id: 104,
-    tittle: "Momentum Hari Sumpah Pemuda",
-    images: "/siropen.jpg", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  {
-    id: 105,
-    tittle: "Momentum Hari Sumpah Pemuda",
-    images: "/path-to-your-image.jpg", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  {
-    id: 106,
-    tittle: "Momentum Hari Sumpah Pemuda",
-    images: "/path-to-your-image.jpg", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  {
-    id: 107,
-    tittle: "Momentum Hari Sumpah Pemuda",
-    images: "/path-to-your-image.jpg", // Replace with actual path to the image
-    location: "Surabaya",
-    date: "2024-10-28",
-    body: "Pemerintah Kota Surabaya menggelar upacara peringatan Hari Sumpah Pemuda ke-96...",
-  },
-  // Add more dummy items as needed
-];
+export interface SurabayaItem {
+  id: number;
+  title: string;
+  image: string;
+  category: string;
+  created_at: string;
+  content: string;
+}
 
-// Function to fetch all news items from the backend
+export const SurabayFetch = async (): Promise<SurabayaItem[]> => {
+  try {
+    const response = await fetch('https://surabaya.go.id/api/data/news?page=1&category=berita');
+    if (!response.ok) {
+      throw new Error('Failed to fetch news items');
+    }
+    const jsonResponse = await response.json();
+    return jsonResponse.data || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
 export const fetchNewsItems = async (): Promise<NewsItem[]> => {
   try {
     const response = await fetch('http://localhost:5000/news?limit=100');
@@ -83,9 +46,27 @@ export const fetchNewsItems = async (): Promise<NewsItem[]> => {
   }
 };
 
-// Other utility functions remain the same
-export const getLatestNews = (items: NewsItem[]) => {
-  return items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+export const parseDate = (dateString: string | undefined): Date => {
+  if (!dateString) {
+    console.error('Received undefined date');
+    return new Date(); // Return current date as fallback
+  }
+  try {
+    // Try parsing as ISO format (2024-10-07T10:00:00.000Z)
+    return parseISO(dateString);
+  } catch {
+    try {
+      // Try parsing as custom format (2024-12-09T07:48:48+07:00)
+      return parse(dateString, "yyyy-MM-dd'T'HH:mm:ssXXX", new Date());
+    } catch {
+      console.error(`Failed to parse date: ${dateString}`);
+      return new Date(); // Return current date as fallback
+    }
+  }
+};
+
+export const formatDate = (date: Date): string => {
+  return dateFormat(date, 'dd MMM yyyy');
 };
 
 export const getTruncatedTitle = (title: string, maxLength = 150) => {
@@ -101,3 +82,4 @@ export const getTruncatedBody = (body: string, maxLength = 350) => {
   }
   return body;
 };
+

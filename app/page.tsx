@@ -6,7 +6,7 @@ import WalKot from './components/walkota';
 import Hotel from './components/hotel';
 import WalikotaVideo from './components/walkitvid';
 import Jadwal from './components/jadwal';
-import Agenda from './components/agenda';
+import Walikota from './components/organizationMember';
 import Berita from './components/Berita';
 import Galeri from './components/gallery';
 import { Box, Typography } from '@mui/material';
@@ -55,36 +55,9 @@ export default function Home() {
        
         <Box sx={{ maxWidth: '80%', width: '100%' }}>  
        
-         <WalKot/>
+         <Walikota/>
         </Box>
       </Box>
-
-      <Box className="text-center text-4xl font-bold mt-10">
-        <h6>Anggota Munas</h6>
-      </Box>
-
-      {/* Add horizontal circles under Anggota Munas */}
-      <Box
-        sx={{
-          mt: 2,
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 2,
-        }}
-      >
-        {[...Array(5)].map((_, index) => (
-          <Box
-            key={index}
-            sx={{
-              width: 150,
-              height: 150,
-              backgroundColor: 'gray',
-              borderRadius: '50%',
-            }}
-          />
-        ))}
-      </Box>
-
       
 
       <Box sx={{ mt: { xs: 2, md: 20 } }}>

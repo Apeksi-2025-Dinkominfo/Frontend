@@ -239,12 +239,14 @@ const AccommodationSlider: React.FC = () => {
                 className="relative block shadow-lg rounded-lg overflow-hidden bg-white"
                 style={{ height: '550px' }}
               >
-                {/* Gambar Full */}
-                <img
-                  src={accommodations[0].hotelThumbnail.link}
-                  alt={accommodations[0].name}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+              <img
+                src={accommodations[0].hotelThumbnail.link}
+                alt={accommodations[0].name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black opacity-70"></div>
+            </div>
 
                 {/* Nama Hotel dan StarNumberName */}
                 <div className="absolute bottom-4 left-4 flex flex-col text-xl text-white font-semibold">
@@ -278,11 +280,14 @@ const AccommodationSlider: React.FC = () => {
                   className="relative block shadow-lg rounded-lg overflow-hidden bg-white"
                   style={{ height: '260px' }}
                 >
-                  <img
-                    src={item.hotelThumbnail.link}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="relative w-full h-full">
+              <img
+               src={item.hotelThumbnail.link}
+               alt={item.name}
+               className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black opacity-70"></div>
+              </div>              
 
                   {/* Informasi */}
                   <div className="absolute bottom-4 left-4 flex flex-col text-xl text-white font-semibold">

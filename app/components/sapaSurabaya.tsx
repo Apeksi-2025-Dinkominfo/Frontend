@@ -60,6 +60,7 @@ export default function CityTourComponent() {
       </div>
 
       <div className=" carousel-container flex flex-col items-center justify-center z-50 " style={{ height: '50px', marginBottom: '350px'  }}>
+
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
             onClick={handlePrev}
