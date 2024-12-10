@@ -59,6 +59,7 @@ export default function CityTourComponent() {
         </Typography>
       </div>
 
+
       <div className=" carousel-container flex flex-col items-center justify-center " style={{ height: '50px', marginBottom: '350px' }}>
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
