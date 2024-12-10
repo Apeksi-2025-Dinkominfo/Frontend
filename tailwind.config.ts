@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			poppins: ['Poppins', 'sans-serif']
+  			poppins: ['Plus Jakarta Sans']
   		},
   		colors: {
   			light: '#78B7D0',

@@ -133,13 +133,13 @@ export default function CulinaryPage() {
       >
         <Typography
           variant="h6"
-          style={{ fontFamily: 'Poppins', color: 'black' }}
+          style={{ fontFamily: 'Plus Jakarta Sans', color: 'black' }}
           className="font-bold "
           sx={{
             fontSize: { xs: '3rem', sm: '4rem' },
             lineHeight: { xs: '1.2', sm: '1.4' },
             textAlign: { xs: 'left', sm: 'left' },
-            fontFamily: "Poppins",
+            fontFamily: "Plus Jakarta Sans",
           }}
         >
           KULINER <br /> SUROBOYO
@@ -273,7 +273,7 @@ export default function CulinaryPage() {
                   gutterBottom
                   variant="h6"
                   component="div"
-                  style={{ fontFamily: 'Poppins', marginBottom: '50px' }}
+                  style={{ fontFamily: 'Plus Jakarta Sans', marginBottom: '50px' }}
                   className="font-semibold"
                 >
                   {item.name}

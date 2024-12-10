@@ -38,7 +38,7 @@ const EventComponent: React.FC = () => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          backgroundColor: "#F5F5F5", // Warna latar belakang
+        
           minHeight: "100vh",
         }}
       >
@@ -53,7 +53,7 @@ const EventComponent: React.FC = () => {
             sx={{
               fontSize: isSmallScreen ? "16px" : "20px",
               fontWeight: "bold",
-              color: "#005A8D",
+              color: "#023E74",
               textTransform: "uppercase",
               letterSpacing: "1px",
             }}
@@ -64,23 +64,21 @@ const EventComponent: React.FC = () => {
             sx={{
               fontSize: isSmallScreen ? "28px" : "40px",
               fontWeight: "bold",
-              color: "#005A8D",
-              marginBottom: "5px",
+              color: "#023E74",
             }}
           >
             Jadwal Rakernas.
           </Typography>
-          <Typography
-            sx={{
-              fontSize: isSmallScreen ? "20px" : "30px",
-              fontWeight: "bold",
-              color: "#005A8D",
-              marginBottom: isSmallScreen ? "10px" : "20px",
-              marginLeft: isSmallScreen ? "10px" : "450px",
-            }}
-          >
-            Mei 2025
-          </Typography>
+            {/* <Typography
+//             sx={{
+//               fontSize: isSmallScreen ? "20px" : "40px",
+//               fontWeight: "bold",
+//               color: "#005A8D",
+//               marginLeft: isSmallScreen ? "10px" : "450px",
+//             }}
+//           >
+//             Mei 2025
+//           </Typography> */}
         </Box>
 
         {/* Tabs untuk Hari */}
@@ -89,9 +87,11 @@ const EventComponent: React.FC = () => {
             display: "flex",
             justifyContent: "center",
             marginBottom: "20px",
-            paddingX: isSmallScreen ? "10px" : "0px",
+            paddingX: isSmallScreen ? "10px" : "0",
           }}
         >
+
+          
           <Tabs
             value={selectedDay}
             onChange={handleTabChange}
@@ -100,19 +100,19 @@ const EventComponent: React.FC = () => {
             TabIndicatorProps={{ style: { display: "none" } }}
             sx={{
               "& .MuiTab-root": {
-                padding: isSmallScreen ? "20px 8px" : "40px 16px",
+                padding: isSmallScreen ? "20px 8px" : "25px 16px",
                 margin: isSmallScreen ? "0 5px" : "0 15px",
-                borderRadius: "8px",
+                borderRadius: "20px",
                 fontSize: isSmallScreen ? "14px" : "16px",
                 fontWeight: "bold",
                 textTransform: "none",
               },
               "& .Mui-selected": {
-                backgroundColor: "#FF8C00",
-                color: "#005A8D",
+                backgroundColor: "#FFFFFF",
+                color: "#023E74",
               },
               "& .MuiTab-root:not(.Mui-selected)": {
-                backgroundColor: "#005A8D",
+                backgroundColor: "#43A5CC",
                 color: "#FFFFFF",
               },
             }}
@@ -132,7 +132,7 @@ const EventComponent: React.FC = () => {
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: isSmallScreen ? "10px" : "12px",
+                        fontSize: isSmallScreen ? "10px" : "20px",
                       }}
                     >
                       {event.day}
@@ -148,18 +148,18 @@ const EventComponent: React.FC = () => {
         {/* Schedule Content */}
         <Box
           sx={{
-            backgroundColor: "#0B3C5D",
+            backgroundColor: "#FFFFFF", //card dalam content
             borderRadius: "15px",
             padding: isSmallScreen ? "10px" : "20px",
-            color: "#FFFFFF",
           }}
         >
           <Typography
             sx={{
               fontWeight: "bold",
-              fontSize: isSmallScreen ? "20px" : "30px",
+              fontSize: isSmallScreen ? "20px" : "40px",
               textAlign: "center",
               marginBottom: "10px",
+              color: "#023E74",
             }}
           >
             {events[selectedDay].headline}
@@ -167,9 +167,11 @@ const EventComponent: React.FC = () => {
           <Typography
             sx={{
               fontWeight: "bold",
-              fontSize: isSmallScreen ? "18px" : "30px",
+              fontSize: isSmallScreen ? "18px" : "40px",
               textAlign: "center",
+              color: "#023E74",
               marginBottom: isSmallScreen ? "15px" : "20px",
+              marginRight: isSmallScreen ? "10px" : "350px",
             }}
           >
             Rangkaian Acara:
@@ -189,8 +191,10 @@ const EventComponent: React.FC = () => {
                   display: "flex",
                   alignItems: "center",
                   flexDirection: isSmallScreen ? "column" : "row",
-                  maxWidth: "600px",
+                  maxWidth: "700px", // Lebih lebar agar tetap center
                   width: "100%",
+                  gap: "15px", // Jarak antara waktu dan accordion
+                  justifyContent: "center", // Tetap center
                 }}
               >
                 {/* Bagian Waktu */}
@@ -198,16 +202,25 @@ const EventComponent: React.FC = () => {
                   sx={{
                     fontWeight: "bold",
                     fontSize: isSmallScreen ? "16px" : "20px",
-                    color: "#FFFFFF",
-                    backgroundColor: "#005A8D",
-                    padding: isSmallScreen ? "8px" : "10px",
-                    borderRadius: "10px",
-                    flex: isSmallScreen ? "0" : "0 0 120px",
+                    color: "#023E74",
+                    // backgroundColor: "#023E74",
+                    padding: isSmallScreen ? "8px" : "5px",
+                    borderRadius: "20px",
                     textAlign: "center",
-                    marginRight: isSmallScreen ? "0" : "10px",
-                    marginBottom: isSmallScreen ? "10px" : "0",
+                    fontFamily: "Plus Jakarta Sans",
+                    width: "230px", // Ukuran tetap untuk waktu
                   }}
                 >
+                  <Typography
+                    sx={{
+                      fontSize: isSmallScreen ? "12px" : "20px",
+                      color: "#023E74",
+                      fontFamily: "Plus Jakarta Sans",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Waktu
+                  </Typography>
                   {event.time}
                 </Box>
 
@@ -216,22 +229,27 @@ const EventComponent: React.FC = () => {
                   sx={{
                     flex: "1",
                     width: "100%",
-                    borderRadius: "10px",
+                    borderRadius: "20px", // Melengkung
+                    // overflow: "hidden",
                     "&:before": { display: "none" },
                   }}
                 >
                   <AccordionSummary
-                    expandIcon={<ExpandMoreIcon sx={{ color: "#FFFFFF" }} />}
+                    expandIcon={<ExpandMoreIcon sx={{ color: "#023E74" }} />}
                     sx={{
-                      backgroundColor: "#FF8C00",
-                      borderRadius: "5px",
+                      backgroundColor: "rgba(120, 183, 208, 0.25)",
+                      // backgroundColor: "#78B7D0",
+                      // borderRadius: "20px 20px 0 0", // Melengkung atas saja
+                      borderRadius: "20px", // Melengkung atas saja
                       padding: "10px",
                     }}
                   >
                     <Typography
                       sx={{
                         fontSize: isSmallScreen ? "16px" : "20px",
-                        color: "#FFFFFF",
+                        fontFamily: "Plus Jakarta Sans",
+                        fontWeight: "bold",
+                        color: "#16325B",
                       }}
                     >
                       {event.title}
@@ -239,10 +257,10 @@ const EventComponent: React.FC = () => {
                   </AccordionSummary>
                   <AccordionDetails
                     sx={{
-                      backgroundColor: "#FFFFFF",
-                      borderRadius: "10px",
+                      backgroundColor: "#FFFFFF", // Warna putih
+                      color: "#023E74", // Teks biru
                       padding: "15px",
-                      color: "#0B3C5D",
+                      borderRadius: "19px", // Radius bawah
                     }}
                   >
                     <Typography>

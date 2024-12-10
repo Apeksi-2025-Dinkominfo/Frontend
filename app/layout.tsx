@@ -55,7 +55,7 @@ export default function RootLayout({
             padding: 0,
             width: '100%',
             overflowX: 'hidden',
-            backgroundImage: "url('/seluruh4.png')",
+            backgroundImage: "url('/seluruh8.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: 'auto',

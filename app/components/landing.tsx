@@ -35,6 +35,7 @@ export default function LandingPage() {
         <IconButton
           onClick={toggleDarkMode}
           sx={{
+            backgroundColor:'white',
             color: isDarkMode ? '#ffffff' : '#000000',
             transition: 'color 0.3s ease',
           }}

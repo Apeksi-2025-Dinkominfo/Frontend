@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -7,27 +8,37 @@ import {
   Card,
   CardMedia,
   CircularProgress,
+  Grid,
+  Button,
 } from "@mui/material";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { fetchGambarData, Gambar } from "../utils/gambardata";
+import { fetchGambarData, Gambar } from "../utils/gambardata"; // Mengambil data dari API
+import { saveAs } from 'file-saver'; // Pustaka untuk download file
 
 const GalleryComponent = () => {
+  // State
   const [images, setImages] = useState<Gambar[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    // Mengambil data gambar dari API
     const getGambarData = async () => {
-      const data = await fetchGambarData();
-      setImages(data);
-      setLoading(false); // Stop loading
+      try {
+        const data = await fetchGambarData();
+        setImages(data); // Menyimpan gambar ke state
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
+        setLoading(false); // Set loading selesai
+      }
     };
 
     getGambarData();
 
-    // Injecting styles dynamically for animations
-    const styles = `
+    // Menambahkan animasi CSS ke dalam dokumen
+    const styles = `      
       @keyframes moveRight {
         0% { transform: translateX(-100%); }
         100% { transform: translateX(100%); }
@@ -36,11 +47,6 @@ const GalleryComponent = () => {
         0% { transform: translateX(100%); }
         100% { transform: translateX(-100%); }
       }
-      @keyframes moveRightFast {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-      }
-
       .animated-row {
         display: flex;
         align-items: center;
@@ -48,17 +54,11 @@ const GalleryComponent = () => {
         overflow: hidden;
         position: relative;
       }
-
-      .row-1 {
+      .row-right {
         animation: moveRight 20s linear infinite;
       }
-
-      .row-2 {
+      .row-left {
         animation: moveLeft 20s linear infinite;
-      }
-
-      .row-3 {
-        animation: moveRight 20s linear infinite; /* Faster animation */
       }
     `;
     const styleSheet = document.createElement("style");
@@ -66,126 +66,145 @@ const GalleryComponent = () => {
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 
+    // Membersihkan gaya saat komponen di-unmount
     return () => {
       document.head.removeChild(styleSheet);
     };
   }, []);
 
+  // Membagi gambar menjadi baris
+  const generateRows = (images: Gambar[], rowTexts: string[]) => {
+    const rows = [];
+    let imageIndex = 0;
+
+    for (let i = 0; i < rowTexts.length; i++) {
+      const row = [];
+      const textPosition = i % 2 === 0 ? 1 : 3; // Pola posisi teks
+
+      for (let j = 0; j < 5; j++) {
+        if (j === textPosition) {
+          row.push({ type: "text", text: rowTexts[i] });
+        } else {
+          if (imageIndex < images.length) {
+            row.push({ type: "image", image: images[imageIndex] });
+            imageIndex++;
+          }
+        }
+      }
+      rows.push(row);
+    }
+
+    return rows;
+  };
+
+  // Teks baris
+  const rowTexts = ["MUNAS", "APEKSI", "2025"];
+  const rows = generateRows(images, rowTexts);
+
+  // Fungsi untuk download gambar
+  const downloadImage = (imageUrl: string) => {
+    saveAs(imageUrl, 'image.jpg');
+  };
+
   return (
     <>
-      {/* Gallery Container */}
       <Container maxWidth={false} sx={{ padding: 0 }}>
-        {/* Section Title */}
         <Box mb={4} position="relative">
           <Typography
             variant="h4"
             fontWeight="bold"
-            color="#FF8D00"
-            sx={{ fontFamily: "serif", textAlign: "center" }}
+            color="#023E74"
+            sx={{ fontFamily: "Plus Jakarta Sans", textAlign: "center" }}
           >
             Galeri APEKSI
           </Typography>
         </Box>
 
-        {/* Loading State */}
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
             <CircularProgress />
           </Box>
-        ) : images && images.length > 0 ? (
-          <>
-            {/* Row 1 */}
-            <Box className="animated-row row-1">
-              {images.slice(0, 4).map((image, index) => (
-                <Card
-                  key={index}
-                  sx={{ borderRadius: "20px", overflow: "hidden", margin: "0 10px 20px 0" }}
-                  onClick={() => setLightboxIndex(index)}
-                >
-                  <CardMedia
-                    component="img"
-                    alt={image.photoType || `Image ${index + 1}`}
-                    image={image.url}
-                    loading="lazy"
-                    sx={{
-                      objectFit: "cover",
-                      width: "300px",
-                      height: "150px",
-                      // aspectRatio: "20/10",
-                    }}
-                  />
-                </Card>
-              ))}
-              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 10, left:'800px', transform: "translateX(-30%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
-                MUNAS
-              </Typography>
-            </Box>
-
-            {/* Row 2 */}
-            <Box className="animated-row row-2">
-              {images.slice(4, 8).map((image, index) => (
-                <Card
-                  key={index}
-                  sx={{ borderRadius: "20px", overflow: "hidden", margin: "0 10px 20px 0" }}
-                  onClick={() => setLightboxIndex(index + 4)}
-                >
-                  <CardMedia
-                    component="img"
-                    alt={image.photoType || `Image ${index + 5}`}
-                    image={image.url}
-                    loading="lazy"
-                    sx={{
-                      objectFit: "cover",
-                      width: "300px",
-                      height: "150px",
-                    }}
-                  />
-                </Card>
-              ))}
-              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 20, left: "74%", transform: "translateX(-30%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
-                APEKSI
-              </Typography>
-            </Box>
-
-            {/* Row 3 */}
-            <Box className="animated-row row-3">
-              {images.slice(8, 12).map((image, index) => (
-                <Card
-                  key={index}
-                  sx={{ borderRadius: "20px", overflow: "hidden", margin: "0 10px 20px 0" }}
-                  onClick={() => setLightboxIndex(index + 8)}
-                >
-                  <CardMedia
-                    component="img"
-                    alt={image.photoType || `Image ${index + 9}`}
-                    image={image.url}
-                    loading="lazy"
-                    sx={{
-                      objectFit: "cover",
-                      width: "300px",
-                      height: "150px",
-                    }}
-                  />
-                </Card>
-              ))}
-              <Typography className="gallery-title" fontSize="7rem" sx={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", fontFamily: "serif", color: "#227B94", fontWeight: "bold" }}>
-                2025
-              </Typography>
-            </Box>
-          </>
         ) : (
-          <Typography variant="h6" sx={{ textAlign: "center", color: "#aaa" }}>
-            Gambar tidak tersedia
-          </Typography>
+          rows.map((row, rowIndex) => (
+            <Box
+              key={rowIndex}
+              className={`animated-row ${
+                rowIndex % 2 === 0 ? "row-right" : "row-left"
+              }`}
+            >
+              <Grid container spacing={2} justifyContent="center">
+                {row.map((item, index) => {
+                  if (item.type === "text") {
+                    return (
+                      <Grid item xs={12} sm={6} md={4} lg={2.4} key={`text-${rowIndex}`}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginBottom: "10px",
+                            height: "150px",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: "5rem",
+                              fontStyle: "italic",
+                              fontWeight: "bold",
+                              color: "#023E74",
+                              textAlign: "center",
+                              textShadow: "0px 0px 5px rgba(0, 0, 0, 0.5)",
+                            }}
+                          >
+                            {item.text}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    );
+                  }
+
+                  // Render gambar
+                  return (
+                    <Grid item xs={12} sm={6} md={4} lg={2.4} key={item.image?.id}>
+                      {item.image ? (
+                        <Card
+                          sx={{
+                            borderRadius: "20px",
+                            overflow: "hidden",
+                          }}
+                          onClick={() =>
+                            setLightboxIndex(rowIndex * 5 + index)
+                          }
+                        >
+                          <CardMedia
+                            component="img"
+                            alt={`Image ${index + 1}`}
+                            image={item.image.url}
+                            loading="lazy"
+                            sx={{
+                              objectFit: "cover",
+                              width: "100%",
+                              height: "150px",
+                            }}
+                          />
+                        </Card>
+                      ) : (
+                        <Box>Image not available</Box>
+                      )}
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Box>
+          ))
         )}
       </Container>
 
-      {/* Lightbox for Image Preview */}
-      {lightboxIndex !== null && (
+      {lightboxIndex !== null && images.length > 0 && (
         <Lightbox
-          mainSrc={images[lightboxIndex].url}
-          nextSrc={images[(lightboxIndex + 1) % images.length].url}
-          prevSrc={images[(lightboxIndex + images.length - 1) % images.length].url}
+          mainSrc={images[lightboxIndex]?.url}
+          nextSrc={images[(lightboxIndex + 1) % images.length]?.url}
+          prevSrc={images[(lightboxIndex + images.length - 1) % images.length]?.url}
           onCloseRequest={() => setLightboxIndex(null)}
           onMovePrevRequest={() =>
             setLightboxIndex((lightboxIndex + images.length - 1) % images.length)
@@ -193,6 +212,16 @@ const GalleryComponent = () => {
           onMoveNextRequest={() =>
             setLightboxIndex((lightboxIndex + 1) % images.length)
           }
+          toolbarButtons={[
+            <Button
+              key="download"
+              variant="contained"
+              color="primary"
+              onClick={() => downloadImage(images[lightboxIndex]?.url)}
+            >
+              Download
+            </Button>,
+          ]}
         />
       )}
     </>
@@ -200,5 +229,3 @@ const GalleryComponent = () => {
 };
 
 export default GalleryComponent;
-
-

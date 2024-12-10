@@ -58,7 +58,7 @@ const VideoGallery = () => {
             fontFamily: "Plus Jakarta Sans",
           }}
         >
-          Alun Alun Kota Surabaya
+         Ucapan Para Walikota
         </Typography>
 
         {/* Video Utama */}
@@ -123,7 +123,7 @@ const VideoGallery = () => {
       {/* Thumbnail Section (Card Biru dengan Swiper) */}
       <Box
         sx={{
-          backgroundColor: "#002E5F",
+          backgroundColor: "#fff",
           padding: "40px",
           marginTop: "20px",
           borderRadius: "10px",

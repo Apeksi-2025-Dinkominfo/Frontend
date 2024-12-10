@@ -77,7 +77,7 @@ function RentalCard() {
 
   return (
     <Container sx={{ padding: 4 }}>
-      <Typography variant="h5" align="center" gutterBottom sx={{ color: '#227B94', fontWeight: 'bold', marginBottom: 3 }}>
+      <Typography variant="h5" align="center" gutterBottom sx={{ color: '#227B94', fontWeight: 'bold', marginBottom: 3, }}>
         Travel Agen Surabaya
       </Typography>
       <Grid container spacing={3}>
