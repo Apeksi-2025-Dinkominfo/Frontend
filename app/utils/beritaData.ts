@@ -1,4 +1,4 @@
-import { parseISO, parse, format as dateFormat } from 'date-fns';
+import { parseISO, parse, format  } from 'date-fns';
 
 export interface NewsItem {
   id: number;
@@ -16,20 +16,37 @@ export interface SurabayaItem {
   category: string;
   created_at: string;
   content: string;
+  publish_date: string;
 }
 
 export const SurabayFetch = async (): Promise<SurabayaItem[]> => {
+  const baseUrl = 'https://surabaya.go.id/api/data/news?page=';
+  const category = '&category=berita';
+  let currentPage = 1;
+  let allItems: SurabayaItem[] = [];
+  let hasMorePages = true;
+
   try {
-    const response = await fetch('https://surabaya.go.id/api/data/news?page=1&category=berita');
-    if (!response.ok) {
-      throw new Error('Failed to fetch news items');
+    while (hasMorePages) {
+      const response = await fetch(`${baseUrl}${currentPage}${category}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch news items on page ${currentPage}`);
+      }
+      const jsonResponse = await response.json();
+      const items = jsonResponse.data || [];
+
+      allItems = allItems.concat(items);
+
+      // Check if there's another page
+      hasMorePages = items.length > 0; // Assuming empty data means no more pages
+      currentPage++;
     }
-    const jsonResponse = await response.json();
-    return jsonResponse.data || [];
   } catch (error) {
     console.error(error);
     return [];
   }
+
+  return allItems;
 };
 
 export const fetchNewsItems = async (): Promise<NewsItem[]> => {
@@ -66,7 +83,7 @@ export const parseDate = (dateString: string | undefined): Date => {
 };
 
 export const formatDate = (date: Date): string => {
-  return dateFormat(date, 'dd MMM yyyy');
+  return format(date, 'dd MMM yyyy');
 };
 
 export const getTruncatedTitle = (title: string, maxLength = 150) => {

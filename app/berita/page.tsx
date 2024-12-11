@@ -10,6 +10,7 @@ import {
   SurabayaItem,
 } from '../utils/beritaData';
 import DOMPurify from 'dompurify';
+
 const BeritaPage = async ({
   searchParams,
 }: {
@@ -27,7 +28,7 @@ const BeritaPage = async ({
 
   // Determine which tab is selected based on the searchParams
   const selectedTab = searchParams.tab || 'surabaya'; // Default to 'surabaya' tab
-
+console.log(apeksiNews)
   // Determine which news items to show based on selected tab and sort by date
   const newsItems =
     selectedTab === 'surabaya'
@@ -84,12 +85,17 @@ const BeritaPage = async ({
               <Link href={`/berita/${item.id}`} key={item.id}>
                 <div className="flex flex-col bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer overflow-hidden">
                   <img
-                    src={isSurabayaItem ? item.feature_image_url : item.images}
+                    src={
+                      isSurabayaItem
+                        ? `http://surabaya.go.id/uploads/images/posts/post_${item.id}/${item.feature_image_url}`
+                        : item.images
+                    }
                     alt={
                       isSurabayaItem ? item.title : item.tittle || 'News Image'
                     }
                     className="w-full h-32 object-cover rounded mb-2"
                   />
+
                   <h2 className="font-bold text-lg text-black mb-1 truncate">
                     {getTruncatedTitle(
                       isSurabayaItem ? item.title : item.tittle || 'No Title'
@@ -108,9 +114,9 @@ const BeritaPage = async ({
 
                   <p className="text-xs text-gray-500">
                     {isSurabayaItem ? item.category : item.location} -{' '}
-                    {formatDate(
+                    {formatDate(  
                       parseDate(
-                        isSurabayaItem ? item.created_at : item.publish_date
+                        isSurabayaItem ? item.date : item.publish_date
                       )
                     )}
                   </p>

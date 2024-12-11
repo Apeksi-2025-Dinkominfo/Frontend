@@ -5,7 +5,6 @@ import {
   Grid,
   Typography,
   Button,
-  useMediaQuery,
   Card,
   CardContent,
   IconButton,
@@ -17,6 +16,7 @@ import Link from 'next/link';
 import { fetchNewsItems, SurabayFetch } from '../utils/beritaData';
 import '@fontsource/plus-jakarta-sans';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
+import CardNewsButton from './buttonBerita'
 
 const Berita = () => {
   const theme = useTheme();
@@ -40,6 +40,7 @@ const Berita = () => {
     location: string;
     date: string;
     body: string;
+    feature_image_url: string;
   }
 
   useEffect(() => {
@@ -55,10 +56,9 @@ const Berita = () => {
       const surabayaNews = await SurabayFetch();
       setsurbaya(surabayaNews); // Simpan data ke state
     };
-  
+
     fetchNews();
   }, []);
-  
 
   console.log(surabaya);
 
@@ -94,9 +94,9 @@ const Berita = () => {
         sx={{
           mt: 4,
           px: 2,
-          py: 3,
+          py: 10,
           fontFamily: 'Plus Jakarta Sans',
-          maxWidth: '900px',
+          maxWidth: '1100px',
           mx: 'auto',
           borderRadius: '20px',
           overflow: 'hidden',
@@ -117,7 +117,7 @@ const Berita = () => {
         ></Box>
 
         <Typography
-          className="text-2xl font-semibold text-body"
+          className="text-4xl font-semibold text-body"
           sx={{ mb: 2, color: '#FFFFFF', position: 'relative', zIndex: 1 }}
         >
           Berita APEKSI
@@ -131,7 +131,7 @@ const Berita = () => {
                 backgroundColor: '#78B7D0',
                 position: 'relative',
                 overflow: 'hidden',
-                height: 300,
+                height: 520,
                 borderRadius: '12px',
               }}
             >
@@ -250,100 +250,88 @@ const Berita = () => {
               sx={{
                 padding: 1,
                 borderRadius: 2,
-                height: '100%', // Pastikan stretch ke tinggi penuh
+                height: '100%',
               }}
             >
               <Typography
-                variant="subtitle1"
+                className='text-2xl'
                 sx={{
                   fontWeight: 'bold',
                   color: 'black',
-                  mt: -3,
+                  mt: -4,
                   textAlign: 'right',
                 }}
               >
                 Surabaya
               </Typography>
-              {Array.isArray(surabaya) &&
-                surabaya.slice(0, 4).map((surabayItem) => (
-                  <Box key={surabayItem.id} sx={{ display: 'flex', mb: 2 }}>
-                    <Link href={`/berita/${surabayItem.id}`} passHref>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          cursor: 'pointer',
-                          gap: 1,
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          src={surabayItem.feature_image_url
-                          }
+              <Box
+                sx={{
+                  overflowY: 'auto',
+                  maxHeight: '500px', 
+                  '&::-webkit-scrollbar': {
+                    width: '8px',
+                  },
+                  '&::-webkit-scrollbar-track': {
+                    background: '#f1f1f1',
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    background: '#888',
+                    borderRadius: '4px',
+                  },
+                  '&::-webkit-scrollbar-thumb:hover': {
+                    background: '#555',
+                  },
+                }}
+              >
+                {Array.isArray(surabaya) &&
+                  surabaya.slice(0, 10).map((surabayItem) => (
+                    <Box key={surabayItem.id} sx={{ display: 'flex', mb: 2 }}>
+                      <Link href={`/berita/${surabayItem.id}`} passHref>
+                        <Box
                           sx={{
-                            height: 60,
-                            width: 80,
-                            objectFit: 'cover',
-                            borderRadius: 2,
+                            display: 'flex',
+                            flexDirection: 'row',
+                            cursor: 'pointer',
+                            gap: 1,
                           }}
-                        />
-                        <Box>
-                          <Typography
-                            variant="body2"
-                            sx={{ fontWeight: 'bold', color: 'white' }}
-                          >
-                            {surabayItem.title}
-                          </Typography>
-                          <Typography variant="caption" color="white">
-                            {new Date(surabayItem.publish_date).toLocaleDateString(
-                              'id-ID',
-                              {
+                        >
+                          <CardMedia
+                            component="img"
+                            src={`http://surabaya.go.id/uploads/images/posts/post_${surabayItem.id}/${surabayItem.feature_image_url}`}
+                            sx={{
+                              height: 60,
+                              width: 80,
+                              objectFit: 'cover',
+                              borderRadius: 2,
+                            }}
+                          />
+                          <Box>
+                            <Typography
+                              variant="body2"
+                              sx={{ fontWeight: 'bold', color: 'white' }}
+                            >
+                              {surabayItem.title}
+                            </Typography>
+                            <Typography variant="caption" color="white">
+                              {new Date(
+                                surabayItem.publish_date
+                              ).toLocaleDateString('id-ID', {
                                 day: 'numeric',
                                 year: 'numeric',
                                 month: 'long',
-                              }
-                            )}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              mt: 0.5,
-                              color: 'black',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              display: '-webkit-box',
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: 'vertical',
-                            }}
-                          ></Typography>
+                              })}
+                            </Typography>
+                          </Box>
                         </Box>
-                      </Box>
-                    </Link>
-                  </Box>
-                ))}
+                      </Link>
+                    </Box>
+                  ))}
+              </Box>
             </Box>
           </Grid>
         </Grid>
 
-        <Box sx={{ position: 'absolute', bottom: 16, right: 20 }}>
-          <Button
-            variant="outlined"
-            sx={{
-              borderColor: '#8AB393',
-              color: '#8AB393',
-              borderRadius: '20px',
-              padding: '8px 16px',
-              fontSize: '0.8rem',
-              '&:hover': {
-                borderColor: '#8AB393',
-                backgroundColor: '#F0FFF4',
-              },
-            }}
-            href="/berita"
-          >
-            Lihat semua berita
-          </Button>
-        </Box>
+        <CardNewsButton/>
       </Box>
     </div>
   );
