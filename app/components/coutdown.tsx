@@ -29,6 +29,7 @@ const renderer: CountdownRendererFn = ({
           sx={{
             backgroundColor: '#FFFFFF',
             padding: { xs: '10px', md: '30px' },
+            fontFamily: "Plus Jakarta Sans",
             borderRadius: '10px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             minWidth: { xs: '60px', md: '100px' },
@@ -57,6 +58,7 @@ const renderer: CountdownRendererFn = ({
         <Box
           sx={{
             backgroundColor: '#FFFFFF',
+            fontFamily: "Plus Jakarta Sans",
             padding: { xs: '10px', md: '30px' },
             borderRadius: '12px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -86,6 +88,7 @@ const renderer: CountdownRendererFn = ({
         <Box
           sx={{
             backgroundColor: '#FFFFFF',
+            fontFamily: "Plus Jakarta Sans",
             padding: { xs: '10px', md: '30px' },
             borderRadius: '10px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -126,6 +129,8 @@ const renderer: CountdownRendererFn = ({
             variant="h4"
             sx={{
               fontWeight: 'semi-bold',
+            fontFamily: "Plus Jakarta Sans",
+
               fontSize: { xs: '20px', md: '64px' },
               color: '#1C1C1C',
             }}
@@ -165,6 +170,7 @@ export default function CountdownComponent() {
           fontWeight: 'bold',
           color: '#1C1C1C',
           textAlign: 'center',
+          fontFamily: "Plus Jakarta Sans",
         }}
       >
         Menuju Munas Apeksi ke VII

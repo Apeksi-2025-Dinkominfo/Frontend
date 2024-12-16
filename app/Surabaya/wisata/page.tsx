@@ -413,7 +413,7 @@ export default function HeritagePage() {
                     );
                   }}
                   variant="contained"
-                  style={{ marginTop: '10px', backgroundColor: '#008080',  }}
+                  style={{fontFamily: 'Plus Jakarta Sans', marginTop: '10px', backgroundColor: '#008080',  }}
                 >
                   Kunjungi Lokasi
                 </Button>

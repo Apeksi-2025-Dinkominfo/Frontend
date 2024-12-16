@@ -117,7 +117,7 @@ const Berita = () => {
         ></Box>
 
         <Typography
-          className="text-2xl font-semibold text-body"
+          className="text-2xl font-semibold text-body font-plus"
           sx={{ mb: 2, color: '#FFFFFF', position: 'relative', zIndex: 1 }}
         >
           Berita APEKSI
@@ -161,7 +161,7 @@ const Berita = () => {
               >
                 <Typography
                   variant="subtitle1"
-                  sx={{ fontWeight: 'bold', color: '#FFFFFF' }}
+                  sx={{ fontWeight: 'bold', color: '#FFFFFF',fontFamily: 'Plus Jakarta Sans', }}
                 >
                   {beritaItems[currentIndex]?.tittle}
                 </Typography>
@@ -257,12 +257,13 @@ const Berita = () => {
                 variant="subtitle1"
                 sx={{
                   fontWeight: 'bold',
-                  color: 'black',
-                  mt: -3,
+                  color: '#16325B',
+                  mt: -4,
                   textAlign: 'right',
+                  fontFamily: 'Plus Jakarta Sans',
                 }}
               >
-                Surabaya
+                Berita Surabaya
               </Typography>
               {Array.isArray(surabaya) &&
                 surabaya.slice(0, 4).map((surabayItem) => (
@@ -277,24 +278,24 @@ const Berita = () => {
                         }}
                       >
                         <CardMedia
-                          component="img"
-                          src={surabayItem.feature_image_url
-                          }
-                          sx={{
-                            height: 60,
-                            width: 80,
-                            objectFit: 'cover',
-                            borderRadius: 2,
-                          }}
-                        />
+  component="img"
+  src={`http://surabaya.go.id/uploads/images/posts/post_${surabayItem.id}/${surabayItem.feature_image_url}`}
+  sx={{
+    height: 60,
+    width: 80,
+    objectFit: 'cover',
+    borderRadius: 2,
+  }}
+/>
+
                         <Box>
                           <Typography
                             variant="body2"
-                            sx={{ fontWeight: 'bold', color: 'white' }}
+                            sx={{ fontWeight: 'bold', color: 'white',fontFamily: 'Plus Jakarta Sans', }}
                           >
                             {surabayItem.title}
                           </Typography>
-                          <Typography variant="caption" color="white">
+                          <Typography variant="caption" color="white" className='font-plus'>
                             {new Date(surabayItem.publish_date).toLocaleDateString(
                               'id-ID',
                               {
@@ -325,15 +326,16 @@ const Berita = () => {
           </Grid>
         </Grid>
 
-        <Box sx={{ position: 'absolute', bottom: 16, right: 20 }}>
+        <Box sx={{ position: 'absolute', bottom: 12, right: 20 }}>
           <Button
             variant="outlined"
             sx={{
-              borderColor: '#8AB393',
-              color: '#8AB393',
+              borderColor: 'black',
+              color: 'black',
               borderRadius: '20px',
               padding: '8px 16px',
               fontSize: '0.8rem',
+              fontFamily:"Plus Jakarta Sans",
               '&:hover': {
                 borderColor: '#8AB393',
                 backgroundColor: '#F0FFF4',

@@ -34,7 +34,7 @@ export const SurabayFetch = async (): Promise<SurabayaItem[]> => {
 
 export const fetchNewsItems = async (): Promise<NewsItem[]> => {
   try {
-    const response = await fetch('http://localhost:5000/news?limit=100');
+    const response = await fetch('http://localhost:5000/news?limit=50');
     if (!response.ok) {
       throw new Error('Failed to fetch news items');
     }

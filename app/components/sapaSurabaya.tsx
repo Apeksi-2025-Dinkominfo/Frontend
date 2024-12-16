@@ -7,10 +7,10 @@ const cardData = [
   { img: '/belanjaIcon.png', link: '/surabaya/belanja' },
   { img: '/WisataIcon.png', link: '/surabaya/wisata' },
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
-  { img: '/transportasi.png', link: '/surabaya/transportasi' },
+  { img: '/travelagent.png', link: '/surabaya/transportasi' },
   { img: '/Kesehatan.png', link: '/hospital' },
   { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
-  { img: '/Travel1.png', link: '/surabaya/travel' }, // Tambahkan card event
+  { img: '/Rental.png', link: '/surabaya/travel' }, // Tambahkan card event
 ];
 
 export default function CityTourComponent() {
@@ -44,9 +44,9 @@ export default function CityTourComponent() {
       <div className="text-center mb-8">
         <Typography
           style={{
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
             color: 'transparent',
-            fontFamily: 'Gotham, sans-serif',
+            fontFamily: 'Plus Jakarta Sans',
             letterSpacing: '2px',
             WebkitTextStroke: '5px #E63946',
             animation: isHovered ? 'strokeAnimation 1s infinite' : 'none',

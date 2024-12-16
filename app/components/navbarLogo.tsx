@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useThemeMode } from '../layout'; // Pastikan konteks tema diimpor
 import HomeIcon from '@mui/icons-material/Home';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
 
 export default function Navbar() {
@@ -11,6 +12,10 @@ export default function Navbar() {
 
   const handleHomeClick = () => {
     router.push('/');
+  };
+
+  const handleBackClick = () => {
+    router.back(); // Kembali ke halaman sebelumnya
   };
 
   return (
@@ -26,18 +31,18 @@ export default function Navbar() {
       }}
     >
       <div className="container mx-auto flex justify-between items-center ">
-        {/* Home Icon on the left */}
-        {/* <div className="flex items-center">
-          <HomeIcon
-            onClick={handleHomeClick}
-            className="cursor-pointer"
-            fontSize="large"
-            style={{
+        {/* Back Icon on the left */}
+        <div className="flex items-center">
+          <IconButton
+            onClick={handleBackClick}
+            sx={{
               color: isDarkMode ? '#ffffff' : '#000000',
               transition: 'color 0.3s ease',
             }}
-          />
-        </div> */}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </div>
 
         {/* Logo in the center */}
         <div className="transform -translate-x-1/2">

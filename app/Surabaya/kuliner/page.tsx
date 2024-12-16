@@ -142,7 +142,7 @@ export default function CulinaryPage() {
             fontFamily: "Plus Jakarta Sans",
           }}
         >
-          KULINER <br /> SUROBOYO
+          KULINER <br /> SURABAYA
         </Typography>
       </Box>
 
@@ -301,6 +301,7 @@ export default function CulinaryPage() {
                   variant="contained"
                   color="primary"
                   style={{
+                    fontFamily: "Plus Jakarta Sans",
                     width: '100%',
                     borderRadius: '50px',
                     padding: '10px 0',

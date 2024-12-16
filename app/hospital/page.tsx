@@ -31,15 +31,15 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
   const getIcon = () => {
     switch (selectedTab) {
       case 'hospitals':
-        return <LocalHospitalIcon sx={{ color: '#0288d1', mr: 1 }} />;
+        return <LocalHospitalIcon sx={{fontFamily: 'Plus Jakarta Sans', color: '#0288d1', mr: 1 }} />;
       case 'puskesmas':
-        return <CategoryIcon sx={{ color: '#0288d1', mr: 1 }} />;
+        return <CategoryIcon sx={{ fontFamily: 'Plus Jakarta Sans',color: '#0288d1', mr: 1 }} />;
       case 'klinik':
-        return <BusinessIcon sx={{ color: '#0288d1', mr: 1 }} />;
+        return <BusinessIcon sx={{fontFamily: 'Plus Jakarta Sans', color: '#0288d1', mr: 1 }} />;
       case 'apotek':
-        return <BusinessIcon sx={{ color: '#0288d1', mr: 1 }} />;
+        return <BusinessIcon sx={{ fontFamily: 'Plus Jakarta Sans',color: '#0288d1', mr: 1 }} />;
       default:
-        return <LocationOnIcon sx={{ color: '#0288d1', mr: 1 }} />;
+        return <LocationOnIcon sx={{ fontFamily: 'Plus Jakarta Sans',color: '#0288d1', mr: 1 }} />;
     }
   };
 
@@ -68,13 +68,13 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
         </Box>
       ) : (
         <CardContent sx={{ paddingBottom: '0px' }}>
-          <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: '#0d47a1', mb: 1 }}>
+          <Typography variant="h5" component="div" sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'bold', color: '#0d47a1', mb: 1 }}>
             {facility.nama}
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
             <LocationOnIcon sx={{ color: '#0288d1', mr: 1 }} />
-            <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+            <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
               {facility.alamat}
             </Typography>
           </Box>
@@ -84,21 +84,21 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
             <>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 {getIcon()}
-                <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
                   Penyelenggara: {facility.penyelenggara}
                 </Typography>
               </Box>
 
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <LocalHospitalIcon sx={{ color: '#0288d1', mr: 1 }} />
-                <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
                   Fasilitas: {facility.klasifikasi_rumah_sakit}
                 </Typography>
               </Box>
 
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <CategoryIcon sx={{ color: '#0288d1', mr: 1 }} />
-                <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+                <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
                   Tipe Rumah Sakit: {facility.tipe_rumah_sakit}
                 </Typography>
               </Box>
@@ -108,7 +108,7 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
           {selectedTab === 'puskesmas' && (
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               {getIcon()}
-              <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+              <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
                 Tipe Fasilitas: {facility.jenis_lyn}
               </Typography>
             </Box>
@@ -117,7 +117,7 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
           {selectedTab === 'klinik' && (
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               {getIcon()} 
-              <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+              <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
                 Tipe Fasilitas: {facility.jenis_sarana_kesehatan}
               </Typography>
             </Box>
@@ -126,18 +126,19 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
           {selectedTab === 'apotek' && (
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               {getIcon()}
-              <Typography variant="body2" color="text.secondary" sx={{ color: '#546e7a' }}>
+              <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
                 Tipe Fasilitas: {facility.jenis_sarana_kesehatan}
               </Typography>
             </Box>
           )}
 
           <Box sx={{ mt: 'auto', pt: 2 }}>
-            <Button
+            <Button 
               variant="contained"
               startIcon={<LocationOnIcon />}
               onClick={() => openLocationInMaps(facility.koordinat)}
               sx={{
+                fontFamily: 'Plus Jakarta Sans',
                 backgroundColor: '#0288d1',
                 borderRadius: '24px',
                 textTransform: 'none',
@@ -219,13 +220,13 @@ const FacilityList: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container className='font-plus'>
       <LandingPage selectedTab={selectedTab} />
-      <Tabs value={selectedTab} onChange={handleTabChange} centered sx={{ marginBottom: '20px' }}>
-        <Tab label="Rumah Sakit" value="hospitals" />
-        <Tab label="Puskesmas" value="puskesmas" />
-        <Tab label="Klinik" value="klinik" />
-        <Tab label="Apotek" value="apotek" />
+      <Tabs value={selectedTab} onChange={handleTabChange} centered sx={{ marginBottom: '20px', color:'white', fontFamily: 'Plus Jakarta Sans' }}>
+        <Tab label="Rumah Sakit" value="hospitals" sx={{ fontFamily: 'Plus Jakarta Sans' }}/>
+        <Tab label="Puskesmas" value="puskesmas" sx={{ fontFamily: 'Plus Jakarta Sans' }}/>
+        <Tab label="Klinik" value="klinik" sx={{ fontFamily: 'Plus Jakarta Sans' }}/>
+        <Tab label="Apotek" value="apotek" sx={{ fontFamily: 'Plus Jakarta Sans' }}/>
       </Tabs>
 
       <Grid container spacing={4}>
@@ -285,10 +286,10 @@ const LandingPage: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
       >
         {/* Text Section */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant={isMobile ? 'h4' : 'h2'} component="div" sx={{ fontWeight: 'bold', color: '#0d47a1' }}>
+          <Typography variant={isMobile ? 'h4' : 'h2'} component="div" sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'bold', color: '#0d47a1' }}>
             {getPageHeading()}
           </Typography>
-          <Typography variant={isMobile ? 'body1' : 'h6'} component="div" sx={{ mt: 2, color: '#0d47a1' }}>
+          <Typography variant={isMobile ? 'body1' : 'h6'} component="div" sx={{ fontFamily: 'Plus Jakarta Sans', mt: 2, color: '#0d47a1' }}>
           Temukan rumah sakit dan fasilitas layanan kesehatan terdekat yang siap menolong jika mengalami masalah kesehatan.
           </Typography>
         </Box>

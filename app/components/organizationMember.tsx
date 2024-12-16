@@ -5,7 +5,7 @@ import ScrollingMembers from './scrolling-member'
 export default function OrganizationStructure() {
   return (
     
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8 font-plus">
         <div className="flex justify-center items-center space-x-6 mb-10">
         {/* Logo */}
         <div className="relative w-28 h-28"> {/* Ukuran gambar logo diperbesar */}
@@ -17,15 +17,15 @@ export default function OrganizationStructure() {
           />
         </div>
         {/* Teks */}
-        <h1 className="text-6xl font-semibold text-[#FF8D00]">
+        <h1 className="text-6xl font-semibold text-[#023E74]">
           Dari Surabaya untuk <br />
-          <span className="text-[#FF8D00]">Indonesia Maju</span>
+          <span className="text-[#023E74]">Indonesia Maju</span>
         </h1>
       </div>
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         {/* Management Board */}
         <div>
-          <h2 className="text-2xl font-bold text-center mb-8">DEWAN PENGURUS</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text ">DEWAN PENGURUS</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="md:col-span-3">
               {managementBoard.slice(0, 1).map((member, index) => (
@@ -116,7 +116,7 @@ export default function OrganizationStructure() {
 
       {/* Regional Commissioners */}
       <div className="mb-12">
-        <h2 className="text-2xl font-bold text-center mb-8">KETUA KOMISARIAT WILAYAH I-VI</h2>
+        <h2 className="text-2xl font-bold text-center mb-8 tracking-wider">KETUA KOMISARIAT WILAYAH I-VI</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {regionalCommissioners.map((commissioner, index) => (
             <div key={index} className="flex flex-col items-center">

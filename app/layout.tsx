@@ -26,7 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isAdminPage = pathname?.startsWith('/admin'); // Check if it's an admin page
+  const isAdminPage = pathname?.startsWith('/admin');
+  const isHomePage = pathname === '/';
+  const isOtherPage = !isAdminPage && pathname !== '/';
 
   // State untuk dark mode
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -52,6 +54,7 @@ export default function RootLayout({
         <body
           style={{
             margin: 0,
+            fontFamily:'Plus Jakarta Sans',
             padding: 0,
             width: '100%',
             overflowX: 'hidden',
@@ -63,20 +66,22 @@ export default function RootLayout({
             color: isDarkMode ? '#ffffff' : '#000000',
           }}
         >
-          {/* Navbar (hanya untuk non-admin) */}
-          {!isAdminPage && (
-            <Box
-              sx={{
-                position: 'sticky',
-                top: 0,
-                zIndex: 1000,
-                backgroundColor: isDarkMode ? 'rgba(18, 18, 18, 0.8)' : 'white',
-                transition: 'background-color 0.3s ease',
-              }}
-            >
-               {/* <NavLogo /> */}
-            </Box>
-          )}
+         {isOtherPage && (
+  <Box
+    sx={{
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000,
+      backgroundColor: isDarkMode ? 'rgba(18, 18, 18, 0.8)' : 'white',
+      transition: 'background-color 0.3s ease',
+    }}
+  >
+    <NavLogo />
+    {/* Add your navbar here */}
+  </Box>
+)}
+
+          
 
           {/* Konten utama */}
           <Box sx={{ marginLeft: isAdminPage && !isMobile ? '250px' : '0' }}>

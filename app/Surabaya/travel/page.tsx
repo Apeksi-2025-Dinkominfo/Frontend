@@ -77,7 +77,7 @@ function RentalCard() {
 
   return (
     <Container sx={{ padding: 4 }}>
-      <Typography variant="h5" align="center" gutterBottom sx={{ color: '#227B94', fontWeight: 'bold', marginBottom: 3, }}>
+      <Typography variant="h5" align="center" gutterBottom sx={{fontFamily: 'Plus Jakarta Sans', color: '#227B94', fontWeight: 'bold', marginBottom: 3, fontFamily:"Plus Jakarta Sans" }}>
         Travel Agen Surabaya
       </Typography>
       <Grid container spacing={3}>
@@ -101,10 +101,10 @@ function RentalCard() {
               }}
             >
               <CardContent className="flex flex-col h-40">
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h6" gutterBottom sx={{fontFamily: 'Plus Jakarta Sans', fontWeight: 'bold' }}>
                   {rental.name}
                 </Typography> 
-                <Typography variant="body2" sx={{ textAlign: 'justify', fontSize: '0.9rem' }}>
+                <Typography variant="body2" sx={{fontFamily: 'Plus Jakarta Sans', textAlign: 'justify', fontSize: '0.9rem' }}>
                   {rental.address}
                 </Typography>
                 <Box display="flex" alignItems="center" mb={1}>
@@ -126,12 +126,12 @@ function RentalCard() {
                     
                     {/* <p>{rental.fax}</p>
                     <FaxIcon/> */}
-                  <Typography variant="body2" sx={{ fontSize: '1rem' }}>
+                  <Typography variant="body2" sx={{fontFamily: 'Plus Jakarta Sans', fontSize: '1rem' }}>
                     {rental.phone}
                   </Typography>
                   
                 </Box>
-                <Typography variant="body2" sx={{ fontSize: '1rem' }} >
+                <Typography variant="body2" sx={{fontFamily: 'Plus Jakarta Sans', fontSize: '1rem' }} >
                 <FaxOutlinedIcon
                className="text-4xl "/> Fax:  
                     {rental.fax}

@@ -149,6 +149,7 @@ const GalleryComponent = () => {
                           <Typography
                             sx={{
                               fontSize: "5rem",
+                              fontFamily: "Plus Jakarta Sans",
                               fontStyle: "italic",
                               fontWeight: "bold",
                               color: "#023E74",

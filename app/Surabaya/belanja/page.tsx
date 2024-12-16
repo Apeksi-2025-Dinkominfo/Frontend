@@ -1,6 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Box, Container } from '@mui/material';
+import NavBarLogo from '../../components/navbarLogo';
+
 
 interface TouristDestinationFile {
   link: string;
@@ -71,7 +73,11 @@ export default function WisataPage() {
   
 
   return (
+ 
+ 
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+       <Box>
+    </Box>
       <Box
         mb={4}
         display="flex"

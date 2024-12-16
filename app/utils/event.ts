@@ -44,14 +44,14 @@ export const events: Event[] = [
       day:'Senin',
       image: '/balaikota.webp',
       headline: 'Hari Ke Dua',
-      mainTime: '08.00 - SELESAI',
+      mainTime: '08.00 - Selesai',
       description: 'Please add your content here. Keep it short and simple.',
       location: 'Exhibition Grand City Lantai 1',
           
       acara: [
         {
-          title: 'Loading Pameran Indonesia City expo',
-          time: '08:00 WIB - SELESAI',
+          title: 'Loading Pameran Indonesia City Expo',
+          time: '08:00 WIB - Selesai',
           location: 'Exhibition Grand City Lantai 1 && Open Space Grandcity',
           description: 'Mendapatkan Kaos, Medali dan goody Bag, Loading UMKM ( Makanan, minuman, pakaian, dll)',
           dresscode: 'Baju Bebas',
@@ -71,8 +71,8 @@ export const events: Event[] = [
           dresscode: 'Terserah',
         },
         {
-          title: 'Youth City Changer',
-          time: '13:00 WIB - SELESAI',
+          title: 'Youth City Changers',
+          time: '13:00 WIB - Selesai',
           location: 'Kodikal AAL Graha Samudra Bumi Moro, Perak',
           description: 'Pertunjukan seni budaya tradisional',
           dresscode: 'Casual',
@@ -86,7 +86,7 @@ export const events: Event[] = [
       day:'Selasa',
       image: '/balaikota.webp',
       headline: 'Hari Ke Tiga',
-      mainTime: '08.00 - SELESAI',
+      mainTime: '08.00 - Selesai',
       description: 'Please add your content here. Keep it short and simple.',
       location: 'Exhibition Grand City Lantai 1',
           
@@ -106,15 +106,15 @@ export const events: Event[] = [
           dresscode: 'Terserah',
         },
         {
-          title: 'Youth City Changer',
-          time: '13:00 WIB - SELESAI',
+          title: 'Youth City Changers',
+          time: '13:00 WIB - Selesai',
           location: 'Kodikal AAL Graha Samudra Bumi Moro, Perak',
           description: '',
           dresscode: '',
         },
         {
-          title: 'Gala Dinner Peserta Muna APEKSI / Wali Kota',
-          time: '18:00 WIB - SELESAI',
+          title: 'Gala Dinner Peserta Munas APEKSI / Wali Kota',
+          time: '18:00 WIB - Selesai',
           location: 'Halaman Taman Surya',
           description: '',
           dresscode: '',
@@ -128,7 +128,7 @@ export const events: Event[] = [
       day:'Rabu',
       image: '/balaikota.webp',
       headline: 'Hari Ke Empat',
-      mainTime: '08.00 - SELESAI',
+      mainTime: '08.00 - Selesai',
       description: 'Please add your content here. Keep it short and simple.',
       location: 'Exhibition Grand City Lantai 1',
           
@@ -156,7 +156,7 @@ export const events: Event[] = [
         },
         {
           title: 'Karnaval Budaya',
-          time: '18:00 WIB - SELESAI',
+          time: '18:00 WIB - Selesai',
           location: 'Depan Siola, Jl. Tunjungan',
           description: '',
           dresscode: '',
@@ -170,7 +170,7 @@ export const events: Event[] = [
       day:'Kamis',
       image: '/balaikota.webp',
       headline: 'Hari Ke Lima',
-      mainTime: '08.00 - SELESAI',
+      mainTime: '08.00 - Selesai',
       description: 'Please add your content here. Keep it short and simple.',
       location: 'Exhibition Grand City Lantai 1',
           
@@ -205,21 +205,21 @@ export const events: Event[] = [
         },
         {
           title: 'Side Event',
-          time: '09:00 WIB - SELESAI',
+          time: '09:00 WIB - Selesai',
           location: 'TIK (Dinas Komunikasi dan Informatika Lingkungan (Dinas Lingkungan Hidup) (Meeting Room tipe Diamond (100 orang)dan Crystal (75 orang)',
           description: '',
           dresscode: '',
         },
         {
           title: 'City Tour',
-          time: '16:00 WIB - SELESAI',
+          time: '16:00 WIB - Selesai',
           location: 'Balai Kota',
           description: 'Optional, diperuntukkan bagi Wali Kota atau peserta pendamping Wali Kota',
           dresscode: '',
         },
         {
           title: 'Pentas Seni',
-          time: '18:00 WIB - SELESAI',
+          time: '18:00 WIB - Selesai',
           location: 'Parkiran Exhibition Grand City',
           description: '(Optional, apabila peserta pentas seni banyak, dapat di mulai pukul 16.00 WIB -  selesai) Diikuti oleh delegasi',
           dresscode: '',
@@ -233,13 +233,13 @@ export const events: Event[] = [
       day:'Jumat',
       image: '/balaikota.webp',
       headline: 'Hari Ke Enam',
-      mainTime: '09.00 WIB - SELESAI',
-      description: 'Penutupan Indonesia Cit Expo',
+      mainTime: '09.00 WIB - Selesai',
+      description: 'Penutupan Indonesia City Expo',
       location: 'Exibition Grand City Lantai 1',
       acara: [
         {
-          title: 'Penutupan Indonesia Cit Expo',
-          time: '09.00 WIB - SELESAI',
+          title: 'Penutupan Indonesia City Expo',
+          time: '09.00 WIB - Selesai',
           location: 'Exibition Grand City Lantai 1',
           description: 'Penghargaan untuk Stand terbaik dan Pentas seni terbaik',
           dresscode: 'Tidak Diketahui',
@@ -258,7 +258,7 @@ export const events: Event[] = [
       acara: [
         {
           title: 'Kepulangan Peserta',
-          time: '09.00 WIB - SELESAI',
+          time: '09.00 WIB - Selesai',
           location: 'Rumah Masing Masing',
           description: 'Pulang Membawa Kenangan Bahagia dan Manis',
           dresscode: 'Terserah',
@@ -269,55 +269,3 @@ export const events: Event[] = [
   
    
 ];
-
-
-      // {
-      //   date: '3 Mei',
-      //   image: '/balaikota.webp',
-      //   headline: 'Headline 1',
-      //   mainTime: '07:00 - 09:00',
-      //   description: 'Please add your content here. Keep it short and simple.',
-      //   location: 'Balai Kota',
-      //   acara: [
-      //     {
-      //       title: 'Gala Dinner',
-      //       time: '19:00 - 21:00',
-      //       location: 'Grand Ballroom',
-      //       description: 'Makan malam mewah dengan tamu kehormatan',
-      //       dresscode: 'Formal',
-      //     },
-      //   ],
-      // },
-    
-      // {
-      //   date: '4 Mei',
-      //   image: '/balaikota.webp',
-      //   headline: 'Headline 1',
-      //   mainTime: '07:00 - 09:00',
-      //   description: 'Please add your content here. Keep it short and simple.',
-      //   location: 'Balai Kota',
-      //   acara: [
-      //     {
-      //       title: 'Gala Dinner',
-      //       time: '19:00 - 21:00',
-      //       location: 'Grand Ballroom',
-      //       description: 'Makan malam mewah dengan tamu kehormatan',
-      //       dresscode: 'Formal',
-      //     },
-      //     {
-      //       title: 'Malam Apresiasi',
-      //       time: '21:30 - 23:00',
-      //       location: 'Convention Center',
-      //       description: 'Acara penghargaan bagi para anggota',
-      //       dresscode: 'Batiks',
-      //     },
-      //     {
-      //       title: 'Pentas Budaya',
-      //       time: '18:00 - 20:00',
-      //       location: 'Teater Terbuka',
-      //       description: 'Pertunjukan seni budaya tradisional',
-      //       dresscode: 'Casual',
-      //     }
-      //   ],
-      // },
-  

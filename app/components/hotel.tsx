@@ -166,7 +166,7 @@ const AccommodationSlider: React.FC = () => {
           onClick={() => router.push('/hotels')}
           className="text-[#FF8D00] hover:underline hidden md:block z-40 mr-20"
         >
-          Lihat semua
+          Lihat Semua
       </button>
       </div>
      
@@ -245,7 +245,7 @@ const AccommodationSlider: React.FC = () => {
                 alt={accommodations[0].name}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black opacity-70"></div>
+              <div className="absolute inset-0 bg-black opacity-40"></div>
             </div>
 
                 {/* Nama Hotel dan StarNumberName */}
@@ -286,7 +286,7 @@ const AccommodationSlider: React.FC = () => {
                alt={item.name}
                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black opacity-70"></div>
+              <div className="absolute inset-0 bg-black opacity-40"></div>
               </div>              
 
                   {/* Informasi */}

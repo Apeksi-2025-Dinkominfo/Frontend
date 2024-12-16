@@ -4,14 +4,19 @@ import { SurabayFetch, fetchNewsItems, parseDate, getTruncatedBody,formatDate, N
 async function getNewsItem(id: string): Promise<NewsItem | SurabayaItem | null> {
   const [surabayaItems, apeksiItems] = await Promise.all([SurabayFetch(), fetchNewsItems()]);
   
+  console.log(surabayaItems)
+
   const surabayaItem = surabayaItems.find(item => item.id.toString() === id);
   if (surabayaItem) return surabayaItem;
+  
+  console.log(apeksiItems)
 
   const apeksiItem = apeksiItems.find(item => item.id.toString() === id);
   if (apeksiItem) return apeksiItem;
 
   return null;
 }
+
 
 export default async function BeritaDetail({ params }: { params: { id_berita: string } }) {
   const newsItem = await getNewsItem(params.id_berita);

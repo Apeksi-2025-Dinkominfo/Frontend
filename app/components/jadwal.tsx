@@ -46,10 +46,10 @@ const EventComponent: React.FC = () => {
         <Box
           sx={{
             textAlign: "center",
-            padding: isSmallScreen ? "20px" : "40px",
+            padding: isSmallScreen ? "20px" : "20px",
           }}
         >
-          <Typography
+          {/* <Typography
             sx={{
               fontSize: isSmallScreen ? "16px" : "20px",
               fontWeight: "bold",
@@ -59,7 +59,7 @@ const EventComponent: React.FC = () => {
             }}
           >
             Rangkaian
-          </Typography>
+          </Typography> */}
           <Typography
             sx={{
               fontSize: isSmallScreen ? "28px" : "40px",
@@ -67,7 +67,7 @@ const EventComponent: React.FC = () => {
               color: "#023E74",
             }}
           >
-            Jadwal Rakernas.
+            JADWAL MUNAS
           </Typography>
             {/* <Typography
 //             sx={{
@@ -167,7 +167,7 @@ const EventComponent: React.FC = () => {
           <Typography
             sx={{
               fontWeight: "bold",
-              fontSize: isSmallScreen ? "18px" : "40px",
+              fontSize: isSmallScreen ? "18px" : "30px",
               textAlign: "center",
               color: "#023E74",
               marginBottom: isSmallScreen ? "15px" : "20px",
