@@ -63,7 +63,7 @@ export default function RootLayout({
             backgroundPosition: 'center',
             height: 'auto',
             backgroundColor: isDarkMode ? '#0F172A' : '#F7F7F7',
-            color: isDarkMode ? '#ffffff' : '#000000',
+            color: isDarkMode ? '#FF8D00' : '#023E74',
           }}
         >
          {isOtherPage && (

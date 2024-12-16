@@ -43,7 +43,7 @@ export default function ScrollingMembers() {
 
   return (
     <div className="mt-12">
-      <h2 className="text-3xl font-bold text-center text-orange-500 mb-8">ANGGOTA MUNAS</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">ANGGOTA MUNAS</h2>
       <div className="relative h-[600px] overflow-hidden">
         <div className="relative h-[150px] mb-8 overflow-hidden">
           {renderMemberRow(offset1)}

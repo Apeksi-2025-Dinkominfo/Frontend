@@ -113,7 +113,6 @@ const GalleryComponent = () => {
           <Typography
             variant="h4"
             fontWeight="bold"
-            color="#023E74"
             sx={{ fontFamily: "Plus Jakarta Sans", textAlign: "center" }}
           >
             Galeri APEKSI
@@ -152,7 +151,6 @@ const GalleryComponent = () => {
                               fontFamily: "Plus Jakarta Sans",
                               fontStyle: "italic",
                               fontWeight: "bold",
-                              color: "#023E74",
                               textAlign: "center",
                               textShadow: "0px 0px 5px rgba(0, 0, 0, 0.5)",
                             }}

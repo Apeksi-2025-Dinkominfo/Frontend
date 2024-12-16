@@ -6,7 +6,9 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 // Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 
 const VideoGallery = () => {
   // Daftar video
@@ -58,7 +60,7 @@ const VideoGallery = () => {
             fontFamily: "Plus Jakarta Sans",
           }}
         >
-         Ucapan Para Walikota
+          Alun Alun Kota Surabaya
         </Typography>
 
         {/* Video Utama */}
@@ -81,7 +83,7 @@ const VideoGallery = () => {
             sx={{
               position: "absolute",
               top: "50%",
-              left: "10px", // Fixed positioning inside video
+              left: "10px",
               transform: "translateY(-50%)",
               backgroundColor: "#FF8C00",
               color: "#FFF",
@@ -89,6 +91,7 @@ const VideoGallery = () => {
               height: "40px",
               padding: 0,
               borderRadius: "50%",
+              zIndex: 20,
               "&:hover": {
                 backgroundColor: "#FFA500",
               },
@@ -102,7 +105,7 @@ const VideoGallery = () => {
             sx={{
               position: "absolute",
               top: "50%",
-              right: "10px", // Fixed positioning inside video
+              right: "10px",
               transform: "translateY(-50%)",
               backgroundColor: "#FF8C00",
               color: "#FFF",
@@ -110,6 +113,7 @@ const VideoGallery = () => {
               height: "40px",
               padding: 0,
               borderRadius: "50%",
+              zIndex: 20,
               "&:hover": {
                 backgroundColor: "#FFA500",
               },
@@ -123,21 +127,30 @@ const VideoGallery = () => {
       {/* Thumbnail Section (Card Biru dengan Swiper) */}
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: "#EEF2F9",
           padding: "40px",
           marginTop: "20px",
           borderRadius: "10px",
+          position: "relative",
         }}
       >
+        {/* Arrow Navigasi Swiper */}
+
         <Swiper
-          spaceBetween={60} // Jarak antar slide
-          slidesPerView={1} // Default view is 1 video
+          modules={[Navigation]}
+          spaceBetween={60}
+          slidesPerView={1}
           breakpoints={{
-            640: { slidesPerView: 1 }, // On mobile, only 1 video
-            768: { slidesPerView: 2 }, // On tablets, show 2 videos
-            1024: { slidesPerView: 3 }, // On large screens, show 3 videos
-            1280: { slidesPerView: 4 }, // On very large screens, show 4 videos
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
           }}
+          style={{  
+      overflowX: "auto", // Memungkinkan scroll horizontal
+      scrollbarWidth: "thin", // Untuk memperkecil scroll di browser yang mendukung
+            
+    }}
         >
           {videos.map((video, index) => (
             <SwiperSlide key={index}>
@@ -147,7 +160,7 @@ const VideoGallery = () => {
                   cursor: "pointer",
                   borderRadius: "12px",
                   border: index === currentIndex ? "3px solid #FFA500" : "none",
-                  overflow: "hidden", // Supaya video tidak keluar dari card
+                  overflow: "hidden",
                 }}
               >
                 <video

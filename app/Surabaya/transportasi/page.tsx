@@ -110,8 +110,8 @@ function RentalCard() {
 
   return (
     <Container sx={{ padding: 4 }}>
-      <Typography variant="h5" align="center" gutterBottom sx={{ fontFamily: 'Plus Jakarta Sans', color: '#227B94', fontWeight: 'bold', marginBottom: 3 }}>
-        Rental Mobil di Surabaya
+      <Typography variant="h5" align="center" gutterBottom sx={{ fontFamily: 'Plus Jakarta Sans', color: '#FF8D00', fontWeight: 'bold', marginBottom: 3 }}>
+       Travel Agent
       </Typography>
       <Grid container spacing={3}>
         {paginatedAccommodations.map((rental) => (

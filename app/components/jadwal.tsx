@@ -64,7 +64,6 @@ const EventComponent: React.FC = () => {
             sx={{
               fontSize: isSmallScreen ? "28px" : "40px",
               fontWeight: "bold",
-              color: "#023E74",
             }}
           >
             JADWAL MUNAS

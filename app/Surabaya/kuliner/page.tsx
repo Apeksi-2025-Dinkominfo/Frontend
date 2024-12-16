@@ -133,7 +133,7 @@ export default function CulinaryPage() {
       >
         <Typography
           variant="h6"
-          style={{ fontFamily: 'Plus Jakarta Sans', color: 'black' }}
+          style={{ fontFamily: 'Plus Jakarta Sans', }}
           className="font-bold "
           sx={{
             fontSize: { xs: '3rem', sm: '4rem' },
@@ -273,7 +273,7 @@ export default function CulinaryPage() {
                   gutterBottom
                   variant="h6"
                   component="div"
-                  style={{ fontFamily: 'Plus Jakarta Sans', marginBottom: '50px' }}
+                  style={{ color:"#023E74", fontFamily: 'Plus Jakarta Sans', marginBottom: '50px' }}
                   className="font-semibold"
                 >
                   {item.name}

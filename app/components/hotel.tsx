@@ -159,12 +159,12 @@ const AccommodationSlider: React.FC = () => {
       ></div> */}
 
       <div className="flex justify-center items-end mb-5 ">
-        <h2 className="text-5xl font-bold  text-[#FF8D00]">Hotel di Surabaya</h2> 
+        <h2 className="text-5xl font-bold">Hotel di Surabaya</h2> 
       </div>
-      <div className="flex justify-end pr-12 mr-1 text-xl  ">
+      <div className="flex justify-end pr-12 mr-1 text-l  ">
          <button
           onClick={() => router.push('/hotels')}
-          className="text-[#FF8D00] hover:underline hidden md:block z-40 mr-20"
+          className="bg-white text-black rounded-2xl p-2 hover:underline hidden md:block z-40 mr-20"
         >
           Lihat Semua
       </button>

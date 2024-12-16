@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
@@ -10,8 +10,6 @@ import {
   Container,
   MenuItem,
   Select,
-  FormControl,
-  InputLabel,
   SelectChangeEvent,
 } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
@@ -33,9 +31,13 @@ const Dashboard = () => {
   const [optdCount, setOptdCount] = useState(0);
   const [totalRombongan, setTotalRombongan] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [walikotaMonthlyData, setWalikotaMonthlyData] = useState<MonthlyData[]>([]);
+  const [walikotaMonthlyData, setWalikotaMonthlyData] = useState<MonthlyData[]>(
+    []
+  );
   const [optdMonthlyData, setOptdMonthlyData] = useState<MonthlyData[]>([]);
-  const [selectedYear, setSelectedYear] = useState<string>(dayjs().format('YYYY'));
+  const [selectedYear, setSelectedYear] = useState<string>(
+    dayjs().format('YYYY')
+  );
   const [availableYears, setAvailableYears] = useState<string[]>([]);
 
   useEffect(() => {
@@ -43,11 +45,14 @@ const Dashboard = () => {
       try {
         setLoading(true);
 
-        const walikotaResponse = await axios.get('http://localhost:5000/peserta');
+        const walikotaResponse = await axios.get(
+          'http://localhost:5000/peserta'
+        );
         const walikotaData = walikotaResponse.data;
         const walikotaCount = walikotaData.length;
         const walikotaRombongan = walikotaData.reduce(
-          (sum: number, item: Participant) => sum + (item.jumlah_rombongan || 0),
+          (sum: number, item: Participant) =>
+            sum + (item.jumlah_rombongan || 0),
           0
         );
 
@@ -55,7 +60,8 @@ const Dashboard = () => {
         const optdData = optdResponse.data;
         const optdCount = optdData.length;
         const optdRombongan = optdData.reduce(
-          (sum: number, item: Participant) => sum + (item.jumlah_rombongan || 0),
+          (sum: number, item: Participant) =>
+            sum + (item.jumlah_rombongan || 0),
           0
         );
 
@@ -72,7 +78,8 @@ const Dashboard = () => {
           const year = dayjs(item.created_at).format('YYYY');
           const key = `${month}-${year}`;
           years.add(year);
-          registrationsByMonthWalikota[key] = (registrationsByMonthWalikota[key] || 0) + 1;
+          registrationsByMonthWalikota[key] =
+            (registrationsByMonthWalikota[key] || 0) + 1;
         });
 
         optdData.forEach((item: Participant) => {
@@ -80,7 +87,8 @@ const Dashboard = () => {
           const year = dayjs(item.created_at).format('YYYY');
           const key = `${month}-${year}`;
           years.add(year);
-          registrationsByMonthOptd[key] = (registrationsByMonthOptd[key] || 0) + 1;
+          registrationsByMonthOptd[key] =
+            (registrationsByMonthOptd[key] || 0) + 1;
         });
 
         setAvailableYears(Array.from(years));
@@ -170,31 +178,37 @@ const Dashboard = () => {
             </Grid>
           </Grid>
 
-          <div style={{ 
-  display: 'flex', 
-  alignItems: 'right', 
-  justifyContent: 'right', 
-  margin: '20px 0', 
-  padding: '10px', 
-  borderRadius: '8px', 
-  boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', 
-  backgroundColor: '#f9f9f9', 
-  maxWidth: '200px',
-}}>
-  <Select
-    value={selectedYear}
-    onChange={handleYearChange}
-    variant="outlined"
-    style={{ width: '100%', fontWeight: 'bold', backgroundColor: '#fff', borderRadius: '4px' }}
-  >
-    {availableYears.map((year) => (
-      <MenuItem key={year} value={year}>
-        {year}
-      </MenuItem>
-    ))}
-  </Select>
-</div>
-
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'right',
+              justifyContent: 'right',
+              margin: '20px 0',
+              padding: '10px',
+              borderRadius: '8px',
+              boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+              backgroundColor: '#f9f9f9',
+              maxWidth: '200px',
+            }}
+          >
+            <Select
+              value={selectedYear}
+              onChange={handleYearChange}
+              variant="outlined"
+              style={{
+                width: '100%',
+                fontWeight: 'bold',
+                backgroundColor: '#fff',
+                borderRadius: '4px',
+              }}
+            >
+              {availableYears.map((year) => (
+                <MenuItem key={year} value={year}>
+                  {year}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
 
           {/* Monthly Registration Chart for Walikota */}
           <Typography
@@ -210,11 +224,17 @@ const Dashboard = () => {
               <BarChart
                 xAxis={[{ dataKey: 'month', scaleType: 'band' }]}
                 series={[
-                  { dataKey: 'registrations', label: 'Registrations', color: '#1976d2' },
+                  {
+                    dataKey: 'registrations',
+                    label: 'Registrations',
+                    color: '#1976d2',
+                  },
                 ]}
                 width={600}
                 height={300}
-                dataset={filterDataByYear(walikotaMonthlyData) as Record<string, any>[]}
+                dataset={
+                  filterDataByYear(walikotaMonthlyData) as Record<string, any>[]
+                }
               />
             </Grid>
           </Grid>
@@ -233,11 +253,17 @@ const Dashboard = () => {
               <BarChart
                 xAxis={[{ dataKey: 'month', scaleType: 'band' }]}
                 series={[
-                  { dataKey: 'registrations', label: 'Registrations', color: '#ff9800' },
+                  {
+                    dataKey: 'registrations',
+                    label: 'Registrations',
+                    color: '#ff9800',
+                  },
                 ]}
                 width={600}
                 height={300}
-                dataset={filterDataByYear(optdMonthlyData) as Record<string, any>[]}
+                dataset={
+                  filterDataByYear(optdMonthlyData) as Record<string, any>[]
+                }
               />
             </Grid>
           </Grid>

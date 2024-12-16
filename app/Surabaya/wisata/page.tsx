@@ -394,13 +394,18 @@ export default function HeritagePage() {
                 }}
               >
                 <div>
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-[#023E74] text-lg font-semibold">
                     {destination.nameIndonesia}
                   </h2>
-                  <p className=" italic font-medium">
+                  <p className=" text-[#023E74] italic font-medium">
                     {destination.address}
                   </p>
-                  <p style={{ fontFamily: "Plus Jakarta Sans" }}>
+                  <p style=
+                  {{ 
+                    fontFamily: "Plus Jakarta Sans",
+                    color:"#023E74",
+                  }}
+                 >
                     {truncateDescription(destination.descriptionIndonesia)}
                   </p>
                 </div>

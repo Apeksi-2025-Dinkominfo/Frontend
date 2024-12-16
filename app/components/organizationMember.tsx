@@ -17,9 +17,9 @@ export default function OrganizationStructure() {
           />
         </div>
         {/* Teks */}
-        <h1 className="text-6xl font-semibold text-[#023E74]">
+        <h1 className="text-6xl font-semibold">
           Dari Surabaya untuk <br />
-          <span className="text-[#023E74]">Indonesia Maju</span>
+          <span className="">Indonesia Maju</span>
         </h1>
       </div>
       <div className="grid md:grid-cols-2 gap-8 mb-12">

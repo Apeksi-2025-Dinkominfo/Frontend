@@ -21,7 +21,7 @@ const renderer: CountdownRendererFn = ({
       sx={{
         marginTop: 2,
         flexWrap: 'nowrap',
-        gap:'45px',
+        gap:{ xs: '10px', md: '45px' },
       }}
     >
       <Grid item>

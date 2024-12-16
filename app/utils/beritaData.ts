@@ -1,4 +1,4 @@
-import { parseISO, parse, format as dateFormat } from 'date-fns';
+import { parseISO, parse, format } from 'date-fns';
 
 export interface NewsItem {
   id: number;
@@ -12,25 +12,31 @@ export interface NewsItem {
 export interface SurabayaItem {
   id: number;
   title: string;
-  image: string;
-  category: string;
-  created_at: string;
+  feature_image_url: string;
+  publish_date: string;
   content: string;
 }
 
 export const SurabayFetch = async (): Promise<SurabayaItem[]> => {
+  const url = 'https://surabaya.go.id/api/data/news?page=1&category=berita';
+
   try {
-    const response = await fetch('https://surabaya.go.id/api/data/news?page=1&category=berita');
+    const response = await fetch(url);
+
     if (!response.ok) {
       throw new Error('Failed to fetch news items');
     }
+
     const jsonResponse = await response.json();
+
+    // Extract the data, assuming the response has a `data` field containing the items
     return jsonResponse.data || [];
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching Surabaya news:', error);
     return [];
   }
 };
+
 
 export const fetchNewsItems = async (): Promise<NewsItem[]> => {
   try {
@@ -39,6 +45,7 @@ export const fetchNewsItems = async (): Promise<NewsItem[]> => {
       throw new Error('Failed to fetch news items');
     }
     const data = await response.json();
+    // console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -46,40 +53,17 @@ export const fetchNewsItems = async (): Promise<NewsItem[]> => {
   }
 };
 
-export const parseDate = (dateString: string | undefined): Date => {
-  if (!dateString) {
-    console.error('Received undefined date');
-    return new Date(); // Return current date as fallback
-  }
+
+
+export const formatDate = (dateString: string): string => {
   try {
-    // Try parsing as ISO format (2024-10-07T10:00:00.000Z)
-    return parseISO(dateString);
-  } catch {
-    try {
-      // Try parsing as custom format (2024-12-09T07:48:48+07:00)
-      return parse(dateString, "yyyy-MM-dd'T'HH:mm:ssXXX", new Date());
-    } catch {
-      console.error(`Failed to parse date: ${dateString}`);
-      return new Date(); // Return current date as fallback
-    }
+    const date = dateString.includes('T') 
+      ? parseISO(dateString) 
+      : parse(dateString, 'yyyy-MM-dd', new Date());
+    return format(date, 'dd MMMM yyyy');
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return dateString;
   }
-};
-
-export const formatDate = (date: Date): string => {
-  return dateFormat(date, 'dd MMM yyyy');
-};
-
-export const getTruncatedTitle = (title: string, maxLength = 150) => {
-  if (title.length > maxLength) {
-    return title.slice(0, maxLength) + '...';
-  }
-  return title;
-};
-
-export const getTruncatedBody = (body: string, maxLength = 350) => {
-  if (body.length > maxLength) {
-    return body.slice(0, maxLength) + '...';
-  }
-  return body;
 };
 

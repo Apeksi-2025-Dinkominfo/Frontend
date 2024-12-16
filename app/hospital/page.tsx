@@ -98,7 +98,7 @@ const FacilityCard: React.FC<{ facility: Facility, loading: boolean, selectedTab
 
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <CategoryIcon sx={{ color: '#0288d1', mr: 1 }} />
-                <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans', color: '#546e7a' }}>
+                <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Plus Jakarta Sans',  }}>
                   Tipe Rumah Sakit: {facility.tipe_rumah_sakit}
                 </Typography>
               </Box>
@@ -286,10 +286,10 @@ const LandingPage: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
       >
         {/* Text Section */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant={isMobile ? 'h4' : 'h2'} component="div" sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'bold', color: '#0d47a1' }}>
+          <Typography variant={isMobile ? 'h4' : 'h2'} component="div" sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'bold', }}>
             {getPageHeading()}
           </Typography>
-          <Typography variant={isMobile ? 'body1' : 'h6'} component="div" sx={{ fontFamily: 'Plus Jakarta Sans', mt: 2, color: '#0d47a1' }}>
+          <Typography variant={isMobile ? 'body1' : 'h6'} component="div" sx={{ fontFamily: 'Plus Jakarta Sans', mt: 2, }}>
           Temukan rumah sakit dan fasilitas layanan kesehatan terdekat yang siap menolong jika mengalami masalah kesehatan.
           </Typography>
         </Box>
