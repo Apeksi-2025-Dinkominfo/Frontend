@@ -1,297 +1,186 @@
-"use client";
-import React, { useState } from 'react';
-import { Box, Typography, Button, Grid } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Countdown, { CountdownRendererFn, CountdownRenderProps } from 'react-countdown';
+'use client';
+import React, { useState } from "react";
+import { Box, Typography, Button } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-const videos = [
-  '/fix.mp4',
-  '/fix.mp4',
-  '/fix.mp4',
-  '/fix.mp4',
-  '/fix.mp4',
-  '/fix.mp4',
-];
+// Import Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
-const targetDate = new Date('2025-05-05T00:00:00');
+const VideoGallery = () => {
+  // Daftar video
+  const videos = [
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+    "/fix.mp4",
+  ];
 
-const renderer: CountdownRendererFn = ({
-  days,
-  hours,
-  minutes,
-  seconds,
-}: CountdownRenderProps) => {
-  return (
-    <Grid
-      container
-      spacing={2}
-      justifyContent="center"
-      sx={{
-        marginTop: 2,
-        flexWrap: 'nowrap',
-      }}
-    >
-      <Grid item>
-        <Box
-          sx={{
-            backgroundColor: '#FFFFFF',
-            padding: { xs: '10px', md: '20px' },
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            minWidth: { xs: '60px', md: '100px' },
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: { xs: '20px', md: '30px' },
-              color: '#1C1C1C',
-            }}
-          >
-            {days}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: '10px', md: '15px' }, color: '#1C1C1C' }}
-          >
-            Days
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item>
-        <Box
-          sx={{
-            backgroundColor: '#FFFFFF',
-            padding: { xs: '10px', md: '20px' },
-            borderRadius: '12px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            minWidth: { xs: '60px', md: '100px' },
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: { xs: '20px', md: '30px' },
-              color: '#1C1C1C',
-            }}
-          >
-            {hours}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: '10px', md: '15px' }, color: '#1C1C1C' }}
-          >
-            Hours
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item>
-        <Box
-          sx={{
-            backgroundColor: '#FFFFFF',
-            padding: { xs: '10px', md: '20px' },
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            minWidth: { xs: '60px', md: '100px' },
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: { xs: '20px', md: '30px' },
-              color: '#1C1C1C',
-            }}
-          >
-            {minutes}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: '10px', md: '15px' }, color: '#1C1C1C' }}
-          >
-            Minutes
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item>
-        <Box
-          sx={{
-            backgroundColor: '#FFFFFF',
-            padding: { xs: '10px', md: '20px' },
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            minWidth: { xs: '60px', md: '100px' },
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: { xs: '20px', md: '30px' },
-              color: '#1C1C1C',
-            }}
-          >
-            {seconds}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: '10px', md: '15px' }, color: '#1C1C1C' }}
-          >
-            Seconds
-          </Typography>
-        </Box>
-      </Grid>
-    </Grid>
-  );
-};
-
-const VideoPlayer: React.FC = () => {
+  // State untuk video yang sedang diputar
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
-  };
-
+  // Fungsi navigasi video utama
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? videos.length - 1 : prevIndex - 1
     );
   };
 
-  return (
-    <Box
-      sx={{
-        position: 'relative',
-        backgroundColor: '#ffffff',
-        padding: { xs: '16px', md: '24px' },
-        borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-      <video
-        key={currentIndex}
-        controls
-        style={{ width: '100%', borderRadius: '10px' }}
-      >
-        <source src={videos[currentIndex]} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <Button
-        onClick={handlePrev}
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '0',
-          transform: 'translateY(-50%)',
-          backgroundColor: '#333',
-          color: '#fff',
-          minWidth: 'auto',
-          padding: '10px',
-          borderRadius: '50%',
-          '&:hover': {
-            backgroundColor: '#555',
-          },
-        }}
-      >
-        <ArrowBackIcon />
-      </Button>
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === videos.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
-      <Button
-        onClick={handleNext}
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          right: '0',
-          transform: 'translateY(-50%)',
-          backgroundColor: '#333',
-          color: '#fff',
-          minWidth: 'auto',
-          padding: '10px',
-          borderRadius: '50%',
-          '&:hover': {
-            backgroundColor: '#555',
-          },
-        }}
-      >
-        <ArrowForwardIcon />
-      </Button>
-    </Box>
-  );
-};
-
-const WalikotaVideos: React.FC = () => {
   return (
-    <Box
-      sx={{
-        padding: { xs: '16px', md: '24px' },
-        borderRadius: '15px',
-        textAlign: 'center',
-        maxWidth: '1000px',
-        margin: '0 auto',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        backgroundImage: 'url("/Gembiliwonokromo3.png")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        position: 'relative',
-      }}
-    >
+    <Box>
+      {/* Container Card Abu-Abu (Video Utama) */}
       <Box
         sx={{
-          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent background
-          borderRadius: '10px',
-          padding: '15px',
-          display: 'inline-block',
-          mb: 4,
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "20px",
+          textAlign: "center",
+          borderRadius: "15px",
         }}
       >
+        {/* Judul */}
         <Typography
           variant="h4"
           sx={{
-            marginBottom: '24px',
-            fontSize: { xs: '20px', md: '39.8px' },
-            color: '#1C1C1C',
+            marginBottom: "24px",
+            fontSize: { xs: "40px", md: "60px" },
+            fontWeight: "bold",
+            color: "#FF8C00",
+            fontFamily: "Plus Jakarta Sans",
           }}
-          className="text-body font-semibold"
         >
-          Ucapan Dari Para Walikota Hebat
+          Alun Alun Kota Surabaya
         </Typography>
+
+        {/* Video Utama */}
+        <Box sx={{ position: "relative", display: "inline-block", width: "100%" }}>
+          <video
+            key={currentIndex}
+            controls
+            style={{
+              width: "100%",
+              borderRadius: "15px",
+            }}
+          >
+            <source src={videos[currentIndex]} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* Tombol Navigasi (Selalu di dalam video pada semua ukuran layar) */}
+          <Button
+            onClick={handlePrev}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "10px",
+              transform: "translateY(-50%)",
+              backgroundColor: "#FF8C00",
+              color: "#FFF",
+              minWidth: "40px",
+              height: "40px",
+              padding: 0,
+              borderRadius: "50%",
+              zIndex: 20,
+              "&:hover": {
+                backgroundColor: "#FFA500",
+              },
+            }}
+          >
+            <ArrowBackIcon fontSize="small" />
+          </Button>
+
+          <Button
+            onClick={handleNext}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              right: "10px",
+              transform: "translateY(-50%)",
+              backgroundColor: "#FF8C00",
+              color: "#FFF",
+              minWidth: "40px",
+              height: "40px",
+              padding: 0,
+              borderRadius: "50%",
+              zIndex: 20,
+              "&:hover": {
+                backgroundColor: "#FFA500",
+              },
+            }}
+          >
+            <ArrowForwardIcon fontSize="small" />
+          </Button>
+        </Box>
       </Box>
 
-      <VideoPlayer />
+      {/* Thumbnail Section (Card Biru dengan Swiper) */}
       <Box
         sx={{
-          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent background
-          borderRadius: '10px',
-          padding: '15px',
-          display: 'inline-block',
-          mb: 6,
+          backgroundColor: "#EEF2F9",
+          padding: "40px",
+          marginTop: "20px",
+          borderRadius: "10px",
+          position: "relative",
         }}
       >
-      <Typography
-        variant="h5"
-        sx={{
-          marginTop: '20px',
-          fontSize: { xs: '18px', md: '25px' },
-          fontWeight: 'bold',
-          color: '#1C1C1C',
-        }}
-      >
-        Menuju Munas APEKSI Ke VII
-      </Typography>
+        {/* Arrow Navigasi Swiper */}
 
-      <Countdown date={targetDate} renderer={renderer} />
-    </Box>
+        <Swiper
+          modules={[Navigation]}
+          spaceBetween={60}
+          slidesPerView={1}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          }}
+          style={{  
+      overflowX: "auto", // Memungkinkan scroll horizontal
+      scrollbarWidth: "thin", // Untuk memperkecil scroll di browser yang mendukung
+            
+    }}
+        >
+          {videos.map((video, index) => (
+            <SwiperSlide key={index}>
+              <Box
+                onClick={() => setCurrentIndex(index)}
+                sx={{
+                  cursor: "pointer",
+                  borderRadius: "12px",
+                  border: index === currentIndex ? "3px solid #FFA500" : "none",
+                  overflow: "hidden",
+                }}
+              >
+                <video
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "12px",
+                    objectFit: "cover",
+                  }}
+                >
+                  <source src={video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Box>
   );
 };
 
-
-export default WalikotaVideos;
+export default VideoGallery;

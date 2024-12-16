@@ -2,6 +2,7 @@ import LandingPage from './components/landing';
 import CountdownComponent from './components/coutdown';
 import Sejarah from './components/CardSejarah';
 import Surabaya from './components/sapaSurabaya';
+import WalKot from './components/walkota';
 import Hotel from './components/hotel';
 import WalikotaVideo from './components/walkitvid';
 import Jadwal from './components/jadwal';
@@ -22,13 +23,13 @@ export default function Home() {
   return (
     <>
     
-      <Box id="home">
+      <Box id="home" className="z-50">
         <LandingPage />     
       </Box>
       <Box
         sx={{
           position: 'absolute', // Posisi absolut
-          top: '85%', // Berada di atas layar
+          top: '75%', // Berada di atas layar
           left: '50%', // Tengah horizontal
           transform: 'translateX(-50%)', // Menyeimbangkan posisi agar benar-benar di tengah
           display: 'flex',
@@ -41,31 +42,22 @@ export default function Home() {
         <CountdownComponent />
       </Box>
 
-      <Box sx={{ mt: { xs: 2, md: 20 } }} id="sejarah">
+      <Box sx={{ mt: { xs: 2, md: 25 } }} id="sejarah">
         <Sejarah />
       </Box>
+      {/* Bagian Untuk foto Walikota */}
       <Box
         sx={{
+          mt: { xs: 2, md: 20 },
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
-          mt: { xs: 2, md: 10 },
         }}
       >
-        <Box sx={{ maxWidth: '40%', width: '50%' }}>
-          <Image
-            src="/kata.png" // Replace with your image path
-            alt="Centered Image"
-            width={400}  // Adjust width as needed
-            height={500} // Adjust height as needed
-            layout="responsive"
-          />
+       
+        <Box sx={{ maxWidth: '80%', width: '100%' }}>  
+       
+         <Walikota/>
         </Box>
-      </Box>
-
-     
-      <Box sx={{ mt: { md: 20 } }}>
-        <Walikota />
       </Box>
       
 

@@ -103,11 +103,11 @@ export default function Register() {
         ctx.clearRect(0, 0, width, height);
   
         // Latar belakang dengan gradien
-        const gradient = ctx.createLinearGradient(0, 0, width, height);
-        gradient.addColorStop(0, '#f0f0f0');
-        gradient.addColorStop(1, '#d4d4d4');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
+        // const gradient = ctx.createLinearGradient(0, 0, width, height);
+        // gradient.addColorStop(0, '#f0f0f0');
+        // gradient.addColorStop(1, '#d4d4d4');
+        // ctx.fillStyle = gradient;
+        // ctx.fillRect(0, 0, width, height);
   
         // Tambahkan teks CAPTCHA dengan rotasi dan warna acak
         ctx.font = 'bold 28px Arial';
@@ -124,47 +124,47 @@ export default function Register() {
           ctx.restore();
         }
   
-        // Tambahkan garis-garis acak
-        for (let i = 0; i < 8; i++) {
-          ctx.strokeStyle = `rgba(${Math.random() * 255}, ${
-            Math.random() * 255
-          }, ${Math.random() * 255}, 0.5)`;
-          ctx.beginPath();
-          ctx.moveTo(Math.random() * width, Math.random() * height);
-          ctx.lineTo(Math.random() * width, Math.random() * height);
-          ctx.stroke();
-        }
+        // // Tambahkan garis-garis acak
+        // for (let i = 0; i < 8; i++) {
+        //   ctx.strokeStyle = `rgba(${Math.random() * 255}, ${
+        //     Math.random() * 255
+        //   }, ${Math.random() * 255}, 0.5)`;
+        //   ctx.beginPath();
+        //   ctx.moveTo(Math.random() * width, Math.random() * height);
+        //   ctx.lineTo(Math.random() * width, Math.random() * height);
+        //   ctx.stroke();
+        // }
   
-        // Tambahkan lingkaran-lingkaran kecil acak
-        for (let i = 0; i < 15; i++) {
-          ctx.fillStyle = `rgba(${Math.random() * 255}, ${
-            Math.random() * 255
-          }, ${Math.random() * 255}, 0.7)`;
-          const x = Math.random() * width;
-          const y = Math.random() * height;
-          const radius = Math.random() * 5;
-          ctx.beginPath();
-          ctx.arc(x, y, radius, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        // // Tambahkan lingkaran-lingkaran kecil acak
+        // for (let i = 0; i < 15; i++) {
+        //   ctx.fillStyle = `rgba(${Math.random() * 255}, ${
+        //     Math.random() * 255
+        //   }, ${Math.random() * 255}, 0.7)`;
+        //   const x = Math.random() * width;
+        //   const y = Math.random() * height;
+        //   const radius = Math.random() * 5;
+        //   ctx.beginPath();
+        //   ctx.arc(x, y, radius, 0, Math.PI * 2);
+        //   ctx.fill();
+        // }
   
-        // Tambahkan distorsi dengan garis melengkung
-        for (let i = 0; i < 5; i++) {
-          ctx.strokeStyle = `rgba(${Math.random() * 255}, ${
-            Math.random() * 255
-          }, ${Math.random() * 255}, 0.5)`;
-          ctx.beginPath();
-          ctx.moveTo(Math.random() * width, Math.random() * height);
-          for (let j = 0; j < 3; j++) {
-            ctx.quadraticCurveTo(
-              Math.random() * width,
-              Math.random() * height,
-              Math.random() * width,
-              Math.random() * height
-            );
-          }
-          ctx.stroke();
-        }
+        // // Tambahkan distorsi dengan garis melengkung
+        // for (let i = 0; i < 5; i++) {
+        //   ctx.strokeStyle = `rgba(${Math.random() * 255}, ${
+        //     Math.random() * 255
+        //   }, ${Math.random() * 255}, 0.5)`;
+        //   ctx.beginPath();
+        //   ctx.moveTo(Math.random() * width, Math.random() * height);
+        //   for (let j = 0; j < 3; j++) {
+        //     ctx.quadraticCurveTo(
+        //       Math.random() * width,
+        //       Math.random() * height,
+        //       Math.random() * width,
+        //       Math.random() * height
+        //     );
+        //   }
+        //   ctx.stroke();
+        // }
       }
     }
   };
@@ -435,9 +435,9 @@ export default function Register() {
                   {[
                     'Fun Run',
                     'Tanam Pohon',
-                    'ladies program',
-                    'karnaval',
-                    'youth city changer',
+                    'Ladies Program',
+                    'Karnaval',
+                    'Youth City Changer',
                   ].map((event) => (
                     <FormControlLabel
                       key={event}
@@ -684,12 +684,12 @@ export default function Register() {
               </Grid>
 
               <form onSubmit={handleSubmit}>
-                <Grid className='mt-10 ' container spacing={2} >
+                <Grid className='mt-2 ' container spacing={2} >
                   {/* CAPTCHA Gambar */}
                   <Grid item xs={12}>
                     <canvas
                       ref={canvasRef}
-                      width={200}
+                      width={250}
                       height={60}
                       style={{
                         display: 'block',

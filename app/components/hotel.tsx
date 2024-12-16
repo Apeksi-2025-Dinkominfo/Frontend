@@ -151,23 +151,25 @@ const AccommodationSlider: React.FC = () => {
   return (
     <div className="relative">
       {/* Background Image */}
-      <div
+      {/* <div
         className="absolute -top-1/2 right-0 w-1/2 h-[150vh] z-0 bg-cover bg-center scale-110 hidden lg:block"
         style={{
           backgroundImage: `url('/htlbg.png')`,
         }}
-      ></div>
+      ></div> */}
 
-      <div className="flex justify-between items-center mb-5 ">
-        <h2 className="text-4xl font-semibold text-body">Hotel di Surabaya</h2>
-        <button
-          onClick={() => router.push('/hotels')}
-          className="text-light hover:underline hidden md:block z-40 mr-20"
-        >
-          Lihat semua
-        </button>
+      <div className="flex justify-center items-end mb-5 ">
+        <h2 className="text-5xl font-bold">Hotel di Surabaya</h2> 
       </div>
-
+      <div className="flex justify-end pr-12 mr-1 text-l  ">
+         <button
+          onClick={() => router.push('/hotels')}
+          className="bg-white text-black rounded-2xl p-2 hover:underline hidden md:block z-40 mr-20"
+        >
+          Lihat Semua
+      </button>
+      </div>
+     
       <div className="block md:hidden">
         {accommodations.slice(0, 5).map((item) => (
           <Link href={item.websiteLink} key={item.id} passHref>
@@ -243,7 +245,7 @@ const AccommodationSlider: React.FC = () => {
                 alt={accommodations[0].name}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black opacity-70"></div>
+              <div className="absolute inset-0 bg-black opacity-40"></div>
             </div>
 
                 {/* Nama Hotel dan StarNumberName */}
@@ -284,7 +286,7 @@ const AccommodationSlider: React.FC = () => {
                alt={item.name}
                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black opacity-70"></div>
+              <div className="absolute inset-0 bg-black opacity-40"></div>
               </div>              
 
                   {/* Informasi */}

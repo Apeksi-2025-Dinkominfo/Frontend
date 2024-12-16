@@ -1,199 +1,285 @@
 'use client';
-
-import { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   Typography,
-  Button,
+  Tabs,
+  Tab,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  IconButton,
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Navigation, Pagination } from 'swiper/modules';
-import { events, Acara } from '../utils/event'; // Import events and Acara from utils
+  createTheme,
+  ThemeProvider,
+  useMediaQuery,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-// const EventComponent = () => {
-//   const [open, setOpen] = useState(false);
-//   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+// Import events data
+import { events } from "../utils/event";
 
-//   const handleClickOpen = (date: string) => {
-//     setSelectedDate(date);
-//     setOpen(true);
-//   };
+// Buat tema dengan font "Plus Jakarta Sans"
+const theme = createTheme({
+  typography: {
+    fontFamily: "Plus Jakarta Sans",
+  },
+});
 
-//   const handleClose = () => {
-//     setOpen(false);
-//     setSelectedDate(null);
-//   };
-const EventComponent = () => {
-  const [expanded, setExpanded] = useState<string | false>(false); // Untuk kontrol accordion yang dibuka
+const EventComponent: React.FC = () => {
+  const [selectedDay, setSelectedDay] = useState(0); // Default to the first day in the events array
 
-  // Fungsi untuk mengatur accordion yang terbuka
-  const handleChange = (event: React.SyntheticEvent, panel: string) => {
-    setExpanded(expanded === panel ? false : panel);
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedDay(newValue);
   };
 
+  // Gunakan media query untuk deteksi ukuran layar
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // Layar kecil (xs atau sm)
+
   return (
-    <Box
-    sx={{
-      mt: '-90px',
-      pt: '120px',
-      // pb: 6,
-      // px: { xs: 2, md: 4 },
-      backgroundColor: '#227B94',
-      backgroundImage: 'url(/abhiboyo31.png)',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'left -60px top -50px',
-      backgroundSize: '400px 400px',
-      color: '#fff',
-      position: 'relative',
-      zIndex: 1,
-    }}
-  >
-    <Typography
-      variant="h6"
-      className="text-white font-medium"
-      sx={{ textAlign: 'center', fontFamily: 'Poppins', letterSpacing: '5px' }}
-    >
-      Cek jadwal Munas di Sini!
-    </Typography>
-    <Typography
-      variant="h6"
-      className="text-body font-semibold"
-      sx={{ mb: 4, textAlign: 'center', fontSize: '19px' }}
-    >
-      Catat jadwal kegiatan selama Munas VIII 2024 di Kota Surabaya
-    </Typography>
-
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        mt: 3,
-        gap: 2,
-        flexWrap: 'wrap',
-      }}
-    >
-      {events.map((event, index) => (
-        <Button
-          key={index}
-          variant="outlined"
-          size="small"
-          sx={{
-            width: '88px',
-            height: '104px',
-            borderRadius: '19px',
-            textTransform: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            color: '#000000',
-            backgroundColor: '#43A5CC',
-            transition: '0.3s',
-            '&:hover': {
-              backgroundColor: '#fff',
-              color: '#16325B',
-              borderColor: '#fff',
-            },
-          }}
-          onClick={() => setExpanded(expanded === event.date ? false : event.date)}
-        >
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{ fontSize: '40px', fontWeight: 'bold', lineHeight: 1 }}
-          >
-            {event.date.split(' ')[0]}
-          </Typography>
-          <Typography variant="body2" component="div">
-            {event.day}
-          </Typography>
-        </Button>
-      ))}
-    </Box>
-   
-   <Box className="bg-white w-full mt-10 pt-6 flex flex-col items-center  ">
-
-
-    {/* Accordion untuk detail acara */}
-    {events.map((event, index) => (
-
-      
-      <Accordion
-        key={index}
-        expanded={expanded === event.date}
-        onChange={(e) => handleChange(e, event.date)}
+    <ThemeProvider theme={theme}>
+      <Box
         sx={{
-          backgroundColor: '#fff',
-          borderRadius: '19px',
-          width:'500px',
-          marginBottom: 2,
+        
+          minHeight: "100vh",
         }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+        {/* Header */}
+        <Box
           sx={{
-            backgroundColor: 'rgba(120, 183, 208, 0.25)',
-            color: '#16325B',
-            borderRadius: '19px',
+            textAlign: "center",
+            padding: isSmallScreen ? "20px" : "20px",
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            {event.headline}
+          {/* <Typography
+            sx={{
+              fontSize: isSmallScreen ? "16px" : "20px",
+              fontWeight: "bold",
+              color: "#023E74",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+            }}
+          >
+            Rangkaian
+          </Typography> */}
+          <Typography
+            sx={{
+              fontSize: isSmallScreen ? "28px" : "40px",
+              fontWeight: "bold",
+            }}
+          >
+            JADWAL MUNAS
           </Typography>
-        </AccordionSummary>
-        <AccordionDetails  sx={{
-          backgroundColor: '#fff',
-          borderRadius: '50px',
-        }}>
-          <Typography variant="body2">
-            <strong>Waktu:</strong> {event.mainTime}
+            {/* <Typography
+//             sx={{
+//               fontSize: isSmallScreen ? "20px" : "40px",
+//               fontWeight: "bold",
+//               color: "#005A8D",
+//               marginLeft: isSmallScreen ? "10px" : "450px",
+//             }}
+//           >
+//             Mei 2025
+//           </Typography> */}
+        </Box>
+
+        {/* Tabs untuk Hari */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+            paddingX: isSmallScreen ? "10px" : "0",
+          }}
+        >
+
+          
+          <Tabs
+            value={selectedDay}
+            onChange={handleTabChange}
+            variant={isSmallScreen ? "scrollable" : "standard"}
+            scrollButtons="auto"
+            TabIndicatorProps={{ style: { display: "none" } }}
+            sx={{
+              "& .MuiTab-root": {
+                padding: isSmallScreen ? "20px 8px" : "25px 16px",
+                margin: isSmallScreen ? "0 5px" : "0 15px",
+                borderRadius: "20px",
+                fontSize: isSmallScreen ? "14px" : "16px",
+                fontWeight: "bold",
+                textTransform: "none",
+              },
+              "& .Mui-selected": {
+                backgroundColor: "#FFFFFF",
+                color: "#023E74",
+              },
+              "& .MuiTab-root:not(.Mui-selected)": {
+                backgroundColor: "#43A5CC",
+                color: "#FFFFFF",
+              },
+            }}
+          >
+            {events.map((event, index) => (
+              <Tab
+                key={index}
+                label={
+                  <Box textAlign="center">
+                    <Typography
+                      sx={{
+                        fontSize: isSmallScreen ? "16px" : "20px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {event.date}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: isSmallScreen ? "10px" : "20px",
+                      }}
+                    >
+                      {event.day}
+                    </Typography>
+                  </Box>
+                }
+                value={index}
+              />
+            ))}
+          </Tabs>
+        </Box>
+
+        {/* Schedule Content */}
+        <Box
+          sx={{
+            backgroundColor: "#FFFFFF", //card dalam content
+            borderRadius: "15px",
+            padding: isSmallScreen ? "10px" : "20px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              fontSize: isSmallScreen ? "20px" : "40px",
+              textAlign: "center",
+              marginBottom: "10px",
+              color: "#023E74",
+            }}
+          >
+            {events[selectedDay].headline}
           </Typography>
-          <Typography variant="body2">
-            <strong>Lokasi:</strong> {event.location}
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              fontSize: isSmallScreen ? "18px" : "30px",
+              textAlign: "center",
+              color: "#023E74",
+              marginBottom: isSmallScreen ? "15px" : "20px",
+              marginRight: isSmallScreen ? "10px" : "350px",
+            }}
+          >
+            Rangkaian Acara:
           </Typography>
-          <Typography variant="body2">
-            <strong>Deskripsi:</strong> {event.description}
-          </Typography>
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-              Detail Acara:
-            </Typography>
-            {event.acara.map((acara, idx) => (
-              <Box key={idx} sx={{ mt: 1 }}>
-                <Typography variant="body2">
-                  <strong>{acara.title}</strong>
-                </Typography>
-                <Typography variant="body2">
-                  <strong>Waktu:</strong> {acara.time}
-                </Typography>
-                <Typography variant="body2">
-                  <strong>Lokasi:</strong> {acara.location}
-                </Typography>
-                <Typography variant="body2">
-                  <strong>Dresscode:</strong> {acara.dresscode}
-                </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "15px",
+            }}
+          >
+            {events[selectedDay].acara.map((event, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: isSmallScreen ? "column" : "row",
+                  maxWidth: "700px", // Lebih lebar agar tetap center
+                  width: "100%",
+                  gap: "15px", // Jarak antara waktu dan accordion
+                  justifyContent: "center", // Tetap center
+                }}
+              >
+                {/* Bagian Waktu */}
+                <Box
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: isSmallScreen ? "16px" : "20px",
+                    color: "#023E74",
+                    // backgroundColor: "#023E74",
+                    padding: isSmallScreen ? "8px" : "5px",
+                    borderRadius: "20px",
+                    textAlign: "center",
+                    fontFamily: "Plus Jakarta Sans",
+                    width: "230px", // Ukuran tetap untuk waktu
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: isSmallScreen ? "12px" : "20px",
+                      color: "#023E74",
+                      fontFamily: "Plus Jakarta Sans",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Waktu
+                  </Typography>
+                  {event.time}
+                </Box>
+
+                {/* Bagian Accordion */}
+                <Accordion
+                  sx={{
+                    flex: "1",
+                    width: "100%",
+                    borderRadius: "20px", // Melengkung
+                    // overflow: "hidden",
+                    "&:before": { display: "none" },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon sx={{ color: "#023E74" }} />}
+                    sx={{
+                      backgroundColor: "rgba(120, 183, 208, 0.25)",
+                      // backgroundColor: "#78B7D0",
+                      // borderRadius: "20px 20px 0 0", // Melengkung atas saja
+                      borderRadius: "20px", // Melengkung atas saja
+                      padding: "10px",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: isSmallScreen ? "16px" : "20px",
+                        fontFamily: "Plus Jakarta Sans",
+                        fontWeight: "bold",
+                        color: "#16325B",
+                      }}
+                    >
+                      {event.title}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#FFFFFF", // Warna putih
+                      color: "#023E74", // Teks biru
+                      padding: "15px",
+                      borderRadius: "19px", // Radius bawah
+                    }}
+                  >
+                    <Typography>
+                      <strong>Lokasi:</strong> {event.location}
+                    </Typography>
+                    <Typography>
+                      <strong>Deskripsi:</strong> {event.description}
+                    </Typography>
+                    <Typography>
+                      <strong>Dresscode:</strong> {event.dresscode}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
               </Box>
             ))}
           </Box>
-        </AccordionDetails>
-      </Accordion>
-    ))}</Box>
-  </Box>
-);
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
 };
 
 export default EventComponent;

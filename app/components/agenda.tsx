@@ -87,10 +87,10 @@ const AgendaAcara = () => {
 
   return (
     <Container>
-      <Typography variant="h4" component="h2" gutterBottom sx={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'normal', fontSize: '1.2rem', color: '#227B94' }}>
+      <Typography variant="h4" component="h2" gutterBottom sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'normal', fontSize: '1.2rem', color: '#227B94' }}>
         Ini lho rek rangkaian acara Munas VIII 2024 Surabaya
       </Typography>
-      <Typography variant="h4" component="h2" gutterBottom sx={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'bold', fontSize: '2.5rem', color: '#16325B' }}>
+      <Typography variant="h4" component="h2" gutterBottom sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'bold', fontSize: '2.5rem', color: '#16325B' }}>
         Jangan sampai ketinggalan rangkaian acara Munas VIII 2024 di Kota Surabaya ya rek!
       </Typography>
       <Grid container spacing={5}>
@@ -120,10 +120,10 @@ const AgendaAcara = () => {
                 </Grid>
                 <Grid item xs={8}>
                   <CardContent>
-                    <Typography variant="h6" sx={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <Typography variant="h6" sx={{ fontFamily: 'Plus Jakarta Sans' }}>
                       {item.title}
                     </Typography>
-                    <Typography variant="body2" color="white" sx={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'semibold' }}>
+                    <Typography variant="body2" color="white" sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 'semibold' }}>
                       {item.description}
                     </Typography>
                   </CardContent>

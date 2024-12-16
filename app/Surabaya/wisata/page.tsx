@@ -286,6 +286,7 @@ export default function HeritagePage() {
         alignItems="center"
         justifyContent="center"
         position="relative"
+        
       >
         {filteredDestinations.length > 0 && (
           <>
@@ -331,7 +332,7 @@ export default function HeritagePage() {
                   color: 'white',
                 }}
               >
-                <span style={{ fontSize: '20px', lineHeight: '0' }}>&lt;</span>
+                <span style={{ fontSize: '20px', lineHeight: '0',fontFamily: "Plus Jakarta Sans" }}>&lt;</span>
               </Button>
               <Button
                 onClick={() =>
@@ -393,13 +394,18 @@ export default function HeritagePage() {
                 }}
               >
                 <div>
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-[#023E74] text-lg font-semibold">
                     {destination.nameIndonesia}
                   </h2>
-                  <p className="text-sm italic font-medium">
+                  <p className=" text-[#023E74] italic font-medium">
                     {destination.address}
                   </p>
-                  <p className="text-sm">
+                  <p style=
+                  {{ 
+                    fontFamily: "Plus Jakarta Sans",
+                    color:"#023E74",
+                  }}
+                 >
                     {truncateDescription(destination.descriptionIndonesia)}
                   </p>
                 </div>
@@ -412,7 +418,7 @@ export default function HeritagePage() {
                     );
                   }}
                   variant="contained"
-                  style={{ marginTop: '10px', backgroundColor: '#008080' }}
+                  style={{fontFamily: 'Plus Jakarta Sans', marginTop: '10px', backgroundColor: '#008080',  }}
                 >
                   Kunjungi Lokasi
                 </Button>

@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 @import '~keen-slider/keen-slider.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
 
 body {
-  font-family: 'Poppins';
+  fontFamily: "Plus Jakarta Sans" !important;
   margin: 0;
   padding: 0;
 }

@@ -31,7 +31,7 @@ const MobileNavbar = () => {
               <HomeIcon sx={{ color: '#D8EFD3' }} />
             </Link>
           }
-          sx={{ color: '#fff', fontFamily: 'Poppins, sans-serif' }} // White text with Poppins font
+          sx={{ color: '#fff', fontFamily: 'Plus Jakarta Sans' }} // White text with Poppins font
         />
 
         <BottomNavigationAction
@@ -41,7 +41,7 @@ const MobileNavbar = () => {
               <HistoryIcon sx={{ color: '#D8EFD3' }} />
             </Link>
           }
-          sx={{ color: '#fff', fontFamily: 'Poppins, sans-serif' }} // White text with Poppins font
+          sx={{ color: '#fff', fontFamily: 'Plus Jakarta Sans' }} // White text with Poppins font
         />
 
         <BottomNavigationAction
@@ -51,7 +51,7 @@ const MobileNavbar = () => {
               <ScheduleIcon sx={{ color: '#D8EFD3' }} />
             </Link>
           }
-          sx={{ color: '#fff', fontFamily: 'Poppins, sans-serif' }} // White text with Poppins font
+          sx={{ color: '#fff', fontFamily: 'Plus Jakarta Sans' }} // White text with Poppins font
         />
 
         <BottomNavigationAction
@@ -61,7 +61,7 @@ const MobileNavbar = () => {
               <EventIcon sx={{ color: '#D8EFD3' }} />
             </Link>
           }
-          sx={{ color: '#fff', fontFamily: 'Poppins, sans-serif' }} // White text with Poppins font
+          sx={{ color: '#fff', fontFamily: 'Plus Jakarta Sans' }} // White text with Poppins font
         />
 
         <BottomNavigationAction
@@ -71,7 +71,7 @@ const MobileNavbar = () => {
               <PhotoLibraryIcon sx={{ color: '#D8EFD3' }} />
             </Link>
           }
-          sx={{ color: '#fff', fontFamily: 'Poppins, sans-serif' }} // White text with Poppins font
+          sx={{ color: '#fff', fontFamily: 'Plus Jakarta Sans' }} // White text with Poppins font
         />
       </BottomNavigation>
     </Box>

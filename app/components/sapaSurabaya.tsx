@@ -7,10 +7,10 @@ const cardData = [
   { img: '/belanjaIcon.png', link: '/surabaya/belanja' },
   { img: '/WisataIcon.png', link: '/surabaya/wisata' },
   { img: '/Kuliner.png', link: '/surabaya/kuliner' },
-  { img: '/transportasi.png', link: '/surabaya/transportasi' },
+  { img: '/travelagent.png', link: '/surabaya/transportasi' },
   { img: '/Kesehatan.png', link: '/hospital' },
   { img: '/event.png', link: '/surabaya/event' }, // Tambahkan card event
-  { img: '/Travel1.png', link: '/surabaya/travel' }, // Tambahkan card event
+  { img: '/Rental.png', link: '/surabaya/travel' }, // Tambahkan card event
 ];
 
 export default function CityTourComponent() {
@@ -30,7 +30,7 @@ export default function CityTourComponent() {
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen relative"
-      style={{ backgroundColor: '#78B7D0' }}
+      
     >
 
       <Link href="https://forms.gle/rpkMZ237aK8tczW78" passHref>
@@ -44,9 +44,9 @@ export default function CityTourComponent() {
       <div className="text-center mb-8">
         <Typography
           style={{
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
             color: 'transparent',
-            fontFamily: 'Gotham, sans-serif',
+            fontFamily: 'Plus Jakarta Sans',
             letterSpacing: '2px',
             WebkitTextStroke: '5px #E63946',
             animation: isHovered ? 'strokeAnimation 1s infinite' : 'none',
@@ -59,8 +59,8 @@ export default function CityTourComponent() {
         </Typography>
       </div>
 
+      <div className=" carousel-container flex flex-col items-center justify-center z-50 " style={{ height: '50px', marginBottom: '350px'  }}>
 
-      <div className=" carousel-container flex flex-col items-center justify-center " style={{ height: '50px', marginBottom: '350px' }}>
         <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
           <button
             onClick={handlePrev}
