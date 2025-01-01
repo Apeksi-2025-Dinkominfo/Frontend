@@ -17,7 +17,6 @@ import {
   NewsItem,
   SurabayaItem,
   fetchNewsItems,
-  SurabayFetch,
   formatDate,
 } from '../../utils/beritaData';
 
@@ -29,14 +28,9 @@ export default function NewsDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [apeksiData, surabayaData] = await Promise.all([
-        fetchNewsItems(),
-        SurabayFetch(),
-      ]);
+      const [apeksiData] = await Promise.all([fetchNewsItems()]);
       console.log('Apeksi Data:', apeksiData);
-      console.log('Surabaya Data:', surabayaData);
       setApeksiNews(apeksiData);
-      setSurabayaNews(surabayaData);
     };
 
     fetchData();
@@ -67,10 +61,6 @@ export default function NewsDashboard() {
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
     setAutoPlay(false);
-  };
-
-  const getImageUrl = (item: SurabayaItem) => {
-    return `https://surabaya.go.id/uploads/images/posts/post_${item.id}/${item.feature_image_url}`;
   };
 
   return (
@@ -197,80 +187,6 @@ export default function NewsDashboard() {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Box sx={{ p: 3, bgcolor: '#f0f9ff', height: '100%' }}>
-              <Typography
-                variant="h5"
-                sx={{ mb: 2, color: '#1e3a8a', fontWeight: 'bold' }}
-              >
-                Surabaya
-              </Typography>
-              <List
-                sx={{
-                  width: '100%',
-                  maxHeight: { xs: '200px', md: '300px' },
-                  overflow: 'auto',
-                  '&::-webkit-scrollbar': {
-                    width: '0.4em',
-                  },
-                  '&::-webkit-scrollbar-track': {
-                    boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-                    webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-                  },
-                  '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: 'rgba(0,0,0,.1)',
-                    borderRadius: '4px',
-                  },
-                }}
-              >
-                {[...surabayaNews]
-                  .sort(
-                    (a, b) =>
-                      new Date(b.publish_date).getTime() -
-                      new Date(a.publish_date).getTime()
-                  )
-                  .map((item) => (
-                    <ListItem
-                      key={item.id}
-                      sx={{
-                        display: 'flex',
-                        gap: 2,
-                        mb: 2,
-                        cursor: 'pointer',
-                        '&:hover': {
-                          bgcolor: 'rgba(0,0,0,0.04)',
-                        },
-                      }}
-                    >
-                      <Link href={`/berita/${item.id}`} passHref>
-                        <Box
-                          component="img"
-                          src={getImageUrl(item)}
-                          alt={item.title}
-                          sx={{
-                            width: 80,
-                            height: 50,
-                            objectFit: 'cover',
-                            borderRadius: 1,
-                          }}
-                        />
-                      </Link>
-                      <Box>
-                        <Link href={`/berita/${item.id}`} passHref>
-                          <Typography
-                            variant="subtitle2"
-                            sx={{ fontWeight: 'bold', mb: 0.5 }}
-                          >
-                            {item.title}
-                          </Typography>
-                        </Link>
-                        <FormattedDate date={item.publish_date} />
-                      </Box>
-                    </ListItem>
-                  ))}
-              </List>
-            </Box>
-          </Grid>
         </Grid>
       </Paper>
       <Box sx={{ mt: 3, textAlign: 'center' }}>
@@ -278,9 +194,10 @@ export default function NewsDashboard() {
           <Typography
             variant="button"
             sx={{
+              textDecoration: 'underline',
+              fontWeight: 'bold',
               color: '#1e3a8a',
-              textDecoration: 'none',
-              '&:hover': { textDecoration: 'underline' },
+              cursor: 'pointer',
             }}
           >
             Lihat Semua Berita

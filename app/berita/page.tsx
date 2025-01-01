@@ -1,4 +1,5 @@
 import AllNews from '../components/berita/all-news'
+import NewsDashboard from '../components/berita/news-dashboard'
 import { fetchNewsItems, SurabayFetch } from '../utils/beritaData'
 import { Container, Typography, Box } from '@mui/material'
 
@@ -19,6 +20,7 @@ export default async function BeritaPage() {
           Semua Berita
         </Typography>
         <AllNews apeksiNews={apeksiNews} surabayaNews={surabayaNews} />
+        {/* <NewsDashboard/> */}
       </Container>
     </Box>
   )

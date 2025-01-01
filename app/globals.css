@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @import '~keen-slider/keen-slider.min.css';
+@import 'owl.carousel/dist/assets/owl.carousel.css';
+@import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 
 body {
   font-family: 'Poppins';
@@ -166,6 +169,113 @@ html, body {
   padding: 20px;
 }
 
+.embla {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  position: relative;
+  flex: 0 0 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.embla__slide__inner {
+  text-align: center;
+}
+
+.embla__slide__img {
+  transition: transform 0.3s ease;
+  border-radius: 15px;
+  width: 100%;
+  height: auto;
+}
+
+.embla__button {
+  background-color: #1e201e;
+  color: white;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10; /* Ensure the button is above all other elements */
+}
+
+.embla__button--prev {
+  left: -80px;
+}
+
+.embla__button--next {
+  right: -80px;
+}
+
+.embla__button:hover {
+  background-color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .embla__button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+
+  .embla__button--prev {
+    left: 10px; /* Adjust for smaller screens */
+  }
+
+  .embla__button--next {
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .embla__button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    padding: 8px;
+  }
+
+  .embla__button--prev {
+    left: 5px; /* Keep buttons visible on small phones */
+  }
+
+  .embla__button--next {
+    right: 5px;
+  }
+}
+
+
 @keyframes rainbowAnimation {
   0% { WebkitTextStrokeColor: #FF0000; } /* Red */
   20% { WebkitTextStrokeColor: #FFA500; } /* Orange */
@@ -178,3 +288,4 @@ html, body {
 .rainbow-text:hover {
   animation: rainbowAnimation 2s linear infinite;
 }
+

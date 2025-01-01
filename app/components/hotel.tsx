@@ -150,13 +150,7 @@ const AccommodationSlider: React.FC = () => {
 
   return (
     <div className="relative">
-      {/* Background Image */}
-      <div
-        className="absolute -top-1/2 right-0 w-1/2 h-[150vh] z-0 bg-cover bg-center scale-110 hidden lg:block"
-        style={{
-          backgroundImage: `url('/htlbg.png')`,
-        }}
-      ></div>
+      
 
       <div className="flex justify-between items-center mb-5 ">
         <h2 className="text-4xl font-semibold text-body">Hotel di Surabaya</h2>

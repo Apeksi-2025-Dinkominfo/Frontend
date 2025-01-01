@@ -12,11 +12,25 @@ import Galeri from './components/gallery';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image'; 
 import React from 'react';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import 'jquery';
+
 
 export const metadata = {
   title: 'Apeksi Rakernas Surabaya 2025',
   description: 'Your site description.',
 };
+
+const cardData = [
+  { img: "/belanjaIcon.png", link: "/surabaya/belanja", alt: "Belanja Icon" },
+  { img: "/WisataIcon.png", link: "/surabaya/wisata", alt: "Wisata Icon" },
+  { img: "/Kuliner.png", link: "/surabaya/kuliner", alt: "Kuliner Icon" },
+  { img: "/transportasi.png", link: "/surabaya/transportasi", alt: "Transportasi Icon" },
+  { img: "/Kesehatan.png", link: "/hospital", alt: "Kesehatan Icon" },
+  { img: "/event.png", link: "/surabaya/event", alt: "Event Icon" },
+  { img: "/Travel1.png", link: "/surabaya/travel", alt: "Travel Icon" },
+];
 
 export default function Home() {
   return (
@@ -70,7 +84,7 @@ export default function Home() {
       
 
       <Box sx={{ mt: { xs: 2, md: 20 } }}>
-        <Surabaya />
+        <Surabaya cardData={cardData}/>
       </Box>
 
       <Box sx={{ mt: { xs: 50, md: 10 } }}>

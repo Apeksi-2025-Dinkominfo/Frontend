@@ -9,11 +9,11 @@ export default function OrganizationStructure() {
         {/* Management Board */}
         <div>
           <h2 className="text-2xl font-bold text-center mb-8">DEWAN PENGURUS</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="md:col-span-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="col-span-2 md:col-span-4">
               {managementBoard.slice(0, 1).map((member, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
+                  <div className="relative w-20 h-20 md:w-28 md:h-28 mb-2">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -21,14 +21,14 @@ export default function OrganizationStructure() {
                       className="rounded-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-center text-sm md:text-base">{member.name}</h3>
+                  <h3 className="font-semibold text-center text-xs md:text-sm">{member.name}</h3>
                   <p className="text-xs md:text-sm text-gray-600 text-center">{member.position}</p>
                 </div>
               ))}
             </div>
-            {managementBoard.slice(1, 5).map((member, index) => (
+            {managementBoard.slice(1).map((member, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
+                <div className="relative w-20 h-20 md:w-28 md:h-28 mb-2">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -36,21 +36,7 @@ export default function OrganizationStructure() {
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="font-semibold text-center text-sm md:text-base">{member.name}</h3>
-                <p className="text-xs md:text-sm text-gray-600 text-center">{member.position}</p>
-              </div>
-            ))}
-            {managementBoard.slice(5, 9).map((member, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="rounded-full object-cover"
-                  />
-                </div>
-                <h3 className="font-semibold text-center text-sm md:text-base">{member.name}</h3>
+                <h3 className="font-semibold text-center text-xs md:text-sm">{member.name}</h3>
                 <p className="text-xs md:text-sm text-gray-600 text-center">{member.position}</p>
               </div>
             ))}
@@ -64,7 +50,7 @@ export default function OrganizationStructure() {
             <div className="col-span-2 md:col-span-3 flex justify-center">
               {supervisoryBoard.slice(0, 1).map((member, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
+                  <div className="relative w-20 h-20 md:w-28 md:h-28 mb-2">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -72,7 +58,7 @@ export default function OrganizationStructure() {
                       className="rounded-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-center text-sm md:text-base">{member.name}</h3>
+                  <h3 className="font-semibold text-center text-xs md:text-sm">{member.name}</h3>
                   <p className="text-xs md:text-sm text-gray-600 text-center">{member.position}</p>
                 </div>
               ))}
@@ -80,7 +66,7 @@ export default function OrganizationStructure() {
             <div className="col-span-2 md:col-span-3 grid grid-cols-2 gap-4 justify-center">
               {supervisoryBoard.slice(1).map((member, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
+                  <div className="relative w-20 h-20 md:w-28 md:h-28 mb-2">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -88,7 +74,7 @@ export default function OrganizationStructure() {
                       className="rounded-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-center text-sm md:text-base">{member.name}</h3>
+                  <h3 className="font-semibold text-center text-xs md:text-sm">{member.name}</h3>
                   <p className="text-xs md:text-sm text-gray-600 text-center">{member.position}</p>
                 </div>
               ))}
@@ -103,7 +89,7 @@ export default function OrganizationStructure() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {regionalCommissioners.map((commissioner, index) => (
             <div key={index} className="flex flex-col items-center">
-              <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
+              <div className="relative w-20 h-20 md:w-28 md:h-28 mb-2">
                 <Image
                   src={commissioner.image}
                   alt={commissioner.name}
@@ -111,7 +97,7 @@ export default function OrganizationStructure() {
                   className="rounded-full object-cover"
                 />
               </div>
-              <h3 className="font-semibold text-center text-sm md:text-base">{commissioner.name}</h3>
+              <h3 className="font-semibold text-center text-xs md:text-sm">{commissioner.name}</h3>
               <p className="text-xs md:text-sm text-gray-600 text-center">{commissioner.position}</p>
               <p className="text-xs md:text-sm text-gray-600 text-center">{commissioner.region}</p>
             </div>

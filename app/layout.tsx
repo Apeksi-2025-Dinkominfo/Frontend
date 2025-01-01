@@ -10,7 +10,9 @@ import AdminSidebar from './components/sidebar';
 import { usePathname } from 'next/navigation';
 import React, { useState, createContext, useContext } from 'react';
 import Image from 'next/image';
-import brokenPhoneImage from '../public/hp.png'; // Adjust the path if necessary
+import brokenPhoneImage from '../public/hp.png'; // Adjust the path if necessary4
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 // Context untuk tema
 const ThemeContext = createContext({
